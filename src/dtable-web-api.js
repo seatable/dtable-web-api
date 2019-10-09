@@ -3,7 +3,7 @@ import FormData from 'form-data'
 
 class DTableWebAPI {
   
-  constructor({server, username, password, token}) {
+  init({server, username, password, token}) {
     this.server = server;
     this.username = username;
     this.password = password;
@@ -14,6 +14,22 @@ class DTableWebAPI {
         headers: { 'Authorization': 'Token ' + this.token }
       });
     }
+    return this;
+  }
+
+  initForDTableUsage({ siteRoot, xcsrfHeaders }) {
+    if (siteRoot && siteRoot.charAt(siteRoot.length-1) === "/") {
+      var server = siteRoot.substring(0, siteRoot.length-1);
+      this.server = server;
+    } else {
+      this.server = siteRoot;
+    }
+
+    this.req = axios.create({
+      headers: {
+        'X-CSRFToken': xcsrfHeaders,
+      }
+    });
     return this;
   }
 
