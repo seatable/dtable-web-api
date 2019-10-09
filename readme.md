@@ -24,13 +24,13 @@
 ### 方式一：
   1. 在当前项目中，添加相关api
   2. 运行测试，修改代码至正确为止
-  3. 发布新版本，更新引用项目中dtable-wep-api的版本
+  3. 发布新版本，更新引用项目中dtable-wep-api的新版本
    
 ### 方式二
   1. 在引用项目中的node_modules/dtable-web-api/lib/dtable-web-pai.js中添加新的api
   2. 重新执行 `npm start`, 测试api添加是否正确，若错误，修改至正确为止
   3. 将添加的api更新到当前项目，
-  4. 发布新版本，更新引用项目中dtable-wep-api的版本
+  4. 发布新版本，更新引用项目中dtable-wep-api的新版本
 
 ## 发布版本
 1. 更新package.json中的version版本号
