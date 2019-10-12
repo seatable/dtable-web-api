@@ -326,6 +326,27 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getTableFormShareLink(workspaceID, dtableName, formId) {
+    let params = 'workspace_id=' + workspaceID + '&name=' + encodeURIComponent(dtableName) + '&form_id=' + formId;
+    let url = this.server + '/api/v2.1/dtable-form-links/?' + params;
+    return this.req.get(url);
+  }
+
+  createTableFormShareLink(workspaceID, dtableName, formId) {
+    let url = this.server + '/api/v2.1/dtable-form-links/';
+    let form = new FormData();
+    form.append('workspace_id', workspaceID);
+    form.append('name', dtableName);
+    form.append('form_id', formId);
+
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteTableFormShareLink(token) {
+    let url = this.server + '/api/v2.1/dtable-form-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
 }
 
 export default DTableWebAPI;
