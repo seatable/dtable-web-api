@@ -347,6 +347,13 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  createGroup(name) {
+    const url = this.server + '/api/v2.1/groups/';
+    let form = new FormData();
+    form.append('name', name);
+    return this._sendPostRequest(url, form);
+  }
+
 }
 
 export default DTableWebAPI;
