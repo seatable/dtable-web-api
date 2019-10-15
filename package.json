@@ -1,6 +1,6 @@
 {
   "name": "dtable-web-api",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "an interface for dtable-web",
   "main": "lib/dtable-web-api.js",
   "scripts": {
@@ -8,7 +8,6 @@
     "test": "jest --env=node --colors --coverage",
     "pub:lib": "./node_modules/.bin/babel src --out-dir lib",
     "prepublishOnly": "npm run clean && npm run pub:lib"
-
   },
   "files": [
     "lib",
