@@ -347,6 +347,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  getGroup(groupID) {
+    const url = this.server + '/api/v2.1/groups/' + groupID + '/';
+    return this.req.get(url);
+  }
+
   createGroup(name) {
     const url = this.server + '/api/v2.1/groups/';
     let form = new FormData();
@@ -354,6 +359,54 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  renameGroup(groupID, name) {
+    const url = this.server + '/api/v2.1/groups/' + groupID + '/';
+    const params = {
+      name: name
+    }
+    return this.req.put(url, params);
+  }
+
+  addGroupMembers(groupID, userNames) {
+    const url = this.server + '/api/v2.1/groups/' + groupID + '/members/bulk/';
+    let form = new FormData();
+    form.append('emails', userNames.join(','));
+    return this._sendPostRequest(url, form);
+  }
+
+  listGroupMembers(groupID, isAdmin=false, avatarSize=64) {
+    let url = this.server + '/api/v2.1/groups/' + groupID + '/members/?avatar_size=' + avatarSize + '&is_admin=' + isAdmin;
+    return this.req.get(url);
+  }
+
+  setGroupAdmin(groupID, userName, isAdmin) {
+    let name = encodeURIComponent(userName);
+    let url = this.server + '/api/v2.1/groups/' + groupID + '/members/' + name + '/';
+    const params = {
+      is_admin: isAdmin
+    }
+    return this.req.put(url, params);
+  }
+
+  deleteGroupMember(groupID, userName) {
+    const name = encodeURIComponent(userName);
+    const url = this.server + '/api/v2.1/groups/' + groupID + '/members/' + name + '/';
+    return this.req.delete(url);
+  }
+
+  //account api
+
+  getAccountInfo() {
+    const url =  this.server + '/api2/account/info/';
+    return this.req.get(url);
+  }
+  
+  listGroups(withRepos = false) {
+    let options = {with_repos: withRepos ? 1 : 0};
+    const url = this.server + '/api/v2.1/groups/';
+    return this.req.get(url, {params: options});
+  }
+  
 }
 
 export default DTableWebAPI;
