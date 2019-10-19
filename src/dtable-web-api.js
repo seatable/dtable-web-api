@@ -287,6 +287,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getTableAccessTokenByShareLink(token) {
+    const url = this.server + '/api/v2.1/dtable/share-link-access-token/' + '?token=' + token;
+    return this.req.get(url);
+  }
+
   getTableRelatedUsers(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/related-users/';
     return this.req.get(url);
@@ -347,6 +352,12 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  listGroups(withRepos = false) {
+    let options = {with_repos: withRepos ? 1 : 0};
+    const url = this.server + '/api/v2.1/groups/';
+    return this.req.get(url, {params: options});
+  }
+
   getGroup(groupID) {
     const url = this.server + '/api/v2.1/groups/' + groupID + '/';
     return this.req.get(url);
@@ -399,12 +410,6 @@ class DTableWebAPI {
   getAccountInfo() {
     const url =  this.server + '/api2/account/info/';
     return this.req.get(url);
-  }
-  
-  listGroups(withRepos = false) {
-    let options = {with_repos: withRepos ? 1 : 0};
-    const url = this.server + '/api/v2.1/groups/';
-    return this.req.get(url, {params: options});
   }
   
 }
