@@ -406,6 +406,11 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/groups/';
     return this.req.get(url, {params: options});
   }
+
+  getTableAccessTokenByToken(token) {
+    const url = this.server + '/api/v2.1/dtable/share-link-access-token/' + '?token=' + token;
+    return this.req.get(url);
+  }
   
 }
 
