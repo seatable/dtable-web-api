@@ -420,7 +420,94 @@ class DTableWebAPI {
     };
     return this.req.get(url, {params: params});
   }
-  
+
+  // sysadmin org api
+  sysAdminListOrgs() {
+    const url = this.server + '/api/v2.1/admin/organizations/';
+    return this.req.get(url);
+  }
+
+  sysAdminGetOrg(orgID) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/';
+    return this.req.get(url);
+  }
+
+  sysAdminUpdateOrg(orgID, orgInfo) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/';
+    let formData = new FormData();
+    if (orgInfo.orgName) {
+      formData.append('org_name', orgInfo.orgName);
+    }
+    if (orgInfo.maxUserNumber) {
+      formData.append('max_user_number', orgInfo.maxUserNumber);
+    }
+    if (orgInfo.quota) {
+      formData.append('quota', orgInfo.quota);
+    }
+    if (orgInfo.role) {
+      formData.append('role', orgInfo.role);
+    }
+    return this.req.put(url, formData);
+  }
+
+  sysAdminAddOrg(orgName, ownerEmail, owner_password) {
+    const url = this.server + '/api/v2.1/admin/organizations/';
+    let formData = new FormData();
+    formData.append('org_name', orgName);
+    formData.append('owner_email', ownerEmail);
+    formData.append('owner_password', owner_password);
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminDeleteOrg(orgID) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/';
+    return this.req.delete(url);
+  }
+
+  sysAdminListOrgUsers(orgID) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/users/';
+    return this.req.get(url);
+  }
+
+  sysAdminAddOrgUser(orgID, email, name, password) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/users/';
+    let formData = new FormData();
+    formData.append('email', email);
+    formData.append('name', name);
+    formData.append('password', password);
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminUpdateOrgUser(orgID, email, attribute, value) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/users/' + encodeURIComponent(email) + '/';
+    let formData = new FormData();
+    switch (attribute) {
+      case 'active':
+        formData.append('active', value);
+        break;
+      case 'name':
+        formData.append('name', value);
+        break;
+      case 'contact_email':
+        formData.append('contact_email', value);
+        break;
+      case 'quota_total':
+        formData.append('quota_total', value);
+        break;
+    }
+    return this.req.put(url, formData);
+  }
+
+  sysAdminDeleteOrgUser(orgID, email) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/users/' + encodeURIComponent(email) + '/';
+    return this.req.delete(url);
+  }
+
+  sysAdminListOrgGroups(orgID) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/groups/';
+    return this.req.get(url);
+  }
+
 }
 
 export default DTableWebAPI;
