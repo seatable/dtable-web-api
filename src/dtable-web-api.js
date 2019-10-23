@@ -411,6 +411,15 @@ class DTableWebAPI {
     const url =  this.server + '/api2/account/info/';
     return this.req.get(url);
   }
+
+  sysAdminListAllDTables(page, perPage) {
+    const url = this.server + '/api/v2.1/admin/dtables/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params});
+  }
   
 }
 
