@@ -222,13 +222,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  createDTableShareLink(workspaceID, name, password, expireDays, permissions) {
+  createDTableShareLink(workspaceID, name, password, expireDays, permission) {
     var url = this.server + '/api/v2.1/dtables/share-links/';
     var form = new FormData();
     form.append('workspace_id', workspaceID);
     form.append('table_name', name);
-    if (permissions) {
-      form.append('permissions', permissions);
+    if (permission) {
+      form.append('permission', permission);
     }
     if (password) {
       form.append('password', password);
