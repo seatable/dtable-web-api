@@ -352,6 +352,14 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  submitFormData(token, table_id, row_data) {
+    const url = this.server + '/api/v2.1/dtable-form-submit/' + token + '/';
+    let form = new FormData();
+    form.append('table_id', table_id);
+    form.append('row_data', row_data);
+    return this._sendPostRequest(url, form);
+  }
+
   listGroups(withRepos = false) {
     let options = {with_repos: withRepos ? 1 : 0};
     const url = this.server + '/api/v2.1/groups/';
