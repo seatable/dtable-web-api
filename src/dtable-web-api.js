@@ -516,6 +516,148 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminListUsers(page, perPage, isLDAPImport) {
+    let url = this.server + '/api/v2.1/admin/users/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    if (isLDAPImport) {
+      url += '?source=ldapimport';
+    }
+    return this.req.get(url, {params: params});
+  }
+
+  sysAdminAddUser(email, name, role, password) {
+    const url = this.server + '/api/v2.1/admin/users/';
+    let formData = new FormData();
+    formData.append('email', email);
+    formData.append('name', name);
+    formData.append('role', role);
+    formData.append('password', password);
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminUpdateUser(email, attribute, value) {
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/';
+    let formData = new FormData();
+    switch (attribute) {
+      case 'password':
+        formData.append('password', value);
+        break;
+      case 'is_active':
+        formData.append('is_active', value);
+        break;
+      case 'is_staff':
+        formData.append('is_staff', value);
+        break;
+      case 'role':
+        formData.append('role', value);
+        break;
+      case 'name':
+        formData.append('name', value);
+        break;
+      case 'login_id':
+        formData.append('login_id', value);
+        break;
+      case 'contact_email':
+        formData.append('contact_email', value);
+        break;
+      case 'reference_id':
+        formData.append('reference_id', value);
+        break;
+      case 'department':
+        formData.append('department', value);
+        break;
+      case 'quota_total':
+        formData.append('quota_total', value);
+        break;
+      case 'institution':
+        formData.append('institution', value);
+        break;
+    }
+    return this.req.put(url, formData);
+  }
+
+  sysAdminDeleteUser(email) {
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/';
+    return this.req.delete(url);
+  }
+
+  sysAdminGetUser(email, avatarSize) {
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/';
+    let params = {};
+    if (avatarSize) {
+      params.avatar_size = avatarSize;
+    }
+    return this.req.get(url, {params: params});
+  }
+
+  sysAdminResetUserPassword(email) {
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/reset-password/';
+    return this.req.put(url);
+  }
+
+  sysAdminSetUserQuotaInBatch(emails, quotaTotal) {
+    const url = this.server + '/api/v2.1/admin/users/batch/';
+    let formData = new FormData();
+    emails.map(email => {
+      formData.append('email', email);
+    });
+    formData.append('operation', 'set-quota');
+    formData.append('quota_total', quotaTotal);
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminDeleteUserInBatch(emails) {
+    const url = this.server + '/api/v2.1/admin/users/batch/';
+    let formData = new FormData();
+    emails.map(email => {
+      formData.append('email', email);
+    });
+    formData.append('operation', 'delete-user');
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminImportUserViaFile(file) {
+    const url = this.server + '/api/v2.1/admin/import-users/';
+    let formData = new FormData();
+    formData.append('file', file);
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminListAdmins() {
+    const url = this.server + '/api/v2.1/admin/admin-users/';
+    return this.req.get(url);
+  }
+
+  sysAdminUpdateAdminRole(email, role) {
+    const url = this.server + '/api/v2.1/admin/admin-role/';
+    let formData = new FormData();
+    formData.append('email', email);
+    formData.append('role', role);
+    return this.req.put(url, formData);
+  }
+
+  sysAdminAddAdminInBatch(emails) {
+    const url = this.server + '/api/v2.1/admin/admin-users/batch/';
+    let formData = new FormData();
+    emails.map(email => {
+      formData.append('email', email);
+    });
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminListGroupsJoinedByUser(email) {
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/groups/';
+    return this.req.get(url);
+  }
+
+  sysAdminDismissGroupByID(groupID) {
+    const url = this.server + '/api/v2.1/admin/groups/' + groupID + '/';
+    return this.req.delete(url);
+  }
+
 }
 
 export default DTableWebAPI;
