@@ -658,6 +658,106 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListGroupDTables(groupID) {
+      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/dtables/';
+      return this.req.get(url);
+  }
+
+  sysAdminDeleteDTableFromGroup(groupID, tableID) {
+      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/dtables/' + tableID + '/';
+      return this.req.delete(url);
+  }
+
+  sysAdminListGroupMembers(groupID) {
+      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/';
+      return this.req.get(url);
+  }
+
+  sysAdminDeleteGroupMember(groupID, email) {
+      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/' + encodeURIComponent(email) + '/';
+      return this.req.delete(url);
+  }
+
+  sysAdminAddGroupMember(groupID, emails) {
+      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/';
+      let form = new FormData();
+      for (var i = 0; i < emails.length; i++) {
+        form.append('email', emails[i]);
+      }
+      return this._sendPostRequest(url, form);
+  }
+
+  sysAdminUpdateGroupMemberRole(groupID, email, isAdmin) {
+      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/' + encodeURIComponent(email) + '/';
+      let formData = new FormData();
+      formData.append('is_admin', isAdmin);
+      return this.req.put(url, formData);
+  }
+
+  sysAdminListAllGroups(page, perPage) {
+      let url = this.server + '/api/v2.1/admin/groups/';
+      let params = {
+        page: page,
+        per_page: perPage
+      };
+      return this.req.get(url, { params: params });
+  }
+
+  sysAdminCreateNewGroup(groupName, ownerEmail) {
+      let url = this.server + '/api/v2.1/admin/groups/';
+      let formData = new FormData();
+      formData.append('group_name', groupName);
+      formData.append('group_owner', ownerEmail);
+      return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminTransferGroup(receiverEmail, groupID) {
+      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/';
+      let formData = new FormData();
+      formData.append('new_owner', receiverEmail);
+      return this.req.put(url, formData);
+  }
+
+  sysAdminListAllSysNotifications() {
+      let url = this.server + '/api/v2.1/admin/sys-notifications/';
+      return this.req.get(url);
+  }
+
+  sysAdminAddSysNotification(msg) {
+      let url = this.server + '/api/v2.1/admin/sys-notifications/';
+      let formData = new FormData();
+      formData.append('msg', msg);
+      return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminDeleteSysNotification(nid) {
+      let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
+      return this.req.delete(url);
+  }
+
+  sysAdminSetSysNotificationToCurrent(nid) {
+      let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
+      return this.req.put(url);
+  }
+
+  sysAdminListAdminLogs(page, perPage) {
+      let url = this.server + '/api/v2.1/admin/admin-logs/';
+      let params = {
+        page: page,
+        per_page: perPage
+      };
+      return this.req.get(url, { params: params });
+  }
+
+  sysAdminListAdminLoginLogs(page, perPage) {
+      let url = this.server + '/api/v2.1/admin/admin-login-logs/';
+      let params = {
+        page: page,
+        per_page: perPage
+      };
+      return this.req.get(url, { params: params });
+  }
+
 }
 
 export default DTableWebAPI;
