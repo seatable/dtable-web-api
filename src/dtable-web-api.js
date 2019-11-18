@@ -786,6 +786,33 @@ class DTableWebAPI {
       return this.req.get(url, { params: params });
   }
 
+  listDtableForms(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/dtable-forms?workspace_id=' + workspaceID + '&name='+ dtableName;
+    return this.req.get(url);
+  }
+
+  createDtableForm(workspaceID, dtableName, formID, formConfig) {
+    let url = this.server + '/api/v2.1/dtable-forms/';
+    let formData = new FormData();
+    formData.append('workspace_id', workspaceID);
+    formData.append('name', dtableName);
+    formData.append('form_id', formID);
+    formData.append('form_config', formConfig);
+    return this._sendPostRequest(url, formData);
+  }
+
+  deleteDtableForm(token) {
+    let url = this.server + '/api/v2.1/dtable-forms/' + token + '/';
+    return this.req.delete(url);
+  }
+
+  updateDtableForm(token, formConfig) {
+    let url = this.server + '/api/v2.1/dtable-forms/' + token + '/';
+    let formData = new FormData();
+    formData.append('form_config', formConfig);
+    return this.req.put(url, formData);
+  }
+
 }
 
 export default DTableWebAPI;
