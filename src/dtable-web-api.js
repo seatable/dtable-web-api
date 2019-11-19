@@ -786,12 +786,12 @@ class DTableWebAPI {
       return this.req.get(url, { params: params });
   }
 
-  listDtableForms(workspaceID, dtableName) {
+  listDTableForms(workspaceID, dtableName) {
     let url = this.server + '/api/v2.1/dtable-forms?workspace_id=' + workspaceID + '&name='+ dtableName;
     return this.req.get(url);
   }
 
-  createDtableForm(workspaceID, dtableName, formID, formConfig) {
+  createDTableForm(workspaceID, dtableName, formID, formConfig) {
     let url = this.server + '/api/v2.1/dtable-forms/';
     let formData = new FormData();
     formData.append('workspace_id', workspaceID);
@@ -801,12 +801,12 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  deleteDtableForm(token) {
+  deleteDTableForm(token) {
     let url = this.server + '/api/v2.1/dtable-forms/' + token + '/';
     return this.req.delete(url);
   }
 
-  updateDtableForm(token, formConfig) {
+  updateDTableForm(token, formConfig) {
     let url = this.server + '/api/v2.1/dtable-forms/' + token + '/';
     let formData = new FormData();
     formData.append('form_config', formConfig);
