@@ -615,6 +615,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminSearchUsers(query) {
+    var url = this.server + '/api/v2.1/admin/search-user/';
+    var params = {
+      query: query
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminDismissGroupByID(groupID) {
     const url = this.server + '/api/v2.1/admin/groups/' + groupID + '/';
     return this.req.delete(url);
