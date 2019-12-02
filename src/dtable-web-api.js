@@ -478,6 +478,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminSearchOrgs(query) {
+    let url = this.server + '/api/v2.1/admin/search-organization/';
+    let params = {
+      query: query
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminListUsers(page, perPage, isLDAPImport) {
     let url = this.server + '/api/v2.1/admin/users/';
     let params = {
