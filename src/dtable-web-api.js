@@ -696,6 +696,14 @@ class DTableWebAPI {
       return this.req.put(url, formData);
   }
 
+  sysAdminSearchGroups(query) {
+    let url = this.server + '/api/v2.1/admin/search-group/';
+    let params = {
+      query: query
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminListAllSysNotifications() {
       let url = this.server + '/api/v2.1/admin/sys-notifications/';
       return this.req.get(url);
