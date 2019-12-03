@@ -771,7 +771,7 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
-  getUploadLinkFromFormToken(token) {
+  getUploadLinkViaFormToken(token) {
     let url = this.server + '/api/v2.1/dtable-forms/' + token + '/upload-link/';
     return this.req.get(url);
   }
