@@ -794,7 +794,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getDtableActivities(pageNum, avatarSize=36) {
+  getDTableActivities(pageNum, avatarSize=36) {
     let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum + '&avatar_size=' + avatarSize;
     return this.req.get(url);
   }
