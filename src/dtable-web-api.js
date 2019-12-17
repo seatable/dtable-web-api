@@ -795,6 +795,16 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listDTableSnapshots(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ dtableName + '/snapshots/';
+    return this.req.get(url);
+  }
+
+  getDTableSnapshotDownloadLink(workspaceID, dtableName, commitId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ dtableName + '/snapshots/' + commitId + '/';
+    return this.req.get(url);
+  }
+
 }
 
 export default DTableWebAPI;
