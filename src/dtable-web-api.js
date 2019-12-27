@@ -809,6 +809,26 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listGlobalDBs() {
+    let url = this.server + '/api/v2.1/dtable/global-dbs/';
+    return this.req.get(url);
+  }
+
+  createGlobalDB(dbName, name, tableName, viewName) {
+    let url = this.server + '/api/v2.1/dtable/global-dbs/';
+    let formData = new FormData();
+    formData.append('db_name', dbName);
+    formData.append('name', name);
+    formData.append('table_name', tableName);
+    formData.append('view_name', viewName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  deleteGlobalDB(globalDBId) {
+    let url = this.server + '/api/v2.1/dtable/global-dbs/' + globalDBId + '/';
+    return this.req.delete(url);
+  }
+
 }
 
 export default DTableWebAPI;
