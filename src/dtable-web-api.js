@@ -814,6 +814,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getGlobalDB(globalDBId) {
+    let url = this.server + '/api/v2.1/dtable/global-dbs/' + globalDBId + '/';
+    return this.req.get(url);
+  }
+
   createGlobalDB(dbName, name, tableName, viewName) {
     let url = this.server + '/api/v2.1/dtable/global-dbs/';
     let formData = new FormData();
