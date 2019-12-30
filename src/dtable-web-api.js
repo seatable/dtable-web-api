@@ -718,6 +718,14 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  sysAdminListGroupRepoDirents(groupID, parentDir) {
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/storages/';
+    let params = {
+      parent_dir: parentDir
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminListAllSysNotifications() {
       let url = this.server + '/api/v2.1/admin/sys-notifications/';
       return this.req.get(url);
