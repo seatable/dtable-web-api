@@ -2,7 +2,8 @@ import ACCESS_CONFIG from '../config/config';
 import DTableWebAPI from '../src/dtable-web-api';
 
 let { server, username, password } = ACCESS_CONFIG;
-let dtableWebAPI = new DTableWebAPI({server, username, password});
+let dtableWebAPI = new DTableWebAPI();
+dtableWebAPI.init({server, username, password});
 
 beforeEach(() => {
   return dtableWebAPI.login();
