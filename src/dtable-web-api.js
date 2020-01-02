@@ -846,6 +846,48 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
+  listCommonDatasets() {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/';
+    return this.req.get(url);
+  }
+
+  getCommonDataset(datasetId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
+    return this.req.get(url);
+  }
+
+  createCommonDataset(datasetName, dtableName, tableName, viewName) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/';
+    let formData = new FormData();
+    formData.append('dataset_name', datasetName);
+    formData.append('dtable_name', dtableName);
+    formData.append('table_name', tableName);
+    formData.append('view_name', viewName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  deleteCommonDataset(datasetId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
+    return this.req.delete(url);
+  }
+
+  listDatasetAccessibleGroups(datasetId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/';
+    return this.req.get(url);
+  }
+
+  addDatasetAccessibleGroup(datasetId, groupId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/';
+    let formData = new FormData();
+    formData.append('group_id', groupId);
+    return this._sendPostRequest(url, formData);
+  }
+
+  deleteDatasetAccessibleGroup(datasetId, groupId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/' + groupId + '/';
+    return this.req.delete(url);
+  }
+
 }
 
 export default DTableWebAPI;
