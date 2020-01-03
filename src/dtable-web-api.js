@@ -876,16 +876,21 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addDatasetAccessibleGroup(datasetId, groupId) {
+  addDatasetAccessibleGroup(datasetId, groupIdList) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/';
     let formData = new FormData();
-    formData.append('group_id', groupId);
+    groupIdList.map(groupId => formData.append('group_id', groupId));
     return this._sendPostRequest(url, formData);
   }
 
   deleteDatasetAccessibleGroup(datasetId, groupId) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/' + groupId + '/';
     return this.req.delete(url);
+  }
+
+  listShareableGroups() {
+    const url = this.server + '/api/v2.1/shareable-groups/';
+    return this.req.get(url);
   }
 
 }
