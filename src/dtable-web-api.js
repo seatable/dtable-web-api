@@ -776,7 +776,7 @@ class DTableWebAPI {
   }
 
   listDTableForms(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/dtable-forms?workspace_id=' + workspaceID + '&name='+ dtableName;
+    let url = this.server + '/api/v2.1/dtable-forms?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
     return this.req.get(url);
   }
 
@@ -813,7 +813,7 @@ class DTableWebAPI {
   }
 
   listDTableSnapshots(workspaceID, dtableName, page, perPage) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ dtableName + '/snapshots/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ encodeURIComponent(dtableName) + '/snapshots/';
     let params = {
       page: page,
       per_page: perPage
