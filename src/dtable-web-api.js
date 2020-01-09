@@ -822,24 +822,24 @@ class DTableWebAPI {
   }
 
   getDTableSnapshotDownloadLink(workspaceID, dtableName, commitId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/snapshots/' + commitId + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/';
     return this.req.get(url);
   }
 
   listDTablePlugins(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/plugins/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
     return this.req.get(url);
   }
   
   uploadDTablePlugin(workspaceID, dtableName, pluginFile) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/plugins/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
     let formData = new FormData();
     formData.append('plugin', pluginFile);
     return this._sendPostRequest(url, formData);
   }
   
   deleteDTablePlugin(workspaceID, dtableName, pluginID) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/plugins/' + pluginID + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
     return this.req.delete(url);
   }
 
