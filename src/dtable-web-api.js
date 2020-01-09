@@ -822,8 +822,23 @@ class DTableWebAPI {
   }
 
   getDTableSnapshotDownloadLink(workspaceID, dtableName, commitId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ dtableName + '/snapshots/' + commitId + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/snapshots/' + commitId + '/';
     return this.req.get(url);
+  }
+
+  listDtablePlugins(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/plugins/';
+    return this.req.get(url);
+  }
+  
+  uploadDtablePlugin(workspaceID, dtableName, formData) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/plugins/';
+    return this._sendPostRequest(url, formData);
+  }
+  
+  deleteDtablePlugin(workspaceID, dtableName, pluginID) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/plugins/' + pluginID + '/';
+    return this.req.delete(url);
   }
 
 }
