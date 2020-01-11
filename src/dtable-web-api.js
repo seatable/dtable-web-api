@@ -766,6 +766,15 @@ class DTableWebAPI {
       return this.req.get(url, { params: params });
   }
 
+   sysAdminStatisticActiveUsers(startTime, endTime) {
+    const url = this.server + '/api/v2.1/admin/statistics/active-users/';
+    let params = {
+      start: startTime,
+      end: endTime,
+    }
+    return this.req.get(url, {params: params});
+  }
+
   listDTableForms(workspaceID, dtableName) {
     let url = this.server + '/api/v2.1/dtable-forms?workspace_id=' + workspaceID + '&name='+ dtableName;
     return this.req.get(url);
