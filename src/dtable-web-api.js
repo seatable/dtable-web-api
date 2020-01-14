@@ -831,16 +831,19 @@ class DTableWebAPI {
     return this.req.get(url);
   }
   
-  uploadDTablePlugin(workspaceID, dtableName, pluginFile) {
+  uploadDTablePlugin(workspaceID, dtableName, formData) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
-    let formData = new FormData();
-    formData.append('plugin', pluginFile);
     return this._sendPostRequest(url, formData);
   }
   
   deleteDTablePlugin(workspaceID, dtableName, pluginID) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
     return this.req.delete(url);
+  }
+  
+  updateDtablePlugin(workspaceID, dtableName, pluginID, formData) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
+    return this.req.put(url, formData);
   }
 
 }
