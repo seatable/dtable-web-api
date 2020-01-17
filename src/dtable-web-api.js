@@ -846,8 +846,11 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
-  listCommonDatasets() {
+  listCommonDatasets(fromTableID) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
+    if (fromTableID) {
+      url = url + '?from_table_id=' + fromTableID;
+    }
     return this.req.get(url);
   }
 
