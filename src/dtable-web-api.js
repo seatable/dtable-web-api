@@ -813,6 +813,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  listForms() {
+    let url = this.server + '/api/v2.1/forms/';
+    return this.req.get(url);
+  }
+
   listDTableForms(workspaceID, dtableName) {
     let url = this.server + '/api/v2.1/dtable-forms?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
     return this.req.get(url);
