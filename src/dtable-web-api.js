@@ -316,6 +316,11 @@ class DTableWebAPI {
     return this.req.put(url, params);
   }
 
+  deleteGroup(groupID) {
+    var url = this.server + '/api/v2.1/groups/' + groupID + '/';
+    return this.req.delete(url);
+  }
+
   addGroupMembers(groupID, userNames) {
     const url = this.server + '/api/v2.1/groups/' + groupID + '/members/bulk/';
     let form = new FormData();
