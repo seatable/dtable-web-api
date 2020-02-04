@@ -936,16 +936,10 @@ class DTableWebAPI {
 
   listUserInfo(userIdList) {
     var url = this.server + '/api/v2.1/user-list/';
-    var formData = new _formData["default"]();
-    formData.append('user_id_list', JSON.stringify(userIdList));
-    formData.set('enctype', 'application/json');
-    formData.getHeaders = function() {
-      return {
-        'Content-Type': 'application/json',
-        'ContentType': 'application/json',
-      }
+    let operation = {
+      user_id_list: userIdList
     };
-    return this._sendPostRequest(url, formData);
+    return this._sendPostRequest(url, operation, { headers: { 'Content-type': 'application/json' }});
   }
 
 }
