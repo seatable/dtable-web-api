@@ -934,6 +934,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listUserInfo(userIdList) {
+    var url = this.server + '/api/v2.1/user-list/';
+    let operation = {
+      user_id_list: userIdList
+    };
+    return this._sendPostRequest(url, operation, { headers: { 'Content-type': 'application/json' }});
+  }
+
 }
 
 export default DTableWebAPI;
