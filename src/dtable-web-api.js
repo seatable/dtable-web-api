@@ -838,10 +838,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  updateDTableForm(token, formConfig) {
+  updateDTableForm(token, formConfig, groupIDs) {
     let url = this.server + '/api/v2.1/dtable-forms/' + token + '/';
     let formData = new FormData();
     formData.append('form_config', formConfig);
+    formData.append('group_ids', groupIDs);
     return this.req.put(url, formData);
   }
 
