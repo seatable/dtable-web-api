@@ -845,7 +845,7 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
-  updateDTableFormShare(token, shareType, groupIDs) {
+  dTableFormShare(token, shareType, groupIDs) {
     let url = this.server + '/api/v2.1/forms/' + token + '/share/';
     let params = {
       share_type: shareType,
