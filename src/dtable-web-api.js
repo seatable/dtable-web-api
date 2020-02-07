@@ -838,12 +838,20 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  updateDTableForm(token, formConfig, groupIDs) {
+  updateDTableForm(token, formConfig) {
     let url = this.server + '/api/v2.1/forms/' + token + '/';
     let formData = new FormData();
     formData.append('form_config', formConfig);
-    formData.append('group_ids', groupIDs);
     return this.req.put(url, formData);
+  }
+
+  updateDTableFormShare(token, shareType, groupIDs) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/share/';
+    let params = {
+      share_type: shareType,
+      group_ids: groupIDs
+    };
+    return this.req.post(url, params);
   }
 
   getUploadLinkViaFormToken(token) {
