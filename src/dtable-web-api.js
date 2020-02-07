@@ -283,7 +283,7 @@ class DTableWebAPI {
   }
 
   submitFormData(token, table_id, row_data) {
-    const url = this.server + '/api/v2.1/dtable-form-submit/' + token + '/';
+    const url = this.server + '/api/v2.1/form-submit/' + token + '/';
     let form = new FormData();
     form.append('table_id', table_id);
     form.append('row_data', row_data);
@@ -819,12 +819,12 @@ class DTableWebAPI {
   }
 
   listDTableForms(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/dtable-forms?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
+    let url = this.server + '/api/v2.1/forms/?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
     return this.req.get(url);
   }
 
   createDTableForm(workspaceID, dtableName, formID, formConfig) {
-    let url = this.server + '/api/v2.1/dtable-forms/';
+    let url = this.server + '/api/v2.1/forms/';
     let formData = new FormData();
     formData.append('workspace_id', workspaceID);
     formData.append('name', dtableName);
@@ -834,12 +834,12 @@ class DTableWebAPI {
   }
 
   deleteDTableForm(token) {
-    let url = this.server + '/api/v2.1/dtable-forms/' + token + '/';
+    let url = this.server + '/api/v2.1/forms/' + token + '/';
     return this.req.delete(url);
   }
 
   updateDTableForm(token, formConfig, groupIDs) {
-    let url = this.server + '/api/v2.1/dtable-forms/' + token + '/';
+    let url = this.server + '/api/v2.1/forms/' + token + '/';
     let formData = new FormData();
     formData.append('form_config', formConfig);
     formData.append('group_ids', groupIDs);
@@ -847,7 +847,7 @@ class DTableWebAPI {
   }
 
   getUploadLinkViaFormToken(token) {
-    let url = this.server + '/api/v2.1/dtable-forms/' + token + '/upload-link/';
+    let url = this.server + '/api/v2.1/forms/' + token + '/upload-link/';
     return this.req.get(url);
   }
 
