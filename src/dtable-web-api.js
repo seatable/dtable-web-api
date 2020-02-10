@@ -956,6 +956,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, operation, { headers: { 'Content-type': 'application/json' }});
   }
 
+  importDTableFromFile (workspaceID, file) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/import-dtable/';
+    let formData = new FormData();
+    formData.append('dtable', file);
+    return this._sendPostRequest(url, formData);
+  }
+
 }
 
 export default DTableWebAPI;
