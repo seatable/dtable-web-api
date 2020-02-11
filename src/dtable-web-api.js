@@ -818,6 +818,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listSharedForms() {
+    let url = this.server + '/api/v2.1/forms/shared/';
+    return this.req.get(url);
+  }
+
   listDTableForms(workspaceID, dtableName) {
     let url = this.server + '/api/v2.1/forms/?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
     return this.req.get(url);
