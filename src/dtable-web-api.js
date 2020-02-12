@@ -864,6 +864,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listDTableFormRecords(token) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/records/';
+    return this.req.get(url);
+  }
+
   getDTableActivities(pageNum, avatarSize=36) {
     let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum + '&avatar_size=' + avatarSize;
     return this.req.get(url);
