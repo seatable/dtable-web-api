@@ -152,7 +152,7 @@ class DTableWebAPI {
   }
 
   getDTableShareLink(workspaceID, name) {
-    var url = this.server + '/api/v2.1/dtables/share-links/?workspace_id=' + workspaceID + '&table_name=' + name;
+    var url = this.server + '/api/v2.1/dtables/share-links/?workspace_id=' + workspaceID + '&table_name=' + encodeURIComponent(name);
     return this.req.get(url);
   }
 
