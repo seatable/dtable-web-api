@@ -869,6 +869,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  updateFormData(token, rowID, rowData) {
+    const url = this.server + '/api/v2.1/forms/' + token + '/records/' + rowID + '/';
+    let form = new FormData();
+    form.append('row_data', rowData);
+    return this.req.put(url, form);
+  }
+
   getDTableActivities(pageNum, avatarSize=36) {
     let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum + '&avatar_size=' + avatarSize;
     return this.req.get(url);
