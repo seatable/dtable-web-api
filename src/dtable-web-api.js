@@ -174,6 +174,21 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  getDTableExternalLink(workspaceID, name) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
+    this.req.get(url);
+  }
+
+  createDTableExternalLink(workspaceID, name) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
+    return this._sendPostRequest(url);
+  }
+  
+  deleteDTableExternalLink(workspaceID, name, token) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
   listTableAPITokens(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/api-tokens/';
     return this.req.get(url);
