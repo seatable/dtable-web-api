@@ -181,7 +181,7 @@ class DTableWebAPI {
 
   createDTableExternalLink(workspaceID, name) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
-    return this._sendPostRequest(url);
+    return this.req.post(url);
   }
   
   deleteDTableExternalLink(workspaceID, name, token) {
