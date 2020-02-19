@@ -174,6 +174,21 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  getDTableExternalLink(workspaceID, name) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
+    return this.req.get(url);
+  }
+
+  createDTableExternalLink(workspaceID, name) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
+    return this.req.post(url);
+  }
+  
+  deleteDTableExternalLink(workspaceID, name, token) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
   listTableAPITokens(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/api-tokens/';
     return this.req.get(url);
@@ -219,6 +234,11 @@ class DTableWebAPI {
 
   getTableAccessTokenByShareLink(token) {
     const url = this.server + '/api/v2.1/dtable/share-link-access-token/' + '?token=' + token;
+    return this.req.get(url);
+  }
+
+  getTableAccessTokenByExternalLink(token) {
+    const url = this.server + '/api/v2.1/external-link-tokens/' + token + '/access-token/';
     return this.req.get(url);
   }
 
