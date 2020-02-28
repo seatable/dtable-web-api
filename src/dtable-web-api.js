@@ -997,11 +997,24 @@ class DTableWebAPI {
     return this._sendPostRequest(url, operation, { headers: { 'Content-type': 'application/json' }});
   }
 
-  importDTableFromFile (workspaceID, file) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/import-dtable/';
+  addExportDTableTask(workspaceId, dtable_name) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
+    return this.req.get(url);
+  }
+
+  addImportDTableTask (workspaceId, file) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-dtable/';
     let formData = new FormData();
     formData.append('dtable', file);
     return this._sendPostRequest(url, formData);
+  }
+
+  queryDTableIOStatusByTaskId(taskId, remove_task_from_pool_when_done) {
+    let url = this.server + 'api/v2.1/dtable-io-status/?task_id=' + taskId;
+    if (remove_task_from_pool_when_done) {
+      url += '&remove_task_from_pool_when_done=' + remove_task_from_pool_when_done;
+    }
+    return this.req.get(url);
   }
 
 }
