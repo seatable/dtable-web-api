@@ -1009,11 +1009,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  queryDTableIOStatusByTaskId(taskId, remove_task_from_pool_when_done) {
+  queryDTableIOStatusByTaskId(taskId) {
     let url = this.server + 'api/v2.1/dtable-io-status/?task_id=' + taskId;
-    if (remove_task_from_pool_when_done) {
-      url += '&remove_task_from_pool_when_done=' + remove_task_from_pool_when_done;
-    }
     return this.req.get(url);
   }
 
