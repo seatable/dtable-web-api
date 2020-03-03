@@ -1014,6 +1014,15 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  copyDTable(srcWorkspaceID, dstWorkspaceID, name) {
+    let url = this.server + '/api/v2.1/dtable-copy/';
+    let formData = new FormData();
+    formData.append('src_workspace_id', srcWorkspaceID);
+    formData.append('dst_workspace_id', dstWorkspaceID);
+    formData.append('name', name);
+    return this._sendPostRequest(url, formData);
+  }
+
 }
 
 export default DTableWebAPI;
