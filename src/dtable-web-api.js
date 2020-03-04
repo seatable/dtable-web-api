@@ -1010,7 +1010,7 @@ class DTableWebAPI {
   }
 
   queryDTableIOStatusByTaskId(taskId) {
-    let url = this.server + 'api/v2.1/dtable-io-status/?task_id=' + taskId;
+    let url = this.server + '/api/v2.1/dtable-io-status/?task_id=' + taskId;
     return this.req.get(url);
   }
 
