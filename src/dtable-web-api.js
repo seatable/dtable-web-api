@@ -1023,6 +1023,14 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  copyExternalDtable(dstWorkspaceID, link) {
+    let url = this.server + '/api/v2.1/dtable-external-link/dtable-copy/';
+    let formData = new FormData();
+    formData.append('link', link);
+    formData.append('dst_workspace_id', dstWorkspaceID);
+    return this._sendPostRequest(url, formData);
+  }
+
 }
 
 export default DTableWebAPI;
