@@ -396,6 +396,14 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
+  listDTableAsset(dtableUuid, parent_dir) {
+    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/';
+    if (parent_dir) {
+      url = url + '?parent_dir=' + parent_dir;
+    }
+    return this.req.get(url);
+  }
+
   //account api
 
   getAccountInfo() {
