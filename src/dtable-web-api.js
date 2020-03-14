@@ -1014,6 +1014,16 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  cancelDTableIOTask(taskId, dtable_uuid, task_type) {
+    let url = this.server + '/api/v2.1/dtable-io-status/';
+    let params = {
+      task_id: taskId,
+      dtable_uuid: dtable_uuid,
+      task_type: task_type
+    };
+    return this.req.delete(url, {params: params});
+  }
+
   copyDTable(srcWorkspaceID, dstWorkspaceID, name) {
     let url = this.server + '/api/v2.1/dtable-copy/';
     let formData = new FormData();
