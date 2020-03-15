@@ -404,6 +404,12 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  deleteDTableAsset(dtableUuid, parentPath, direntName) {
+    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/';
+    url += '?parent_path=' + parentPath + '&name=' + direntName;
+    return this.req.delete(url);
+  }
+
   //account api
 
   getAccountInfo() {
