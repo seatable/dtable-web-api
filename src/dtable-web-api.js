@@ -215,6 +215,11 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/api-tokens/' + encodeURIComponent(appName) + '/';
     return this.req.delete(url);
   }
+
+  ListAPITokenStatus(workspaceID, name) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID +  '/dtable/' + name + '/api-tokens-status/';
+    return this.req.get(url);
+  }
   
   // ---- dtable data api
   getTableDownloadLink(workspaceID, name) {
