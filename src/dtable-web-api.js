@@ -242,6 +242,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listPluginsByExternalLink(token) {
+    const url = this.server + '/api/v2.1/external-link-tokens/' + token + '/plugins/';
+    return this.req.get(url);
+  }
+
   getTableRelatedUsers(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/related-users/';
     return this.req.get(url);
