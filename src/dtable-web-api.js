@@ -216,7 +216,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  ListAPITokenStatus(workspaceID, name) {
+  listAPITokenStatus(workspaceID, name) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID +  '/dtable/' + name + '/api-tokens-status/';
     return this.req.get(url);
   }
