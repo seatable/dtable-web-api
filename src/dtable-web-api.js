@@ -470,6 +470,14 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  // org admin api
+  orgAdminUpdateOrgInfo(newOrgName) {
+    let url = this.server + '/api/v2.1/org/admin/info/';
+    let formData = new FormData();
+    formData.append('new_org_name', newOrgName);
+    return this.req.put(url, formData);
+  }
+
   // sysadmin org api
   sysAdminListOrgs() {
     const url = this.server + '/api/v2.1/admin/organizations/';
