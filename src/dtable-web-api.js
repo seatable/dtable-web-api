@@ -494,12 +494,12 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
-  sysAdminAddOrg(orgName, email, nickname, password) {
+  sysAdminAddOrg(orgName, adminEmail, adminName, password) {
     const url = this.server + '/api/v2.1/admin/organizations/';
     let formData = new FormData();
     formData.append('org_name', orgName);
-    formData.append('email', email);
-    formData.append('nickname', nickname);
+    formData.append('admin_email', adminEmail);
+    formData.append('admin_name', adminName);
     formData.append('password', password);
     return this._sendPostRequest(url, formData);
   }
