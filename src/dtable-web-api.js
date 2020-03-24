@@ -874,6 +874,20 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  sysAdminListExternalLinks(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/external-links/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminDeleteExternalLink(token) {
+    let url = this.server + '/api/v2.1/admin/external-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
   listForms() {
     let url = this.server + '/api/v2.1/forms/';
     return this.req.get(url);
