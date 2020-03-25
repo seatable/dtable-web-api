@@ -1579,11 +1579,6 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
-  listFileScanRecords() {
-    const url = this.server + '/api/v2.1/admin/file-scan-records/';
-    return this.req.get(url);
-  }
-
 }
 
 export default DTableWebAPI;
