@@ -220,6 +220,187 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID +  '/dtable/' + name + '/api-tokens-status/';
     return this.req.get(url);
   }
+
+  copyDTable(srcWorkspaceID, dstWorkspaceID, name) {
+    let url = this.server + '/api/v2.1/dtable-copy/';
+    let formData = new FormData();
+    formData.append('src_workspace_id', srcWorkspaceID);
+    formData.append('dst_workspace_id', dstWorkspaceID);
+    formData.append('name', name);
+    return this._sendPostRequest(url, formData);
+  }
+
+  copyExternalDtable(dstWorkspaceID, link) {
+    let url = this.server + '/api/v2.1/dtable-external-link/dtable-copy/';
+    let formData = new FormData();
+    formData.append('link', link);
+    formData.append('dst_workspace_id', dstWorkspaceID);
+    return this._sendPostRequest(url, formData);
+  }
+
+  addExportDTableTask(workspaceId, dtable_name) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
+    return this.req.get(url);
+  }
+
+  addImportDTableTask (workspaceId, file) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-dtable/';
+    let formData = new FormData();
+    formData.append('dtable', file);
+    return this._sendPostRequest(url, formData);
+  }
+
+  queryDTableIOStatusByTaskId(taskId) {
+    let url = this.server + '/api/v2.1/dtable-io-status/?task_id=' + taskId;
+    return this.req.get(url);
+  }
+
+  cancelDTableIOTask(taskId, dtable_uuid, task_type) {
+    let url = this.server + '/api/v2.1/dtable-io-status/';
+    let params = {
+      task_id: taskId,
+      dtable_uuid: dtable_uuid,
+      task_type: task_type
+    };
+    return this.req.delete(url, {params: params});
+  }
+
+  createSeafileConnector(dtableId, seafileURL, repoAPIToken) {
+    let url = this.server + '/api/v2.1/seafile-connectors/';
+    let formData = new FormData();
+    formData.append('dtable_id', dtableId);
+    formData.append('seafile_url', seafileURL );
+    formData.append('repo_api_token', repoAPIToken);
+    return this.req.post(url, formData);
+  }
+
+  updateSeafileConnector(dtableId, seafileURL, repoAPIToken, connectorId) {
+    let url = this.server + '/api/v2.1/seafile-connectors/' + connectorId + '/';
+    let formData = new FormData();
+    formData.append('dtable_id', dtableId);
+    formData.append('seafile_url', seafileURL );
+    formData.append('repo_api_token', repoAPIToken);
+    return this.req.put(url, formData);
+  }
+
+  listForms() {
+    let url = this.server + '/api/v2.1/forms/';
+    return this.req.get(url);
+  }
+
+  listSharedForms() {
+    let url = this.server + '/api/v2.1/forms/shared/';
+    return this.req.get(url);
+  }
+
+  listDTableForms(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/forms/?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
+    return this.req.get(url);
+  }
+
+  createDTableForm(workspaceID, dtableName, formID, formConfig) {
+    let url = this.server + '/api/v2.1/forms/';
+    let formData = new FormData();
+    formData.append('workspace_id', workspaceID);
+    formData.append('name', dtableName);
+    formData.append('form_id', formID);
+    formData.append('form_config', formConfig);
+    return this._sendPostRequest(url, formData);
+  }
+
+  deleteDTableForm(token) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/';
+    return this.req.delete(url);
+  }
+
+  updateDTableForm(token, formConfig) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/';
+    let formData = new FormData();
+    formData.append('form_config', formConfig);
+    return this.req.put(url, formData);
+  }
+
+  dTableFormShare(token, shareType, groupIDs) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/share/';
+    let params = {
+      share_type: shareType,
+      group_ids: groupIDs
+    };
+    return this.req.post(url, params);
+  }
+
+  getUploadLinkViaFormToken(token) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/upload-link/';
+    return this.req.get(url);
+  }
+
+  getTableFormShareLink(workspaceID, dtableName, formId) {
+    let params = 'workspace_id=' + workspaceID + '&name=' + encodeURIComponent(dtableName) + '&form_id=' + formId;
+    let url = this.server + '/api/v2.1/dtable-form-links/?' + params;
+    return this.req.get(url);
+  }
+
+  createTableFormShareLink(workspaceID, dtableName, formId) {
+    let url = this.server + '/api/v2.1/dtable-form-links/';
+    let form = new FormData();
+    form.append('workspace_id', workspaceID);
+    form.append('name', dtableName);
+    form.append('form_id', formId);
+
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteTableFormShareLink(token) {
+    let url = this.server + '/api/v2.1/dtable-form-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
+  submitFormData(token, table_id, row_data) {
+    const url = this.server + '/api/v2.1/form-submit/' + token + '/';
+    let form = new FormData();
+    form.append('table_id', table_id);
+    form.append('row_data', row_data);
+    return this._sendPostRequest(url, form);
+  }
+
+  getDTableActivities(pageNum, avatarSize=36) {
+    let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum + '&avatar_size=' + avatarSize;
+    return this.req.get(url);
+  }
+
+  listDTableSnapshots(workspaceID, dtableName, page, perPage) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ encodeURIComponent(dtableName) + '/snapshots/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  getDTableSnapshotDownloadLink(workspaceID, dtableName, commitId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/';
+    return this.req.get(url);
+  }
+
+  listDTablePlugins(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
+    return this.req.get(url);
+  }
+  
+  uploadDTablePlugin(workspaceID, dtableName, formData) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
+    return this._sendPostRequest(url, formData);
+  }
+  
+  deleteDTablePlugin(workspaceID, dtableName, pluginID) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
+    return this.req.delete(url);
+  }
+  
+  updateDtablePlugin(workspaceID, dtableName, pluginID, formData) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
+    return this.req.put(url, formData);
+  }
   
   // ---- dtable data api
   getTableDownloadLink(workspaceID, name) {
@@ -291,35 +472,12 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getTableFormShareLink(workspaceID, dtableName, formId) {
-    let params = 'workspace_id=' + workspaceID + '&name=' + encodeURIComponent(dtableName) + '&form_id=' + formId;
-    let url = this.server + '/api/v2.1/dtable-form-links/?' + params;
+  // other not-admin APIs
+  getUserInfo() {
+    const url = this.server + '/api/v2.1/user/';
     return this.req.get(url);
   }
-
-  createTableFormShareLink(workspaceID, dtableName, formId) {
-    let url = this.server + '/api/v2.1/dtable-form-links/';
-    let form = new FormData();
-    form.append('workspace_id', workspaceID);
-    form.append('name', dtableName);
-    form.append('form_id', formId);
-
-    return this._sendPostRequest(url, form);
-  }
-
-  deleteTableFormShareLink(token) {
-    let url = this.server + '/api/v2.1/dtable-form-links/' + token + '/';
-    return this.req.delete(url);
-  }
-
-  submitFormData(token, table_id, row_data) {
-    const url = this.server + '/api/v2.1/form-submit/' + token + '/';
-    let form = new FormData();
-    form.append('table_id', table_id);
-    form.append('row_data', row_data);
-    return this._sendPostRequest(url, form);
-  }
-
+ 
   listGroups(withRepos = false) {
     let options = {with_repos: withRepos ? 1 : 0};
     const url = this.server + '/api/v2.1/groups/';
@@ -388,22 +546,17 @@ class DTableWebAPI {
     });
   }
 
-  createSeafileConnector(dtableId, seafileURL, repoAPIToken) {
-    let url = this.server + '/api/v2.1/seafile-connectors/';
-    let formData = new FormData();
-    formData.append('dtable_id', dtableId);
-    formData.append('seafile_url', seafileURL );
-    formData.append('repo_api_token', repoAPIToken);
-    return this.req.post(url, formData);
+  listShareableGroups() {
+    const url = this.server + '/api/v2.1/shareable-groups/';
+    return this.req.get(url);
   }
 
-  updateSeafileConnector(dtableId, seafileURL, repoAPIToken, connectorId) {
-    let url = this.server + '/api/v2.1/seafile-connectors/' + connectorId + '/';
-    let formData = new FormData();
-    formData.append('dtable_id', dtableId);
-    formData.append('seafile_url', seafileURL );
-    formData.append('repo_api_token', repoAPIToken);
-    return this.req.put(url, formData);
+  listUserInfo(userIdList) {
+    var url = this.server + '/api/v2.1/user-list/';
+    let operation = {
+      user_id_list: userIdList
+    };
+    return this._sendPostRequest(url, operation, { headers: { 'Content-type': 'application/json' }});
   }
 
   listDTableAsset(dtableUuid, parent_dir) {
@@ -420,6 +573,132 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  listCommonDatasets(fromTableID) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/';
+    if (fromTableID) {
+      url = url + '?from_table_id=' + fromTableID;
+    }
+    return this.req.get(url);
+  }
+
+  getCommonDataset(datasetId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
+    return this.req.get(url);
+  }
+
+  createCommonDataset(datasetName, dtableName, tableName, viewName) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/';
+    let formData = new FormData();
+    formData.append('dataset_name', datasetName);
+    formData.append('dtable_name', dtableName);
+    formData.append('table_name', tableName);
+    formData.append('view_name', viewName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  deleteCommonDataset(datasetId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
+    return this.req.delete(url);
+  }
+
+  listDatasetAccessibleGroups(datasetId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/';
+    return this.req.get(url);
+  }
+
+  addDatasetAccessibleGroup(datasetId, groupIdList) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/';
+    let formData = new FormData();
+    groupIdList.map(groupId => formData.append('group_id', groupId));
+    return this._sendPostRequest(url, formData);
+  }
+
+  deleteDatasetAccessibleGroup(datasetId, groupId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/' + groupId + '/';
+    return this.req.delete(url);
+  }
+
+  markNoticeAsRead(noticeId) {
+    const url = this.server + '/api/v2.1/notification/';
+    let from = new FormData();
+    from.append('notice_id', noticeId);
+    return this.req.put(url, from);
+  }
+
+  listNotifications(page, perPage) {
+    const url = this.server + '/api/v2.1/notifications/';
+    let params = {
+      page: page,
+      per_page: perPage
+    }
+    return this.req.get(url, {params: params});
+  }
+
+  updateNotifications() {
+    const url = this.server + '/api/v2.1/notifications/';
+    return this.req.put(url);
+  }
+
+  getUnseenNotificationCount() {
+    const url = this.server + '/api/v2.1/notifications/';
+    return this.req.get(url);
+  }
+
+  queryOfficeFileConvertStatus(repoID, commitID, path, fileType, shareToken) {
+    const url = this.server + '/office-convert/status/';
+    const params = {
+      repo_id: repoID,
+      commit_id: commitID,
+      path: path,
+      doctype: fileType // 'document' or 'spreadsheet'
+    };
+    // for view of share link
+    if (shareToken) {
+      params['token'] = shareToken;
+    }
+    return this.req.get(url, {
+      headers: {'X-Requested-With': 'XMLHttpRequest'},
+      params: params
+    });
+  }
+
+  searchUsers(searchParam) {
+    const url = this.server + '/api2/search-user/?q=' + encodeURIComponent(searchParam);
+    return this.req.get(url);
+  }
+
+  sendUploadLink(token, email, extraMsg) {
+    const url = this.server + '/api2/send-upload-link/';
+    let form = new FormData();
+    form.append('token', token);
+    form.append('email', email);
+    if (extraMsg) {
+      form.append('extra_msg', extraMsg);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  sendShareLink(token, email, extraMsg) {
+    const url = this.server + '/api2/send-share-link/';
+    let form = new FormData();
+    form.append('token', token);
+    form.append('email', email);
+    if (extraMsg) {
+      form.append('extra_msg', extraMsg);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  shareableGroups() {
+    const url = this.server + '/api/v2.1/shareable-groups/';
+    return this.req.get(url);
+  }
+
+  listDepartments() {
+    const url = this.server + '/api/v2.1/departments/';
+    return this.req.get(url);
+  }
+
   //account api
 
   getAccountInfo() {
@@ -427,6 +706,313 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sendVerifyCode(phone, type) {
+    let url = this.server + '/api/v2.1/user/sms-verify/';
+    let data = {
+      phone: phone,
+      type: type
+    };
+    return this.req.post(url, data);
+  }
+
+  bindPhoneNumber(phone, code) {
+    let url = this.server + '/api/v2.1/user/bind-phone/';
+    let data = {
+      phone: phone,
+      code: code
+    };
+    return this.req.post(url, data);
+  }
+
+  updateEmailNotificationInterval(interval) {
+    const url = this.server + '/api2/account/info/';
+    const data = {
+      'email_notification_interval': interval
+    };
+    return this.req.put(url, data);
+  }
+
+  updateUserAvatar(avatarFile, avatarSize) {
+    const url = this.server + '/api/v2.1/user-avatar/';
+    let form = new FormData();
+    form.append('avatar', avatarFile);
+    form.append('avatar_size', avatarSize);
+    return this._sendPostRequest(url, form);
+  }
+
+  updateUserInfo({name, telephone, contact_email, list_in_address_book}) {
+    const url = this.server + '/api/v2.1/user/';
+    let data = {};
+    if (name != undefined) {
+      data.name = name;
+    }
+    if (telephone != undefined) {
+      data.telephone = telephone;
+    }
+    if (contact_email != undefined) {
+      data.contact_email = contact_email;
+    }
+    if (list_in_address_book != undefined) {
+      data.list_in_address_book = list_in_address_book;
+    }
+    return this.req.put(url, data);
+  }
+
+  updateWebdavSecret(password) {
+    const url = this.server + '/api/v2.1/webdav-secret/';
+    const data = {
+      'secret': password
+    };
+    return this.req.put(url, data);
+  }
+
+  // org admin api
+  orgAdminUpdateOrgInfo(newOrgName) {
+    let url = this.server + '/api/v2.1/org/admin/info/';
+    let formData = new FormData();
+    formData.append('new_org_name', newOrgName);
+    return this.req.put(url, formData);
+  }
+
+  orgAdminAddDepartGroup(orgID, parentGroup, groupName, groupOwner, groupStaff) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/';
+    let form = new FormData();
+    form.append('parent_group', parentGroup);
+    form.append('group_name', groupName);
+    if (groupOwner) {
+      form.append('group_owner', groupOwner);
+    }
+    if (groupStaff) {
+      form.append('group_staff', groupStaff.join(','));
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  orgAdminAddDepartmentRepo(orgID, groupID, repoName) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/group-owned-libraries/';
+    let form = new FormData();
+    form.append('repo_name', repoName);
+    return this._sendPostRequest(url, form);
+  }
+
+  orgAdminAddGroupMember(orgID, groupID, userEmail) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID +  '/members/';
+    let form = new FormData();
+    form.append('email', userEmail);
+    return this._sendPostRequest(url, form);
+  }
+
+  orgAdminAddOrgUser(orgID, email, name, password) {
+    const url =  this.server + '/api/v2.1/org/' + orgID +'/admin/users/';
+    let form = new FormData();
+    form.append('email', email);
+    form.append('name', name);
+    form.append('password', password);
+    return this._sendPostRequest(url, form);
+  }
+
+  orgAdminChangeOrgUserStatus(userID, statusCode) {
+    const url = this.server + '/org/useradmin/toggle_status/' + userID + '/';
+    let form = new FormData();
+    form.append('s', statusCode);
+    return this.req.post(url, form, { headers: {'X-Requested-With': 'XMLHttpRequest'}});
+  }
+
+  orgAdminDeleteDepartGroup(orgID, groupID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/' + groupID + '/';
+    return this.req.delete(url);
+  }
+
+  orgAdminDeleteDepartmentRepo(orgID, groupID, repoID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/group-owned-libraries/' + repoID;
+    return this.req.delete(url);
+  }
+
+  orgAdminDeleteGroupMember(orgID, groupID, userEmail) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/members/' + encodeURIComponent(userEmail) + '/';
+    return this.req.delete(url);
+  }
+
+  orgAdminDeleteOrgGroup(orgID, groupID) {
+    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/groups/' + groupID + '/';
+    return this.req.delete(url);
+  }
+
+  orgAdminDeleteOrgLink(token) {
+    const url = this.server + '/api/v2.1/org/admin/links/' + token + '/';
+    return this.req.delete(url);
+  }
+
+  orgAdminDeleteOrgRepo(orgID, repoID) {
+    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/repos/' + repoID + '/';
+    return this.req.delete(url);
+  }
+
+  orgAdminDeleteOrgUser(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    return this.req.delete(url);
+  }
+
+  orgAdminGetFileUpdateDetail(repoID, commitID) {
+    let url = this.server + '/ajax/repo/' + repoID + '/history/changes/?commit_id=' + commitID;
+    return this.req.get(url, { headers: {'X-Requested-With': 'XMLHttpRequest'}});
+  }
+
+  orgAdminGetGroup(orgID, groupID) {
+    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/groups/' + groupID + '/';
+    return this.req.get(url);
+  }
+
+  orgAdminGetOrgInfo() {
+    const url = this.server + '/api/v2.1/org/admin/info/';
+    return this.req.get(url);
+  }
+
+  orgAdminGetOrgUserBesharedRepos(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/beshared-repos/';
+    return this.req.get(url);
+  }
+
+  orgAdminGetOrgUserInfo(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    return this.req.get(url);
+  }
+
+  orgAdminGetOrgUserOwnedRepos(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/repos/';
+    return this.req.get(url);
+  }
+
+  orgAdminListDepartGroups(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/';
+    return this.req.get(url);
+  }
+
+  orgAdminListFileAudit(email, repoID, page) {
+    let url = this.server + '/api/v2.1/org/admin/logs/file-access/?page=' + page;
+    if (email) {
+      url = url + '&email=' + encodeURIComponent(email);
+    }
+    if (repoID) {
+      url = url + '&repo_id=' + repoID;
+    }
+    return this.req.get(url);
+  }
+
+  orgAdminListFileUpdate(email, repoID, page) {
+    let url = this.server + '/api/v2.1/org/admin/logs/file-update/?page=' + page;
+    if (email) {
+      url = url + '&email=' + encodeURIComponent(email);
+    }
+    if (repoID) {
+      url = url + '&repo_id=' + repoID;
+    }
+    return this.req.get(url);
+  }
+
+  orgAdminListGroupInfo(orgID, groupID, showAncestors) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/' + groupID + '/?return_ancestors=' + showAncestors;
+    return this.req.get(url);
+  }
+
+  orgAdminListGroupMembers(orgID, groupID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/members/';
+    return this.req.get(url);
+  }
+
+  orgAdminListGroupRepos(orgID, groupID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/libraries/';
+    return this.req.get(url);
+  }
+
+  orgAdminListOrgGroups(orgID, page) {
+    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/groups/?page=' + page;
+    return this.req.get(url);
+  }
+
+  orgAdminListOrgLinks(page) {
+    const url = this.server + '/api/v2.1/org/admin/links/?page=' + page;
+    return this.req.get(url);
+  }
+
+  orgAdminListOrgRepos(orgID, page) {
+    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/repos/?page=' + page;
+    return this.req.get(url);
+  }
+  orgAdminListOrgUsers(orgID, isStaff, page) {
+    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/users/?is_staff=' + isStaff + '&page=' + page;
+    return this.req.get(url);
+  }
+
+  orgAdminListPermAudit(email, repoID, page) {
+    let url = this.server + '/api/v2.1/org/admin/logs/repo-permission/?page=' + page;
+    if (email) {
+      url = url + '&email=' + encodeURIComponent(email);
+    }
+    if (repoID) {
+      url = url + '&repo_id=' + repoID;
+    }
+    return this.req.get(url);
+  }
+
+  orgAdminResetOrgUserPassword(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/set-password/';
+    return this.req.put(url);
+  }
+
+  orgAdminSetGroupMemberRole(orgID, groupID, userEmail, isAdmin) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID +  '/members/' + encodeURIComponent(userEmail) + '/';
+    let form = new FormData();
+    form.append('is_admin', isAdmin);
+    return this.req.put(url, form);
+  }
+
+  orgAdminSetGroupQuota(orgID, groupID, quota) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/';
+    let form = new FormData();
+    form.append('quota', quota);
+    return this.req.put(url, form);
+  }
+
+  orgAdminSetOrgAdmin(orgID, email, isStaff) {
+    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/users/' + encodeURIComponent(email) + '/';
+    let form = new FormData();
+    form.append('is_staff', isStaff)
+    return this.req.put(url, form);
+  }
+
+  orgAdminSetOrgUserContactEmail(orgID, email, contactEmail) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const data = {
+      contact_email: contactEmail
+    };
+    return this.req.put(url, data);
+  }
+
+  orgAdminSetOrgUserName(orgID, email, name) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const data = {
+      name: name
+    };
+    return this.req.put(url, data);
+  }
+
+  orgAdminSetOrgUserQuota(orgID, email, quota) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const data = {
+      quota_total: quota
+    };
+    return this.req.put(url, data);
+  }
+
+  orgAdminTransferOrgRepo(orgID, repoID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/repos/' + repoID + '/';
+    let form = new FormData();
+    form.append('email', email);
+    return this.req.put(url, form);
+  }
+
+  // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
     let params = {
@@ -450,32 +1036,6 @@ class DTableWebAPI {
   sysAdminRestoreTrashDTable(dtableID) {
     let url = this.server + '/api/v2.1/admin/trash-dtables/' + dtableID + '/';
     return this.req.put(url);
-  }
-
-  sendVerifyCode(phone, type) {
-    let url = this.server + '/api/v2.1/user/sms-verify/';
-    let data = {
-      phone: phone,
-      type: type
-    };
-    return this.req.post(url, data);
-  }
-
-  bindPhoneNumber(phone, code) {
-    let url = this.server + '/api/v2.1/user/bind-phone/';
-    let data = {
-      phone: phone,
-      code: code
-    };
-    return this.req.post(url, data);
-  }
-
-  // org admin api
-  orgAdminUpdateOrgInfo(newOrgName) {
-    let url = this.server + '/api/v2.1/org/admin/info/';
-    let formData = new FormData();
-    formData.append('new_org_name', newOrgName);
-    return this.req.put(url, formData);
   }
 
   // sysadmin org api
@@ -840,7 +1400,7 @@ class DTableWebAPI {
       return this.req.get(url, { params: params });
   }
 
-   sysAdminStatisticActiveUsers(startTime, endTime) {
+  sysAdminStatisticActiveUsers(startTime, endTime) {
     const url = this.server + '/api/v2.1/admin/statistics/active-users/';
     let params = {
       start: startTime,
@@ -896,196 +1456,132 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  listForms() {
-    let url = this.server + '/api/v2.1/forms/';
-    return this.req.get(url);
+  sysAdminAddRepoSharedItem(repoID, shareType, shareToList, permission) {
+    const url = this.server + '/api/v2.1/admin/shares/';
+    let form = new FormData();
+    form.append('repo_id', repoID);
+    form.append('share_type', shareType);
+    form.append('permission', permission);
+    shareToList.map((shareTo) => {
+      form.append('share_to', shareTo);
+    });
+    return this._sendPostRequest(url, form);
   }
 
-  listSharedForms() {
-    let url = this.server + '/api/v2.1/forms/shared/';
-    return this.req.get(url);
-  }
-
-  listDTableForms(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/forms/?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
-    return this.req.get(url);
-  }
-
-  createDTableForm(workspaceID, dtableName, formID, formConfig) {
-    let url = this.server + '/api/v2.1/forms/';
-    let formData = new FormData();
-    formData.append('workspace_id', workspaceID);
-    formData.append('name', dtableName);
-    formData.append('form_id', formID);
-    formData.append('form_config', formConfig);
-    return this._sendPostRequest(url, formData);
-  }
-
-  deleteDTableForm(token) {
-    let url = this.server + '/api/v2.1/forms/' + token + '/';
+  sysAdminClearDeviceErrors() {
+    const url = this.server + '/api/v2.1/admin/device-errors/';
     return this.req.delete(url);
   }
 
-  updateDTableForm(token, formConfig) {
-    let url = this.server + '/api/v2.1/forms/' + token + '/';
-    let formData = new FormData();
-    formData.append('form_config', formConfig);
-    return this.req.put(url, formData);
-  }
-
-  dTableFormShare(token, shareType, groupIDs) {
-    let url = this.server + '/api/v2.1/forms/' + token + '/share/';
-    let params = {
+  sysAdminDeleteRepoSharedItem(repoID, shareType, shareTo) {
+    const url = this.server + '/api/v2.1/admin/shares/';
+    const params = {
+      repo_id: repoID,
       share_type: shareType,
-      group_ids: groupIDs
+      share_to: shareTo
     };
-    return this.req.post(url, params);
+    return this.req.delete(url, {data: params});
   }
 
-  getUploadLinkViaFormToken(token) {
-    let url = this.server + '/api/v2.1/forms/' + token + '/upload-link/';
+  sysAdminGetRepoHistorySetting(repoID) {
+    const url = this.server + '/api/v2.1/admin/libraries/' + repoID + '/history-limit/';
     return this.req.get(url);
   }
 
-  getDTableActivities(pageNum, avatarSize=36) {
-    let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum + '&avatar_size=' + avatarSize;
+  sysAdminGetSysInfo() {
+    const url = this.server + '/api/v2.1/admin/sysinfo/';
     return this.req.get(url);
   }
 
-  listDTableSnapshots(workspaceID, dtableName, page, perPage) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ encodeURIComponent(dtableName) + '/snapshots/';
+  sysAdminListDeviceErrors() {
+    const url = this.server + '/api/v2.1/admin/device-errors/';
+    return this.req.get(url);
+  }
+
+  sysAdminListDevices(platform, page, per_page) {
+    const url = this.server + '/api/v2.1/admin/devices/';
     let params = {
+      platform: platform,
       page: page,
-      per_page: perPage
+      per_page: per_page
     };
-    return this.req.get(url, { params: params });
+    return this.req.get(url, {params: params});
   }
 
-  getDTableSnapshotDownloadLink(workspaceID, dtableName, commitId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/';
-    return this.req.get(url);
-  }
-
-  listDTablePlugins(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
-    return this.req.get(url);
-  }
-  
-  uploadDTablePlugin(workspaceID, dtableName, formData) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
-    return this._sendPostRequest(url, formData);
-  }
-  
-  deleteDTablePlugin(workspaceID, dtableName, pluginID) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
-    return this.req.delete(url);
-  }
-  
-  updateDtablePlugin(workspaceID, dtableName, pluginID, formData) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
-    return this.req.put(url, formData);
-  }
-
-  listCommonDatasets(fromTableID) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/';
-    if (fromTableID) {
-      url = url + '?from_table_id=' + fromTableID;
-    }
-    return this.req.get(url);
-  }
-
-  getCommonDataset(datasetId) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
-    return this.req.get(url);
-  }
-
-  createCommonDataset(datasetName, dtableName, tableName, viewName) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/';
-    let formData = new FormData();
-    formData.append('dataset_name', datasetName);
-    formData.append('dtable_name', dtableName);
-    formData.append('table_name', tableName);
-    formData.append('view_name', viewName);
-    return this._sendPostRequest(url, formData);
-  }
-
-  deleteCommonDataset(datasetId) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
-    return this.req.delete(url);
-  }
-
-  listDatasetAccessibleGroups(datasetId) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/';
-    return this.req.get(url);
-  }
-
-  addDatasetAccessibleGroup(datasetId, groupIdList) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/';
-    let formData = new FormData();
-    groupIdList.map(groupId => formData.append('group_id', groupId));
-    return this._sendPostRequest(url, formData);
-  }
-
-  deleteDatasetAccessibleGroup(datasetId, groupId) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/' + groupId + '/';
-    return this.req.delete(url);
-  }
-
-  listShareableGroups() {
-    const url = this.server + '/api/v2.1/shareable-groups/';
-    return this.req.get(url);
-  }
-
-  listUserInfo(userIdList) {
-    var url = this.server + '/api/v2.1/user-list/';
-    let operation = {
-      user_id_list: userIdList
+  sysAdminListRepoSharedItems(repoID, shareType) {
+    const url = this.server + '/api/v2.1/admin/shares/';
+    const params = {
+      repo_id: repoID,
+      share_type: shareType
     };
-    return this._sendPostRequest(url, operation, { headers: { 'Content-type': 'application/json' }});
+    return this.req.get(url, {params: params});
   }
 
-  addExportDTableTask(workspaceId, dtable_name) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
-    return this.req.get(url);
-  }
-
-  addImportDTableTask (workspaceId, file) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-dtable/';
-    let formData = new FormData();
-    formData.append('dtable', file);
-    return this._sendPostRequest(url, formData);
-  }
-
-  queryDTableIOStatusByTaskId(taskId) {
-    let url = this.server + '/api/v2.1/dtable-io-status/?task_id=' + taskId;
-    return this.req.get(url);
-  }
-
-  cancelDTableIOTask(taskId, dtable_uuid, task_type) {
-    let url = this.server + '/api/v2.1/dtable-io-status/';
+  sysAdminUnlinkDevice(platform, deviceID, user, wipeDevice) {
+    const url = this.server + '/api/v2.1/admin/devices/';
     let params = {
-      task_id: taskId,
-      dtable_uuid: dtable_uuid,
-      task_type: task_type
+      platform: platform,
+      device_id: deviceID,
+      user: user
     };
-    return this.req.delete(url, {params: params});
+    if (wipeDevice) {
+      params.wipe_device = wipeDevice
+    }
+    return this.req.delete(url, {data: params});
   }
 
-  copyDTable(srcWorkspaceID, dstWorkspaceID, name) {
-    let url = this.server + '/api/v2.1/dtable-copy/';
+  sysAdminUpdateRepoHistorySetting(repoID, keepDays) {
+    const url = this.server + '/api/v2.1/admin/libraries/' + repoID + '/history-limit/';
+    let form = new FormData();
+    form.append('keep_days', keepDays);
+    return this.req.put(url, form);
+  }
+
+  sysAdminUpdateRepoSharedItemPermission(repoID, shareType, shareTo, permission) {
+    const url = this.server + '/api/v2.1/admin/shares/';
+    const params = {
+      repo_id: repoID,
+      share_type: shareType,
+      permission: permission,
+      share_to: shareTo
+    };
+    return this.req.put(url, params);
+  }
+
+  sysAdminUploadLicense(file) {
+    const url = this.server + '/api/v2.1/admin/license/';
     let formData = new FormData();
-    formData.append('src_workspace_id', srcWorkspaceID);
-    formData.append('dst_workspace_id', dstWorkspaceID);
-    formData.append('name', name);
+    formData.append('license', file);
     return this._sendPostRequest(url, formData);
   }
 
-  copyExternalDtable(dstWorkspaceID, link) {
-    let url = this.server + '/api/v2.1/dtable-external-link/dtable-copy/';
-    let formData = new FormData();
-    formData.append('link', link);
-    formData.append('dst_workspace_id', dstWorkspaceID);
-    return this._sendPostRequest(url, formData);
+  adminAddWorkWeixinUsersBatch(userList) {
+    const url = this.server + '/api/v2.1/admin/work-weixin/users/batch/';
+    return this.req.post(url, {userlist: userList});
+  }
+
+  adminImportWorkWeixinDepartment(departmentID) {
+    const url = this.server + '/api/v2.1/admin/work-weixin/departments/import/';
+    return this.req.post(url, {work_weixin_department_id: departmentID});
+  }
+
+  adminListWorkWeixinDepartmentMembers(departmentID, params) {
+    const url = this.server + '/api/v2.1/admin/work-weixin/departments/' + departmentID + '/members/';
+    return this.req.get(url, {params: params});
+  }
+
+  adminListWorkWeixinDepartments(departmentID) {
+    const url = this.server + '/api/v2.1/admin/work-weixin/departments/';
+    const params = {};
+    if (departmentID) {
+      params.department_id = departmentID;
+    }
+    return this.req.get(url, {params: params});
+  }
+
+  listFileScanRecords() {
+    const url = this.server + '/api/v2.1/admin/file-scan-records/';
+    return this.req.get(url);
   }
 
 }
