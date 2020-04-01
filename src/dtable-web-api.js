@@ -57,6 +57,17 @@ class DTableWebAPI {
     }
   }
 
+  uploadFile(url, formData, onUploadProgress) {
+    return axios.create()({
+      method: "post",
+      data: formData,
+      url: url,
+      baseURL: this.server,
+      headers: { 'Authorization': 'Token ' + this.token },
+      onUploadProgress: onUploadProgress,
+    })
+  }
+
   uploadImage (uploadLink, formData, onUploadProgress = null) {
     return (
       axios.create()({
@@ -389,7 +400,7 @@ class DTableWebAPI {
   
   uploadDTablePlugin(workspaceID, dtableName, formData) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
-    return this._sendPostRequest(url, formData);
+    return this.uploadFile(url, formData, onUploadProgress);
   }
   
   deleteDTablePlugin(workspaceID, dtableName, pluginID) {
