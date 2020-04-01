@@ -398,7 +398,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
   
-  uploadDTablePlugin(workspaceID, dtableName, formData) {
+  uploadDTablePlugin(workspaceID, dtableName, formData, onUploadProgress) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
     return this.uploadFile(url, formData, onUploadProgress);
   }
