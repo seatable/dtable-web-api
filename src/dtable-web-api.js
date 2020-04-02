@@ -483,6 +483,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  rotateImage(workspaceID, name, path, angle) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + name + '/rotate-image/';
+    let form = new FormData();
+    form.append('path', path);
+    form.append('angle', angle);
+    return this._sendPostRequest(url, form);
+  }
+
   // other not-admin APIs
   getUserInfo() {
     const url = this.server + '/api/v2.1/user/';
