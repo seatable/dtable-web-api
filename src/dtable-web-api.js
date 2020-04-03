@@ -57,17 +57,6 @@ class DTableWebAPI {
     }
   }
 
-  uploadFile(url, formData, onUploadProgress) {
-    return axios.create()({
-      method: "post",
-      data: formData,
-      url: url,
-      baseURL: this.server,
-      headers: { 'Authorization': 'Token ' + this.token },
-      onUploadProgress: onUploadProgress,
-    })
-  }
-
   uploadImage (uploadLink, formData, onUploadProgress = null) {
     return (
       axios.create()({
@@ -398,9 +387,9 @@ class DTableWebAPI {
     return this.req.get(url);
   }
   
-  uploadDTablePlugin(workspaceID, dtableName, formData, onUploadProgress) {
+  uploadDTablePlugin(workspaceID, dtableName, formData, onUploadProgress = null) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
-    return this.uploadFile(url, formData, onUploadProgress);
+    return this.req.post(url, formData, {onUploadProgress});
   }
   
   deleteDTablePlugin(workspaceID, dtableName, pluginID) {
@@ -408,9 +397,9 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
   
-  updateDtablePlugin(workspaceID, dtableName, pluginID, formData) {
+  updateDtablePlugin(workspaceID, dtableName, pluginID, formData, onUploadProgress) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
-    return this.req.put(url, formData);
+    return this.req.put(url, formData, {onUploadProgress});
   }
   
   // ---- dtable data api
