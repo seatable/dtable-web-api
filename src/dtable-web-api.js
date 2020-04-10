@@ -99,6 +99,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listGroupSharedTables() {
+    let url = this.server + '/api/v2.1/dtables/group-shared/';
+    return this.req.get(url);
+  }
+
   // ---- dTable api
   createTable(name, owner) {
     const url = this.server + '/api/v2.1/dtables/';
@@ -146,6 +151,33 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/share/';
     let params = {
       email: email,
+      permission: permission
+    };
+    return this.req.put(url, params);
+  }
+
+  listTableGroupShares(workspaceID, name) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/group-shares/';
+    return this.req.get(url);
+  }
+
+  addTableGroupShare(workspaceID, name, groupID, permission) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/group-shares/';
+    let params = {
+      email: email,
+      permission: permission
+    };
+    return this.req.post(url, params);
+  }
+
+  deleteTableGroupShare(workspaceID, name, groupID) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/group-shares/' + groupID + '/';
+    return this.req.delete(url);
+  }
+
+  updateTableGroupShare(workspaceID, name, groupID, permission) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/group-shares/' + groupID + '/';
+    let params = {
       permission: permission
     };
     return this.req.put(url, params);
