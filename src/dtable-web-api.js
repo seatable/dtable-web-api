@@ -23,7 +23,7 @@ class DTableWebAPI {
       this.server = server;
     } else {
       this.server = siteRoot;
-    }
+    } 
 
     this.req = axios.create({
       headers: {
@@ -164,7 +164,7 @@ class DTableWebAPI {
   addTableGroupShare(workspaceID, name, groupID, permission) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/group-shares/';
     let params = {
-      email: email,
+      group_id: groupID,
       permission: permission
     };
     return this.req.post(url, params);
