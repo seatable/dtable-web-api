@@ -1052,6 +1052,34 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  orgAdminListDTables(orgID, page, perPage) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  orgAdminDeleteDTable(orgID, dtableID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableID + '/';
+    return this.req.delete(url);
+  }
+
+  orgAdminListTrashDTables(orgID, page, perPage) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  orgAdminRestoreTrashDTable(orgID, dtableID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/' + dtableID + '/';
+    return this.req.put(url);
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
