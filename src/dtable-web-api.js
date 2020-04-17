@@ -475,7 +475,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getDTableAssetExistsView (workspaceID, tableName, path) {
+  isDTableAssetExist (workspaceID, tableName, path) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + tableName + '/asset-exists/?path=' + path;
     return this.req.get(url);
   }
