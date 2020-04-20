@@ -475,6 +475,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  isDTableAssetExist (workspaceID, tableName, path) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + tableName + '/asset-exists/?path=' + path;
+    return this.req.get(url);
+  }
+
   getTableRowShareLink(workspaceID, tableName, table_id, rowId) {
     let params = "?workspace_id=" + workspaceID + "&name=" + encodeURIComponent(tableName) + "&table_id=" + table_id + "&row_id=" + rowId; 
     const url = this.server + '/api/v2.1/dtable-row-shares/' + params;
