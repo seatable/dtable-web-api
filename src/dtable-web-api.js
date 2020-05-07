@@ -315,6 +315,18 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
+  addStarDTable(dtable_uuid) {
+    let url = this.server + '/api/v2.1/starred-dtables/';
+    let formData = new FormData();
+    formData.append('dtable_uuid', dtable_uuid);
+    return this.req.post(url, formData);
+  }
+
+  unstarDTable(dtable_uuid) {
+    let url = this.server + '/api/v2.1/starred-dtables/?dtable_uuid=' + dtable_uuid;
+    return this.req.delete(url);
+  }
+
   listForms() {
     let url = this.server + '/api/v2.1/forms/';
     return this.req.get(url);
