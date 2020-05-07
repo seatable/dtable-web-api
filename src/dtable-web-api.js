@@ -322,7 +322,7 @@ class DTableWebAPI {
     return this.req.post(url, formData);
   }
 
-  cancelStarDTable(dtable_uuid) {
+  unstarDTable(dtable_uuid) {
     let url = this.server + '/api/v2.1/starred-dtables/?dtable_uuid=' + dtable_uuid;
     return this.req.delete(url);
   }
