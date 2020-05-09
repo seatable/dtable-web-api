@@ -211,10 +211,18 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  createDTableExternalLink(workspaceID, name, token) {
+  createDTableExternalLink(workspaceID, name, token, password, expireDays) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
     let form = new FormData();
-    form.append('token', token);
+    if (token) {
+      form.append('token', token);
+    }
+    if (password) {
+      form.append('password', password);
+    }
+    if (expireDays) {
+      form.append('expire_days', expireDays);
+    }
     return this._sendPostRequest(url, form);
   }
   
