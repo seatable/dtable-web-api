@@ -1124,9 +1124,15 @@ class DTableWebAPI {
   }
 
   // sysadmin org api
-  sysAdminListOrgs() {
+  sysAdminListOrgs(page, per_page) {
     const url = this.server + '/api/v2.1/admin/organizations/';
-    return this.req.get(url);
+    let params = {
+      page,
+      per_page
+    };
+    return this.req.get(url, {
+      params
+    });
   }
 
   sysAdminGetOrg(orgID) {
