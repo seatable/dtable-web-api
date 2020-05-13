@@ -879,9 +879,9 @@ class DTableWebAPI {
   }
 
   orgAdminChangeOrgUserStatus(userID, statusCode) {
-    const url = this.server + '/org/useradmin/toggle_status/' + userID + '/';
+    const url = this.server + '/api/v2.1/org/useradmin/toggle_status/' + userID + '/';
     let form = new FormData();
-    form.append('s', statusCode);
+    form.append('user_status', statusCode);
     return this.req.post(url, form, { headers: {'X-Requested-With': 'XMLHttpRequest'}});
   }
 
