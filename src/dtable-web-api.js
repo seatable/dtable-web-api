@@ -886,11 +886,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  orgAdminChangeOrgUserStatus(userID, statusCode) {
-    const url = this.server + '/api/v2.1/org/useradmin/toggle_status/' + userID + '/';
+  orgAdminChangeOrgUserStatus(orgID, email, statusCode) {
+    const url = this.server +'/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
     let form = new FormData();
     form.append('user_status', statusCode);
-    return this.req.post(url, form, { headers: {'X-Requested-With': 'XMLHttpRequest'}});
+    return this.req.put(url, form);
   }
 
   orgAdminDeleteDepartGroup(orgID, groupID) {
