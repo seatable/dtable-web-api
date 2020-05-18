@@ -1115,13 +1115,13 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
-  orgAdminGetWebSettings() {
-    const url = this.server + '/api/v2.1/org/admin/web-settings/';
+  orgAdminGetSettings() {
+    const url = this.server + '/api/v2.1/org/admin/settings/';
     return this.req.get(url);
   }
 
-  orgAdminUpdateWebSettings(key, value) {
-    const url = this.server + '/api/v2.1/org/admin/web-settings/';
+  orgAdminUpdateSettings(key, value) {
+    const url = this.server + '/api/v2.1/org/admin/settings/';
     let form = new FormData;
     form.append(key, value);
     return this.req.put(url, form);
