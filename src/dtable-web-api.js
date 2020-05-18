@@ -1115,6 +1115,18 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
+  orgAdminGetSettings() {
+    const url = this.server + '/api/v2.1/org/admin/settings/';
+    return this.req.get(url);
+  }
+
+  orgAdminUpdateSettings(key, value) {
+    const url = this.server + '/api/v2.1/org/admin/settings/';
+    let form = new FormData;
+    form.append(key, value);
+    return this.req.put(url, form);
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
