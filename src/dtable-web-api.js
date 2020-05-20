@@ -889,7 +889,7 @@ class DTableWebAPI {
   orgAdminChangeOrgUserStatus(orgID, email, statusCode) {
     const url = this.server +'/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
     let form = new FormData();
-    form.append('user_status', statusCode);
+    form.append('is_active', statusCode);
     return this.req.put(url, form);
   }
 
