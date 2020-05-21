@@ -841,6 +841,21 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
+  listNotificationRules(workspace_id, dtable_name) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/';
+    return this.req.get(url);
+  }
+
+  addNotificationRule(workspace_id, dtable_name, ruleJson) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/';
+    return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' }});
+  }
+
+  deleteNotificationRule(workspace_id, dtable_name, notificationRuleId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/' + notificationRuleId + '/';
+    return this.req.delete(url);
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
