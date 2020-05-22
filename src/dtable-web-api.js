@@ -552,7 +552,12 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/user/';
     return this.req.get(url);
   }
- 
+
+  getChargebeeCustomer() {
+    const url = this.server + '/api/v2.1/chargebee/customer/';
+    return this.req.get(url);
+  }
+
   listGroups(withRepos = false) {
     let options = {with_repos: withRepos ? 1 : 0};
     const url = this.server + '/api/v2.1/groups/';
