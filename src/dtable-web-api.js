@@ -676,6 +676,27 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  importCommonDataset(datasetId, dst_dtable_uuid) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/import/';
+    let formData = new FormData();
+    formData.append('dst_dtable_uuid', dst_dtable_uuid);
+    return this._sendPostRequest(url, formData);
+  }
+
+  syncCommonDataset(datasetId, dst_dtable_uuid, dst_table_id) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/sync/';
+    let formData = new FormData();
+    formData.append('dst_dtable_uuid', dst_dtable_uuid);
+    formData.append('dst_table_id', dst_table_id);
+    return this._sendPostRequest(url, formData);
+  }
+
+  listCommonDatasetSyncs(dst_dtable_uuid) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/syncs/';
+    url += '?dst_dtable_uuid=' + dst_dtable_uuid;
+    return this.req.get(url);
+  }
+
   listDatasetAccessibleGroups(datasetId) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/access-groups/';
     return this.req.get(url);
