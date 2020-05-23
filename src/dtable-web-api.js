@@ -855,6 +855,11 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/' + notificationRuleId + '/';
     return this.req.delete(url);
   }
+  
+  updateNotificationRule(workspace_id, dtable_name, notificationRuleId, ruleJson) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/' + notificationRuleId + '/';
+    return this.req.put(url, ruleJson,  { headers: { 'Content-type': 'application/json' }})
+  }
 
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
