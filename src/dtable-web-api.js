@@ -558,6 +558,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  chargebeeCheckout(planID) {
+    const url = this.server + '/api/v2.1/chargebee/checkout/';
+    return this.req.post(url, { plan_id: planID });
+  }
+
   listGroups(withRepos = false) {
     let options = {with_repos: withRepos ? 1 : 0};
     const url = this.server + '/api/v2.1/groups/';
