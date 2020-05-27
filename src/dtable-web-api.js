@@ -99,6 +99,21 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listSharedViews() {
+    let url = this.server + '/api/v2.1/dtables/view-shares-shared/';
+    return this.req.get(url);
+  }
+
+  leaveViewShare(viewShareId) {
+    let url = this.server + '/api/v2.1/dtables/view-shares-shared/' + viewShareId + '/';
+    return this.req.delete(url);
+  }
+
+  listGroupSharedViews() {
+    let url = this.server + '/api/v2.1/dtables/view-shares-group-shared/';
+    return this.req.get(url);
+  }
+
   listGroupSharedTables() {
     let url = this.server + '/api/v2.1/dtables/group-shared/';
     return this.req.get(url);
@@ -477,6 +492,11 @@ class DTableWebAPI {
 
   getTableAccessToken(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/access-token/';
+    return this.req.get(url);
+  }
+
+  getTableAccessTokenByViewShare(workspaceID, name, viewShareId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/access-token-view-share/?view_share_id=' + viewShareId + '/';
     return this.req.get(url);
   }
 
