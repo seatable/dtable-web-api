@@ -553,6 +553,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getUserCommonInfo(email, avatarSize) {
+    const url = this.server + '/api/v2.1/user-common-info/' + email;
+    let params = {
+      avatar_size: avatarSize
+    };
+    return this.req.get(url, {params: params});
+  }
+
   getChargebeeCustomer() {
     const url = this.server + '/api/v2.1/chargebee/customer/';
     return this.req.get(url);
