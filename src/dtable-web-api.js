@@ -94,9 +94,48 @@ class DTableWebAPI {
   //   return this.req.delete(url);
   // }
 
+  // share table api
   listSharedTables() {
     let url = this.server + '/api/v2.1/dtables/shared/';
     return this.req.get(url);
+  }
+
+  listGroupSharedTables() {
+    let url = this.server + '/api/v2.1/dtables/group-shared/';
+    return this.req.get(url);
+  }
+  
+  // share view api
+  listDTableViewShares(workspaceId, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/';
+    return this.req.get(url);
+  }
+  
+  createDTableViewShare(workspaceId, dtableName, tableId, viewId, permission, to) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/';
+    let params = {
+      table_id: tableId,
+      view_id: viewId,
+      permission: permission,
+      to: to,
+    };
+    return this.req.post(url, {params: params});
+  }
+  
+  updateDTableViewShare(workspaceId, dtableName, tableId, viewId, permission, to) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/';
+    let params = {
+      table_id: tableId,
+      view_id: viewId,
+      permission: permission,
+      to: to,
+    };
+    return this.req.put(url, {params: params});
+  }
+  
+  deleteDTableViewShare(viewShareId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/' + viewShareId + '/';
+    this.req.delete(url);
   }
 
   listSharedViews() {
@@ -104,19 +143,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  leaveViewShare(viewShareId) {
-    let url = this.server + '/api/v2.1/dtables/view-shares-shared/' + viewShareId + '/';
-    return this.req.delete(url);
-  }
-
   listGroupSharedViews() {
     let url = this.server + '/api/v2.1/dtables/view-shares-group-shared/';
     return this.req.get(url);
   }
 
-  listGroupSharedTables() {
-    let url = this.server + '/api/v2.1/dtables/group-shared/';
-    return this.req.get(url);
+  leaveViewShare(viewShareId) {
+    let url = this.server + '/api/v2.1/dtables/view-shares-shared/' + viewShareId + '/';
+    return this.req.delete(url);
   }
 
   // ---- dTable api
