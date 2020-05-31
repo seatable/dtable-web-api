@@ -119,23 +119,20 @@ class DTableWebAPI {
       permission: permission,
       to: to,
     };
-    return this.req.post(url, {params: params});
+    return this.req.post(url, params);
   }
   
-  updateDTableViewShare(workspaceId, dtableName, tableId, viewId, permission, to) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/';
-    let params = {
-      table_id: tableId,
-      view_id: viewId,
-      permission: permission,
-      to: to,
-    };
-    return this.req.put(url, {params: params});
-  }
-  
-  deleteDTableViewShare(viewShareId) {
+  updateDTableViewShare(workspaceId, dtableName, viewShareId, permission) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/' + viewShareId + '/';
-    this.req.delete(url);
+    let params = {
+      permission: permission,
+    };
+    return this.req.put(url, params);
+  }
+  
+  deleteDTableViewShare(workspaceId, dtableName, viewShareId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/' + viewShareId + '/';
+    return this.req.delete(url);
   }
 
   listSharedViews() {
