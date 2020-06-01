@@ -106,38 +106,72 @@ class DTableWebAPI {
   }
   
   // share view api
-  listDTableViewShares(workspaceId, dtableName) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/';
+  listDTableUserViewShares(workspaceId, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/';
     return this.req.get(url);
   }
-  
-  createDTableViewShare(workspaceId, dtableName, tableId, viewId, permission, to) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/';
+
+  createDTableUserViewShare(workspaceId, dtableName, tableId, viewId, permission, toUser) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/';
     let params = {
       table_id: tableId,
       view_id: viewId,
       permission: permission,
-      to: to,
+      to_user: toUser,
     };
     return this.req.post(url, params);
   }
-  
-  updateDTableViewShare(workspaceId, dtableName, viewShareId, permission) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/' + viewShareId + '/';
+
+  updateDTableUserViewShare(workspaceId, dtableName, viewShareId, permission) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/' + viewShareId + '/';
     let params = {
       permission: permission,
     };
     return this.req.put(url, params);
   }
-  
-  deleteDTableViewShare(workspaceId, dtableName, viewShareId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/view-shares/' + viewShareId + '/';
+
+  deleteDTableUserViewShare(workspaceId, dtableName, viewShareId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/' + viewShareId + '/';
+    return this.req.delete(url);
+  }
+
+  listDTableGroupViewShares(workspaceId, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/';
+    return this.req.get(url);
+  }
+
+  createDTableGroupViewShare(workspaceId, dtableName, tableId, viewId, permission, toGroupId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/';
+    let params = {
+      table_id: tableId,
+      view_id: viewId,
+      permission: permission,
+      to_group_id: toGroupId,
+    };
+    return this.req.post(url, params);
+  }
+
+  updateDTableGroupViewShare(workspaceId, dtableName, viewShareId, permission) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/' + viewShareId + '/';
+    let params = {
+      permission: permission,
+    };
+    return this.req.put(url, params);
+  }
+
+  deleteDTableGroupViewShare(workspaceId, dtableName, viewShareId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/' + viewShareId + '/';
     return this.req.delete(url);
   }
 
   listSharedViews() {
-    let url = this.server + '/api/v2.1/dtables/view-shares-shared/';
+    let url = this.server + '/api/v2.1/dtables/view-shares-user-shared/';
     return this.req.get(url);
+  }
+
+  leaveViewShare(viewShareId) {
+    let url = this.server + '/api/v2.1/dtables/view-shares-user-shared/' + viewShareId + '/';
+    return this.req.delete(url);
   }
 
   listGroupSharedViews() {
@@ -145,8 +179,8 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  leaveViewShare(viewShareId) {
-    let url = this.server + '/api/v2.1/dtables/view-shares-shared/' + viewShareId + '/';
+  leaveGroupViewShare(viewShareId) {
+    let url = this.server + '/api/v2.1/dtables/view-shares-group-shared/' + viewShareId + '/';
     return this.req.delete(url);
   }
 
@@ -538,8 +572,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getTableAccessTokenByViewShare(workspaceID, name, viewShareId) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/access-token-view-share/?view_share_id=' + viewShareId + '/';
+  getTableAccessTokenByUserViewShare(workspaceID, name, viewShareId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/user-view-share-access-token/?user_view_share_id=' + viewShareId;
+    return this.req.get(url);
+  }
+
+  getTableAccessTokenByGroupViewShare(workspaceID, name, viewShareId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/group-view-share-access-token/?group_view_share_id=' + viewShareId;
     return this.req.get(url);
   }
 
