@@ -768,10 +768,10 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  listCommonDatasets(fromTableID) {
+  listCommonDatasets(dst_dtable_uuid) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
-    if (fromTableID) {
-      url = url + '?from_table_id=' + fromTableID;
+    if (dst_dtable_uuid) {
+      url = url + '?dst_dtable_uuid=' + dst_dtable_uuid;
     }
     return this.req.get(url);
   }
