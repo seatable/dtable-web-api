@@ -50,18 +50,11 @@ test("listSharedTables", () => {
 });
 
 test("createTable", () => {
-  let name = "山水请";
-  let owner = "214407373@qq.com";
-  return dtableWebAPI.createTable(name, owner).then(response => {
-    console.log(response.data);
+  let tableName = "Test create table";
+  let owner = username;
+  return dtableWebAPI.createTable(tableName, owner).then(response => {
     expect(response.data).not.toBe(null);
   }).catch(error => {
     console.log(error.response.data);
   })
 });
-
-
-
-
-
-
