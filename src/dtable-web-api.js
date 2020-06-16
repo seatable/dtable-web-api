@@ -1346,6 +1346,12 @@ class DTableWebAPI {
     if (orgInfo.role) {
       formData.append('role', orgInfo.role);
     }
+    if (orgInfo.rowLimit) {
+      formData.append('row_limit', orgInfo.rowLimit);
+    }
+    if (orgInfo.assetQuotaMb) {
+      formData.append('asset_quota_mb', orgInfo.assetQuotaMb);
+    }
     return this.req.put(url, formData);
   }
 
@@ -1474,6 +1480,12 @@ class DTableWebAPI {
         break;
       case 'institution':
         formData.append('institution', value);
+        break;
+      case 'row_limit':
+        formData.append('row_limit', value);
+        break;
+      case 'asset_quota_mb':
+        formData.append('asset_quota_mb', value);
         break;
     }
     return this.req.put(url, formData);
