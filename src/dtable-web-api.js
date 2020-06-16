@@ -768,6 +768,18 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  zipDTableAssetFiles(dtableUuid, files) {
+    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid  + '/zip-task/';
+    if (!Array.isArray(files)) {
+      files = [files];
+    }
+    let form = new FormData();
+    files.map(item => {
+      form.append('file', item);
+    });
+    return this._sendPostRequest(url, form);
+  }
+
   listCommonDatasets(dst_dtable_uuid) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     if (dst_dtable_uuid) {
