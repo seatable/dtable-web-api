@@ -1861,6 +1861,26 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  sysAdminListPlugins() {
+    const url = this.server + '/api/v2.1/admin/dtable-system-plugins/';
+    return this.req.get(url);
+  }
+
+  sysAdminAddPlugin(formData) {
+    const url = this.server + '/api/v2.1/admin/dtable-system-plugins/';
+    return this.req.post(url, formData);
+  }
+
+  sysAdminUpdatePlugin(plugin_id, formData) {
+    const url = this.server + '/api/v2.1/admin/dtable-system-plugins/' + plugin_id + '/';
+    return this.req.put(url, formData);
+  }
+
+  sysAdminDeletePlugin(plugin_id) {
+    const url = this.server + '/api/v2.1/admin/dtable-system-plugins/' + plugin_id + '/';
+    return this.req.delete(url);
+  }
+
   adminAddWorkWeixinUsersBatch(userList) {
     const url = this.server + '/api/v2.1/admin/work-weixin/users/batch/';
     return this.req.post(url, {userlist: userList});
