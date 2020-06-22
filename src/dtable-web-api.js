@@ -536,6 +536,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  restoreDTableSnapshot(workspaceID, dtableName, commitId, snapshotName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/restore/';
+    let form = new FormData();
+    form.append('snapshot_name', snapshotName);
+    return this._sendPostRequest(url, form);
+  }
+
   listDTablePlugins(workspaceID, dtableName) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
     return this.req.get(url);
