@@ -536,24 +536,23 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  listDTablePlugins(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
+  // dtable plugin module
+  listAvailablePlugins() {
+    let url = this.server + '/api/v2.1/dtable-system-plugins/';
     return this.req.get(url);
   }
-  
-  uploadDTablePlugin(workspaceID, dtableName, formData, onUploadProgress = null) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/';
-    return this.req.post(url, formData, {onUploadProgress});
+
+  listActivatedPlugins(dtableUuid) {
+    let url = this.server + '/api/v2.1/dtable-plugins/';
+    return this.req.get(url, {params: { dtable_uuid: dtableUuid }});
   }
   
-  deleteDTablePlugin(workspaceID, dtableName, pluginID) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
-    return this.req.delete(url);
-  }
-  
-  updateDtablePlugin(workspaceID, dtableName, pluginID, formData, onUploadProgress) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/plugins/' + pluginID + '/';
-    return this.req.put(url, formData, {onUploadProgress});
+  updatePluginState(pluginId, dtableUuid, enable) {
+    let url = this.server + '/api/v2.1/dtable-plugins/' + pluginId + '/';
+    let form = new FormData();
+    form.append('dtable_uuid', dtableUuid);
+    form.append('is_enable', enable);
+    return this._sendPostRequest(url, form);
   }
   
   // ---- dtable data api
