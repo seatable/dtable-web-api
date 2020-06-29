@@ -662,6 +662,18 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  migrateUserToOrg(org_id) {
+    const url = this.server + '/api/v2.1/user/migrate-org/';
+    let form = new FormData();
+    form.append('org_id', org_id);
+    return this._sendPostRequest(url, form);
+  }
+
+  getOrgCommonInfo(org_id) {
+    const url = this.server + '/api/v2.1/org/' + org_id + '/common-info/';
+    return this.req.get(url);
+  }
+
   getChargebeeCustomer() {
     const url = this.server + '/api/v2.1/chargebee/customer/';
     return this.req.get(url);
