@@ -669,8 +669,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  getOrgCommonInfo(org_id) {
-    const url = this.server + '/api/v2.1/org/' + org_id + '/common-info/';
+  getOrganization(org_id) {
+    const url = this.server + '/api/v2.1/orgs/' + org_id + '/';
     return this.req.get(url);
   }
 
