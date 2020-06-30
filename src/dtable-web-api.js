@@ -670,7 +670,7 @@ class DTableWebAPI {
   }
 
   getOrganization(org_id) {
-    const url = this.server + '/api/v2.1/orgs/' + org_id + '/';
+    const url = this.server + '/api/v2.1/organizations/' + org_id + '/';
     return this.req.get(url);
   }
 
