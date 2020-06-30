@@ -549,9 +549,19 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  listActivatedPlugins(dtableUuid) {
+  listActivatedPlugins(dtableUuid, pluginNames) {
     let url = this.server + '/api/v2.1/dtable-plugins/';
-    return this.req.get(url, {params: { dtable_uuid: dtableUuid }});
+    let params = '?&dtable_uuid=' + dtableUuid;
+    if (pluginNames) {
+      if (!Array.isArray(pluginNames)) {
+        params = params + '&plugin_name=' + pluginNames;
+      } else {
+        for(let i = 0; i < pluginNames.length; i++) {
+          params = params + '&plugin_name=' + pluginNames[i];
+        }
+      }
+    }
+    return this.req.get(url + params);
   }
   
   updatePluginState(pluginId, dtableUuid, enable) {
