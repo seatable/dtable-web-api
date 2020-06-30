@@ -608,9 +608,22 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  listPluginsByExternalLink(token) {
+  listPluginsByExternalLink(token, pluginNames) {
     const url = this.server + '/api/v2.1/external-link-tokens/' + token + '/plugins/';
-    return this.req.get(url);
+    let params = '?';
+    if (pluginNames) {
+      if (!Array.isArray(pluginNames)) {
+        params = params + 'plugin_name=' + pluginNames;
+      } else {
+        let pluginName = pluginNames.shift();
+        params = params + 'plugin_name=' + pluginName;
+
+        for(let i = 0; i < pluginNames.length; i++) {
+          params = params + '&plugin_name=' + pluginNames[i];
+        }
+      }
+    }
+    return this.req.get(url + params);
   }
 
   getTableRelatedUsers(workspaceID, name) {
