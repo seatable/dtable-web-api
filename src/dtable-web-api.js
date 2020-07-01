@@ -631,8 +631,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getTableAssetUploadLink(workspaceID, name) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable-asset-upload-link/?name=' + encodeURIComponent(name);
+  getTableAssetUploadLink(workspaceID, userViewShareId, groupViewShareId, name) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable-asset-upload-link/?name=' + encodeURIComponent(name);
+    if (userViewShareId) {
+      url += '&user_view_share_id=' + userViewShareId;
+    }
+    if (groupViewShareId) {
+      url += '&group_view_share_id=' + groupViewShareId;
+    }
     return this.req.get(url);
   }
 
