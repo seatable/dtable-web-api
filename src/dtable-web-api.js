@@ -551,7 +551,7 @@ class DTableWebAPI {
 
   listActivatedPlugins(dtableUuid, pluginNames) {
     let url = this.server + '/api/v2.1/dtable-plugins/';
-    let params = '?&dtable_uuid=' + dtableUuid;
+    let params = '?dtable_uuid=' + dtableUuid;
     if (pluginNames) {
       if (!Array.isArray(pluginNames)) {
         params = params + '&plugin_name=' + pluginNames;
