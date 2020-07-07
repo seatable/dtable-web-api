@@ -294,6 +294,35 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  listDTableViewShareLinks(workspaceID, name, tableId, viewId) {
+    var url = this.server + '/api/v2.1/dtables/view-share-links/?workspace_id=' + workspaceID + '&dtable_name=' + encodeURIComponent(name) + '&table_id=' + tableId + '&view_id=' + viewId;
+    return this.req.get(url);
+  }
+
+  createDTableViewShareLink(workspaceID, dtableName, tableId, viewId, permission, password, expire_days) {
+    let url = this.server + '/api/v2.1/dtables/view-share-links/';
+    let form = new FormData();
+    form.append('workspace_id', workspaceID);
+    form.append('dtable_name', dtableName);
+    form.append('table_id', tableId);
+    form.append('view_id', viewId);
+    if (permission) {
+      form.append('permission', permission);
+    }
+    if (password) {
+      form.append('password', password);
+    }
+    if (expire_days) {
+      form.append('expire_days', expire_days);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteDTableViewShareLink(token) {
+    var url = this.server + '/api/v2.1/dtables/view-share-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
   getDTableExternalLink(workspaceID, name) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
     return this.req.get(url);
