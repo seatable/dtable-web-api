@@ -106,9 +106,13 @@ class DTableWebAPI {
   }
   
   // share view api
-  listDTableUserViewShares(workspaceId, dtableName) {
+  listDTableUserViewShares(workspaceId, dtableName, tableId, viewId) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/';
-    return this.req.get(url);
+    let params = '';
+    if (tableId && viewId) {
+      params = `?table_id${tableId}&view_id=${viewId}`;
+    }
+    return this.req.get(url + params);
   }
 
   createDTableUserViewShare(workspaceId, dtableName, tableId, viewId, permission, toUser) {
@@ -135,9 +139,13 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  listDTableGroupViewShares(workspaceId, dtableName) {
+  listDTableGroupViewShares(workspaceId, dtableName, tableId, viewId) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/';
-    return this.req.get(url);
+    let params = '';
+    if (tableId && viewId) {
+      params = `?table_id${tableId}&view_id=${viewId}`;
+    }
+    return this.req.get(url + params);
   }
 
   createDTableGroupViewShare(workspaceId, dtableName, tableId, viewId, permission, toGroupId) {
