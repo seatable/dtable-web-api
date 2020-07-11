@@ -1387,6 +1387,17 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
+  sysAdminListForms(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/forms/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   // sysadmin org api
   sysAdminListOrgs(page, per_page) {
     const url = this.server + '/api/v2.1/admin/organizations/';
