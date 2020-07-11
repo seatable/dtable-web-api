@@ -146,7 +146,7 @@ class DTableWebAPI {
   }
 
   listDTableGroupViewShares(workspaceId, dtableName, tableId, viewId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName)+ '/group-view-shares/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/group-view-shares/';
     let params = '';
     if (tableId && viewId) {
       params = `?table_id=${tableId}&view_id=${viewId}`;
