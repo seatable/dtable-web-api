@@ -107,16 +107,16 @@ class DTableWebAPI {
   
   // share view api
   listDTableUserViewShares(workspaceId, dtableName, tableId, viewId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/user-view-shares/';
     let params = '';
     if (tableId && viewId) {
-      params = `?table_id${tableId}&view_id=${viewId}`;
+      params = `?table_id=${tableId}&view_id=${viewId}`;
     }
     return this.req.get(url + params);
   }
 
   createDTableUserViewShare(workspaceId, dtableName, tableId, viewId, permission, toUser) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/user-view-shares/';
     let params = {
       table_id: tableId,
       view_id: viewId,
@@ -127,7 +127,7 @@ class DTableWebAPI {
   }
 
   updateDTableUserViewShare(workspaceId, dtableName, viewShareId, permission) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/' + viewShareId + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/user-view-shares/' + viewShareId + '/';
     let params = {
       permission: permission,
     };
@@ -135,21 +135,27 @@ class DTableWebAPI {
   }
 
   deleteDTableUserViewShare(workspaceId, dtableName, viewShareId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/user-view-shares/' + viewShareId + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/user-view-shares/' + viewShareId + '/';
     return this.req.delete(url);
   }
 
+  deleteDTableUserViewShareByViewId(workspaceId, dtableName, tableId, viewId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/user-view-shares/';
+    let params = `?table_id=${tableId}&view_id=${viewId}`;
+    return this.req.delete(url + params);
+  }
+
   listDTableGroupViewShares(workspaceId, dtableName, tableId, viewId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/group-view-shares/';
     let params = '';
     if (tableId && viewId) {
-      params = `?table_id${tableId}&view_id=${viewId}`;
+      params = `?table_id=${tableId}&view_id=${viewId}`;
     }
     return this.req.get(url + params);
   }
 
   createDTableGroupViewShare(workspaceId, dtableName, tableId, viewId, permission, toGroupId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/group-view-shares/';
     let params = {
       table_id: tableId,
       view_id: viewId,
@@ -160,7 +166,7 @@ class DTableWebAPI {
   }
 
   updateDTableGroupViewShare(workspaceId, dtableName, viewShareId, permission) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/' + viewShareId + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/group-view-shares/' + viewShareId + '/';
     let params = {
       permission: permission,
     };
@@ -168,8 +174,14 @@ class DTableWebAPI {
   }
 
   deleteDTableGroupViewShare(workspaceId, dtableName, viewShareId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/group-view-shares/' + viewShareId + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/group-view-shares/' + viewShareId + '/';
     return this.req.delete(url);
+  }
+
+  deleteDTableGroupViewShareByViewId(workspaceId, dtableName, tableId, viewId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/group-view-shares/';
+    let params = `?table_id=${tableId}&view_id=${viewId}`;
+    return this.req.delete(url + params);
   }
 
   listSharedViews() {
