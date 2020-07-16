@@ -854,10 +854,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  createCommonDataset(datasetName, dtableName, tableName, viewName) {
+  createCommonDataset(datasetName, workspaceID, dtableName, tableName, viewName) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     let formData = new FormData();
     formData.append('dataset_name', datasetName);
+    formData.append('workspace_id', workspaceID);
     formData.append('dtable_name', dtableName);
     formData.append('table_name', tableName);
     formData.append('view_name', viewName);
