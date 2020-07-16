@@ -1398,6 +1398,11 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminDeleteForm(token) {
+    let url = this.server + '/api/v2.1/admin/forms/' + token + '/';
+    return this.req.delete(url);
+  }
+
   // sysadmin org api
   sysAdminListOrgs(page, per_page) {
     const url = this.server + '/api/v2.1/admin/organizations/';
