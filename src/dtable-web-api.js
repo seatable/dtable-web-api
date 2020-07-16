@@ -1671,6 +1671,17 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminListUserSharedDTables(email, page, per_page) {
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/shared-dtables/';
+    let params = {
+      page: page,
+      per_page: per_page
+    }
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   sysAdminSearchUsers(query) {
     var url = this.server + '/api/v2.1/admin/search-user/';
     var params = {
