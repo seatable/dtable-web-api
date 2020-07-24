@@ -229,10 +229,10 @@ class DTableWebAPI {
       form.append('color', updates.color);
     }
     if (updates.text_color) {
-      form.append('text_color', updates.color);
+      form.append('text_color', updates.text_color);
     }
     if (updates.icon) {
-      form.append('icon', updates.color);
+      form.append('icon', updates.icon);
     }
     return this.req.put(url, form);
   }
