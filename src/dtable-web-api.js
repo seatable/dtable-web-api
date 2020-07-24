@@ -216,8 +216,24 @@ class DTableWebAPI {
   renameTable(workspaceID, old_name, new_name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/';
     let form = new FormData();
-    form.append('old_name', old_name);
+    form.append('name', old_name);
     form.append('new_name', new_name);
+    return this.req.put(url, form);
+  }
+
+  updateTable(workspaceID, table_name, updates) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/';
+    let form = new FormData();
+    form.append('name', table_name);
+    if (updates.color) {
+      form.append('color', updates.color);
+    }
+    if (updates.text_color) {
+      form.append('text_color', updates.color);
+    }
+    if (updates.icon) {
+      form.append('icon', updates.color);
+    }
     return this.req.put(url, form);
   }
 
