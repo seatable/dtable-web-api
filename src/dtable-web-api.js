@@ -735,6 +735,20 @@ class DTableWebAPI {
     return this.req.post(url, { plan_id: planID });
   }
 
+  getSubscription() {
+    const url = this.server + '/api/v2.1/subscription/';
+    return this.req.get(url);
+  }
+
+  getSubscriptionPlans(level, isOrg) {
+    const url = this.server + '/api/v2.1/subscription/plans/';
+    let params = {
+      current_level: level,
+      is_org: isOrg,
+    };
+    return this.req.get(url, {params: params});
+  }
+
   listGroups(withRepos = false) {
     let options = {with_repos: withRepos ? 1 : 0};
     const url = this.server + '/api/v2.1/groups/';
