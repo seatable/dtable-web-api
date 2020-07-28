@@ -370,6 +370,35 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  listDTableViewExternalLinks(workspaceID, name, tableId, viewId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/view-external-links/';
+    url += '?table_id=' + tableId + '&view_id=' + viewId;
+    return this.req.get(url);
+  }
+
+  createDTableViewExternalLink(workspaceID, name, tableId, viewId, token, password, expireDays) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/view-external-links/';
+    let form = new FormData();
+    form.append('table_id', tableId);
+    form.append('view_id', viewId);
+    if (token) {
+      form.append('token', token);
+    }
+    if (password) {
+      form.append('password', password);
+    }
+    if (expireDays) {
+      form.append('expire_days', expireDays);
+    }
+    return this._sendPostRequest(url, form);
+  }
+  
+  deleteDTableViewExternalLink(workspaceID, name, token) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/view-external-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
+
   listTableAPITokens(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/api-tokens/';
     return this.req.get(url);
