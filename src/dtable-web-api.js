@@ -740,13 +740,17 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getSubscriptionPlans(level, isOrg) {
+  getSubscriptionPlans(paymentType) {
     const url = this.server + '/api/v2.1/subscription/plans/';
     let params = {
-      current_level: level,
-      is_org: isOrg,
+      payment_type: paymentType,
     };
     return this.req.get(url, {params: params});
+  }
+
+  getSubscriptionLogs() {
+    const url = this.server + '/api/v2.1/subscription/logs/';
+    return this.req.get(url);
   }
 
   listGroups(withRepos = false) {
