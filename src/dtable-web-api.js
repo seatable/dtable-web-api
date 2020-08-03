@@ -1433,18 +1433,6 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  orgAdminUpdateSocialSettings(orgID, updates) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/org-social/';
-    let form = new FormData();
-    if (updates.workwx_corpid) {
-      form.append('workwx_corpid', updates.workwx_corpid);
-    }
-    if (updates.workwx_secret) {
-      form.append('workwx_secret', updates.workwx_secret);
-    }
-    return this.req.put(url, form);
-  }
-
   orgAdminAddWorkWeixinUsersBatch(orgID, userList) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/users/batch/';
     return this.req.post(url, {userlist: userList});
