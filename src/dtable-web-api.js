@@ -735,6 +735,24 @@ class DTableWebAPI {
     return this.req.post(url, { plan_id: planID });
   }
 
+  getSubscription() {
+    const url = this.server + '/api/v2.1/subscription/';
+    return this.req.get(url);
+  }
+
+  getSubscriptionPlans(paymentType) {
+    const url = this.server + '/api/v2.1/subscription/plans/';
+    let params = {
+      payment_type: paymentType,
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  getSubscriptionLogs() {
+    const url = this.server + '/api/v2.1/subscription/logs/';
+    return this.req.get(url);
+  }
+
   listGroups(withRepos = false) {
     let options = {with_repos: withRepos ? 1 : 0};
     const url = this.server + '/api/v2.1/groups/';
