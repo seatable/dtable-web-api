@@ -1707,6 +1707,14 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminListUserRepoDirents(email, parentDir) {
+    let url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/storages/';
+    let params = {
+      parent_dir: parentDir
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminSearchUsers(query) {
     var url = this.server + '/api/v2.1/admin/search-user/';
     var params = {
