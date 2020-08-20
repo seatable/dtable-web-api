@@ -1708,7 +1708,7 @@ class DTableWebAPI {
   }
 
   sysAdminListUserRepoDirents(email, parentDir) {
-    let url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/storages/';
+    let url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/storage/';
     let params = {
       parent_dir: parentDir
     };
