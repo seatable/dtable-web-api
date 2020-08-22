@@ -1715,6 +1715,13 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  sysAdminRenameUserFile(email, direntPath, newName) {
+    let url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/storage/' + direntPath;
+    let form = new FormData();
+    form.append('new_name', newName);
+    return this.req.put(url, form);
+  }
+
   sysAdminSearchUsers(query) {
     var url = this.server + '/api/v2.1/admin/search-user/';
     var params = {
@@ -1802,6 +1809,13 @@ class DTableWebAPI {
       parent_dir: parentDir
     };
     return this.req.get(url, { params: params });
+  }
+
+  sysAdminRenameGroupFile(groupID, direntPath, newName) {
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/storage/' + direntPath;
+    let form = new FormData();
+    form.append('new_name', newName);
+    return this.req.put(url, form);
   }
 
   sysAdminListAllSysNotifications() {
