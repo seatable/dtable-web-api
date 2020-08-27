@@ -387,6 +387,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getDTableTempAPIToken(workspaceID, name) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/temp-api-token/';
+    return this.req.get(url);
+  }
+
   copyDTable(srcWorkspaceID, dstWorkspaceID, name) {
     let url = this.server + '/api/v2.1/dtable-copy/';
     let formData = new FormData();
