@@ -1145,6 +1145,15 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  orgAdminInviteOrgUser(orgID, email, name, password) {
+    const url =  this.server + '/api/v2.1/org/' + orgID +'/admin/invite-user-email/';
+    let form = new FormData();
+    form.append('email', email);
+    form.append('name', name);
+    form.append('password', password);
+    return this._sendPostRequest(url, form);
+  }
+
   orgAdminChangeOrgUserStatus(orgID, email, statusCode) {
     const url = this.server +'/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
     let form = new FormData();
