@@ -478,6 +478,38 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  getDTableWebhooks(workspaceID, name) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/webhooks/';
+    return this.req.get(url);
+  }
+
+  createDTableWebhook(workspaceID, name, hookURL, secret) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/webhooks/';
+    let form = new FormData();
+    form.append('url', hookURL);
+    if (secret) {
+      form.append('secret', secret);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteDTableWebhook(workspaceID, name, webhookID) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/webhooks/' + webhookID + '/';
+    return this.req.delete(url);
+  }
+
+  updateDTableWebhook(workspaceID, name, webhookID, updates) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/webhooks/' + webhookID + '/';
+    let form = new FormData();
+    if (updates.url) {
+      form.append('url', updates.url);
+    }
+    if (updates.secret) {
+      form.append('secret', updates.secret);
+    }
+    return this.req.put(url, form);
+  }
+
   listForms() {
     let url = this.server + '/api/v2.1/forms/';
     return this.req.get(url);
