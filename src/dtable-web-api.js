@@ -2071,6 +2071,10 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  runScript(dtableUuid, scriptName) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/`;
+    return this.req.post(url);
+  }
 }
 
 export default DTableWebAPI;
