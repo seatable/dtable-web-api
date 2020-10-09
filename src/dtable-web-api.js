@@ -590,8 +590,14 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  getDTableActivities(pageNum, avatarSize=36) {
-    let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum + '&avatar_size=' + avatarSize;
+  getActivitiesDetail(dtable_uuid, opDate, pageNum, avatarSize=36) {
+    let params = 'dtable_uuid=' + dtable_uuid + '&op_date=' + opDate + '&page=' + pageNum + '&avatar_size=' + avatarSize;
+    let url = this.server + '/api/v2.1/dtable-activities/detail/?' + params;
+    return this.req.get(url);
+  }
+
+  getDTableActivities(pageNum) {
+    let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum;
     return this.req.get(url);
   }
 
