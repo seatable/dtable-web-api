@@ -2109,8 +2109,11 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
-  runScript(dtableUuid, scriptName) {
+  runScript(dtableUuid, scriptName, data) {
     const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/`;
+    if (data) {
+      return this.req.post(url, data);
+    }
     return this.req.post(url);
   }
 }
