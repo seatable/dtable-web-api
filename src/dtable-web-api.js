@@ -1433,6 +1433,11 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  orgAdminBindWorkWeixin(orgID, corpID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/bind/';
+    return this.req.post(url, {corp_id: corpID});
+  }
+
   orgAdminAddWorkWeixinUsersBatch(orgID, userList) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/users/batch/';
     return this.req.post(url, {userlist: userList});
