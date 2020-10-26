@@ -1428,9 +1428,38 @@ class DTableWebAPI {
 
   orgAdminUpdateSettings(key, value) {
     const url = this.server + '/api/v2.1/org/admin/settings/';
-    let form = new FormData;
+    let form = new FormData();
     form.append(key, value);
     return this.req.put(url, form);
+  }
+
+  orgAdminBindWorkWeixin(orgID, corpID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/bind/';
+    return this.req.post(url, {corp_id: corpID});
+  }
+
+  orgAdminAddWorkWeixinUsersBatch(orgID, userList) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/users/batch/';
+    return this.req.post(url, {userlist: userList});
+  }
+
+  orgAdminImportWorkWeixinDepartment(orgID, departmentID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/departments/import/';
+    return this.req.post(url, {work_weixin_department_id: departmentID});
+  }
+
+  orgAdminListWorkWeixinDepartmentMembers(orgID, departmentID, params) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/departments/' + departmentID + '/members/';
+    return this.req.get(url, {params: params});
+  }
+
+  orgAdminListWorkWeixinDepartments(orgID, departmentID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/departments/';
+    const params = {};
+    if (departmentID) {
+      params.department_id = departmentID;
+    }
+    return this.req.get(url, {params: params});
   }
 
   // sys-admin
