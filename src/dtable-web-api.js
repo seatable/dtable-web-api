@@ -2145,6 +2145,31 @@ class DTableWebAPI {
     }
     return this.req.post(url);
   }
+
+  getScriptTask(dtableUuid, scriptName) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
+    return this.req.get(url);
+  }
+
+  addScriptTask(dtableUuid, scriptName, taskData) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
+    return this.req.post(url, taskData);
+  }
+
+  updateScriptTask(dtableUuid, scriptName, taskData) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
+    return this.req.put(url, taskData);
+  }
+
+  deleteScriptTask(dtableUuid, scriptName) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
+    return this.req.delete(url);
+  }
+
+  getScriptTaskLogs(dtableUuid, scriptName) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/logs/`;
+    return this.req.get(url);
+  }
 }
 
 export default DTableWebAPI;
