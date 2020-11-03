@@ -2191,6 +2191,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getSharedPermission(workspaceId, dtableName, permissionId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/shared-permissions/' + permissionId;
+    return this.req.get(url);
+  }
+
   getSharePermissions(workspaceId, dtableName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/';
     return this.req.get(url);
