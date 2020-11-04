@@ -2187,12 +2187,12 @@ class DTableWebAPI {
   }
 
   getSharePermission(workspaceId, dtableName, permissionId) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId;
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
     return this.req.get(url);
   }
 
   getSharedPermission(workspaceId, dtableName, permissionId) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/shared-permissions/' + permissionId;
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/shared-permissions/' + permissionId + '/';
     return this.req.get(url);
   }
 
@@ -2207,12 +2207,12 @@ class DTableWebAPI {
   }
 
   updateSharePermission(workspaceId, dtableName, permissionId, permission) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId;
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
     return this.req.put(url, permission);
   }
 
   deleteSharePermission(workspaceId, dtableName, permissionId) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId;
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
     return this.req.delete(url);
   }
 
