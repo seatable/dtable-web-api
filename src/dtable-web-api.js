@@ -205,11 +205,20 @@ class DTableWebAPI {
   }
 
   // ---- dTable api
-  createTable(name, owner) {
+  createTable(name, owner, dtableIcon, dtableColor, textColor) {
     const url = this.server + '/api/v2.1/dtables/';
     let form = new FormData();
     form.append('name', name);
     form.append('owner', owner);
+    if (dtableColor) {
+      form.append('color', dtableColor);
+    }
+    if (dtableIcon) {
+      form.append('icon', dtableIcon);
+    }
+    if (textColor) {
+      form.append('text_color', textColor);
+    }
     return this._sendPostRequest(url, form);
   }
 
