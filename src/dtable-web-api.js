@@ -1119,12 +1119,11 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
-  updateWebdavSecret(password) {
-    const url = this.server + '/api/v2.1/webdav-secret/';
-    const data = {
-      'secret': password
-    };
-    return this.req.put(url, data);
+  bindContactEmail(newContactEmail) {
+    let url = this.server + '/api/v2.1/user/contact-email/';
+    let form = new FormData();
+    form.append('new_contact_email', newContactEmail);
+    return this.req.put(url, form);
   }
 
   listNotificationRules(workspace_id, dtable_name) {
