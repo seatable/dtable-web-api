@@ -1117,14 +1117,6 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  updateWebdavSecret(password) {
-    const url = this.server + '/api/v2.1/webdav-secret/';
-    const data = {
-      'secret': password
-    };
-    return this.req.put(url, data);
-  }
-
   listNotificationRules(workspace_id, dtable_name) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/';
     return this.req.get(url);
