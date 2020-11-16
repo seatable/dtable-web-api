@@ -482,6 +482,16 @@ class DTableWebAPI {
     return this.req.post(url, formData);
   }
 
+  addAbuseReport(external_link_token, reporter, abuse_type, description) {
+    let url = this.server + '/api/v2.1/abuse-reports/';
+    let formData = new FormData();
+    formData.append('external_link_token', external_link_token);
+    formData.append('reporter', reporter);
+    formData.append('abuse_type', abuse_type);
+    formData.append('description', description);
+    return this.req.post(url, formData);
+  }
+
   unstarDTable(dtable_uuid) {
     let url = this.server + '/api/v2.1/starred-dtables/?dtable_uuid=' + dtable_uuid;
     return this.req.delete(url);
@@ -2171,6 +2181,22 @@ class DTableWebAPI {
   sysAdminDeletePlugin(plugin_id) {
     const url = this.server + '/api/v2.1/admin/dtable-system-plugins/' + plugin_id + '/';
     return this.req.delete(url);
+  }
+
+  sysAdminListAbuseReports(page, per_page) {
+    const url = this.server + '/api/v2.1/admin/abuse-reports/';
+    let params = {
+      page: page,
+      per_page: per_page
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  sysAdminUpdateAbuseReport(reportId, handled) {
+    const url = this.server + '/api/v2.1/admin/abuse-reports/' + reportId + '/';
+    let formData = new FormData();
+    formData.append('handled', handled);
+    return this.req.put(url, formData);
   }
 
   adminAddWorkWeixinUsersBatch(userList) {
