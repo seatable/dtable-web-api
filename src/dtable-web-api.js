@@ -831,6 +831,14 @@ class DTableWebAPI {
     return this.req.put(url, params);
   }
 
+  transferGroup(groupID, newOwner) {
+    const url = this.server + '/api/v2.1/groups/' + groupID + '/';
+    const form = {
+      owner: newOwner
+    };
+    return this.req.put(url, form);
+  }
+
   deleteGroup(groupID) {
     var url = this.server + '/api/v2.1/groups/' + groupID + '/';
     return this.req.delete(url);
