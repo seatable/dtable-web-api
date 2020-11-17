@@ -918,7 +918,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  zipDTableAssetFiles(dtableUuid, files) {
+  zipDTableAssetFiles(dtableUuid, files, filenames) {
     let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid  + '/zip-task/';
     if (!Array.isArray(files)) {
       files = [files];
@@ -927,6 +927,11 @@ class DTableWebAPI {
     files.map(item => {
       form.append('file', item);
     });
+    if (Array.isArray(filenames)) {
+      filenames.map(item => {
+        form.append('filename', item);
+      });
+    }
     return this._sendPostRequest(url, form);
   }
 
