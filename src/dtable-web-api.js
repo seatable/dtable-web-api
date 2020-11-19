@@ -1386,6 +1386,14 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
+  orgAdminSetOrgUserIdInOrg(orgID, email, IdInOrg) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const data = {
+      id_in_org: IdInOrg
+    };
+    return this.req.put(url, data);
+  }
+
   orgAdminTransferOrgRepo(orgID, repoID, email) {
     const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/repos/' + repoID + '/';
     let form = new FormData();
@@ -1692,6 +1700,9 @@ class DTableWebAPI {
         break;
       case 'asset_quota_mb':
         formData.append('asset_quota_mb', value);
+        break;
+      case 'id_in_org':
+        formData.append('id_in_org', value);
         break;
     }
     return this.req.put(url, formData);
