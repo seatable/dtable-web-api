@@ -1083,6 +1083,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getInvitationLink() {
+    const url = this.server + '/api/v2.1/invitation-link/';
+    return this.req.get(url);
+  }
+
   //account api
 
   getAccountInfo() {
