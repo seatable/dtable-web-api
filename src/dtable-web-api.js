@@ -1023,6 +1023,11 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
+  deleteNotifications() {
+    const url = this.server + '/api/v2.1/notifications/';
+    return this.req.delete(url);
+  }
+
   getUnseenNotificationCount() {
     const url = this.server + '/api/v2.1/notifications/';
     return this.req.get(url);
