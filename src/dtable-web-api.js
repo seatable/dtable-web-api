@@ -918,21 +918,12 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  zipDTableAssetFiles(dtableUuid, files, filenames) {
+  zipDTableAssetFiles(dtableUuid, filesMap) {
     let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid  + '/zip-task/';
-    if (!Array.isArray(files)) {
-      files = [files];
-    }
-    let form = new FormData();
-    files.map(item => {
-      form.append('file', item);
-    });
-    if (Array.isArray(filenames)) {
-      filenames.map(item => {
-        form.append('filename', item);
-      });
-    }
-    return this._sendPostRequest(url, form);
+
+    let data = {'files_map': filesMap};
+
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
   listCommonDatasets(dst_dtable_uuid) {
