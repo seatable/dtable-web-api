@@ -641,6 +641,22 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  listTrashDTables(page, perPage){
+    let url = this.server + '/api/v2.1/trash-dtables/';
+    let params = {
+      page: page,
+      per_page: perPage
+      };
+    return this.req.get(url, {
+      params: params
+      });
+  }
+
+  restoreTrashDTable(dtableID){
+    let url = this.server + '/api/v2.1/trash-dtables/' + dtableID + '/';
+    return this.req.put(url);
+  }
+
   // dtable plugin module
   listAvailablePlugins() {
     let url = this.server + '/api/v2.1/dtable-system-plugins/';
