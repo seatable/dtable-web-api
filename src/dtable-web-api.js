@@ -2029,7 +2029,7 @@ class DTableWebAPI {
   }
 
   sysAdminStatisticRunScripts(is_user, month, page, perPage, orderBy) {
-    const url = this.server + '/api/v2.1/admin/statistics/run-script/';
+    const url = this.server + '/api/v2.1/admin/statistics/run-scripts/';
     let params = {
       is_user: is_user,
       month: month,
