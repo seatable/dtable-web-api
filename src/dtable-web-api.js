@@ -1213,6 +1213,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listTemplates() {
+    const url = '/api/v2.1/templates/';
+    return this.req.get(url);
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
