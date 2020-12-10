@@ -69,8 +69,11 @@ class DTableWebAPI {
   }
 
   // workspace api
-  listWorkspaces(detail) {
-    const url = this.server + '/api/v2.1/workspaces/?detail=' + detail;
+  listWorkspaces(isDetail) {
+    let url = this.server + '/api/v2.1/workspaces/';
+    if (isDetail === false) {
+      url = url + '?detail=' + isDetail;
+    }
     return this.req.get(url);
   }
 
