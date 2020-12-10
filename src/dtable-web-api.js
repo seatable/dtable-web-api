@@ -1112,10 +1112,11 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
-  updateEmailNotificationInterval(interval) {
+  updateEmailNotificationInterval(dtableUpdatesEmailInterval, dtableCollaborateEmailInterval) {
     const url = this.server + '/api2/account/info/';
     const data = {
-      'email_notification_interval': interval
+      'dtable_updates_email_interval': dtableUpdatesEmailInterval,
+      'dtable_collaborate_email_interval': dtableCollaborateEmailInterval,
     };
     return this.req.put(url, data);
   }
