@@ -71,7 +71,7 @@ class DTableWebAPI {
   // workspace api
   listWorkspaces(detail) {
     let url = this.server + '/api/v2.1/workspaces/';
-    if (detail || detail === false) {
+    if (detail !== undefined) {
       url = url + '?detail=' + detail;
     }
     return this.req.get(url);
