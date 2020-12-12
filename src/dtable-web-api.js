@@ -646,10 +646,10 @@ class DTableWebAPI {
     let params = {
       page: page,
       per_page: perPage
-      };
+    };
     return this.req.get(url, {
       params: params
-      });
+    });
   }
 
   restoreTrashDTable(dtableID){
