@@ -2019,7 +2019,7 @@ class DTableWebAPI {
       return this.req.get(url, { params: params });
   }
 
-  sysAdminStatisticActiveUsers(startTime, endTime) {
+  sysAdminListActiveUsersStatistics(startTime, endTime) {
     const url = this.server + '/api/v2.1/admin/statistics/active-users/';
     let params = {
       start: startTime,
@@ -2028,7 +2028,7 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
-  sysAdminStatisticRunScripts(is_user, month, page, perPage, orderBy) {
+  sysAdminListScriptsRunningStatistics(is_user, month, page, perPage, orderBy) {
     const url = this.server + '/api/v2.1/admin/statistics/scripts-running/';
     let params = {
       is_user: is_user,
