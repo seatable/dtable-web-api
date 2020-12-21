@@ -1,6 +1,6 @@
 {
   "name": "dtable-web-api",
-  "version": "1.0.115",
+  "version": "1.0.116",
   "description": "an interface for dtable-web",
   "main": "lib/dtable-web-api.js",
   "scripts": {
