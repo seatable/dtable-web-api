@@ -1238,6 +1238,56 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getBaseSharePermission(workspaceId, dtableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/base-share-permission/';
+    return this.req.get(url);
+  }
+
+  getSharePermission(workspaceId, dtableName, permissionId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
+    return this.req.get(url);
+  }
+
+  getSharedPermission(workspaceId, dtableName, permissionId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/shared-permissions/' + permissionId + '/';
+    return this.req.get(url);
+  }
+
+  getSharePermissions(workspaceId, dtableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/';
+    return this.req.get(url);
+  }
+
+  addSharePermission(workspaceId, dtableName, permission) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/';
+    return this.req.post(url, permission);
+  }
+
+  updateSharePermission(workspaceId, dtableName, permissionId, permission) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
+    return this.req.put(url, permission);
+  }
+
+  deleteSharePermission(workspaceId, dtableName, permissionId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
+    return this.req.delete(url);
+  }
+
+  getGroupInviteLinks(groupId) {
+    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/';
+    return this.req.get(url);
+  }
+
+  addGroupInviteLinks(groupId) {
+    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/';
+    return this.req.post(url);
+  }
+
+  deleteGroupInviteLinks(groupId, token) {
+    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
@@ -2271,56 +2321,6 @@ class DTableWebAPI {
       params.department_id = departmentID;
     }
     return this.req.get(url, {params: params});
-  }
-
-  getBaseSharePermission(workspaceId, dtableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/base-share-permission/';
-    return this.req.get(url);
-  }
-
-  getSharePermission(workspaceId, dtableName, permissionId) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
-    return this.req.get(url);
-  }
-
-  getSharedPermission(workspaceId, dtableName, permissionId) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/shared-permissions/' + permissionId + '/';
-    return this.req.get(url);
-  }
-
-  getSharePermissions(workspaceId, dtableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/';
-    return this.req.get(url);
-  }
-
-  addSharePermission(workspaceId, dtableName, permission) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/';
-    return this.req.post(url, permission);
-  }
-
-  updateSharePermission(workspaceId, dtableName, permissionId, permission) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
-    return this.req.put(url, permission);
-  }
-
-  deleteSharePermission(workspaceId, dtableName, permissionId) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/share-permissions/' + permissionId + '/';
-    return this.req.delete(url);
-  }
-
-  getGroupInviteLinks(groupId) {
-    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/';
-    return this.req.get(url);
-  }
-
-  addGroupInviteLinks(groupId) {
-    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/';
-    return this.req.post(url);
-  }
-
-  deleteGroupInviteLinks(groupId, token) {
-    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/' + token + '/';
-    return this.req.delete(url);
   }
 }
 
