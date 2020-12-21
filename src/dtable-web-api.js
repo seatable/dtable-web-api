@@ -2308,6 +2308,20 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  getGroupInviteLinks(groupId) {
+    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/';
+    return this.req.get(url);
+  }
+
+  addGroupInviteLinks(groupId) {
+    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/';
+    return this.req.post(url);
+  }
+
+  deleteGroupInviteLinks(groupId, token) {
+    const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/' + token + '/';
+    return this.req.delete(url);
+  }
 }
 
 export default DTableWebAPI;
