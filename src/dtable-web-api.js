@@ -945,6 +945,19 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
+  fileTransferSave(dtableUuid, filesMap, path, replace, relativePath) {
+    let url = this.server + '/api/v2.1/seafile-connectors/' + dtableUuid + '/file-transfer-task/';
+    let data = {
+      'files_map': filesMap,
+      'parent_dir': path,
+      'replace': replace
+    };
+    if (relativePath) {
+      data['relative_path'] = relativePath;
+    }
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
   listCommonDatasets(dst_dtable_uuid) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     if (dst_dtable_uuid) {
