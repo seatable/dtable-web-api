@@ -2106,9 +2106,13 @@ class DTableWebAPI {
       return this.req.put(url);
   }
 
-  sysAdminListAllSysUserNotifications(){
+  sysAdminListAllSysUserNotifications(page, perPage){
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
-      return this.req.get(url);
+    let params = {
+        page: page,
+        per_page: perPage
+      };
+      return this.req.get(url, { params: params });
   }
 
   sysAdminAddSysUserNotification(msg, username, current){
