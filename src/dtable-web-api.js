@@ -2115,25 +2115,17 @@ class DTableWebAPI {
       return this.req.get(url, { params: params });
   }
 
-  sysAdminAddSysUserNotification(msg, username, current){
+  sysAdminAddSysUserNotification(msg, username){
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
       let formData = new FormData();
       formData.append('msg', msg);
       formData.append('username', username);
-      if (current){
-        formData.append('is_current', true)
-      }
       return this._sendPostRequest(url, formData);
   }
 
   sysAdminDeleteSysUserNotification(nid){
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/' + nid + '/';
       return this.req.delete(url);
-  }
-
-  sysAdminSetSysUserNotificationToCurrent(nid){
-    let url = this.server + '/api/v2.1/admin/sys-user-notifications/' + nid + '/';
-      return this.req.put(url);
   }
 
   sysAdminListAdminLogs(page, perPage) {
