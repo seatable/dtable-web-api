@@ -9,3 +9,4 @@ config
 
 # lib
 lib
+/.idea
