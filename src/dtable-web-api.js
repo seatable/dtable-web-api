@@ -1570,6 +1570,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  orgAdminAddExportDTableTask(orgID, dtableUuid) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/export-dtable/';
+    return this.req.get(url);
+  }
+
   orgAdminListTrashDTables(orgID, page, perPage) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/';
     let params = {
