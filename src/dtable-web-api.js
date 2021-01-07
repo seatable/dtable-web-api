@@ -735,13 +735,13 @@ class DTableWebAPI {
 
   getTableAssetUploadLink(workspaceID, name, tableId, viewId) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable-asset-upload-link/?name=' + encodeURIComponent(name);
-      if (tid){
+    if (tid){
         url += '&tid=' + tableId;
       }
-      if (vid){
+    if (vid){
         url += '&vid=' + viewId;
       }
-      return this.req.get(url);
+    return this.req.get(url);
   }
 
   isDTableAssetExist (workspaceID, tableName, path) {
