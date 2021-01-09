@@ -1382,6 +1382,13 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  orgAdminTransferOrgGroup(orgID, receiverEmail, groupID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/';
+    let formData = new FormData();
+    formData.append('new_owner', receiverEmail);
+    return this.req.put(url, formData);
+  }
+
   orgAdminDeleteOrgLink(token) {
     const url = this.server + '/api/v2.1/org/admin/links/' + token + '/';
     return this.req.delete(url);
