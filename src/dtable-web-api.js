@@ -2317,6 +2317,78 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
+
+  sysAdminListInstitutions(page, perPage) {
+    const url = this.server + '/api/v2.1/admin/institutions/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  sysAdminAddInstitution(name) {
+    const url = this.server + '/api/v2.1/admin/institutions/';
+    let formData = new FormData();
+    formData.append('name', name);
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminDeleteInstitution(institutionID) {
+    const url = this.server + '/api/v2.1/admin/institutions/' + institutionID + '/';
+    return this.req.delete(url);
+  }
+
+  sysAdminGetInstitution(institutionID) {
+    const url = this.server + '/api/v2.1/admin/institutions/' + institutionID + '/';
+    return this.req.get(url);
+  }
+
+  sysAdminUpdateInstitution(institutionID, quota) {
+    const url = this.server + '/api/v2.1/admin/institutions/' + institutionID + '/';
+    let formData = new FormData();
+    formData.append('quota', quota);
+    return this.req.put(url, formData);
+  }
+
+  sysAdminListInstitutionUsers(institutionID, page, perPage) {
+    const url = this.server + '/api/v2.1/admin/institutions/' + institutionID + '/users/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  sysAdminListInstitutionAdmins(institutionID) {
+    const url = this.server + '/api/v2.1/admin/institutions/' + institutionID + '/users/';
+    let params = {
+      is_institution_admin: true,
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  sysAdminAddInstitutionUserBatch(institutionID, emailArray) {
+    const url = this.server + '/api/v2.1/admin/institutions/' + institutionID + '/users/';
+    let formData = new FormData();
+    emailArray.map(email => {
+      formData.append('email', email);
+    });
+    return this.req.post(url, formData);
+  }
+
+  sysAdminUpdateInstitutionUser(institutionID, email, isInstitutionAdmin) {
+    const url = this.server + '/api/v2.1/admin/institutions/' + institutionID + '/users/' + encodeURIComponent(email) + '/';
+    let formData = new FormData();
+    formData.append('is_institution_admin', isInstitutionAdmin);
+    return this.req.put(url, formData);
+  }
+
+  sysAdminDeleteInstitutionUser(institutionID, email) {
+    const url = this.server + '/api/v2.1/admin/institutions/' + institutionID + '/users/' + encodeURIComponent(email) + '/';
+    return this.req.delete(url);
+  }
+
   adminAddWorkWeixinUsersBatch(userList) {
     const url = this.server + '/api/v2.1/admin/work-weixin/users/batch/';
     return this.req.post(url, {userlist: userList});
