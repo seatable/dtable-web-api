@@ -1041,6 +1041,16 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  listSysUserUnseenNotifications(){
+    const url = this.server + '/api/v2.1/sys-user-notifications/unseen/';
+    return this.req.get(url);
+  }
+
+  setSysUserNotificationToSeen(nid){
+     let url = this.server + '/api/v2.1/sys-user-notifications/' + nid + '/seen/';
+     return this.req.put(url);
+  }
+
   updateNotifications() {
     const url = this.server + '/api/v2.1/notifications/';
     return this.req.put(url);
@@ -2099,6 +2109,28 @@ class DTableWebAPI {
   sysAdminSetSysNotificationToCurrent(nid) {
       let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
       return this.req.put(url);
+  }
+
+  sysAdminListAllSysUserNotifications(page, perPage){
+    let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
+    let params = {
+        page: page,
+        per_page: perPage
+      };
+      return this.req.get(url, { params: params });
+  }
+
+  sysAdminAddSysUserNotification(msg, username){
+    let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
+      let formData = new FormData();
+      formData.append('msg', msg);
+      formData.append('username', username);
+      return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminDeleteSysUserNotification(nid){
+    let url = this.server + '/api/v2.1/admin/sys-user-notifications/' + nid + '/';
+      return this.req.delete(url);
   }
 
   sysAdminListAdminLogs(page, perPage) {
