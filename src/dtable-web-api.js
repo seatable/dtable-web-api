@@ -1041,9 +1041,14 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  listSysUserUnseenNotifications(){
+    const url = this.server + '/api/v2.1/sys-user-notifications/unseen/'
+    return this.req.get(url)
+  }
+
   setSysUserNotificationToSeen(nid){
      let url = this.server + '/api/v2.1/sys-user-notifications/' + nid + '/seen/';
-      return this.req.put(url);
+     return this.req.put(url);
   }
 
   updateNotifications() {
