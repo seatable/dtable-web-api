@@ -240,6 +240,9 @@ class DTableWebAPI {
     if (updates.color) {
       form.append('color', updates.color);
     }
+    if (updates.new_name) {
+      form.append('new_name', updates.new_name);
+    }
     if (updates.text_color) {
       form.append('text_color', updates.text_color);
     }
