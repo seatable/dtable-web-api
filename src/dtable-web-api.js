@@ -460,24 +460,24 @@ class DTableWebAPI {
     return this.req.delete(url, {params: params});
   }
 
-  importExcelPreview (workspaceId, dtableName) {
+  importExcelPreview(workspaceId, dtableName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/?dtable_name=' + dtableName;
     return this.req.get(url);
   }
 
-  importExcelCancel (workspaceId, dtableName) {
+  importExcelCancel(workspaceId, dtableName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/?dtable_name=' + dtableName;
     return this.req.delete(url);
   }
 
-  addImportExcelTask (workspaceId, dtableName) {
+  addImportExcelTask(workspaceId, dtableName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/';
     let formData = new FormData();
     formData.append('dtable_name', dtableName);
     return this.req.post(url, formData);
   }
 
-  addUpdateExcelTask (workspaceId, dtableName, tables) {
+  addUpdateExcelTask(workspaceId, dtableName, tables) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/';
     let formData = new FormData();
     formData.append('dtable_name', dtableName);
