@@ -1400,6 +1400,13 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  orgAdminChangeOrgUserRole(orgID, email, role) {
+    const url = this.server +'/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    let form = new FormData();
+    form.append('role', role);
+    return this.req.put(url, form);
+  }
+
   orgAdminDeleteDepartGroup(orgID, groupID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/' + groupID + '/';
     return this.req.delete(url);
