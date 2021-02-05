@@ -575,13 +575,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  createDTableForm(workspaceID, dtableName, formID, formConfig) {
+  createDTableForm(workspaceID, dtableName, formID, formConfig, formType) {
     let url = this.server + '/api/v2.1/forms/';
     let formData = new FormData();
     formData.append('workspace_id', workspaceID);
     formData.append('name', dtableName);
     formData.append('form_id', formID);
     formData.append('form_config', formConfig);
+    formData.append('form_type', formType);
     return this._sendPostRequest(url, formData);
   }
 
@@ -638,6 +639,11 @@ class DTableWebAPI {
     form.append('table_id', table_id);
     form.append('row_data', row_data);
     return this._sendPostRequest(url, form);
+  }
+
+  getTableAccessTokenByFormToken(token) {
+    let url = this.server + 'api/v2.1/forms/access-token/' + '?token=' + token;;
+    return this.req.get(url);
   }
 
   getActivitiesDetail(dtable_uuid, opDate, pageNum, avatarSize=36) {
