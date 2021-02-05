@@ -2008,7 +2008,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  sysAdminListGroupInfo(groupID, showAncestors) {
+  sysAdminGetDepartGroupInfo(groupID, showAncestors) {
     const url = this.server + '/api/v2.1/admin/address-book/groups/' + groupID + '/' + '?return_ancestors=' + showAncestors;
     return this.req.get(url);
   }
