@@ -1995,6 +1995,29 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminListDepartGroups() {
+    const url = this.server + '/api/v2.1/admin/address-book/groups/';
+    return this.req.get(url);
+  }
+
+  sysAdminAddDepartGroup(groupName, parentGroup) {
+    const url = this.server + '/api/v2.1/admin/address-book/groups/';
+    let form = new FormData();
+    form.append('group_name', groupName);
+    form.append('parent_group', parentGroup);
+    return this._sendPostRequest(url, form);
+  }
+
+  sysAdminGetDepartGroupInfo(groupID, showAncestors) {
+    const url = this.server + '/api/v2.1/admin/address-book/groups/' + groupID + '/' + '?return_ancestors=' + showAncestors;
+    return this.req.get(url);
+  }
+
+  sysAdminDeleteDepartGroup(groupID) {
+    const url = this.server + '/api/v2.1/admin/address-book/groups/' + groupID + '/';
+    return this.req.delete(url);
+  }
+
   sysAdminListUserDTables(email, page, per_page) {
     const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/dtables/';
     let params = {
