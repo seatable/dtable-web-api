@@ -560,6 +560,42 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  listCollectionTables() {
+    let url = this.server + '/api/v2.1/collection-tables/';
+    return this.req.get(url);
+  }
+
+  listDTableCollectionTables(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/collection-tables/?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
+    return this.req.get(url);
+  }
+
+  createDTableCollectionTable(workspaceID, dtableName, config) {
+    let url = this.server + '/api/v2.1/collection-tables/';
+    let formData = new FormData();
+    formData.append('workspace_id', workspaceID);
+    formData.append('name', dtableName);
+    formData.append('config', config);
+    return this._sendPostRequest(url, formData);
+  }
+
+  updateDTableCollectionTable(token, config) {
+    let url = this.server + '/api/v2.1/collection-tables/' + token + '/';
+    let formData = new FormData();
+    formData.append('config', config);
+    return this.req.put(url, formData);
+  }
+
+  deleteDTableCollectionTable(token) {
+    let url = this.server + '/api/v2.1/collection-tables/' + token + '/';
+    return this.req.delete(url);
+  }
+
+  getTableAccessTokenByCollectionTableToken(token) {
+    let url = this.server + '/api/v2.1/collection-tables/access-token/' + '?token=' + token;;
+    return this.req.get(url);
+  }
+
   listForms() {
     let url = this.server + '/api/v2.1/forms/';
     return this.req.get(url);
