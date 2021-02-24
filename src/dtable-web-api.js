@@ -865,7 +865,6 @@ class DTableWebAPI {
       'detail': detail
     };
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
-
   }
 
   updateThirdPartyAccount(dtableUuid, account_id, account_name, account_type, detail) {
@@ -876,7 +875,6 @@ class DTableWebAPI {
       'detail': detail
     };
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
-
   }
 
   deleteThirdPartyAccount(dtableUuid, account_id) {
