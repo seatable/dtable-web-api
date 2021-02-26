@@ -845,11 +845,8 @@ class DTableWebAPI {
   }
 
   getThirdPartyAccountsDetail(dtableUuid, account_name) {
-    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/detail/';
-    let params = {
-      'account_name': account_name
-    };
-    return this.req.get(url, {params: params});
+    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/detail/?account_name=' + account_name;
+    return this.req.get(url);
   }
 
   listThirdPartyAccounts(dtableUuid) {
