@@ -885,6 +885,41 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  getThirdPartyAccountsDetail(dtableUuid, account_name) {
+    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/detail/?account_name=' + account_name;
+    return this.req.get(url);
+  }
+
+  listThirdPartyAccounts(dtableUuid) {
+    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/';
+    return this.req.get(url);
+  }
+
+  addThirdPartyAccount(dtableUuid, account_name, accout_type, detail) {
+    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/';
+    let data = {
+      'account_name': account_name,
+      'account_type': accout_type,
+      'detail': detail
+    };
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  updateThirdPartyAccount(dtableUuid, account_id, account_name, account_type, detail) {
+    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/' + account_id + '/';
+    let data = {
+      'account_name': account_name,
+      'account_type': account_type,
+      'detail': detail
+    };
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  deleteThirdPartyAccount(dtableUuid, account_id) {
+    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/' + account_id + '/';
+    return this.req.delete(url);
+  }
+
   // other not-admin APIs
   getUserInfo() {
     const url = this.server + '/api/v2.1/user/';
