@@ -760,6 +760,11 @@ class DTableWebAPI {
     });
   }
 
+  emptyTrashDTables() {
+    let url = this.server + '/api/v2.1/trash-dtables/';
+    return this.req.delete(url);
+  }
+
   restoreTrashDTable(dtableID){
     let url = this.server + '/api/v2.1/trash-dtables/' + dtableID + '/';
     return this.req.put(url);
