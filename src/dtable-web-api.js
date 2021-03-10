@@ -985,6 +985,11 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  exchangeCoinByCode(code) {
+    const url = this.server + '/api/v2.1/subscription/coin-exchange/';
+    return this.req.post(url, {code: code});
+  }
+
   getGroup(groupID) {
     const url = this.server + '/api/v2.1/groups/' + groupID + '/';
     return this.req.get(url);
