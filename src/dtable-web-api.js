@@ -1754,6 +1754,11 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  orgAdminEmptyTrashDTables(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/';
+    return this.req.delete(url);
+  }
+
   orgAdminRestoreTrashDTable(orgID, dtableID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/' + dtableID + '/';
     return this.req.put(url);
