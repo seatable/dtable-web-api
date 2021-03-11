@@ -974,10 +974,10 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  listGroups(withRepos = false) {
-    let options = {with_repos: withRepos ? 1 : 0};
+  listGroups(includingAllDeps=false) {
     const url = this.server + '/api/v2.1/groups/';
-    return this.req.get(url, {params: options});
+    let params = {including_all_deps: includingAllDeps};
+    return this.req.get(url, {params: params});
   }
 
   getGroup(groupID) {
