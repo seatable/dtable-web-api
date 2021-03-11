@@ -1,5 +1,5 @@
 import axios from 'axios';
-import FormData from 'form-data'
+import FormData from 'form-data';
 
 class DTableWebAPI {
   
@@ -1448,6 +1448,43 @@ class DTableWebAPI {
 
   deleteGroupInviteLinks(groupId, token) {
     const url = this.server + '/api/v2.1/groups/' + groupId + '/invite-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
+  addEmailSendTask(dtableUuid, account_name, messagesend_to, send_to, subject, source, copy_to, reply_to) {
+    const url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
+    let form = new FormData();
+    form.append('account_name', account_name);
+    form.append('messagesend_to', messagesend_to);
+    form.append('send_to', send_to);
+    form.append('subject', subject);
+    if (source) {
+      form.append('source', source);
+    }
+    if (copy_to) {
+      form.append('extra_msg', copy_to);
+    }
+    if (reply_to) {
+      form.append('extra_msg', reply_to);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  addWeChatSendTask(dtableUuid, account_name, message) {
+    const url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/wechat/';
+    let form = new FormData();
+    form.append('account_name', account_name);
+    form.append('message', message);
+    return this._sendPostRequest(url, form);
+  }
+
+  getMessageStatus(task_id) {
+    const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
+    return this.req.get(url);
+  }
+
+  deleteMessageTask(task_id) {
+    const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
     return this.req.delete(url);
   }
 
