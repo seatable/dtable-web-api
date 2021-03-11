@@ -1451,11 +1451,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  addEmailSendTask(dtableUuid, account_name, messagesend_to, send_to, subject, source, copy_to, reply_to) {
+  addEmailSendTask(dtableUuid, account_name, message, send_to, subject, source, copy_to, reply_to) {
     const url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let form = new FormData();
     form.append('account_name', account_name);
-    form.append('messagesend_to', messagesend_to);
+    form.append('message', message);
     form.append('send_to', send_to);
     form.append('subject', subject);
     if (source) {
