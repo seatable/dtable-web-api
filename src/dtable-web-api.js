@@ -760,6 +760,11 @@ class DTableWebAPI {
     });
   }
 
+  cleanTrashDTables() {
+    let url = this.server + '/api/v2.1/trash-dtables/';
+    return this.req.delete(url);
+  }
+
   restoreTrashDTable(dtableID){
     let url = this.server + '/api/v2.1/trash-dtables/' + dtableID + '/';
     return this.req.put(url);
@@ -1747,6 +1752,11 @@ class DTableWebAPI {
       per_page: perPage
     };
     return this.req.get(url, {params: params});
+  }
+
+  orgAdminCleanTrashDTables(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/';
+    return this.req.delete(url);
   }
 
   orgAdminRestoreTrashDTable(orgID, dtableID) {
