@@ -760,7 +760,7 @@ class DTableWebAPI {
     });
   }
 
-  clearTrashDTables() {
+  cleanTrashDTables() {
     let url = this.server + '/api/v2.1/trash-dtables/';
     return this.req.delete(url);
   }
@@ -1754,7 +1754,7 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
-  orgAdminClearTrashDTables(orgID) {
+  orgAdminCleanTrashDTables(orgID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/';
     return this.req.delete(url);
   }
