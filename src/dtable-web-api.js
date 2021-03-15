@@ -1478,12 +1478,12 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  getMessageStatus(task_id) {
+  getMessageSendStatus(task_id) {
     const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
     return this.req.get(url);
   }
 
-  deleteMessageTask(task_id) {
+  deleteMessageSendTask(task_id) {
     const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
     return this.req.delete(url);
   }
