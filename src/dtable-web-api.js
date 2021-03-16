@@ -818,6 +818,7 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/wechat/';
     let data = {
       'message': message,
+      'account_name': account_name,
     };
 
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
