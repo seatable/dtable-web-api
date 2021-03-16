@@ -798,7 +798,7 @@ class DTableWebAPI {
   }
 
   addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to) {
-    let url = this.server + '/api/v2.1/dtable-message' + dtableUuid + '/email/';
+    let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
       'account_name': account_name,
       'send_to': send_to,
@@ -815,7 +815,7 @@ class DTableWebAPI {
   }
 
   addWechatSendTask(dtableUuid, account_name, message) {
-    let url = this.server + '/api/v2.1/dtable-message' + dtableUuid + '/wechat/';
+    let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/wechat/';
     let data = {
       'message': message,
     };
