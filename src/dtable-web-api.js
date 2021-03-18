@@ -801,6 +801,45 @@ class DTableWebAPI {
     form.append('is_enable', enable);
     return this._sendPostRequest(url, form);
   }
+
+  addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to) {
+    let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
+    let data = {
+      'account_name': account_name,
+      'send_to': send_to,
+      'message': message,
+      'subject': subject,
+    };
+    if (copy_to) {
+      data['copy_to'] = copy_to
+    }
+    if (reply_to) {
+      data['reply_to'] = reply_to
+    }
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  addWechatSendTask(dtableUuid, account_name, message) {
+    let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/wechat/';
+    let data = {
+      'message': message,
+      'account_name': account_name,
+    };
+
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+
+  getMessageSendStatus(task_id) {
+    const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
+    return this.req.get(url);
+  }
+
+  deleteMessageSendTask(task_id) {
+    const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
+    return this.req.delete(url);
+  }
+
   
   // ---- dtable data api
   getTableDownloadLink(workspaceID, name) {
