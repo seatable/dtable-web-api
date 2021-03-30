@@ -594,7 +594,6 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/forms/' + token + '/logos/';
     let formData = new FormData();
     formData.append('form_logo', file);
-
     return this.req.post(url, data);
   }
 
