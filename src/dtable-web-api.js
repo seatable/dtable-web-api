@@ -717,6 +717,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  uploadFormLogo(token, file) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/logos/';
+    let form = new FormData();
+    form.append('form_logo', file);
+    return this.req.post(url, form);
+  }
+
   getActivitiesDetail(dtable_uuid, opDate, pageNum, avatarSize=36) {
     let params = 'dtable_uuid=' + dtable_uuid + '&op_date=' + opDate + '&page=' + pageNum + '&avatar_size=' + avatarSize;
     let url = this.server + '/api/v2.1/dtable-activities/detail/?' + params;
