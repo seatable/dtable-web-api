@@ -216,7 +216,7 @@ class DTableWebAPI {
   }
 
   // ---- dTable api
-  createTable(name, owner, dtableIcon, dtableColor, textColor) {
+  createTable(name, owner, dtableIcon, dtableColor, textColor, folderID) {
     const url = this.server + '/api/v2.1/dtables/';
     let form = new FormData();
     form.append('name', name);
@@ -229,6 +229,9 @@ class DTableWebAPI {
     }
     if (textColor) {
       form.append('text_color', textColor);
+    }
+    if (folderID) {
+      form.append('folder_id', folderID);
     }
     return this._sendPostRequest(url, form);
   }
@@ -457,11 +460,14 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  copyExternalDtable(dstWorkspaceID, link) {
+  copyExternalDtable(dstWorkspaceID, link, folderID) {
     let url = this.server + '/api/v2.1/dtable-external-link/dtable-copy/';
     let formData = new FormData();
     formData.append('link', link);
     formData.append('dst_workspace_id', dstWorkspaceID);
+    if (folderID) {
+      formData.append('folder_id', folderID);
+    }
     return this._sendPostRequest(url, formData);
   }
 
@@ -482,10 +488,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addImportDTableTask (workspaceId, file) {
+  addImportDTableTask (workspaceId, file, folderID) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-dtable/';
     let formData = new FormData();
     formData.append('dtable', file);
+    if (folderID) {
+      formData.append('folder_id', folderID);
+    }
     return this._sendPostRequest(url, formData);
   }
 
@@ -514,10 +523,13 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  addImportExcelTask(workspaceId, dtableName) {
+  addImportExcelTask(workspaceId, dtableName, folderID) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/';
     let formData = new FormData();
     formData.append('dtable_name', dtableName);
+    if (folderID) {
+      formData.append('folder_id', folderID);
+    }
     return this.req.post(url, formData);
   }
 
@@ -775,6 +787,43 @@ class DTableWebAPI {
   restoreTrashDTable(dtableID){
     let url = this.server + '/api/v2.1/trash-dtables/' + dtableID + '/';
     return this.req.put(url);
+  }
+
+  createFolder(workspaceID, name, color) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/';
+    let form = new FormData();
+    form.append('name', name);
+    if (color) {
+      form.append('color', color);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  updateFolder(workspaceID, folderID, updates) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/' + folderID + '/';
+    let form = new FormData();
+    if (updates.name) {
+      form.append('name', updates.name);
+    }
+    if (updates.color) {
+      form.append('color', updates.color);
+    }
+    return this.req.put(url, form);
+  }
+
+  deleteFolder(workspaceID, folderID) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/' + folderID +'/';
+    return this.req.delete(url);
+  }
+
+  moveFolderItem(workspaceID, itemType, itemID, moveFrom, moveTo) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folder-item-moving/';
+    let form = new FormData();
+    form.append('item_type', itemType);
+    form.append('item_id', itemID);
+    form.append('from', moveFrom);
+    form.append('to', moveTo);
+    return this._sendPostRequest(url, form);
   }
 
   // dtable plugin module
