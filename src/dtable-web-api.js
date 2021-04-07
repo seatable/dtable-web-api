@@ -721,11 +721,14 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  submitFormData(token, table_id, row_data) {
+  submitFormData(token, table_id, row_data, link_data) {
     const url = this.server + '/api/v2.1/form-submit/' + token + '/';
     let form = new FormData();
     form.append('table_id', table_id);
     form.append('row_data', row_data);
+    if (link_data) {
+      form.append('link_data', link_data);
+    }
     return this._sendPostRequest(url, form);
   }
 
