@@ -137,7 +137,7 @@ class DTableWebAPI {
     };
     if (sharedName) {
       params['shared_name'] = sharedName;
-    };
+    }
     return this.req.put(url, params);
   }
 
@@ -180,7 +180,7 @@ class DTableWebAPI {
     };
     if (sharedName) {
       params['shared_name'] = sharedName;
-    };
+    }
     return this.req.put(url, params);
   }
 
@@ -645,7 +645,7 @@ class DTableWebAPI {
   }
 
   getTableAccessTokenByCollectionTableToken(token) {
-    let url = this.server + '/api/v2.1/collection-tables/access-token/' + '?token=' + token;;
+    let url = this.server + '/api/v2.1/collection-tables/access-token/' + '?token=' + token;
     return this.req.get(url);
   }
 
