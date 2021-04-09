@@ -792,25 +792,17 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
-  createFolder(workspaceID, name, color) {
+  createFolder(workspaceID, name) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/';
     let form = new FormData();
     form.append('name', name);
-    if (color) {
-      form.append('color', color);
-    }
     return this._sendPostRequest(url, form);
   }
 
-  updateFolder(workspaceID, folderID, updates) {
+  updateFolder(workspaceID, folderID, name) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/' + folderID + '/';
     let form = new FormData();
-    if (updates.name) {
-      form.append('name', updates.name);
-    }
-    if (updates.color) {
-      form.append('color', updates.color);
-    }
+    form.append('name', name);
     return this.req.put(url, form);
   }
 
