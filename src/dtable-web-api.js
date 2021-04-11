@@ -1198,12 +1198,16 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  listCommonDatasets(dst_dtable_uuid) {
+  listCommonDatasets(dstDTableUuid, byGroup=false) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
-    if (dst_dtable_uuid) {
-      url = url + '?dst_dtable_uuid=' + dst_dtable_uuid;
+    let params = {};
+    if (dstDTableUuid) {
+      params.dst_dtable_uuid = dstDTableUuid;
     }
-    return this.req.get(url);
+    params.by_group = byGroup;
+    return this.req.get(url, {
+      params: params
+    });
   }
 
   getCommonDataset(datasetId) {
