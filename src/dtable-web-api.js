@@ -1905,7 +1905,7 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
-  orgAdminListDTableExternalLinks(orgID, page, per_page) {
+  orgAdminListDTableExternalLinks(orgID, page, perPage) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/external-links/';
     let params = {
       page: page,
@@ -1919,7 +1919,7 @@ class DTableWebAPI {
     return this.req.delete(url)
   }
 
-  orgAdminListViewExternalLinks(orgID, page, per_page) {
+  orgAdminListViewExternalLinks(orgID, page, perPage) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/view-external-links/';
     let params = {
       page: page,
