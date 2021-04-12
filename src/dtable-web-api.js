@@ -2516,6 +2516,20 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListViewExternalLinks(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/view-external-links/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminDeleteViewExternalLink(token) {
+    let url = this.server + '/api/v2.1/admin/view-external-links/' + token + '/';
+    return this.req.delete(url);
+  }
+
   sysAdminAddRepoSharedItem(repoID, shareType, shareToList, permission) {
     const url = this.server + '/api/v2.1/admin/shares/';
     let form = new FormData();
