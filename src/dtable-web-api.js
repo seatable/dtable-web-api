@@ -1905,6 +1905,34 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  orgAdminListDTableExternalLinks(orgID, page, per_page) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/external-links/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params})
+  }
+
+  orgAdminDeleteDTableExternalLink(orgID, token) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/external-links/' + token + '/';
+    return this.req.delete(url)
+  }
+
+  orgAdminListViewExternalLinks(orgID, page, per_page) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/view-external-links/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params})
+  }
+
+  orgAdminDeleteViewExternalLink(orgID, token) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/view-external-links/' + token + '/';
+    return this.req.delete(url)
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
