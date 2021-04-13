@@ -1931,6 +1931,14 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
+  sysAdminSearchDTables(query) {
+    var url = this.server + '/api/v2.1/admin/search-dtable/';
+    var params = {
+      query: query
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminListForms(page, perPage) {
     let url = this.server + '/api/v2.1/admin/forms/';
     let params = {
