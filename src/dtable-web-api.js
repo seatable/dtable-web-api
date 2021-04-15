@@ -1932,8 +1932,8 @@ class DTableWebAPI {
   }
 
   sysAdminSearchDTables(query) {
-    var url = this.server + '/api/v2.1/admin/search-dtable/';
-    var params = {
+    let url = this.server + '/api/v2.1/admin/search-dtable/';
+    let params = {
       query: query
     };
     return this.req.get(url, { params: params });
