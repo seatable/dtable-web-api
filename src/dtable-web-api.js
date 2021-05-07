@@ -1968,7 +1968,7 @@ class DTableWebAPI {
   }
 
   sysAdminDeleteDTable(dtable_uuid) {
-    const url = this.server + '/api/v2.1/admin/dtable/' + dtable_uuid;
+    const url = this.server + '/api/v2.1/admin/dtable/' + dtable_uuid + '/';
     return this.req.delete(url);
   }
   
