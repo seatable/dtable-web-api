@@ -1967,6 +1967,11 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  sysAdminDeleteDTable(dtable_uuid) {
+    const url = this.server + '/api/v2.1/admin/dtable/' + dtable_uuid + '/';
+    return this.req.delete(url);
+  }
+  
   sysAdminListForms(page, perPage) {
     let url = this.server + '/api/v2.1/admin/forms/';
     let params = {
