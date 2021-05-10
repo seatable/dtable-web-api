@@ -2004,6 +2004,22 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+
+  sysAdminListDTableBlacklists() {
+    let url = this.server + '/api/v2.1/admin/dtable-blacklists/';
+    return this.req.get(url)
+  }
+
+  sysAdminAddDTableBlacklist(dtable_uuid) {
+    let url = this.server + '/api/v2.1/admin/dtable-blacklists/';
+    return this.req.post(url, {dtable_uuid: dtable_uuid});
+  }
+
+  sysAdminDeleteDTableBlacklist(blacklist_id) {
+    let url = this.server + '/api/v2.1/admin/dtable-blacklists/' + blacklist_id + '/';
+    return this.req.delete(url);
+  }
+
   // sysadmin org api
   sysAdminListOrgs(page, per_page) {
     const url = this.server + '/api/v2.1/admin/organizations/';
