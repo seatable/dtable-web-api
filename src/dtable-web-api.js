@@ -2735,7 +2735,7 @@ class DTableWebAPI {
   }
   
   listDTableNotifications(dtableUuid, page, per_page) {
-    const url = this.server + '/api/v2.1/dtable/' + dtableUuid+ '/notifications/';
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid+ '/notifications/';
     const params = {
       page: page,
       per_page: per_page
@@ -2743,20 +2743,20 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
   
-  updateDTableNotifications(seen) {
-    const url = this.server + '/api/v2.1/dtable/' + dtableUuid+ '/notifications/';
+  updateDTableNotifications(dtableUuid, seen) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid+ '/notifications/';
     let form = new FormData();
     form.append('seen', seen);
     return this.req.put(url, form);
   }
   
-  deleteDTableNotifications() {
-    const url = this.server + '/api/v2.1/dtable/' + dtableUuid+ '/notifications/';
+  deleteDTableNotifications(dtableUuid) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid+ '/notifications/';
     return this.req.delete(url);
   }
   
-  updateDTableNotification(dtableUuid, notificationId) {
-    const url = this.server + '/api/v2.1/dtable/' + dtableUuid+ '/notifications/' + notificationId + '/';
+  updateDTableNotification(dtableUuid, notificationId, seen) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid+ '/notifications/' + notificationId + '/';
     let form = new FormData();
     form.append('seen', seen);
     return this.req.put(url, form);
