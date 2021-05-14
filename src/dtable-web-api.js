@@ -2007,7 +2007,7 @@ class DTableWebAPI {
 
   sysAdminListDTableBlacklists() {
     let url = this.server + '/api/v2.1/admin/dtable-blacklists/';
-    return this.req.get(url)
+    return this.req.get(url);
   }
 
   sysAdminAddDTableBlacklist(dtable_uuid) {
