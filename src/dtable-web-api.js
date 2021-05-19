@@ -2547,10 +2547,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  sysAdminUpdateFavicon(file) {
+  sysAdminUpdateFavicon(file, withNotify=null) {
     let url = this.server + '/api/v2.1/admin/favicon/';
     let formData = new FormData();
     formData.append('favicon', file);
+    if (withNotify) {
+      formData.append('with_notify', withNotify);
+    }
     return this._sendPostRequest(url, formData);
   }
 
