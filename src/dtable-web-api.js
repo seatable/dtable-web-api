@@ -2747,6 +2747,11 @@ class DTableWebAPI {
     }
     return this.req.get(url, {params: params});
   }
+
+  sysAdminListScripts() {
+    const url = this.server + '/api/v2.1/scripts-time-task/';
+    return this.req.get(url);
+  }
   
 }
 
