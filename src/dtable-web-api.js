@@ -853,6 +853,32 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  // external app module
+  listExternalAppsInstances(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/';
+    return this.req.get(url);
+  }
+  
+  createExternalAppInstance(workspaceID, dtableName, appType, appConfig) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/';
+    let form = new FormData();
+    form.append('app_type', appType);
+    form.append('app_config', appConfig);
+    return this.req.post(url, form);
+  }
+  
+  deleteExternalAppInstance(workspaceID, dtableName, externalAppId) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/' + externalAppId + '/';
+    return this.req.delete(url);
+  }
+
+  updateExternalAppInstance(workspaceID, dtableName, externalAppId, appConfig) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/' + externalAppId + '/';
+    let form = new FormData();
+    form.append('app_config', appConfig);
+    return this.req.put(url, form);
+  }
+
   addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
