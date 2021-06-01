@@ -2750,7 +2750,7 @@ class DTableWebAPI {
 
   sysAdminListScripts(page, per_page) {
     const url = this.server + '/api/v2.1/admin/scripts-tasks/';
-    var params = {
+    const params = {
       page: page,
       per_page: per_page
     };
