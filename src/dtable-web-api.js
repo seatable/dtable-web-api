@@ -2776,6 +2776,17 @@ class DTableWebAPI {
     }
     return this.req.get(url, {params: params});
   }
+
+  sysAdminListScriptsTasks(page, per_page) {
+    const url = this.server + '/api/v2.1/admin/scripts-tasks/';
+    const params = {
+      page: page,
+      per_page: per_page
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
   
 }
 
