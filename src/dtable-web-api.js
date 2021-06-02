@@ -2748,7 +2748,7 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
-  sysAdminListScripts(page, per_page) {
+  sysAdminListScriptsTasks(page, per_page) {
     const url = this.server + '/api/v2.1/admin/scripts-tasks/';
     const params = {
       page: page,
