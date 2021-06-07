@@ -2509,7 +2509,7 @@ class DTableWebAPI {
   }
 
   sysAdminListInvalidNotificationRules(page,perPage) {
-    let url = this.server + '/api/v2.1/admin/notification-invalid-rules/';
+    let url = this.server + '/api/v2.1/admin//api/v2.1/admin/invalid-notification-rules/';
     let params = {
       page: page,
       per_page: perPage
@@ -2522,8 +2522,8 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  sysAdminDeleteNotificationInvalidRules() {
-    let url = this.server + '/api/v2.1/admin/notification-invalid-rules/' ;
+  sysAdminDeleteInvalidNotificationRules() {
+    let url = this.server + '/api/v2.1/admin/invalid-notification-rules/' ;
     return this.req.delete(url);
   }
 
