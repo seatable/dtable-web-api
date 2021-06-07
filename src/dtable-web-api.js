@@ -2509,7 +2509,7 @@ class DTableWebAPI {
   }
 
   sysAdminListInvalidNotificationRules(page,perPage) {
-    let url = this.server + '/api/v2.1/admin//api/v2.1/admin/invalid-notification-rules/';
+    let url = this.server + '/api/v2.1/admin/invalid-notification-rules/';
     let params = {
       page: page,
       per_page: perPage
