@@ -1591,6 +1591,26 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  listAutomationRules(workspace_id, dtable_name) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/';
+    return this.req.get(url);
+  }
+
+  addAutomationRules(workspace_id, dtable_name, ruleObj) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/';
+    return this._sendPostRequest(url, ruleObj, { headers: { 'Content-type': 'application/json' }});
+  }
+
+  updateAutomationRules(workspace_id, dtable_name, ruleId, ruleObj) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + ruleId + '/';
+    return this.req.put(url, ruleObj,  { headers: { 'Content-type': 'application/json' }})
+  }
+
+  deleteAutomationRules(workspace_id, dtable_name, ruleId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + ruleId + '/';
+    return this.req.delete(url);
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
