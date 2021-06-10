@@ -1581,6 +1581,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  listOrgDepartments(orgId) {
+    const url = this.server + '/api/v2.1/org/' + orgId + '/departments/';
+    return this.req.get(url);
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
