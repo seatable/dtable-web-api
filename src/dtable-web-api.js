@@ -1054,14 +1054,7 @@ class DTableWebAPI {
     };
     return this.req.get(url, {params: params});
   }
-
-  migrateUserToOrg(org_id) {
-    const url = this.server + '/api/v2.1/user/migrate-org/';
-    let form = new FormData();
-    form.append('org_id', org_id);
-    return this._sendPostRequest(url, form);
-  }
-
+  
   getOrganization(org_id) {
     const url = this.server + '/api/v2.1/organizations/' + org_id + '/';
     return this.req.get(url);
