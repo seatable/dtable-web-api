@@ -2632,6 +2632,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListDTableExternalLinks(dtable_id) {
+    let url = this.server + '/api/v2.1/admin/dtable/' + dtable_id + '/external-links/';
+    return this.req.get(url)
+  }
+
   sysAdminAddRepoSharedItem(repoID, shareType, shareToList, permission) {
     const url = this.server + '/api/v2.1/admin/shares/';
     let form = new FormData();
