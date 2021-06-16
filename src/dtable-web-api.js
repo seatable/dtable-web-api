@@ -2619,7 +2619,7 @@ class DTableWebAPI {
   }
 
   sysAdminListDTableExternalLinks(dtable_id) {
-    let url = this.server + '/api/v2.1/admin/dtable/' + dtable_id + '/all-external-links/';
+    let url = this.server + '/api/v2.1/admin/dtable/' + dtable_id + '/external-links/';
     return this.req.get(url)
   }
 
