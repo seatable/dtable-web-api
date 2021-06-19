@@ -2470,6 +2470,13 @@ class DTableWebAPI {
       return this.req.put(url);
   }
 
+  sysAdminUpdateSysNotification(nid, msg){
+      let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
+      let formData = new FormData();
+      formData.append('msg', msg);
+      return this.req.put(url, formData);
+  }
+
   sysAdminListAllSysUserNotifications(page, perPage){
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
     let params = {
