@@ -853,6 +853,14 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  countPluginInstall(dtableUuid, pluginId, operator) {
+    let url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/'+'plugins_install_count/';
+    let form = new FormData();
+    form.append('plugin_id', pluginId);
+    form.append('operator', operator);
+    return this._sendPostRequest(url, form);
+  }
+
   // external app module
   listExternalAppsInstances(workspaceID, dtableName) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/';
