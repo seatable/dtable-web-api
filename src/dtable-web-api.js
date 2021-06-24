@@ -853,11 +853,10 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  countPluginInstall(dtableUuid, pluginId, operator) {
+  countPluginInstall(dtableUuid, pluginName) {
     let url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/'+'plugins_install_count/';
     let form = new FormData();
-    form.append('plugin_id', pluginId);
-    form.append('operator', operator);
+    form.append('plugin_name', pluginName);
     return this._sendPostRequest(url, form);
   }
 
