@@ -854,7 +854,7 @@ class DTableWebAPI {
   }
 
   countPluginInstall(pluginName) {
-    let url = this.server + '/api/v2.1/dtables/plugins_install_count/';
+    let url = this.server + '/api/v2.1/dtables/plugins-install-count/';
     let form = new FormData();
     form.append('plugin_name', pluginName);
     return this._sendPostRequest(url, form);
