@@ -2027,6 +2027,15 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListEmailSendingLogs(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/email-sending-logs/';
+    let params = {
+        page: page,
+        per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   // sysadmin org api
   sysAdminListOrgs(page, per_page) {
     const url = this.server + '/api/v2.1/admin/organizations/';
