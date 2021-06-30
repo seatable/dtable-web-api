@@ -2468,8 +2468,12 @@ class DTableWebAPI {
   sysAdminUpdateSysNotification(nid, msg, primary){
       let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
       let formData = new FormData();
-      formData.append('msg', msg);
-      formData.append('primary', primary);
+      if (msg) {
+        formData.append('msg', msg);
+      }
+      if (primary) {
+        formData.append('primary', primary);
+      }
       return this.req.put(url, formData);
   }
 
