@@ -2484,9 +2484,16 @@ class DTableWebAPI {
       return this.req.delete(url);
   }
 
-  sysAdminSetSysNotificationToCurrent(nid) {
+  sysAdminUpdateSysNotification(nid, msg, primary){
       let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
-      return this.req.put(url);
+      let formData = new FormData();
+      if (msg) {
+        formData.append('msg', msg);
+      }
+      if (primary) {
+        formData.append('primary', primary);
+      }
+      return this.req.put(url, formData);
   }
 
   sysAdminListAllSysUserNotifications(page, perPage){
