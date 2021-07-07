@@ -1561,6 +1561,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  addTemplate(row_data) {
+    const url = '/api/v2.1/admin/template-dtables/';
+    let formData = new FormData();
+    formData.append('row_data', row_data);
+    return this.req.post(url, formData);
+  }
+
   getBaseSharePermission(workspaceId, dtableName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/base-share-permission/';
     return this.req.get(url);
