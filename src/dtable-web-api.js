@@ -1049,8 +1049,8 @@ class DTableWebAPI {
   }
 
   getEasyDLAccessToken(api_key, secret_key) {
-    let url = this.server + '/api/v2.1/dtable-baidu-dl/access_token/?api_key=' + api_key + '&secret_key=' + secret_key
-    return this.req.get(url)
+    let url = this.server + '/api/v2.1/dtable-baidu-dl/access_token/?api_key=' + api_key + '&secret_key=' + secret_key;
+    return this.req.get(url);
   }
 
   // other not-admin APIs
