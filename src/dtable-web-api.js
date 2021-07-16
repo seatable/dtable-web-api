@@ -2398,10 +2398,12 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  sysAdminSearchUsers(query) {
+  sysAdminSearchUsers(query, page, perPage) {
     var url = this.server + '/api/v2.1/admin/search-user/';
     var params = {
-      query: query
+      query: query,
+      page: page,
+      perPage: perPage,
     };
     return this.req.get(url, { params: params });
   }
