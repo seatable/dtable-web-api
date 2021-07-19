@@ -1067,6 +1067,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getOrganizationMembers(org_id) {
+    const url = this.server + '/api/v2.1/organizations/' + org_id + '/members/';
+    return this.req.get(url);
+  }
+
   getChargebeeCustomer() {
     const url = this.server + '/api/v2.1/chargebee/customer/';
     return this.req.get(url);
