@@ -2403,7 +2403,7 @@ class DTableWebAPI {
     var params = {
       query: query,
       page: page,
-      perPage: perPage,
+      per_page: perPage,
     };
     return this.req.get(url, { params: params });
   }
