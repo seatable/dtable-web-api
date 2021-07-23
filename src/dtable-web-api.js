@@ -2842,7 +2842,7 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
-  sysAdminExternalApps(page, per_page) {
+  sysAdminListExternalApps(page, per_page) {
     const url = this.server + '/api/v2.1/admin/external-apps/';
     const params = {
       page: page,
