@@ -1013,6 +1013,16 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  recognizeImage(dtableUuid, account_name, image_path, top_num = 2) {
+    let url = this.server + '/api/v2.1/dtable/' + dtableUuid + '/image-recognition/';
+    let data = {
+      'account_name': account_name,
+      'image_path': image_path,
+      'top_num': top_num,
+    };
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
   getThirdPartyAccountsDetail(dtableUuid, account_name) {
     let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/detail/?account_name=' + account_name;
     return this.req.get(url);
