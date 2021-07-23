@@ -1013,7 +1013,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  recognitionImage(dtableUuid, account_name, image_path, top_num = 2) {
+  recognizeImage(dtableUuid, account_name, image_path, top_num = 2) {
     let url = this.server + '/api/v2.1/dtable/' + dtableUuid + '/image-recognition/';
     let data = {
       'account_name': account_name,
