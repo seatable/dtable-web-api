@@ -2814,6 +2814,15 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListPluginsInstallCount(page, per_page) {
+    const url = this.server + '/api/v2.1/admin/plugins-install-count/';
+    let params = {
+      page: page,
+      per_page: per_page
+    };
+    return this.req.get(url, {params: params});
+  }
+
   sysAdminListAbuseReports(page, per_page) {
     const url = this.server + '/api/v2.1/admin/abuse-reports/';
     let params = {
