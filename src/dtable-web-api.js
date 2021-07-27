@@ -2889,6 +2889,16 @@ class DTableWebAPI {
       params: params
     });
   }
+
+  imageRecognition(image, token, account_name, top_num = 2) {
+    let url = this.server + '/api/v2.1/dtable-apps/data-search/image-recognize/';
+    let form = new FormData();
+    form.append('image', image);
+    form.append('token', token);
+    form.append('account_name', account_name);
+    form.append('top_num', top_num);
+    return this._sendPostRequest(url, form, {headers: {'Content-Type': 'application/json'}});
+  }
   
 }
 
