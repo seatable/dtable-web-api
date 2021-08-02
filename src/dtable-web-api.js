@@ -2590,6 +2590,37 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  // automation rules
+  sysAdminListAllAutomationRules(page,perPage) {
+    let url = this.server + '/api/v2.1/admin/automation-rules/';
+    let params = {
+      page: page,
+      per_page: perPage
+    }
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminListInvalidAutomationRules(page,perPage) {
+    let url = this.server + '/api/v2.1/admin/invalid-automation-rules/';
+    let params = {
+      page: page,
+      per_page: perPage
+    }
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminDeleteAutomationRule(rid) {
+    let url = this.server + '/api/v2.1/admin/automation-rules/' + rid + '/';
+    return this.req.delete(url);
+  }
+
+  sysAdminDeleteInvalidAutomationRules() {
+    let url = this.server + '/api/v2.1/admin/invalid-automation-rules/' ;
+    return this.req.delete(url);
+  }
+
+  // end automation rules
+
   sysAdminListAdminLogs(page, perPage) {
       let url = this.server + '/api/v2.1/admin/admin-logs/';
       let params = {
