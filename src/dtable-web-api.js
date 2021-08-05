@@ -1013,6 +1013,16 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  recognizeImage(dtableUuid, account_name, image_path, top_num = 2) {
+    let url = this.server + '/api/v2.1/dtable/' + dtableUuid + '/image-recognition/';
+    let data = {
+      'account_name': account_name,
+      'image_path': image_path,
+      'top_num': top_num,
+    };
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
   getThirdPartyAccountsDetail(dtableUuid, account_name) {
     let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/detail/?account_name=' + account_name;
     return this.req.get(url);
@@ -2433,10 +2443,12 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  sysAdminSearchUsers(query) {
+  sysAdminSearchUsers(query, page, perPage) {
     var url = this.server + '/api/v2.1/admin/search-user/';
     var params = {
-      query: query
+      query: query,
+      page: page,
+      per_page: perPage,
     };
     return this.req.get(url, { params: params });
   }
@@ -2837,6 +2849,15 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListPluginsInstallCount(page, per_page) {
+    const url = this.server + '/api/v2.1/admin/plugins-install-count/';
+    let params = {
+      page: page,
+      per_page: per_page
+    };
+    return this.req.get(url, {params: params});
+  }
+
   sysAdminListAbuseReports(page, per_page) {
     const url = this.server + '/api/v2.1/admin/abuse-reports/';
     let params = {
@@ -2875,6 +2896,17 @@ class DTableWebAPI {
       params.department_id = departmentID;
     }
     return this.req.get(url, {params: params});
+  }
+
+  sysAdminListExternalApps(page, per_page) {
+    const url = this.server + '/api/v2.1/admin/external-apps/';
+    const params = {
+      page: page,
+      per_page: per_page
+    };
+    return this.req.get(url, {
+      params: params
+    });
   }
 
   sysAdminListScriptsTasks(page, per_page) {
