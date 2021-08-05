@@ -1067,6 +1067,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listOrganizationTemplates(org_id) {
+    const url = this.server + '/api/v2.1/organizations/' + org_id + '/templates/';
+    return this.req.get(url);
+  }
+
   getChargebeeCustomer() {
     const url = this.server + '/api/v2.1/chargebee/customer/';
     return this.req.get(url);
@@ -1895,10 +1900,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  orgAdminAddTemplate(orgID, row_data) {
+  orgAdminAddTemplate(orgID,  display_name, link, category, description) {
     const url = '/api/v2.1/org/' + orgID + '/admin/templates/';
     let formData = new FormData();
-    formData.append('row_data', row_data);
+    formData.append('display_name', display_name);
+    formData.append('link', link);
+    formData.append('description', description);
+    formData.append('category', category);
     return this.req.post(url, formData);
   }
 
@@ -2033,18 +2041,6 @@ class DTableWebAPI {
 
   sysAdminListTemplates() {
     let url = this.server + '/api/v2.1/admin/template-dtables/';
-    return this.req.get(url);
-  }
-
-  sysAdminAddTemplate(row_data) {
-    const url = '/api/v2.1/admin/template-dtables/';
-    let formData = new FormData();
-    formData.append('row_data', row_data);
-    return this.req.post(url, formData);
-  }
-
-  sysAdminListWorkspaces() {
-    let url = this.server + '/api/v2.1/admin/workspaces/';
     return this.req.get(url);
   }
 
