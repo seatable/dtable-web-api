@@ -1067,6 +1067,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getOrganizationMembers(org_id, page) {
+    const url = this.server + '/api/v2.1/organizations/' + org_id + '/members/?page=' + page;
+    return this.req.get(url);
+  }
+
   listOrganizationTemplates(org_id) {
     const url = this.server + '/api/v2.1/organizations/' + org_id + '/templates/';
     return this.req.get(url);
