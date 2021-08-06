@@ -2590,8 +2590,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  // automation rules
-  sysAdminListAllAutomationRules(page,perPage) {
+  sysAdminListAllAutomationRules(page, perPage) {
     let url = this.server + '/api/v2.1/admin/automation-rules/';
     let params = {
       page: page,
@@ -2600,7 +2599,7 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
-  sysAdminListInvalidAutomationRules(page,perPage) {
+  sysAdminListInvalidAutomationRules(page, perPage) {
     let url = this.server + '/api/v2.1/admin/invalid-automation-rules/';
     let params = {
       page: page,
@@ -2618,8 +2617,6 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/admin/invalid-automation-rules/' ;
     return this.req.delete(url);
   }
-
-  // end automation rules
 
   sysAdminListAdminLogs(page, perPage) {
       let url = this.server + '/api/v2.1/admin/admin-logs/';
