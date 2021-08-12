@@ -1950,7 +1950,7 @@ class DTableWebAPI {
   orgAdminRestoreTrashDTable(orgID, dtableID, restoreToAdminAccount) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/' + dtableID + '/';
     const data = {
-      owner_deleted: restoreToAdminAccount
+      restore_to_admin_account: restoreToAdminAccount
     };
     return this.req.put(url, data);
   }
