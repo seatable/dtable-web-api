@@ -1947,10 +1947,10 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  orgAdminRestoreTrashDTable(orgID, dtableID, owerDeleted) {
+  orgAdminRestoreTrashDTable(orgID, dtableID, restoreToAdminAccount) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/trash-dtables/' + dtableID + '/';
     const data = {
-      owner_deleted: owerDeleted
+      owner_deleted: restoreToAdminAccount
     };
     return this.req.put(url, data);
   }
