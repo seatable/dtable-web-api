@@ -1905,13 +1905,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  orgAdminAddTemplate(orgID,  display_name, link, category, description) {
+  orgAdminAddTemplate(orgID,  display_name, link, dtable_uuid, description) {
     const url = '/api/v2.1/org/' + orgID + '/admin/templates/';
     let formData = new FormData();
     formData.append('display_name', display_name);
     formData.append('link', link);
     formData.append('description', description);
-    formData.append('category', category);
+    formData.append('dtable_uuid', dtable_uuid);
     return this.req.post(url, formData);
   }
 
