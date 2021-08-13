@@ -541,9 +541,9 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
-  addConvertPageTask(workspaceId, dtableName) {
+  addConvertPageTask(workspaceId, dtableName, params) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/convert-page/';
-    return this.req.get(url);
+    return this.req.get(url, { params: params });
   }
 
   createSeafileConnector(dtableId, seafileURL, repoAPIToken) {
