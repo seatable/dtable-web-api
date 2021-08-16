@@ -1916,7 +1916,7 @@ class DTableWebAPI {
   }
 
   orgAdminAddTemplate(orgID,  display_name, link, dtable_uuid, description) {
-    const url = '/api/v2.1/org/' + orgID + '/admin/templates/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/templates/';
     let formData = new FormData();
     formData.append('display_name', display_name);
     formData.append('link', link);
@@ -1926,7 +1926,7 @@ class DTableWebAPI {
   }
 
   orgAdminListWorkspaces(orgID) {
-    const url = '/api/v2.1/org/' + orgID + '/admin/workspaces/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/workspaces/';
     return this.req.get(url);
   }
 
