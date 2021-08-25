@@ -1262,6 +1262,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
+  listRecentUploadFiles(dtableUuid) {
+    let url = this.server + '/api/v2.1/dtable-recent-asset/' + dtableUuid + '/';
+    return this.req.get(url);
+  }
+
   listCommonDatasets(dstDTableUuid, byGroup=false) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     let params = {};
