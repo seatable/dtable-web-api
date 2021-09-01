@@ -2943,6 +2943,29 @@ class DTableWebAPI {
       params: params
     });
   }
+
+  sysAdminListCurrentSessions(page, perPage) {
+    const url = this.server + '/api/v2.1/admin/current-sessions/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  sysAdminListHistorySessions(page, perPage) {
+    const url = this.server + '/api/v2.1/admin/history-sessions/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  sysAdminLogOutSession(session_key) {
+    const url = this.server + '/api/v2.1/admin/session/' + session_key + '/';
+    return this.req.delete(url);
+  }
   
 }
 
