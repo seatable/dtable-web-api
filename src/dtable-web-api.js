@@ -498,6 +498,23 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  addAppendDTableTask (workspaceId, file, fileName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-dtable/';
+    let formData = new FormData();
+    formData.append('dtable', file);
+    formData.append('file_name', fileName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  addAppendExcelTask(workspaceId, fileName, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/';
+    let formData = new FormData();
+    formData.append('file_name', fileName);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
+    return this._sendPostRequest(url, formData);
+  }
+
   queryDTableIOStatusByTaskId(taskId) {
     let url = this.server + '/api/v2.1/dtable-io-status/?task_id=' + taskId;
     return this.req.get(url);
