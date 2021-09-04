@@ -515,6 +515,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  appendExcelPreview(workspaceId, dtableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/?dtable_name=' + dtableName;
+    return this.req.get(url);
+  }
+
   queryDTableIOStatusByTaskId(taskId) {
     let url = this.server + '/api/v2.1/dtable-io-status/?task_id=' + taskId;
     return this.req.get(url);
