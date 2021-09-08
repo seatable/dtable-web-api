@@ -1671,6 +1671,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  orgAdminUpdateDepartGroup(orgID, groupID, groupName) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/' + groupID + '/';
+    let form = new FormData();
+    form.append('group_name', groupName);
+    return this.req.put(url);
+  }
+
   orgAdminAddDepartmentRepo(orgID, groupID, repoName) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/group-owned-libraries/';
     let form = new FormData();
