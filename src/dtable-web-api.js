@@ -498,11 +498,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  addAppendDTableTask (workspaceId, file, fileName) {
+  addAppendDTableTask (workspaceId, file, fileName, dtableUuid, tableName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-dtable/';
     let formData = new FormData();
     formData.append('dtable', file);
     formData.append('file_name', fileName);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
     return this._sendPostRequest(url, formData);
   }
 
