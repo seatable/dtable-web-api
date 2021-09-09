@@ -1675,7 +1675,7 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/' + groupID + '/';
     let form = new FormData();
     form.append('group_name', groupName);
-    return this.req.put(url);
+    return this.req.put(url, form);
   }
 
   orgAdminAddDepartmentRepo(orgID, groupID, repoName) {
