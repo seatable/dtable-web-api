@@ -516,8 +516,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  appendExcelPreview(workspaceId, dtableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/get-parsed-file/?dtable_name=' + dtableName;
+  appendExcelPreview(workspaceId, fileName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/get-parsed-file/?file_name=' + fileName;
     return this.req.get(url);
   }
 
