@@ -498,18 +498,17 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  addAppendDTableTask (workspaceId, file, fileName, dtableUuid, tableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-dtable/';
+  appendUploadExcel(workspaceId, file, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/upload-excel/';
     let formData = new FormData();
     formData.append('dtable', file);
-    formData.append('file_name', fileName);
     formData.append('dtable_uuid', dtableUuid);
     formData.append('table_name', tableName);
     return this._sendPostRequest(url, formData);
   }
 
-  addAppendExcelTask(workspaceId, fileName, dtableUuid, tableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/';
+  appendParsedFile(workspaceId, fileName, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/append-parsed-file/';
     let formData = new FormData();
     formData.append('file_name', fileName);
     formData.append('dtable_uuid', dtableUuid);
@@ -518,7 +517,7 @@ class DTableWebAPI {
   }
 
   appendExcelPreview(workspaceId, dtableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/?dtable_name=' + dtableName;
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/get-parsed-file/?dtable_name=' + dtableName;
     return this.req.get(url);
   }
 
