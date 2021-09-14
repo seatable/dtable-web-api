@@ -501,7 +501,7 @@ class DTableWebAPI {
   appendUploadExcel(workspaceId, file, dtableUuid, tableName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/upload-excel/';
     let formData = new FormData();
-    formData.append('dtable', file);
+    formData.append('file', file);
     formData.append('dtable_uuid', dtableUuid);
     formData.append('table_name', tableName);
     return this._sendPostRequest(url, formData);
