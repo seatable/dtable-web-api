@@ -533,14 +533,14 @@ class DTableWebAPI {
     return this.req.post(url, formData);
   }
 
-  importUploadExcel(workspaceId, file) {
+  importExcelUploadExcel(workspaceId, file) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/upload-excel/';
     let formData = new FormData();
     formData.append('file', file);
     return this.req.post(url, formData);
   }
 
-  importParsedFile(workspaceId, fileName, dtableUuid, tableName) {
+  importExcelImportParsedFile(workspaceId, fileName, dtableUuid, tableName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/import-parsed-file/';
     let formData = new FormData();
     formData.append('file_name', fileName);
@@ -549,7 +549,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  importExcelFilePreview(workspaceId, fileName) {
+  importExcelGetParsedFile(workspaceId, fileName) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/get-parsed-file/?file_name=' + fileName;
     return this.req.get(url);
   }
