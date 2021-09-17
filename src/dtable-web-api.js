@@ -556,6 +556,27 @@ class DTableWebAPI {
     return this.req.post(url, formData);
   }
 
+  importExcelUploadExcel(workspaceId, file) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/upload-excel/';
+    let formData = new FormData();
+    formData.append('file', file);
+    return this.req.post(url, formData);
+  }
+
+  importExcelImportParsedFile(workspaceId, fileName, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/import-parsed-file/';
+    let formData = new FormData();
+    formData.append('file_name', fileName);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  importExcelGetParsedFile(workspaceId, fileName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/get-parsed-file/?file_name=' + fileName;
+    return this.req.get(url);
+  }
+
   addUpdateExcelTask(workspaceId, dtableName, tables) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/';
     let formData = new FormData();
