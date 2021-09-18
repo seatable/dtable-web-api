@@ -521,6 +521,51 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  updateExcelUploadExcel(workspaceId, file, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-excel/upload-excel/';
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  updateExcelCSVUpdateParsedFile(workspaceId, fileName, dtableUuid, tableName, selectedColumns) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-excel-csv/update-parsed-file/';
+    let formData = new FormData();
+    formData.append('file_name', fileName);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
+    formData.append('selected_columns', selectedColumns);
+    return this._sendPostRequest(url, formData);
+  }
+
+  updateExcelCSVGetParsedFile(workspaceId, fileName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-excel-csv/get-parsed-file/?file_name=' + fileName;
+    return this.req.get(url);
+  }
+
+  updateExcelCSVGetCheckedResult(workspaceId, fileName, dtableUuid, tableName, selectedColumns) {
+    let params = 'file_name=' + encodeURIComponent(fileName) + '&dtable_uuid=' + dtableUuid + '&table_name='
+          + encodeURIComponent(tableName) + '&selected_columns=' + encodeURIComponent(selectedColumns);
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-excel-csv/get-checked-result/?' + params;
+    return this.req.get(url);
+  }
+
+  updateCSVUploadCSV(workspaceId, file, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-csv/upload-csv/';
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  updateCSVUpdateCSVCancel(workspaceId, fileName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-csv/upload-csv/?file_name=' + fileName;
+    return this.req.delete(url);
+  }
+
   queryDTableIOStatusByTaskId(taskId) {
     let url = this.server + '/api/v2.1/dtable-io-status/?task_id=' + taskId;
     return this.req.get(url);
