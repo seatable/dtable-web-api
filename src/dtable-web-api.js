@@ -516,9 +516,14 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  appendExcelGetParsedFile(workspaceId, fileName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/get-parsed-file/?file_name=' + fileName;
+  appendExcelGetParsedFile(workspaceId, fileName, dtableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/get-parsed-file/?file_name=' + fileName+ '&dtable_name=' + dtableName;
     return this.req.get(url);
+  }
+
+  deleteExcel(workspaceId, fileName, dtableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/delete-excel/?file_name=' + fileName;
+    return this.req.delete(url);
   }
 
   queryDTableIOStatusByTaskId(taskId) {
