@@ -3014,8 +3014,8 @@ class DTableWebAPI {
     });
   }
 
-  savePageDesignPDFToFileColumn(page_id, row_id, target_table, target_row_id, target_column, file_name) {
-    const url = this.server + '/api/v2.1/workspace/1/dtable/img-files/page-design-file/';
+  savePageDesignPDFToFileCell(workspaceID, dtableName, { page_id, row_id, target_table, target_row_id, target_column, file_name }) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID +'/dtable/' + dtableName + '/page-design-file/';
     const params = {
       page_id,
       row_id,
