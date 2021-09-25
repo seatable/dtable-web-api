@@ -556,10 +556,11 @@ class DTableWebAPI {
     return this.req.post(url, formData);
   }
 
-  importExcelUploadExcel(workspaceId, file) {
+  importExcelUploadExcel(workspaceId, file, dtableUuid) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/upload-excel/';
     let formData = new FormData();
     formData.append('file', file);
+    formData.append('dtable_uuid', dtableUuid);
     return this.req.post(url, formData);
   }
 
