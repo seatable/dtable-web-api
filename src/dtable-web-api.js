@@ -516,8 +516,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  appendExcelGetParsedFile(workspaceId, fileName, dtableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/get-parsed-file/?file_name=' + fileName + '&dtable_name=' + dtableName;
+  excelCommonGetParsedFile(workspaceId, fileName, dtableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/excel-common/get-parsed-file/?file_name=' + fileName + '&dtable_name=' + dtableName;
     return this.req.get(url);
   }
 
@@ -573,13 +573,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  importExcelGetParsedFile(workspaceId, fileName, dtableName) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/get-parsed-file/?file_name=' + fileName + '&dtable_name=' + dtableName;
-    return this.req.get(url);
-  }
-
-  deleteExcel(workspaceId, fileName, dtableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/delete-excel/?file_name=' + fileName;
+  excelCommonDeleteExcel(workspaceId, fileName, dtableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + dtableName + '/excel-common/delete-excel/?file_name=' + fileName;
     return this.req.delete(url);
   }
 
