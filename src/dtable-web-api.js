@@ -1107,6 +1107,18 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  savePageDesignPDFToFileColumn(workspaceID, dtableName, { page_id, row_id, target_table, target_row_id, target_column, file_name }) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID +'/dtable/' + dtableName + '/page-design-file/';
+    let formData = new FormData();
+    formData.append('page_id', page_id);
+    formData.append('row_id', row_id);
+    formData.append('target_table', target_table);
+    formData.append('target_row_id', target_row_id);
+    formData.append('target_column', target_column);
+    formData.append('file_name', file_name);
+    return this._sendPostRequest(url, formData);
+  }
+
   // other not-admin APIs
   getUserInfo() {
     const url = this.server + '/api/v2.1/user/';
@@ -1491,18 +1503,6 @@ class DTableWebAPI {
   getInvitationLink() {
     const url = this.server + '/api/v2.1/invitation-link/';
     return this.req.get(url);
-  }
-
-  savePageDesignPDFToFileColumn(workspaceID, dtableName, { page_id, row_id, target_table, target_row_id, target_column, file_name }) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceID +'/dtable/' + dtableName + '/page-design-file/';
-    let formData = new FormData();
-    formData.append('page_id', page_id);
-    formData.append('row_id', row_id);
-    formData.append('target_table', target_table);
-    formData.append('target_row_id', target_row_id);
-    formData.append('target_column', target_column);
-    formData.append('file_name', file_name);
-    return this._sendPostRequest(url, formData);
   }
 
   //account api
