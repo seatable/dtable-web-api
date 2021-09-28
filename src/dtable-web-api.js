@@ -578,6 +578,46 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  updateExcelUploadExcel(workspaceId, file, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-excel/upload-excel/';
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  updateExcelCSVUpdateParsedFile(workspaceId, fileName, dtableUuid, tableName, selectedColumns) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-excel-csv/update-parsed-file/';
+    let formData = new FormData();
+    formData.append('file_name', fileName);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
+    formData.append('selected_columns', selectedColumns);
+    return this._sendPostRequest(url, formData);
+  }
+
+  updateExcelCSVGetCheckedResult(workspaceId, fileName, dtableUuid, tableName, selectedColumns) {
+    let params = 'file_name=' + encodeURIComponent(fileName) + '&dtable_uuid=' + dtableUuid + '&table_name='
+          + encodeURIComponent(tableName) + '&selected_columns=' + encodeURIComponent(selectedColumns);
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-excel-csv/get-checked-result/?' + params;
+    return this.req.get(url);
+  }
+
+  updateCSVUploadCSV(workspaceId, file, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-csv/upload-csv/';
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('dtable_uuid', dtableUuid);
+    formData.append('table_name', tableName);
+    return this._sendPostRequest(url, formData);
+  }
+
+  CSVCommonDeleteCSV(workspaceId, fileName, dtableUuid) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/csv-common/delete-csv/?file_name=' + fileName + '&dtable_uuid=' + dtableUuid;
+    return this.req.delete(url);
+  }
+
   addUpdateExcelTask(workspaceId, dtableName, tables) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/';
     let formData = new FormData();
