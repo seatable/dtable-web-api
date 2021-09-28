@@ -1119,6 +1119,57 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  listUserAdminDTables() {
+    let url = this.server + '/api/v2.1/user-admin-dtables/';
+    return this.req.get(url);
+  }
+
+  getDTableMetadata(dtableUuid) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/metadata/`;
+    return this.req.get(url);
+  }
+
+  // email-sync apis
+  listEmailSyncUserJobs() {
+    let url = this.server + '/api/v2.1/email-sync/user-jobs/';
+    return this.req.get(url);
+  }
+
+
+  addEmailSyncJob(dtableUuid, imapServer, emailUser, emailPassword, emailTableName, linkTableName, minute, hour, isUseExsitedTables) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/email-sync/jobs/`;
+
+    return this.req.post(url, {
+      imap_server: imapServer,
+      email_user: emailUser,
+      email_password: emailPassword,
+      email_table_name: emailTableName,
+      link_table_name: linkTableName,
+      schedule_minute: minute,
+      schedule_hour: hour,
+      is_use_existed_tables: isUseExsitedTables
+    });
+  }
+
+  updateEmailSyncJob(dtableUuid, jobId, options) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/email-sync/jobs/${jobId}/`;
+
+    return this.req.put(url, options);
+  }
+
+  deleteEmailSyncJob(dtableUuid, jobId) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/email-sync/jobs/${jobId}/`;
+    return this.req.delete(url);
+  }
+
+  runEmailSyncJob(dtableUuid, jobId, sendDate, mode) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/email-sync/run-job/${jobId}/`;
+    return this.req.post(url, {
+      send_date: sendDate,
+      mode: mode
+    });
+  }
+
   // other not-admin APIs
   getUserInfo() {
     const url = this.server + '/api/v2.1/user/';
