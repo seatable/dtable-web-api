@@ -1276,24 +1276,6 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  queryOfficeFileConvertStatus(repoID, commitID, path, fileType, shareToken) {
-    const url = this.server + '/office-convert/status/';
-    const params = {
-      repo_id: repoID,
-      commit_id: commitID,
-      path: path,
-      doctype: fileType // 'document' or 'spreadsheet'
-    };
-    // for view of share link
-    if (shareToken) {
-      params['token'] = shareToken;
-    }
-    return this.req.get(url, {
-      headers: {'X-Requested-With': 'XMLHttpRequest'},
-      params: params
-    });
-  }
-
   fileTransferSave(dtableUuid, filesMap, path, replace, relativePath) {
     let url = this.server + '/api/v2.1/seafile-connectors/' + dtableUuid + '/file-transfer-task/';
     let data = {
