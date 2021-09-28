@@ -516,8 +516,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  appendExcelGetParsedFile(workspaceId, fileName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/get-parsed-file/?file_name=' + fileName;
+  excelCommonGetParsedFile(workspaceId, fileName, dtableUuid) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/excel-common/get-parsed-file/?file_name=' + fileName + '&dtable_uuid=' + dtableUuid;
     return this.req.get(url);
   }
 
@@ -556,10 +556,11 @@ class DTableWebAPI {
     return this.req.post(url, formData);
   }
 
-  importExcelUploadExcel(workspaceId, file) {
+  importExcelUploadExcel(workspaceId, file, dtableUuid) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/upload-excel/';
     let formData = new FormData();
     formData.append('file', file);
+    formData.append('dtable_uuid', dtableUuid);
     return this.req.post(url, formData);
   }
 
@@ -572,9 +573,9 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  importExcelGetParsedFile(workspaceId, fileName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/get-parsed-file/?file_name=' + fileName;
-    return this.req.get(url);
+  excelCommonDeleteExcel(workspaceId, fileName, dtableUuid) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/excel-common/delete-excel/?file_name=' + fileName + '&dtable_uuid=' + dtableUuid;
+    return this.req.delete(url);
   }
 
   addUpdateExcelTask(workspaceId, dtableName, tables) {
@@ -1285,24 +1286,6 @@ class DTableWebAPI {
     let data = {'files_map': filesMap};
 
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
-  }
-
-  queryOfficeFileConvertStatus(repoID, commitID, path, fileType, shareToken) {
-    const url = this.server + '/office-convert/status/';
-    const params = {
-      repo_id: repoID,
-      commit_id: commitID,
-      path: path,
-      doctype: fileType // 'document' or 'spreadsheet'
-    };
-    // for view of share link
-    if (shareToken) {
-      params['token'] = shareToken;
-    }
-    return this.req.get(url, {
-      headers: {'X-Requested-With': 'XMLHttpRequest'},
-      params: params
-    });
   }
 
   fileTransferSave(dtableUuid, filesMap, path, replace, relativePath) {
