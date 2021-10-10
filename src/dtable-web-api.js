@@ -1444,18 +1444,9 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  listOnlineSessions() {
-    const url = this.server + '/api/v2.1/online-sessions/';
+  listSessions() {
+    const url = this.server + '/api/v2.1/sessions/';
     return this.req.get(url);
-  }
-
-  listHistorySessions(page, perPage) {
-    const url = this.server + '/api/v2.1/history-sessions/';
-    let params = {
-      page: page,
-      per_page: perPage
-    };
-    return this.req.get(url, {params: params});
   }
 
   logOutSession(session_key) {
