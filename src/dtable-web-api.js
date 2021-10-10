@@ -1129,45 +1129,42 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  // email-sync apis
-  listEmailSyncUserJobs() {
-    let url = this.server + '/api/v2.1/email-sync/user-jobs/';
+  // sync-data apis
+  listSyncDataJobs() {
+    let url = this.server + '/api/v2.1/sync-data/user-jobs/';
     return this.req.get(url);
   }
 
-
-  addEmailSyncJob(dtableUuid, imapServer, emailUser, emailPassword, emailTableName, linkTableName, minute, hour, isUseExsitedTables) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/email-sync/jobs/`;
+  addSyncDataJob(dtableUuid, jobType, detail, minute, hour) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/sync-data/jobs/`;
 
     return this.req.post(url, {
-      imap_server: imapServer,
-      email_user: emailUser,
-      email_password: emailPassword,
-      email_table_name: emailTableName,
-      link_table_name: linkTableName,
-      schedule_minute: minute,
-      schedule_hour: hour,
-      is_use_existed_tables: isUseExsitedTables
+      detail: detail,
+      job_type: jobType,
+      trigger_minute: minute,
+      trigger_hour: hour
     });
   }
 
-  updateEmailSyncJob(dtableUuid, jobId, options) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/email-sync/jobs/${jobId}/`;
+  updateSyncDataJob(dtableUuid, jobId, detail, minute, hour) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/sync-data/jobs/${jobId}/`;
 
+    let options = {
+      detail: detail,
+      trigger_minute: minute,
+      trigger_hour: hour
+    };
     return this.req.put(url, options);
   }
 
-  deleteEmailSyncJob(dtableUuid, jobId) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/email-sync/jobs/${jobId}/`;
+  deleteSyncDataJob(dtableUuid, jobId) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/sync-data/jobs/${jobId}/`;
     return this.req.delete(url);
   }
 
-  runEmailSyncJob(dtableUuid, jobId, sendDate, mode) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/email-sync/run-job/${jobId}/`;
-    return this.req.post(url, {
-      send_date: sendDate,
-      mode: mode
-    });
+  runSyncDataJob(dtableUuid, jobId, options) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/sync-data/jobs/${jobId}/run/`;
+    return this.req.post(url, options);
   }
 
   // other not-admin APIs
