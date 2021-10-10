@@ -471,6 +471,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  copyTemplate(templateBaseId) {
+    const url = this.server + '/api/v2.1/template-copy/?template_base_id='+templateBaseId;
+    return this.req.get(url);
+  }
+
   addExportExternalDTable(externalLinkToken, onDownloadProgress = null) {
     let url = this.server + '/dtable/external-links/'+ externalLinkToken +'/download-zip/';
     const _this = this;
