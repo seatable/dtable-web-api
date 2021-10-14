@@ -1129,14 +1129,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  // sync-data apis
-  listSyncDataJobs() {
-    let url = this.server + '/api/v2.1/sync-data/user-jobs/';
+  // data-sync apis
+  listDataSyncJobs() {
+    let url = this.server + '/api/v2.1/data-sync/user-jobs/';
     return this.req.get(url);
   }
 
-  addSyncDataJob(dtableUuid, jobType, detail, minute, hour) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/sync-data/jobs/`;
+  addDataSyncJob(dtableUuid, jobType, detail, minute, hour) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/`;
 
     return this.req.post(url, {
       detail: detail,
@@ -1146,8 +1146,8 @@ class DTableWebAPI {
     });
   }
 
-  updateSyncDataJob(dtableUuid, jobId, detail, minute, hour) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/sync-data/jobs/${jobId}/`;
+  updateDataSyncJob(dtableUuid, jobId, detail, minute, hour) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/`;
 
     let options = {
       detail: detail,
@@ -1157,13 +1157,13 @@ class DTableWebAPI {
     return this.req.put(url, options);
   }
 
-  deleteSyncDataJob(dtableUuid, jobId) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/sync-data/jobs/${jobId}/`;
+  deleteDataSyncJob(dtableUuid, jobId) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/`;
     return this.req.delete(url);
   }
 
-  runSyncDataJob(dtableUuid, jobId, options) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/sync-data/jobs/${jobId}/run/`;
+  runDataSyncJob(dtableUuid, jobId, options) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/run/`;
     return this.req.post(url, options);
   }
 
