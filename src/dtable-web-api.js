@@ -1120,6 +1120,54 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  listUserAdminDTables() {
+    let url = this.server + '/api/v2.1/user-admin-dtables/';
+    return this.req.get(url);
+  }
+
+  getDTableMetadata(dtableUuid) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/metadata/`;
+    return this.req.get(url);
+  }
+
+  // data-sync apis
+  listDataSyncJobs() {
+    let url = this.server + '/api/v2.1/data-sync/user-jobs/';
+    return this.req.get(url);
+  }
+
+  addDataSyncJob(dtableUuid, jobType, detail, minute, hour) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/`;
+
+    return this.req.post(url, {
+      detail: detail,
+      job_type: jobType,
+      trigger_minute: minute,
+      trigger_hour: hour
+    });
+  }
+
+  updateDataSyncJob(dtableUuid, jobId, detail, minute, hour) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/`;
+
+    let options = {
+      detail: detail,
+      trigger_minute: minute,
+      trigger_hour: hour
+    };
+    return this.req.put(url, options);
+  }
+
+  deleteDataSyncJob(dtableUuid, jobId) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/`;
+    return this.req.delete(url);
+  }
+
+  runDataSyncJob(dtableUuid, jobId, options) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/run/`;
+    return this.req.post(url, options);
+  }
+
   // other not-admin APIs
   getUserInfo() {
     const url = this.server + '/api/v2.1/user/';
