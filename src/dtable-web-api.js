@@ -1536,6 +1536,16 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listSessions() {
+    const url = this.server + '/api/v2.1/sessions/';
+    return this.req.get(url);
+  }
+
+  logOutSession(session_key) {
+    const url = this.server + '/api/v2.1/session/' + session_key + '/';
+    return this.req.delete(url);
+  }
+
   //account api
 
   getAccountInfo() {
@@ -3056,7 +3066,6 @@ class DTableWebAPI {
       params: params
     });
   }
-  
 }
 
 export default DTableWebAPI;
