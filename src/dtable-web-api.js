@@ -1328,6 +1328,21 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  deleteMutipleTableAsset(dtableUuid, parentPath, assetNames) {
+    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/batch-delete-assets/';
+    let operation = {
+      'parent_path': parentPath,
+      'asset_names': assetNames
+    };
+    return this.req["delete"](url, {
+      data: operation
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
   zipDTableAssetFiles(dtableUuid, filesMap) {
     let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid  + '/zip-task/';
 
