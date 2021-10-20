@@ -1328,7 +1328,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  deleteMutipleTableAsset(dtableUuid, parentPath, direntName) {
+  deleteMutipleTableAsset(dtableUuid, parentPath, assetNames) {
     let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/batch-delete-assets/';
     let operation = {
       'parent_path': parentPath,
