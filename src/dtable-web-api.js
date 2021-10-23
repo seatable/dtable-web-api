@@ -1658,6 +1658,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' }});
   }
 
+  testAutomationRule(workspace_id, dtable_name, ruleJson) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/test-automation-rules/';
+    return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' }});
+  }
+
   deleteAutomationRule(workspace_id, dtable_name, automationRuleId) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + automationRuleId + '/';
     return this.req.delete(url);
