@@ -1653,13 +1653,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addAutomationRule(workspace_id, dtable_name, ruleJson) {
+  addAutomationRule(workspace_id, dtable_name, ruleJson, run_test) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/';
-    return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' }});
-  }
-
-  testAutomationRule(workspace_id, dtable_name, ruleJson) {
-    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/test-automation-rules/';
+    if (run_test) {
+      ruleJson.run_test = run_test;
+    }
     return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' }});
   }
 
@@ -1668,8 +1666,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
   
-  updateAutomationRule(workspace_id, dtable_name, automationRuleId, ruleJson) {
+  updateAutomationRule(workspace_id, dtable_name, automationRuleId, ruleJson, run_test) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + automationRuleId + '/';
+    if (run_test) {
+      ruleJson.run_test = run_test;
+    }
     return this.req.put(url, ruleJson,  { headers: { 'Content-type': 'application/json' }})
   }
 
