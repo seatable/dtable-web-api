@@ -1871,6 +1871,11 @@ class DTableWebAPI {
     return this.req.post(url);
   }
 
+  listAutomationRuleTaskLog(workspace_id, dtable_name, automationRuleId, page) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + automationRuleId + '/task-logs/?page=' + page;
+    return this.req.get(url);
+  }
+
   runScript(dtableUuid, scriptName, data) {
     const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/`;
     if (data) {
