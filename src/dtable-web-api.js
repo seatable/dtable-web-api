@@ -1136,10 +1136,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addDataSyncJob(dtableUuid, jobType, detail, minute, hour) {
+  addDataSyncJob(dtableUuid, name, jobType, detail, minute, hour) {
     let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/`;
 
     return this.req.post(url, {
+      name: name,
       detail: detail,
       job_type: jobType,
       trigger_minute: minute,
@@ -1147,10 +1148,11 @@ class DTableWebAPI {
     });
   }
 
-  updateDataSyncJob(dtableUuid, jobId, detail, minute, hour) {
+  updateDataSyncJob(dtableUuid, jobId, name, detail, minute, hour) {
     let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/`;
 
     let options = {
+      name: name,
       detail: detail,
       trigger_minute: minute,
       trigger_hour: hour
