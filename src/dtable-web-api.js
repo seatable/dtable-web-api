@@ -1667,7 +1667,12 @@ class DTableWebAPI {
   
   updateAutomationRule(workspace_id, dtable_name, automationRuleId, ruleJson) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + automationRuleId + '/';
-    return this.req.put(url, ruleJson,  { headers: { 'Content-type': 'application/json' }})
+    return this.req.put(url, ruleJson,  { headers: { 'Content-type': 'application/json' }});
+  }
+
+  testAutomationRule(workspace_id, dtable_name, automationRuleId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + automationRuleId + '/run-test/';
+    return this._sendPostRequest(url);
   }
 
   runScript(dtableUuid, scriptName, data) {
