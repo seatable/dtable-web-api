@@ -1672,7 +1672,7 @@ class DTableWebAPI {
 
   testAutomationRule(workspace_id, dtable_name, automationRuleId) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + automationRuleId + '/run-test/';
-    return this._sendPostRequest(url);
+    return this.req.post(url);
   }
 
   runScript(dtableUuid, scriptName, data) {
