@@ -1588,6 +1588,11 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  unbindPhoneNumber() {
+    const url = this.server + '/api/v2.1/user/unbind-phone/';
+    return this.req.put(url);
+  }
+
   updateEmailNotificationInterval(dtableUpdatesEmailInterval, dtableCollaborateEmailInterval) {
     const url = this.server + '/api2/account/info/';
     const data = {
