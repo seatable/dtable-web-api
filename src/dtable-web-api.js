@@ -260,6 +260,9 @@ class DTableWebAPI {
     if (updates.icon) {
       form.append('icon', updates.icon);
     }
+    if (updates.password) {
+      form.append('password', updates.password);
+    }
     return this.req.put(url, form);
   }
 
