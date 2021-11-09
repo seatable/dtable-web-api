@@ -264,7 +264,7 @@ class DTableWebAPI {
       form.append('password', updates.password);
     }
     if (updates.unset_password) {
-      form.append('password', updates.unset_password);
+      form.append('unset_password', updates.unset_password);
     }
 
     return this.req.put(url, form);
