@@ -1273,6 +1273,14 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  searchGroupMember(groupID, q) {
+    const url = this.server + '/api/v2.1/groups/' + groupID + '/search-member/';
+    const params = {
+      q: q
+    }
+    return this.req.get(url, {params: params});
+  }
+
   listGroupMembers(groupID, isAdmin=false, avatarSize=64) {
     let url = this.server + '/api/v2.1/groups/' + groupID + '/members/?avatar_size=' + avatarSize + '&is_admin=' + isAdmin;
     return this.req.get(url);
