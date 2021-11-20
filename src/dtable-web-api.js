@@ -2432,6 +2432,9 @@ class DTableWebAPI {
       case 'id_in_org':
         formData.append('id_in_org', value);
         break;
+      case 'unit':
+        formData.append('unit', value);
+        break;
     }
     return this.req.put(url, formData);
   }
