@@ -976,6 +976,14 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  shareExternalAppToGroups(externalAppToken, groupIds) {
+    let url = this.server + `/api/v2.1/dtable-external-apps/${externalAppToken}/share/`;
+    let jsonData = {
+      group_ids: groupIds
+    };
+    return this.req.post(url, jsonData, {headers: {'Content-Type': 'application/json'}});
+  }
+
   addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
@@ -1208,6 +1216,49 @@ class DTableWebAPI {
   runDataSyncJob(dtableUuid, jobId, options) {
     let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/run/`;
     return this.req.post(url, options);
+  }
+
+  // approval flow apis
+  submitApprovalFlowTicket(appToken, rowData, tableId) {
+    let url = this.server + `/api/v2.1/approval-flows/${appToken}/ticket-submit/`;
+    let form = new FormData();
+    form.append('row_data', rowData);
+    form.append('table_id', tableId);
+    return this._sendPostRequest(url, form);
+  }
+
+  approveApprovalFlowTicket(appToken, ticketId, isPass) {
+    let url = this.server + `/api/v2.1/approval-flows/${appToken}/tickets/${ticketId}/approving/`;
+    let form = new FormData();
+    form.append('is_pass', isPass);
+    return this._sendPostRequest(url, form);
+  }
+
+  listSubmittedApprovalFlowTickets(page = null, perPage = null) {
+    let url = this.server + '/api/v2.1/approval-flows/submitted-tickets/';
+    let params = {
+      page: page || 1,
+      perPgage: perPage || 25
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
+  listToBeApprovedTickets(page = null, perPage = null) {
+    let url = this.server + '/api/v2.1/approval-flows/to-be-approved-tickets/';
+    let params = {
+      page: page || 1,
+      perPgage: perPage || 25
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
+  listSharedApprovalFlowApps() {
+    let url = this.server + '/api/v2.1/approval-flows/shared/';
+    return this.req.get(url);
   }
 
   // other not-admin APIs
