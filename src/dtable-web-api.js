@@ -325,13 +325,13 @@ class DTableWebAPI {
     return this.req.put(url, params);
   }
 
-  getDTableShareLink(workspaceID, name) {
-    var url = this.server + '/api/v2.1/dtables/share-links/?workspace_id=' + workspaceID + '&table_name=' + encodeURIComponent(name);
+  getDTableInviteLink(workspaceID, name) {
+    var url = this.server + '/api/v2.1/dtables/invite-links/?workspace_id=' + workspaceID + '&table_name=' + encodeURIComponent(name);
     return this.req.get(url);
   }
 
-  createDTableShareLink(workspaceID, name, permission, password, expire_days) {
-    let url = this.server + '/api/v2.1/dtables/share-links/';
+  createDTableInviteLink(workspaceID, name, permission, password, expire_days) {
+    let url = this.server + '/api/v2.1/dtables/invite-links/';
     let form = new FormData();
     form.append('workspace_id', workspaceID);
     form.append('table_name', name);
@@ -351,8 +351,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  deleteDTableShareLink(token) {
-    var url = this.server + '/api/v2.1/dtables/share-links/' + token + '/';
+  deleteDTableInviteLink(token) {
+    var url = this.server + '/api/v2.1/dtables/invite-links/' + token + '/';
     return this.req.delete(url);
   }
 
