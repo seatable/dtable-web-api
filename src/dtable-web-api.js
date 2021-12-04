@@ -1431,8 +1431,9 @@ class DTableWebAPI {
     });
   }
 
-  getCommonDataset(datasetId) {
+  getCommonDataset(datasetId, start, limit) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
+    url = url + `?start=${start}&limit=${limit}`;
     return this.req.get(url);
   }
 
