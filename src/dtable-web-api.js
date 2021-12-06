@@ -1234,6 +1234,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listOrganizationTemplates(org_id) {
+    const url = this.server + '/api/v2.1/organizations/' + org_id + '/templates/';
+    return this.req.get(url);
+  }
+
   getChargebeeCustomer() {
     const url = this.server + '/api/v2.1/chargebee/customer/';
     return this.req.get(url);
@@ -2107,6 +2112,24 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  orgAdminListTemplates(orgID) {
+    let url = this.server + '/api/v2.1/org/' + orgID + '/admin/templates/';
+    return this.req.get(url);
+  }
+
+  orgAdminAddTemplate(orgID, externalLink, description) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/templates/';
+    let formData = new FormData();
+    formData.append('external_link', externalLink);
+    formData.append('description', description);
+    return this.req.post(url, formData);
+  }
+
+  orgAdminListWorkspaces(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/workspaces/';
+    return this.req.get(url);
+  }
+
   orgAdminDeleteDTable(orgID, dtableID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableID + '/';
     return this.req.delete(url);
@@ -2232,6 +2255,11 @@ class DTableWebAPI {
     return this.req.get(url, {
       params: params
     });
+  }
+
+  sysAdminListTemplates() {
+    let url = this.server + '/api/v2.1/admin/template-dtables/';
+    return this.req.get(url);
   }
 
   sysAdminRestoreTrashDTable(dtableID) {
