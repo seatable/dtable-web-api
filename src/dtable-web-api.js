@@ -1219,45 +1219,45 @@ class DTableWebAPI {
   }
 
   // approval flow apis
-  submitApprovalFlowTicket(appToken, rowData, tableId) {
-    let url = this.server + `/api/v2.1/approval-flows/${appToken}/ticket-submit/`;
+  submitWorkflowTask(appToken, rowData, tableId) {
+    let url = this.server + `/api/v2.1/workflows/${appToken}/task-submit/`;
     let form = new FormData();
     form.append('row_data', rowData);
     form.append('table_id', tableId);
     return this._sendPostRequest(url, form);
   }
 
-  approveApprovalFlowTicket(appToken, ticketId, isPass) {
-    let url = this.server + `/api/v2.1/approval-flows/${appToken}/tickets/${ticketId}/approving/`;
+  transferWorkFlowTicket(appToken, taskId, nextNodeId) {
+    let url = this.server + `/api/v2.1/workflows/${appToken}/tasks/${taskId}/transfer/`;
     let form = new FormData();
-    form.append('is_pass', isPass);
+    form.append('next_node_id', nextNodeId);
     return this._sendPostRequest(url, form);
   }
 
-  listSubmittedApprovalFlowTickets(page = null, perPage = null) {
-    let url = this.server + '/api/v2.1/approval-flows/submitted-tickets/';
+  listSubmittedWorkflowTasks(page = null, perPage = null) {
+    let url = this.server + '/api/v2.1/workflows/submitted-tasks/';
     let params = {
       page: page || 1,
-      perPgage: perPage || 25
+      per_page: perPage || 25
     };
     return this.req.get(url, {
       params: params
     });
   }
 
-  listToBeApprovedTickets(page = null, perPage = null) {
-    let url = this.server + '/api/v2.1/approval-flows/to-be-approved-tickets/';
+  listOngoingTasks(page = null, perPage = null) {
+    let url = this.server + '/api/v2.1/workflows/ongoing-tasks/';
     let params = {
       page: page || 1,
-      perPgage: perPage || 25
+      per_page: perPage || 25
     };
     return this.req.get(url, {
       params: params
     });
   }
 
-  listSharedApprovalFlowApps() {
-    let url = this.server + '/api/v2.1/approval-flows/shared/';
+  listSharedWorkflowApps() {
+    let url = this.server + '/api/v2.1/workflows/shared/';
     return this.req.get(url);
   }
 
