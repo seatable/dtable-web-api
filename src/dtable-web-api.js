@@ -976,14 +976,6 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  shareExternalAppToGroups(externalAppToken, groupIds) {
-    let url = this.server + `/api/v2.1/dtable-external-apps/${externalAppToken}/share/`;
-    let jsonData = {
-      group_ids: groupIds
-    };
-    return this.req.post(url, jsonData, {headers: {'Content-Type': 'application/json'}});
-  }
-
   addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
@@ -1245,7 +1237,7 @@ class DTableWebAPI {
     });
   }
 
-  listOngoingTasks(page = null, perPage = null) {
+  listWorkflowOngoingTasks(page = null, perPage = null) {
     let url = this.server + '/api/v2.1/workflows/ongoing-tasks/';
     let params = {
       page: page || 1,
@@ -1254,11 +1246,6 @@ class DTableWebAPI {
     return this.req.get(url, {
       params: params
     });
-  }
-
-  listSharedWorkflowApps() {
-    let url = this.server + '/api/v2.1/workflows/shared/';
-    return this.req.get(url);
   }
 
   // other not-admin APIs
