@@ -1210,6 +1210,44 @@ class DTableWebAPI {
     return this.req.post(url, options);
   }
 
+  // approval flow apis
+  submitWorkflowTask(appToken, rowData, tableId) {
+    let url = this.server + `/api/v2.1/workflows/${appToken}/task-submit/`;
+    let form = new FormData();
+    form.append('row_data', rowData);
+    form.append('table_id', tableId);
+    return this._sendPostRequest(url, form);
+  }
+
+  transferWorkFlowTicket(appToken, taskId, nextNodeId) {
+    let url = this.server + `/api/v2.1/workflows/${appToken}/tasks/${taskId}/transfer/`;
+    let form = new FormData();
+    form.append('next_node_id', nextNodeId);
+    return this._sendPostRequest(url, form);
+  }
+
+  listSubmittedWorkflowTasks(page = null, perPage = null) {
+    let url = this.server + '/api/v2.1/workflows/submitted-tasks/';
+    let params = {
+      page: page || 1,
+      per_page: perPage || 25
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
+  listWorkflowOngoingTasks(page = null, perPage = null) {
+    let url = this.server + '/api/v2.1/workflows/ongoing-tasks/';
+    let params = {
+      page: page || 1,
+      per_page: perPage || 25
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   // other not-admin APIs
   getUserInfo() {
     const url = this.server + '/api/v2.1/user/';
