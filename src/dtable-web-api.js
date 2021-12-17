@@ -2278,6 +2278,17 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminListArchivedDTables(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/archived-dtables/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   sysAdminRestoreTrashDTable(dtableID) {
     let url = this.server + '/api/v2.1/admin/trash-dtables/' + dtableID + '/';
     return this.req.put(url);
