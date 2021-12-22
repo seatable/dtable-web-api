@@ -2017,6 +2017,17 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  orgAdminEnforceUser2FA(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/enforce-2fa/';
+    let form = new FormData();
+    return this._sendPostRequest(url, form);
+  }
+
+  orgAdminDisableUser2FA(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/disable-2fa/';
+    return this.req.delete(url);
+  }
+
   orgAdminListFileAudit(email, repoID, page) {
     let url = this.server + '/api/v2.1/org/admin/logs/file-access/?page=' + page;
     if (email) {
