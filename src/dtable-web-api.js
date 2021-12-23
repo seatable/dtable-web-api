@@ -2017,14 +2017,16 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  orgAdminEnforceUser2FA(orgID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/enforce-2fa/';
-    let form = new FormData();
-    return this._sendPostRequest(url, form);
+  orgAdminSetForceTwoFactorAuth(orgID, email, isForce2FA) {
+    let isForce = isForce2FA ? 1 : 0;
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/two-factor-auth/';
+    let formData = new FormData();
+    formData.append('force_2fa', isForce);
+    return this.req.put(url, formData);
   }
 
-  orgAdminDisableUser2FA(orgID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/disable-2fa/';
+  orgAdminDeleteTwoFactorAuth(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/two-factor-auth/';
     return this.req.delete(url);
   }
 
