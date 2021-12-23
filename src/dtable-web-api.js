@@ -2602,6 +2602,19 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  sysAdminSetForceTwoFactorAuth(email, isForce2FA) {
+    let isForce = isForce2FA ? 1 : 0;
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/two-factor-auth/';
+    let formData = new FormData();
+    formData.append('force_2fa', isForce);
+    return this.req.put(url, formData);
+  }
+
+  sysAdminDeleteTwoFactorAuth(email) {
+    const url = this.server + '/api/v2.1/admin/users/'+ encodeURIComponent(email) + '/two-factor-auth/';
+    return this.req.delete(url);
+  }
+
   sysAdminImportUserViaFile(file) {
     const url = this.server + '/api/v2.1/admin/import-users/';
     let formData = new FormData();
