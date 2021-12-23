@@ -2017,6 +2017,19 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  orgAdminSetForceTwoFactorAuth(orgID, email, isForce2FA) {
+    let isForce = isForce2FA ? 1 : 0;
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/two-factor-auth/';
+    let formData = new FormData();
+    formData.append('force_2fa', isForce);
+    return this.req.put(url, formData);
+  }
+
+  orgAdminDeleteTwoFactorAuth(orgID, email) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/two-factor-auth/';
+    return this.req.delete(url);
+  }
+
   orgAdminListFileAudit(email, repoID, page) {
     let url = this.server + '/api/v2.1/org/admin/logs/file-access/?page=' + page;
     if (email) {
@@ -2587,6 +2600,19 @@ class DTableWebAPI {
     });
     formData.append('operation', 'delete-user');
     return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminSetForceTwoFactorAuth(email, isForce2FA) {
+    let isForce = isForce2FA ? 1 : 0;
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/two-factor-auth/';
+    let formData = new FormData();
+    formData.append('force_2fa', isForce);
+    return this.req.put(url, formData);
+  }
+
+  sysAdminDeleteTwoFactorAuth(email) {
+    const url = this.server + '/api/v2.1/admin/users/'+ encodeURIComponent(email) + '/two-factor-auth/';
+    return this.req.delete(url);
   }
 
   sysAdminImportUserViaFile(file) {
