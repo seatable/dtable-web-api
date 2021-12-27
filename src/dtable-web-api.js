@@ -1217,7 +1217,7 @@ class DTableWebAPI {
     return this.req.post(url, options);
   }
 
-  // approval flow apis
+  // workflow apis
   submitWorkflowTask(appToken, rowData, tableId) {
     let url = this.server + `/api/v2.1/workflows/${appToken}/task-submit/`;
     let form = new FormData();
@@ -1226,10 +1226,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  transferWorkFlowTicket(appToken, taskId, nextNodeId) {
+  transferWorkFlowTask(appToken, taskId, rowData, nextNodeId) {
     let url = this.server + `/api/v2.1/workflows/${appToken}/tasks/${taskId}/transfer/`;
     let form = new FormData();
-    form.append('next_node_id', nextNodeId);
+    form.append('row_data', JSON.stringify(rowData));
+    if (nextNodeId) {
+      form.append('next_node_id', nextNodeId);
+    }
     return this._sendPostRequest(url, form);
   }
 
