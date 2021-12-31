@@ -1218,6 +1218,42 @@ class DTableWebAPI {
   }
 
   // workflow apis
+  listWorkflows(workspaceId, tableName) {
+    let url = this.server + '/api/v2.1/workflows/';
+    return this.req.get(url, {
+      params: {
+        workspace_id: workspaceId,
+        name: tableName
+      }
+    });
+  }
+
+  addWorkflow(workspaceId, tableName, appConfig) {
+    let url = this.server + '/api/v2.1/workflows/';
+    let form = new FormData();
+    form.append('workspace_id', workspaceId);
+    form.append('name', tableName);
+    form.append('app_config', appConfig);
+    return this._sendPostRequest(url, form);
+  }
+
+  getWorkflow(token) {
+    let url = this.server + '/api/v2.1/workflows/' + token + '/';
+    return this.req.get(url);
+  }
+
+  updateWorkflow(token, appConfig) {
+    let url = this.server + '/api/v2.1/workflows/' + token + '/';
+    let form = new FormData();
+    form.append('app_config', appConfig);
+    return this.req.put(url, form);
+  }
+
+  deleteWorkflow(token) {
+    let url = this.server + '/api/v2.1/workflows/' + token + '/';
+    return this.req.delete(url);
+  }
+
   submitWorkflowTask(appToken, rowData, tableId) {
     let url = this.server + `/api/v2.1/workflows/${appToken}/task-submit/`;
     let form = new FormData();
@@ -1256,6 +1292,30 @@ class DTableWebAPI {
     return this.req.get(url, {
       params: params
     });
+  }
+
+  listWorkflowShares(token) {
+    let url = this.server + `/api/v2.1/workflows/${token}/shares/`;
+    return this.req.get(url);
+  }
+
+  shareWorkflow(token, groupIdList) {
+    let url = this.server + `/api/v2.1/workflows/${token}/shares/`;
+    let form = new FormData();
+    for (let i = 0; i < groupIdList.length; i++) {
+      form.append('group_id', groupIdList[i]);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteWorkflowShare(token, groupId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/shares/${groupId}/`;
+    return this.req.delete(url);
+  }
+
+  listSharedWorkflows() {
+    let url = this.server + `/api/v2.1/workflows/shared/`;
+    return this.req.get(url);
   }
 
   // other not-admin APIs
