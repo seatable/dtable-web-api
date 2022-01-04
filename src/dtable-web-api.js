@@ -1218,21 +1218,21 @@ class DTableWebAPI {
   }
 
   // workflow apis
-  listWorkflows(workspaceId, tableName) {
+  listWorkflows(workspaceId, baseName) {
     let url = this.server + '/api/v2.1/workflows/';
     return this.req.get(url, {
       params: {
         workspace_id: workspaceId,
-        name: tableName
+        name: baseName
       }
     });
   }
 
-  addWorkflow(workspaceId, tableName, appConfig) {
+  addWorkflow(workspaceId, baseName, appConfig) {
     let url = this.server + '/api/v2.1/workflows/';
     let form = new FormData();
     form.append('workspace_id', workspaceId);
-    form.append('name', tableName);
+    form.append('name', baseName);
     form.append('app_config', appConfig);
     return this._sendPostRequest(url, form);
   }
