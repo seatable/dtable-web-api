@@ -638,9 +638,9 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
-  parseViewToExcel(workspaceId, fileName, tableId, viewId) {
+  convertViewToExcel(workspaceId, fileName, tableId, viewId) {
     let params = 'table_id=' + encodeURIComponent(tableId) + '&view_id=' + encodeURIComponent(viewId);
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/parse-view-to-excel/?' + params;
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-view-to-excel/?' + params;
     return this.req.get(url);
   }
 
