@@ -1010,6 +1010,15 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
+  checkEmailDetails(dtableUuid, account_name, uids) {
+    let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/emails/';
+    let data = {
+      'uids': uids,
+      'account_name': account_name,
+    };
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
 
   getMessageSendStatus(task_id) {
     const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
