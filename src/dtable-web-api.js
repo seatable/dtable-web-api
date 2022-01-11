@@ -638,6 +638,12 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  convertViewToExcel(workspaceId, fileName, tableId, viewId) {
+    let params = 'table_id=' + tableId + '&view_id=' + viewId;
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-view-to-excel/?' + params;
+    return this.req.get(url);
+  }
+
   createSeafileConnector(dtableId, seafileURL, repoAPIToken) {
     let url = this.server + '/api/v2.1/seafile-connectors/';
     let formData = new FormData();
