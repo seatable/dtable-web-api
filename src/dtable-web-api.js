@@ -639,7 +639,7 @@ class DTableWebAPI {
   }
 
   convertViewToExcel(workspaceId, fileName, tableId, viewId) {
-    let params = 'table_id=' + encodeURIComponent(tableId) + '&view_id=' + encodeURIComponent(viewId);
+    let params = 'table_id=' + tableId + '&view_id=' + viewId;
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-view-to-excel/?' + params;
     return this.req.get(url);
   }
