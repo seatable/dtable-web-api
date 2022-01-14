@@ -267,6 +267,10 @@ class DTableWebAPI {
       form.append('unset_password', updates.unset_password);
     }
 
+    if (updates.verify_password) {
+        form.append('verify_password', updates.verify_password);
+    }
+
     return this.req.put(url, form);
   }
 
@@ -458,12 +462,15 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  copyDTable(srcWorkspaceID, dstWorkspaceID, name) {
+  copyDTable(srcWorkspaceID, dstWorkspaceID, name, password) {
     let url = this.server + '/api/v2.1/dtable-copy/';
     let formData = new FormData();
     formData.append('src_workspace_id', srcWorkspaceID);
     formData.append('dst_workspace_id', dstWorkspaceID);
     formData.append('name', name);
+    if (password) {
+      formData.append('verify_password', password);
+    }
     return this._sendPostRequest(url, formData);
   }
 
@@ -490,8 +497,11 @@ class DTableWebAPI {
     return this.source();
   }
 
-  addExportDTableTask(workspaceId, dtable_name) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
+  addExportDTableTask(workspaceId, dtable_name, password) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
+    if (password) {
+      url = url + '?verify_password=' + encodeURIComponent(password)
+    }
     return this.req.get(url);
   }
 
