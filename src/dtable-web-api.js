@@ -260,15 +260,9 @@ class DTableWebAPI {
     if (updates.icon) {
       form.append('icon', updates.icon);
     }
-    if (updates.password) {
-      form.append('password', updates.password);
-    }
-    if (updates.unset_password) {
-      form.append('unset_password', updates.unset_password);
-    }
 
-    if (updates.verify_password) {
-        form.append('verify_password', updates.verify_password);
+    if (updates.hasOwnProperty('password')) {
+      form.append('password', updates.password);
     }
 
     return this.req.put(url, form);
@@ -469,7 +463,7 @@ class DTableWebAPI {
     formData.append('dst_workspace_id', dstWorkspaceID);
     formData.append('name', name);
     if (password) {
-      formData.append('verify_password', password);
+      formData.append('password', password);
     }
     return this._sendPostRequest(url, formData);
   }
@@ -500,7 +494,7 @@ class DTableWebAPI {
   addExportDTableTask(workspaceId, dtable_name, password) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
     if (password) {
-      url = url + '?verify_password=' + encodeURIComponent(password)
+      url = url + '?password=' + encodeURIComponent(password)
     }
     return this.req.get(url);
   }
