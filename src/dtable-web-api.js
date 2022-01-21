@@ -260,11 +260,9 @@ class DTableWebAPI {
     if (updates.icon) {
       form.append('icon', updates.icon);
     }
-    if (updates.password) {
+
+    if (updates.hasOwnProperty('password')) {
       form.append('password', updates.password);
-    }
-    if (updates.unset_password) {
-      form.append('unset_password', updates.unset_password);
     }
 
     return this.req.put(url, form);
@@ -458,12 +456,15 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  copyDTable(srcWorkspaceID, dstWorkspaceID, name) {
+  copyDTable(srcWorkspaceID, dstWorkspaceID, name, password) {
     let url = this.server + '/api/v2.1/dtable-copy/';
     let formData = new FormData();
     formData.append('src_workspace_id', srcWorkspaceID);
     formData.append('dst_workspace_id', dstWorkspaceID);
     formData.append('name', name);
+    if (password) {
+      formData.append('password', password);
+    }
     return this._sendPostRequest(url, formData);
   }
 
@@ -490,8 +491,11 @@ class DTableWebAPI {
     return this.source();
   }
 
-  addExportDTableTask(workspaceId, dtable_name) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
+  addExportDTableTask(workspaceId, dtable_name, password) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
+    if (password) {
+      url = url + '?password=' + encodeURIComponent(password)
+    }
     return this.req.get(url);
   }
 
