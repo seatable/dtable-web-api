@@ -1981,6 +1981,16 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  orgAdminListGroupDTables(orgID, groupID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/dtables/';
+    return this.req.get(url);
+  }
+
+  orgAdminDeleteDTableFromGroup(orgID, groupID, tableID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/dtables/' + tableID + '/';
+    return this.req.delete(url);
+  }
+
   orgAdminAddOrgUser(orgID, email, name, password) {
     const url =  this.server + '/api/v2.1/org/' + orgID +'/admin/users/';
     let form = new FormData();
