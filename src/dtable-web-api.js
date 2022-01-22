@@ -2362,7 +2362,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  orgAdminSetVerification(orgID, phone, code) {
+  orgAdminUpdateVerification(orgID, phone, code) {
     let url = this.server + '/api/v2.1/org/' + orgID + '/admin/verification/';
     let data = {
       phone: phone,
@@ -2573,6 +2573,11 @@ class DTableWebAPI {
     return this.req.get(url, {
       params: params
     });
+  }
+
+  sysAdminUpdateOrgVerification(orgID, verification) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/org-verification/';
+    return this.req.post(url, {verification: verification});
   }
 
   sysAdminSearchOrgs(query) {
