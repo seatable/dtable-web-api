@@ -2357,6 +2357,20 @@ class DTableWebAPI {
     return this.req.delete(url)
   }
 
+  orgAdminGetVerification(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/verification/';
+    return this.req.get(url);
+  }
+
+  orgAdminSetVerification(orgID, phone, code) {
+    let url = this.server + '/api/v2.1/org/' + orgID + '/admin/verification/';
+    let data = {
+      phone: phone,
+      code: code
+    };
+    return this.req.post(url, data);
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
@@ -2557,6 +2571,14 @@ class DTableWebAPI {
     return this.req.get(url, {
       params: params
     });
+  }
+
+  sysAdminUpdateOrgVerification(orgID, verification) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/org-verification/';
+    let formData = new FormData();
+    formData.append('org_id', orgID);
+    formData.append('verification', verification);
+    return this.req.put(url, formData);
   }
 
   sysAdminSearchOrgs(query) {
