@@ -1316,9 +1316,13 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  listSharedWorkflows() {
+  listSharedWorkflows(byGroup = false) {
     let url = this.server + `/api/v2.1/workflows/shared/`;
-    return this.req.get(url);
+    if (byGroup) {
+      return this.req.get(url, {params: {by_group: byGroup}});
+    } else {
+      return this.req.get(url);
+    }
   }
 
   // other not-admin APIs
