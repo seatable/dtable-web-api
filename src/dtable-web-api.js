@@ -2573,6 +2573,14 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminUpdateOrgVerification(orgID, verification) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/org-verification/';
+    let formData = new FormData();
+    formData.append('org_id', orgID);
+    formData.append('verification', verification);
+    return this.req.put(url, formData);
+  }
+
   sysAdminSearchOrgs(query) {
     let url = this.server + '/api/v2.1/admin/search-organization/';
     let params = {
