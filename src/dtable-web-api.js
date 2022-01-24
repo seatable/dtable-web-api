@@ -2398,6 +2398,17 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminDeleteArchivedDTables(dtable_uuids) {
+    let url = this.server + '/api/v2.1/admin/archived-dtables/';
+    let params = {
+      dtable_uuids: dtable_uuids,
+    };
+
+    return this.req.delete(url, {
+      data: params
+    });
+  }
+
   sysAdminRestoreTrashDTable(dtableID, restoreToAdminAccount) {
     const url = this.server + '/api/v2.1/admin/trash-dtables/' + dtableID + '/';
     const data = {
