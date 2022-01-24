@@ -268,6 +268,17 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  updateDTablePassword(workspaceID, dtableName, operation, password, new_password) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/password/';
+    let form = new FormData();
+    form.append('operation', operation);
+    form.append('password', password);
+    if (new_password) {
+      form.append('new_password', new_password);
+    }
+    return this.req.put(url, form);
+  }
+
   deleteTable(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/';
     let params = { name: name };
@@ -2430,6 +2441,11 @@ class DTableWebAPI {
   sysAdminDeleteDTable(dtable_uuid) {
     const url = this.server + '/api/v2.1/admin/dtable/' + dtable_uuid + '/';
     return this.req.delete(url);
+  }
+
+  sysAdminUnsetDTablePassword(dtable_uuid) {
+    const url = this.server + '/api/v2.1/admin/dtable/' + dtable_uuid + '/unset-password/';
+    return this.req.put(url);
   }
   
   sysAdminListForms(page, perPage) {
