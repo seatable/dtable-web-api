@@ -495,7 +495,7 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
     let formData = new FormData();
     if (password) {
-      formData.append('password', password)
+      formData.append('password', password);
     }
 
     return this._sendPostRequest(url, formData);
