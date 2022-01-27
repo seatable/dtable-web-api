@@ -2394,10 +2394,12 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
-  sysAdminSearchDTables(query) {
+  sysAdminSearchDTables(query, page, perPage) {
     let url = this.server + '/api/v2.1/admin/search-dtable/';
     let params = {
-      query: query
+      query: query,
+      page: page,
+      per_page: perPage
     };
     return this.req.get(url, { params: params });
   }
