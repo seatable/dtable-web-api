@@ -2389,9 +2389,12 @@ class DTableWebAPI {
     });
   }
 
-  sysAdminRestoreTrashDTable(dtableID) {
-    let url = this.server + '/api/v2.1/admin/trash-dtables/' + dtableID + '/';
-    return this.req.put(url);
+  sysAdminRestoreTrashDTable(dtableID, restoreToAdminAccount) {
+    const url = this.server + '/api/v2.1/admin/trash-dtables/' + dtableID + '/';
+    const data = {
+      restore_to_admin_account: restoreToAdminAccount
+    };
+    return this.req.put(url, data);
   }
 
   sysAdminSearchDTables(query, page, perPage) {
