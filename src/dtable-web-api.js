@@ -2388,7 +2388,7 @@ class DTableWebAPI {
   }
 
   sysAdminListArchivedDTables(page, perPage) {
-    let url = this.server + '/api/v2.1/admin/archived-dtables/';
+    let url = this.server + '/api/v2.1/admin/dtable-archives/';
     let params = {
       page: page,
       per_page: perPage
@@ -2399,7 +2399,7 @@ class DTableWebAPI {
   }
 
   sysAdminDeleteArchivedDTables(dtable_uuids) {
-    let url = this.server + '/api/v2.1/admin/archived-dtables/';
+    let url = this.server + '/api/v2.1/admin/dtable-archives/';
     let params = {
       dtable_uuids: dtable_uuids,
     };
