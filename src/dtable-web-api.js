@@ -493,10 +493,12 @@ class DTableWebAPI {
 
   addExportDTableTask(workspaceId, dtable_name, password) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
+    let formData = new FormData();
     if (password) {
-      url = url + '?password=' + encodeURIComponent(password)
+      formData.append('password', password);
     }
-    return this.req.get(url);
+
+    return this._sendPostRequest(url, formData);
   }
 
   addImportDTableTask (workspaceId, file, folderID) {
