@@ -2575,9 +2575,9 @@ class DTableWebAPI {
     });
   }
 
-  sysAdminUpdateOrgVerification(orgID, verification) {
+  sysAdminUpdateOrgVerification(orgID, verified) {
     const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/org-verification/';
-    return this.req.post(url, {verification: verification});
+    return this.req.post(url, {verified: verified});
   }
 
   sysAdminSearchOrgs(query) {
