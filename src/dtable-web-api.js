@@ -1570,6 +1570,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  renameCommonDataset(datasetId, datasetName) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
+    let form = new FormData();
+    form.append('dataset_name', datasetName);
+    return this.req.put(url, form);
+  }
+
   deleteCommonDataset(datasetId) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/';
     return this.req.delete(url);
