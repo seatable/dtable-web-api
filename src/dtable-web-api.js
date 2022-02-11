@@ -2772,6 +2772,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminUpdateDepartGroup(groupID, groupName) {
+    const url = this.server + '/api/v2.1/admin/address-book/groups/' + groupID + '/';
+    let form = new FormData();
+    form.append('group_name', groupName);
+    return this.req.put(url, form);
+  }
+
   sysAdminDeleteDepartGroup(groupID) {
     const url = this.server + '/api/v2.1/admin/address-book/groups/' + groupID + '/';
     return this.req.delete(url);
