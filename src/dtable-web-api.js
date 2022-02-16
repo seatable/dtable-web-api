@@ -1336,6 +1336,11 @@ class DTableWebAPI {
     }
   }
 
+  getUploadLinkViaWorkflowToken(token) {
+    let url = this.server + '/api/v2.1/workflows/' + token + '/upload-link/';
+    return this.req.get(url);
+  }
+
   // other not-admin APIs
   getUserInfo() {
     const url = this.server + '/api/v2.1/user/';
