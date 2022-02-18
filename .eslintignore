@@ -1,0 +1,6 @@
+config
+coverage
+lib
+node_modules
+tests
+scripts
