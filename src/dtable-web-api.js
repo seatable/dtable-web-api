@@ -1608,6 +1608,15 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  setCommonDatasetSyncMode(datasetId, dst_dtable_uuid, dst_table_id, is_sync_periodical) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/sync/';
+    let formData = new FormData();
+    formData.append('dst_dtable_uuid', dst_dtable_uuid);
+    formData.append('dst_table_id', dst_table_id);
+    formData.append('is_sync_periodical', is_sync_periodical);
+    return this.req.put(url, formData);
+  }
+
   listCommonDatasetSyncs(dst_dtable_uuid) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/syncs/';
     url += '?dst_dtable_uuid=' + dst_dtable_uuid;
