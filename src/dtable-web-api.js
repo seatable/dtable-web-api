@@ -2301,6 +2301,16 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
+  orgAdminSearchDTables(orgID, query, page, perPage) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/search-dtables/';
+    let params = {
+      query: query,
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   orgAdminGetSettings() {
     const url = this.server + '/api/v2.1/org/admin/settings/';
     return this.req.get(url);
