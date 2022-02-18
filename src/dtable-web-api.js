@@ -1,5 +1,5 @@
 import axios from 'axios';
-import FormData from 'form-data'
+import FormData from 'form-data';
 
 class DTableWebAPI {
   
@@ -18,7 +18,7 @@ class DTableWebAPI {
   }
 
   initForDTableUsage({ siteRoot, xcsrfHeaders }) {
-    if (siteRoot && siteRoot.charAt(siteRoot.length-1) === "/") {
+    if (siteRoot && siteRoot.charAt(siteRoot.length-1) === '/') {
       var server = siteRoot.substring(0, siteRoot.length-1);
       this.server = server;
     } else {
@@ -60,7 +60,7 @@ class DTableWebAPI {
   uploadImage (uploadLink, formData, onUploadProgress = null) {
     return (
       axios.create()({
-        method: "post",
+        method: 'post',
         data: formData,
         url: uploadLink,
         onUploadProgress: onUploadProgress
@@ -260,11 +260,9 @@ class DTableWebAPI {
     if (updates.icon) {
       form.append('icon', updates.icon);
     }
-
-    if (updates.hasOwnProperty('password')) {
+    if (Object.prototype.hasOwnProperty.call(updates, 'password')) {
       form.append('password', updates.password);
     }
-
     return this.req.put(url, form);
   }
 
@@ -495,7 +493,7 @@ class DTableWebAPI {
     const _this = this;
     return this.req.get(url, {onDownloadProgress, responseType: 'blob', cancelToken: new axios.CancelToken(function executor(c) {
       _this.source = c;
-    })})
+    })});
   }
 
   cancelRequest() {
@@ -1008,10 +1006,10 @@ class DTableWebAPI {
       'subject': subject,
     };
     if (copy_to) {
-      data['copy_to'] = copy_to
+      data['copy_to'] = copy_to;
     }
     if (reply_to) {
-      data['reply_to'] = reply_to
+      data['reply_to'] = reply_to;
     }
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
@@ -1090,7 +1088,7 @@ class DTableWebAPI {
   }
 
   getTableRowShareLink(workspaceID, tableName, table_id, rowId) {
-    let params = "?workspace_id=" + workspaceID + "&name=" + encodeURIComponent(tableName) + "&table_id=" + table_id + "&row_id=" + rowId; 
+    let params = '?workspace_id=' + workspaceID + '&name=' + encodeURIComponent(tableName) + '&table_id=' + table_id + '&row_id=' + rowId; 
     const url = this.server + '/api/v2.1/dtable-row-shares/' + params;
     return this.req.get(url); 
   }
@@ -1330,7 +1328,7 @@ class DTableWebAPI {
   }
 
   listSharedWorkflows(byGroup = false) {
-    let url = this.server + `/api/v2.1/workflows/shared/`;
+    let url = this.server + '/api/v2.1/workflows/shared/';
     if (byGroup) {
       return this.req.get(url, {params: {by_group: byGroup}});
     } else {
@@ -1417,7 +1415,7 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/groups/' + groupID + '/';
     const params = {
       name: name
-    }
+    };
     return this.req.put(url, params);
   }
 
@@ -1445,7 +1443,7 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/groups/' + groupID + '/search-member/';
     const params = {
       q: q
-    }
+    };
     return this.req.get(url, {params: params});
   }
 
@@ -1459,7 +1457,7 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/groups/' + groupID + '/members/' + name + '/';
     const params = {
       is_admin: isAdmin
-    }
+    };
     return this.req.put(url, params);
   }
 
@@ -1512,7 +1510,7 @@ class DTableWebAPI {
       'parent_path': parentPath,
       'asset_names': assetNames
     };
-    return this.req["delete"](url, {
+    return this.req['delete'](url, {
       data: operation
     }, {
       headers: {
@@ -1643,7 +1641,7 @@ class DTableWebAPI {
     let params = {
       page: page,
       per_page: perPage
-    }
+    };
     return this.req.get(url, {params: params});
   }
 
@@ -1653,8 +1651,8 @@ class DTableWebAPI {
   }
 
   setSysUserNotificationToSeen(nid){
-     let url = this.server + '/api/v2.1/sys-user-notifications/' + nid + '/seen/';
-     return this.req.put(url);
+    let url = this.server + '/api/v2.1/sys-user-notifications/' + nid + '/seen/';
+    return this.req.put(url);
   }
 
   updateNotifications() {
@@ -1729,12 +1727,12 @@ class DTableWebAPI {
 
   listAddressBookDepartments() {
     const url = this.server + '/api/v2.1/address-book/departments/';
-    return this.req.get(url)
+    return this.req.get(url);
   }
 
   listAddressBookDepartmentMembers(department_id) {
     const url = this.server + '/api/v2.1/address-book/departments/' + department_id + '/members/';
-    return this.req.get(url)
+    return this.req.get(url);
   }
 
   getInvitationLink() {
@@ -1836,7 +1834,7 @@ class DTableWebAPI {
   
   updateNotificationRule(workspace_id, dtable_name, notificationRuleId, ruleJson) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/' + notificationRuleId + '/';
-    return this.req.put(url, ruleJson,  { headers: { 'Content-type': 'application/json' }})
+    return this.req.put(url, ruleJson,  { headers: { 'Content-type': 'application/json' }});
   }
 
   listAutomationRules(workspace_id, dtable_name) {
@@ -2029,7 +2027,7 @@ class DTableWebAPI {
     let form = new FormData();
     emails.forEach(email => {
       form.append('email', email);
-    })
+    });
     return this._sendPostRequest(url, form);
   }
 
@@ -2219,7 +2217,7 @@ class DTableWebAPI {
   orgAdminSetOrgAdmin(orgID, email, isStaff) {
     const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/users/' + encodeURIComponent(email) + '/';
     let form = new FormData();
-    form.append('is_staff', isStaff)
+    form.append('is_staff', isStaff);
     return this.req.put(url, form);
   }
 
@@ -2355,12 +2353,12 @@ class DTableWebAPI {
       page: page,
       per_page: perPage
     };
-    return this.req.get(url, {params: params})
+    return this.req.get(url, {params: params});
   }
 
   orgAdminDeleteDTableExternalLink(orgID, token) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/external-links/' + token + '/';
-    return this.req.delete(url)
+    return this.req.delete(url);
   }
 
   orgAdminListViewExternalLinks(orgID, page, perPage) {
@@ -2369,12 +2367,12 @@ class DTableWebAPI {
       page: page,
       per_page: perPage
     };
-    return this.req.get(url, {params: params})
+    return this.req.get(url, {params: params});
   }
 
   orgAdminDeleteViewExternalLink(orgID, token) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/view-external-links/' + token + '/';
-    return this.req.delete(url)
+    return this.req.delete(url);
   }
 
   // sys-admin
@@ -2488,8 +2486,8 @@ class DTableWebAPI {
   sysAdminListEmailSendingLogs(page, perPage) {
     let url = this.server + '/api/v2.1/admin/email-sending-logs/';
     let params = {
-        page: page,
-        per_page: perPage
+      page: page,
+      per_page: perPage
     };
     return this.req.get(url, { params: params });
   }
@@ -2568,18 +2566,18 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/users/' + encodeURIComponent(email) + '/';
     let formData = new FormData();
     switch (attribute) {
-      case 'active':
-        formData.append('active', value);
-        break;
-      case 'name':
-        formData.append('name', value);
-        break;
-      case 'contact_email':
-        formData.append('contact_email', value);
-        break;
-      case 'quota_total':
-        formData.append('quota_total', value);
-        break;
+    case 'active':
+      formData.append('active', value);
+      break;
+    case 'name':
+      formData.append('name', value);
+      break;
+    case 'contact_email':
+      formData.append('contact_email', value);
+      break;
+    case 'quota_total':
+      formData.append('quota_total', value);
+      break;
     }
     return this.req.put(url, formData);
   }
@@ -2639,51 +2637,51 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/';
     let formData = new FormData();
     switch (attribute) {
-      case 'password':
-        formData.append('password', value);
-        break;
-      case 'is_active':
-        formData.append('is_active', value);
-        break;
-      case 'is_staff':
-        formData.append('is_staff', value);
-        break;
-      case 'role':
-        formData.append('role', value);
-        break;
-      case 'name':
-        formData.append('name', value);
-        break;
-      case 'login_id':
-        formData.append('login_id', value);
-        break;
-      case 'contact_email':
-        formData.append('contact_email', value);
-        break;
-      case 'reference_id':
-        formData.append('reference_id', value);
-        break;
-      case 'department':
-        formData.append('department', value);
-        break;
-      case 'quota_total':
-        formData.append('quota_total', value);
-        break;
-      case 'institution':
-        formData.append('institution', value);
-        break;
-      case 'row_limit':
-        formData.append('row_limit', value);
-        break;
-      case 'asset_quota_mb':
-        formData.append('asset_quota_mb', value);
-        break;
-      case 'id_in_org':
-        formData.append('id_in_org', value);
-        break;
-      case 'unit':
-        formData.append('unit', value);
-        break;
+    case 'password':
+      formData.append('password', value);
+      break;
+    case 'is_active':
+      formData.append('is_active', value);
+      break;
+    case 'is_staff':
+      formData.append('is_staff', value);
+      break;
+    case 'role':
+      formData.append('role', value);
+      break;
+    case 'name':
+      formData.append('name', value);
+      break;
+    case 'login_id':
+      formData.append('login_id', value);
+      break;
+    case 'contact_email':
+      formData.append('contact_email', value);
+      break;
+    case 'reference_id':
+      formData.append('reference_id', value);
+      break;
+    case 'department':
+      formData.append('department', value);
+      break;
+    case 'quota_total':
+      formData.append('quota_total', value);
+      break;
+    case 'institution':
+      formData.append('institution', value);
+      break;
+    case 'row_limit':
+      formData.append('row_limit', value);
+      break;
+    case 'asset_quota_mb':
+      formData.append('asset_quota_mb', value);
+      break;
+    case 'id_in_org':
+      formData.append('id_in_org', value);
+      break;
+    case 'unit':
+      formData.append('unit', value);
+      break;
     }
     return this.req.put(url, formData);
   }
@@ -2810,7 +2808,7 @@ class DTableWebAPI {
     let params = {
       page: page,
       per_page: per_page
-    }
+    };
     return this.req.get(url, {
       params: params
     });
@@ -2821,7 +2819,7 @@ class DTableWebAPI {
     let params = {
       page: page,
       per_page: per_page
-    }
+    };
     return this.req.get(url, {
       params: params
     });
@@ -2858,63 +2856,63 @@ class DTableWebAPI {
   }
 
   sysAdminListGroupDTables(groupID) {
-      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/dtables/';
-      return this.req.get(url);
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/dtables/';
+    return this.req.get(url);
   }
 
   sysAdminDeleteDTableFromGroup(groupID, tableID) {
-      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/dtables/' + tableID + '/';
-      return this.req.delete(url);
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/dtables/' + tableID + '/';
+    return this.req.delete(url);
   }
 
   sysAdminListGroupMembers(groupID) {
-      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/';
-      return this.req.get(url);
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/';
+    return this.req.get(url);
   }
 
   sysAdminDeleteGroupMember(groupID, email) {
-      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/' + encodeURIComponent(email) + '/';
-      return this.req.delete(url);
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/' + encodeURIComponent(email) + '/';
+    return this.req.delete(url);
   }
 
   sysAdminAddGroupMember(groupID, emails) {
-      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/';
-      let form = new FormData();
-      for (var i = 0; i < emails.length; i++) {
-        form.append('email', emails[i]);
-      }
-      return this._sendPostRequest(url, form);
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/';
+    let form = new FormData();
+    for (var i = 0; i < emails.length; i++) {
+      form.append('email', emails[i]);
+    }
+    return this._sendPostRequest(url, form);
   }
 
   sysAdminUpdateGroupMemberRole(groupID, email, isAdmin) {
-      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/' + encodeURIComponent(email) + '/';
-      let formData = new FormData();
-      formData.append('is_admin', isAdmin);
-      return this.req.put(url, formData);
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/members/' + encodeURIComponent(email) + '/';
+    let formData = new FormData();
+    formData.append('is_admin', isAdmin);
+    return this.req.put(url, formData);
   }
 
   sysAdminListAllGroups(page, perPage) {
-      let url = this.server + '/api/v2.1/admin/groups/';
-      let params = {
-        page: page,
-        per_page: perPage
-      };
-      return this.req.get(url, { params: params });
+    let url = this.server + '/api/v2.1/admin/groups/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
   }
 
   sysAdminCreateNewGroup(groupName, ownerEmail) {
-      let url = this.server + '/api/v2.1/admin/groups/';
-      let formData = new FormData();
-      formData.append('group_name', groupName);
-      formData.append('group_owner', ownerEmail);
-      return this._sendPostRequest(url, formData);
+    let url = this.server + '/api/v2.1/admin/groups/';
+    let formData = new FormData();
+    formData.append('group_name', groupName);
+    formData.append('group_owner', ownerEmail);
+    return this._sendPostRequest(url, formData);
   }
 
   sysAdminTransferGroup(receiverEmail, groupID) {
-      let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/';
-      let formData = new FormData();
-      formData.append('new_owner', receiverEmail);
-      return this.req.put(url, formData);
+    let url = this.server + '/api/v2.1/admin/groups/' + groupID + '/';
+    let formData = new FormData();
+    formData.append('new_owner', receiverEmail);
+    return this.req.put(url, formData);
   }
 
   sysAdminSearchGroups(query) {
@@ -2941,54 +2939,54 @@ class DTableWebAPI {
   }
 
   sysAdminListAllSysNotifications() {
-      let url = this.server + '/api/v2.1/admin/sys-notifications/';
-      return this.req.get(url);
+    let url = this.server + '/api/v2.1/admin/sys-notifications/';
+    return this.req.get(url);
   }
 
   sysAdminAddSysNotification(msg) {
-      let url = this.server + '/api/v2.1/admin/sys-notifications/';
-      let formData = new FormData();
-      formData.append('msg', msg);
-      return this._sendPostRequest(url, formData);
+    let url = this.server + '/api/v2.1/admin/sys-notifications/';
+    let formData = new FormData();
+    formData.append('msg', msg);
+    return this._sendPostRequest(url, formData);
   }
 
   sysAdminDeleteSysNotification(nid) {
-      let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
-      return this.req.delete(url);
+    let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
+    return this.req.delete(url);
   }
 
   sysAdminUpdateSysNotification(nid, msg, primary){
-      let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
-      let formData = new FormData();
-      if (msg) {
-        formData.append('msg', msg);
-      }
-      if (primary) {
-        formData.append('primary', primary);
-      }
-      return this.req.put(url, formData);
+    let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
+    let formData = new FormData();
+    if (msg) {
+      formData.append('msg', msg);
+    }
+    if (primary) {
+      formData.append('primary', primary);
+    }
+    return this.req.put(url, formData);
   }
 
   sysAdminListAllSysUserNotifications(page, perPage){
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
     let params = {
-        page: page,
-        per_page: perPage
-      };
-      return this.req.get(url, { params: params });
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
   }
 
   sysAdminAddSysUserNotification(msg, username){
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
-      let formData = new FormData();
-      formData.append('msg', msg);
-      formData.append('username', username);
-      return this._sendPostRequest(url, formData);
+    let formData = new FormData();
+    formData.append('msg', msg);
+    formData.append('username', username);
+    return this._sendPostRequest(url, formData);
   }
 
   sysAdminDeleteSysUserNotification(nid){
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/' + nid + '/';
-      return this.req.delete(url);
+    return this.req.delete(url);
   }
 
   sysAdminListAllNotificationRules(page,perPage) {
@@ -2996,7 +2994,7 @@ class DTableWebAPI {
     let params = {
       page: page,
       per_page: perPage
-    }
+    };
     return this.req.get(url, { params: params });
   }
 
@@ -3005,7 +3003,7 @@ class DTableWebAPI {
     let params = {
       page: page,
       per_page: perPage
-    }
+    };
     return this.req.get(url, { params: params });
   }
 
@@ -3024,7 +3022,7 @@ class DTableWebAPI {
     let params = {
       page: page,
       per_page: perPage
-    }
+    };
     return this.req.get(url, { params: params });
   }
 
@@ -3033,7 +3031,7 @@ class DTableWebAPI {
     let params = {
       page: page,
       per_page: perPage
-    }
+    };
     return this.req.get(url, { params: params });
   }
 
@@ -3048,21 +3046,21 @@ class DTableWebAPI {
   }
 
   sysAdminListAdminLogs(page, perPage) {
-      let url = this.server + '/api/v2.1/admin/admin-logs/';
-      let params = {
-        page: page,
-        per_page: perPage
-      };
-      return this.req.get(url, { params: params });
+    let url = this.server + '/api/v2.1/admin/admin-logs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListAdminLoginLogs(page, perPage) {
-      let url = this.server + '/api/v2.1/admin/admin-login-logs/';
-      let params = {
-        page: page,
-        per_page: perPage
-      };
-      return this.req.get(url, { params: params });
+    let url = this.server + '/api/v2.1/admin/admin-login-logs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListActiveUsersStatistics(startTime, endTime) {
@@ -3070,7 +3068,7 @@ class DTableWebAPI {
     let params = {
       start: startTime,
       end: endTime,
-    }
+    };
     return this.req.get(url, {params: params});
   }
 
@@ -3168,7 +3166,7 @@ class DTableWebAPI {
 
   sysAdminListDTableExternalLinks(dtable_id) {
     let url = this.server + '/api/v2.1/admin/dtable/' + dtable_id + '/external-links/';
-    return this.req.get(url)
+    return this.req.get(url);
   }
 
   sysAdminAddRepoSharedItem(repoID, shareType, shareToList, permission) {
@@ -3240,7 +3238,7 @@ class DTableWebAPI {
       user: user
     };
     if (wipeDevice) {
-      params.wipe_device = wipeDevice
+      params.wipe_device = wipeDevice;
     }
     return this.req.delete(url, {data: params});
   }
