@@ -2420,6 +2420,11 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminListArchiveBackups(dtable_uuid) {
+    let url = this.server + '/api/v2.1/admin/dtable-archives/' + dtable_uuid + '/backups/';
+    return this.req.get(url);
+  }
+
   sysAdminRestoreTrashDTable(dtableID, restoreToAdminAccount) {
     const url = this.server + '/api/v2.1/admin/trash-dtables/' + dtableID + '/';
     const data = {
