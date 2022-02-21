@@ -1256,10 +1256,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  updateWorkflow(token, workflowConfig) {
+  updateWorkflow(token, workflowConfig, stateField) {
     let url = this.server + '/api/v2.1/workflows/' + token + '/';
     let form = new FormData();
     form.append('workflow_config', workflowConfig);
+    form.append('state_field', stateField);
     return this.req.put(url, form);
   }
 
