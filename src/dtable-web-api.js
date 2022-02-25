@@ -1452,6 +1452,17 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+
+  listGroupTrashDTables(groupID){
+    let url = this.server + '/api/v2.1/groups/' + groupID + '/trash-dtables/';
+    return this.req.get(url);
+  }
+
+  restoreGroupTrashDTable(dtableID, groupID){
+    let url = this.server + '/api/v2.1/groups/' + groupID + '/trash-dtables/'  + dtableID + '/';
+    return this.req.put(url);
+  }
+
   setGroupAdmin(groupID, userName, isAdmin) {
     let name = encodeURIComponent(userName);
     let url = this.server + '/api/v2.1/groups/' + groupID + '/members/' + name + '/';
