@@ -1242,12 +1242,12 @@ class DTableWebAPI {
     });
   }
 
-  addWorkflow(workspaceId, baseName, appConfig) {
+  addWorkflow(workspaceId, baseName, workflowConfig) {
     let url = this.server + '/api/v2.1/workflows/';
     let form = new FormData();
     form.append('workspace_id', workspaceId);
     form.append('name', baseName);
-    form.append('app_config', appConfig);
+    form.append('workflow_config', workflowConfig);
     return this._sendPostRequest(url, form);
   }
 
@@ -1256,10 +1256,10 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  updateWorkflow(token, appConfig) {
+  updateWorkflow(token, workflowConfig) {
     let url = this.server + '/api/v2.1/workflows/' + token + '/';
     let form = new FormData();
-    form.append('app_config', appConfig);
+    form.append('workflow_config', workflowConfig);
     return this.req.put(url, form);
   }
 
