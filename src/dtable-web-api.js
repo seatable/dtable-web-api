@@ -2647,6 +2647,19 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  sysAdminFilteredUsers(page, perPage, isLDAPImport, userStatus) {
+    let url = this.server + '/api/v2.1/admin/filtered-users/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    if (isLDAPImport) {
+      url += '?source=ldapimport';
+    }
+    url += '?user_status=' + userStatus;
+    return this.req.get(url, {params: params});
+  }
+
   sysAdminAddUser(email, name, role, password) {
     const url = this.server + '/api/v2.1/admin/users/';
     let formData = new FormData();
