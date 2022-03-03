@@ -3080,6 +3080,24 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListCommonDatasetSyncs(page, perPage) {
+    const url = this.server + '/api/v2.1/admin/common-dataset/syncs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminListAutomaticCommonDatasetSyncs(page, perPage) {
+    const url = this.server + '/api/v2.1/admin/automatic-common-dataset/syncs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminListAdminLogs(page, perPage) {
     let url = this.server + '/api/v2.1/admin/admin-logs/';
     let params = {
