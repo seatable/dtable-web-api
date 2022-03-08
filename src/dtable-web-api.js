@@ -1286,6 +1286,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  getTransferWorkFlowTask(appToken, taskId) {
+    let url = this.server + `/api/v2.1/workflows/${appToken}/tasks/${taskId}/transfer/`;
+    return this.req.get(url);
+  }
+
   listSubmittedWorkflowTasks(page = null, perPage = null) {
     let url = this.server + '/api/v2.1/workflows/submitted-tasks/';
     let params = {
