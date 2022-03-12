@@ -1297,6 +1297,17 @@ class DTableWebAPI {
     });
   }
 
+  listHandledWorkflowTasks(page = null, perPage = null) {
+    let url = this.server + '/api/v2.1/workflows/handled-tasks/';
+    let params = {
+      page: page || 1,
+      per_page: perPage || 25
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   listWorkflowOngoingTasks(page = null, perPage = null) {
     let url = this.server + '/api/v2.1/workflows/ongoing-tasks/';
     let params = {
