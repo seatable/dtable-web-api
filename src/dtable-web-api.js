@@ -2669,6 +2669,27 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  sysAdminFilterUsers(page, perPage, {userStatus, userRole, orderBy, direction}) {
+    let url = this.server + '/api/v2.1/admin/filter-users/';
+    let params = {
+      page: page,
+      per_page: perPage,
+    };
+    if (userStatus) {
+      params.user_status = userStatus;
+    }
+    if (userRole) {
+      params.role = userRole;
+    }
+    if (orderBy) {
+      params.order_by = orderBy;
+    }
+    if (direction) {
+      params.direction = direction;
+    }
+    return this.req.get(url, {params: params});
+  }
+
   sysAdminAddUser(email, name, role, password) {
     const url = this.server + '/api/v2.1/admin/users/';
     let formData = new FormData();
