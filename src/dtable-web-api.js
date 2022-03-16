@@ -1276,7 +1276,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  transferWorkFlowTask(appToken, taskId, rowData, nextNodeId) {
+  transferWorkflowTask(appToken, taskId, rowData, nextNodeId) {
     let url = this.server + `/api/v2.1/workflows/${appToken}/tasks/${taskId}/transfer/`;
     let form = new FormData();
     form.append('row_data', JSON.stringify(rowData));
@@ -1284,6 +1284,11 @@ class DTableWebAPI {
       form.append('next_node_id', nextNodeId);
     }
     return this._sendPostRequest(url, form);
+  }
+
+  getWorkflowTask(appToken, taskId, taskType) {
+    let url = this.server + `/api/v2.1/workflows/${appToken}/task/${taskId}/?type=${taskType}`;
+    return this.req.get(url);
   }
 
   listSubmittedWorkflowTasks(page = null, perPage = null) {
