@@ -2374,6 +2374,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  orgAdminGetDingtalkInfo(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dingtalk/info/';
+    return this.req.get(url);
+  }
+
   orgAdminAddWorkWeixinUsersBatch(orgID, userList) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/users/batch/';
     return this.req.post(url, {userlist: userList});
