@@ -1479,8 +1479,8 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  restoreGroupTrashDTable(dtableID, groupID){
-    let url = this.server + '/api/v2.1/groups/' + groupID + '/trash-dtables/'  + dtableID + '/';
+  restoreGroupTrashDTable(dtableUuid, groupID){
+    let url = this.server + '/api/v2.1/groups/' + groupID + '/trash-dtables/'  + dtableUuid + '/';
     return this.req.put(url);
   }
 
