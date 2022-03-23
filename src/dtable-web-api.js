@@ -1357,6 +1357,20 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listWorkflowTaskLogs(token, taskId, page, perPage) {
+    let url = this.server + `/api/v2.1/workflows/${token}/task/${taskId}/logs/`;
+    let params = {};
+    if (page) {
+      params.page = page;
+    }
+    if (perPage) {
+      params.per_page = page;
+    }
+    return this.req.get(url, {
+      params
+    });
+  }
+
   // other not-admin APIs
   getUserInfo() {
     const url = this.server + '/api/v2.1/user/';
