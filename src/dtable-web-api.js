@@ -1286,8 +1286,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  getWorkflowTask(appToken, taskId, taskType) {
-    let url = this.server + `/api/v2.1/workflows/${appToken}/task/${taskId}/?type=${taskType}`;
+  getWorkflowTask(appToken, taskId, asRole) {
+    let url = this.server + `/api/v2.1/workflows/${appToken}/tasks/${taskId}/?as_role=${asRole}`;
     return this.req.get(url);
   }
 
@@ -1358,13 +1358,30 @@ class DTableWebAPI {
   }
 
   listWorkflowTaskLogs(token, taskId, page, perPage) {
-    let url = this.server + `/api/v2.1/workflows/${token}/task/${taskId}/logs/`;
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/logs/`;
     let params = {};
     if (page) {
       params.page = page;
     }
     if (perPage) {
       params.per_page = page;
+    }
+    return this.req.get(url, {
+      params
+    });
+  }
+
+  listWorkflowTasksByType(token, taskType, page, perPage) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/`;
+    let params = {};
+    if (taskType) {
+      params.task_type = taskType;
+    }
+    if (page) {
+      params.page = page;
+    }
+    if (perPage) {
+      params.per_page = perPage;
     }
     return this.req.get(url, {
       params
