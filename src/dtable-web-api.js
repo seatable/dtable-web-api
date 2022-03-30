@@ -1268,16 +1268,16 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  submitWorkflowTask(appToken, rowData, tableId) {
-    let url = this.server + `/api/v2.1/workflows/${appToken}/task-submit/`;
+  submitWorkflowTask(token, rowData, tableId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/task-submit/`;
     let form = new FormData();
     form.append('row_data', rowData);
     form.append('table_id', tableId);
     return this._sendPostRequest(url, form);
   }
 
-  transferWorkflowTask(appToken, taskId, rowData, nextNodeId) {
-    let url = this.server + `/api/v2.1/workflows/${appToken}/tasks/${taskId}/transfer/`;
+  transferWorkflowTask(token, taskId, rowData, nextNodeId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/transfer/`;
     let form = new FormData();
     form.append('row_data', JSON.stringify(rowData));
     if (nextNodeId) {
@@ -1286,8 +1286,18 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  getWorkflowTask(appToken, taskId, asRole) {
-    let url = this.server + `/api/v2.1/workflows/${appToken}/tasks/${taskId}/?as_role=${asRole}`;
+  getWorkflowTaskAdminView(token, taskId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/admin-view/`;
+    return this.req.get(url);
+  }
+
+  getWorkflowTaskParticipantView(token, taskId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/participant-view/`;
+    return this.req.get(url);
+  }
+
+  getWorkflowTaskInitiatorView(token, taskId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/initiator-view/`;
     return this.req.get(url);
   }
 
@@ -1371,11 +1381,11 @@ class DTableWebAPI {
     });
   }
 
-  listWorkflowTasksByType(token, taskType, page, perPage) {
+  listWorkflowTasksByType(token, filterType, page, perPage) {
     let url = this.server + `/api/v2.1/workflows/${token}/tasks/`;
     let params = {};
-    if (taskType) {
-      params.task_type = taskType;
+    if (filterType) {
+      params.filter_type = filterType;
     }
     if (page) {
       params.page = page;
