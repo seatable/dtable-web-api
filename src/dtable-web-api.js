@@ -2828,17 +2828,6 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
-  sysAdminSetUserQuotaInBatch(emails, quotaTotal) {
-    const url = this.server + '/api/v2.1/admin/users/batch/';
-    let formData = new FormData();
-    emails.map(email => {
-      formData.append('email', email);
-    });
-    formData.append('operation', 'set-quota');
-    formData.append('quota_total', quotaTotal);
-    return this._sendPostRequest(url, formData);
-  }
-
   sysAdminDeleteUserInBatch(emails) {
     const url = this.server + '/api/v2.1/admin/users/batch/';
     let formData = new FormData();
