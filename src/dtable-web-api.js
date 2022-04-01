@@ -3081,7 +3081,7 @@ class DTableWebAPI {
   }
 
   sysAdminListCommonDatasetSyncs(page, perPage) {
-    const url = this.server + '/api/v2.1/admin/common-dataset/syncs/';
+    let url = this.server + '/api/v2.1/admin/common-dataset/syncs/';
     let params = {
       page: page,
       per_page: perPage
@@ -3090,12 +3090,31 @@ class DTableWebAPI {
   }
 
   sysAdminListCommonDatasetPeriodicalSyncs(page, perPage) {
-    const url = this.server + '/api/v2.1/admin/common-dataset/periodical-syncs/';
+    let url = this.server + '/api/v2.1/admin/common-dataset/periodical-syncs/';
     let params = {
       page: page,
       per_page: perPage
     };
     return this.req.get(url, { params: params });
+  }
+
+  sysAdminListInvalidCommonDatasetSyncs(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/common-dataset/invalid-syncs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminDeleteCommonDatasetSync(sid) {
+    let url = this.server + '/api/v2.1/admin/common-dataset/sync/' + sid + '/';
+    return this.req.delete(url);
+  }
+
+  sysAdminDeleteCommonDatasetInvalidSyncs() {
+    let url = this.server + '/api/v2.1/admin/common-dataset/invalid-syncs/' ;
+    return this.req.delete(url);
   }
 
   sysAdminListAdminLogs(page, perPage) {
