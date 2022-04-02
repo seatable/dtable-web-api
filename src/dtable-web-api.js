@@ -3213,6 +3213,17 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  sysAdminListAutoRuleStatisticDetails(is_user, month, username, org_id) {
+    const url = this.server + '/api/v2.1/admin/statistics/auto-rules-details/';
+    let params = {
+      is_user: is_user,
+      month: month,
+      owner: username,
+      org_id: org_id
+    };
+    return this.req.get(url, {params: params});
+  }
+
   sysAdminGetSysSettingInfo() {
     let url = this.server + '/api/v2.1/admin/web-settings/';
     return this.req.get(url);
