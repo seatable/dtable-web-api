@@ -1263,6 +1263,21 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  updateWorkflowProperties(token, updates) {
+    let url = this.server + '/api/v2.1/workflows/' + token + '/';
+    let form = new FormData();
+    if (updates.workflow_name) {
+      form.append('workflow_name', updates.workflow_name);
+    }
+    if (updates.icon) {
+      form.append('icon', updates.icon);
+    }
+    if (updates.color) {
+      form.append('color', updates.color);
+    }
+    return this.req.put(url, form);
+  }
+
   deleteWorkflow(token) {
     let url = this.server + '/api/v2.1/workflows/' + token + '/';
     return this.req.delete(url);
