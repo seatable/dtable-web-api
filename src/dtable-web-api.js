@@ -3173,6 +3173,43 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListCommonDatasets(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/common-datasets/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminListCommonDatasetPeriodicalSyncs(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/common-dataset/periodical-syncs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminListInvalidCommonDatasetSyncs(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/common-dataset/invalid-syncs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminDeleteCommonDatasetSync(sid) {
+    let url = this.server + '/api/v2.1/admin/common-dataset/sync/' + sid + '/';
+    return this.req.delete(url);
+  }
+
+  sysAdminDeleteCommonDatasetInvalidSyncs() {
+    let url = this.server + '/api/v2.1/admin/common-dataset/invalid-syncs/' ;
+    return this.req.delete(url);
+  }
+
   sysAdminListAdminLogs(page, perPage) {
     let url = this.server + '/api/v2.1/admin/admin-logs/';
     let params = {
