@@ -1349,6 +1349,11 @@ class DTableWebAPI {
     });
   }
 
+  deleteWorkflowTask(token, taskId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/`;
+    return this.req.delete(url);
+  }
+
   listWorkflowShares(token) {
     let url = this.server + `/api/v2.1/workflows/${token}/shares/`;
     return this.req.get(url);
