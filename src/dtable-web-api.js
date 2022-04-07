@@ -2007,6 +2007,17 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listBigDataTaskLogs(dtableUuid, page) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/big-data-task/logs/?page=' + page;
+    return this.req.get(url);
+  }
+
+  deleteBigDataTaskLogs(dtableUuid) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/big-data-task/logs/';
+    return this.req.delete(url);
+  }
+
+
   listTemplates() {
     const url = '/api/v2.1/templates/';
     return this.req.get(url);
