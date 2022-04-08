@@ -2017,6 +2017,17 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  cancelBigDataTask(taskID) {
+    const url = this.server + '/api/v2.1/dtables/big-data-status/?task_id=' + taskID;
+    return this.req.delete(url);
+
+  }
+
+  queryBigDataTaskStatus(taskID) {
+    const url = this.server + '/api/v2.1/dtables/big-data-status/?task_id=' + taskID;
+    return this.req.get(url);
+
+  }
 
   listTemplates() {
     const url = '/api/v2.1/templates/';
