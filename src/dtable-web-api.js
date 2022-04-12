@@ -2653,6 +2653,9 @@ class DTableWebAPI {
     if (orgInfo.assetQuotaMb) {
       formData.append('asset_quota_mb', orgInfo.assetQuotaMb);
     }
+    if (orgInfo.bigDataRowLimit) {
+      formData.append('big_data_row_limit', orgInfo.bigDataRowLimit);
+    }
     return this.req.put(url, formData);
   }
 
