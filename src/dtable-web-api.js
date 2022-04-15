@@ -455,11 +455,6 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  listAPITokenStatus(workspaceID, name) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID +  '/dtable/' + name + '/api-tokens-status/';
-    return this.req.get(url);
-  }
-
   getDTableTempAPIToken(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/temp-api-token/';
     return this.req.get(url);
