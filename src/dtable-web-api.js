@@ -998,6 +998,20 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  submitExternalAppFormData(token, app_page_id, row_data, table_name) {
+    let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
+    let form = new FormData();
+    form.append('app_page_id', app_page_id);
+    form.append('row_data', row_data);
+    form.append('table_name', table_name);
+    return this._sendPostRequest(url, form);
+  }
+
+  getExternalAppUploadLink(token) {
+    let url = this.server + '/api/v2.1/external-apps/' + token + '/upload-link/';
+    return this.req.get(url);
+  }
+
   addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
