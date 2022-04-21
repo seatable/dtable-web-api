@@ -2675,8 +2675,8 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  sysAdminListOrgUsers(orgID) {
-    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/users/';
+  sysAdminListOrgUsers(orgID, is_staff) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/users/?is_staff=' + is_staff;
     return this.req.get(url);
   }
 
