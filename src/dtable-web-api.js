@@ -1232,6 +1232,18 @@ class DTableWebAPI {
     return this.req.post(url, options);
   }
 
+  syncEmail(dtableUuid, emailTableId, threadTableId, syncMode, sendDate, thirdAccountId) {
+    let url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/sync-email/';
+    let data = {
+      'email_table_id': emailTableId,
+      'thread_table_id': threadTableId,
+      'sync_mode': syncMode,
+      'send_date': sendDate,
+      'third_account_id': thirdAccountId,
+    };
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
   // workflow apis
   listWorkflows(workspaceId, baseName) {
     let url = this.server + '/api/v2.1/workflows/';
