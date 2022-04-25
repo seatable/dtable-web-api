@@ -2083,6 +2083,70 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  // universal app api
+  getUniversalMetadata(token) {
+    const url = `${this.server}/api/v2.1/universal-apps/${token}/metadata/`;
+    return this.req.get(url);
+  }
+
+  getUniversalPageRows(token, page_id, start, limit) {
+    let url = `${this.server}/api/v2.1/universal-apps/${token}/rows/?page_id=${page_id}`;
+    if (start || start === 0) {
+      url = url + '&start=' + start;
+    }
+    if (limit) {
+      url = url + '&limit=' + limit;
+    }
+    return this.req.get(url);
+  }
+
+  insertUniversalRow(token, page_id, row_data) {
+    const url = `${this.server}/api/v2.1/universal-apps/${token}/rows/`;
+    let data = { page_id, row_data };
+    return this.req.post(url, data);
+  }
+
+  updateUniversalRow(token, page_id, row_id, row_data) {
+    const url = `${this.server}/api/v2.1/universal-apps/${token}/row/`;
+    let data = { page_id, row_id, row_data };
+    return this.req.put(url, data);
+  }
+
+  deleteUniversalRow(token, page_id, row_id) {
+    const url = `${this.server}/api/v2.1/universal-apps/${token}/row/`;
+    let params = {
+      page_id,
+      row_id,
+    };
+    return this.req.delete(url, {
+      data: params
+    });
+  }
+
+  getUniversalUploadLink(token) {
+    const url = `${this.server}/api/v2.1/universal-apps/${token}/upload-link/`;
+    return this.req.get(url);
+  }
+
+  listUniversalNotifications(dtableUuid, page, perPage) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/notifications/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {params: params});
+  }
+
+  clearUniversalNotifications(dtableUuid) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/notifications/';
+    return this.req.delete(url);
+  }
+
+  getUniversalCollaborators(dtableUuid) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/related-users/';
+    return this.req.get(url);
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
