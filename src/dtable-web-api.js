@@ -1398,8 +1398,8 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  listWorkflowRelatedMetadata(token) {
-    const url = this.server + '/api/v2.1/workflows/' + token + '/related-metadata/';
+  getWorkflowInitForm(token) {
+    const url = this.server + '/api/v2.1/workflows/' + token + '/init-form/';
     return this.req.get(url);
   }
 
