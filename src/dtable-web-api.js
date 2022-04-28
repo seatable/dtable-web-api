@@ -1232,16 +1232,42 @@ class DTableWebAPI {
     return this.req.post(url, options);
   }
 
-  syncEmail(dtableUuid, emailTableId, threadTableId, syncMode, sendDate, thirdAccountId) {
-    let url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/sync-email/';
-    let data = {
-      'email_table_id': emailTableId,
-      'thread_table_id': threadTableId,
-      'sync_mode': syncMode,
-      'send_date': sendDate,
-      'third_account_id': thirdAccountId,
+  addDataSync(dtableUuid, syncName, detail, syncType) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/`;
+    return this.req.post(url, {
+      name: syncName,
+      detail: detail,
+      sync_type: syncType
+    });
+  }
+
+  listDataSyncs(dtableUuid) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/`;
+    return this.req.get(url);
+  }
+
+  updateDataSync(dtableUuid, dataSyncId, syncName, syncType, detail) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/${dataSyncId}/`;
+    let options = {
+      name: syncName,
+      detail: detail,
+      sync_type: syncType
     };
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this.req.put(url, options);
+  }
+
+  deleteDataSync(dtableUuid, dataSyncId) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/${dataSyncId}/`;
+    return this.req.delete(url);
+  }
+
+  runDataSync(dtableUuid, dataSyncId, sendDate, syncType) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/${dataSyncId}/run/`;
+    let options = {
+      send_date: sendDate,
+      sync_type: syncType
+    };
+    return this.req.post(url, options);
   }
 
   // workflow apis
