@@ -1247,7 +1247,7 @@ class DTableWebAPI {
   }
 
   updateDataSync(dtableUuid, dataSyncId, syncName, syncType, detail) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/${dataSyncId}/`;
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/${dataSyncId}/`;
     let options = {
       name: syncName,
       detail: detail,
@@ -1257,12 +1257,12 @@ class DTableWebAPI {
   }
 
   deleteDataSync(dtableUuid, dataSyncId) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/${dataSyncId}/`;
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/${dataSyncId}/`;
     return this.req.delete(url);
   }
 
   runDataSync(dtableUuid, dataSyncId, sendDate, syncType) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/${dataSyncId}/run/`;
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/${dataSyncId}/run/`;
     let options = {
       send_date: sendDate,
       sync_type: syncType
