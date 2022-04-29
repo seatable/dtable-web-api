@@ -1331,6 +1331,18 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getWorkflowTaskParticipants(token, taskId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/participants/`;
+    return this.req.get(url);
+  }
+
+  updateWorkflowTaskParticipants(token, taskId, participants) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/participants/`;
+    let form = new FormData();
+    form.append('participants', participants.join(','));
+    return this.req.put(url, form);
+  }
+
   listSubmittedWorkflowTasks(page = null, perPage = null) {
     let url = this.server + '/api/v2.1/workflows/submitted-tasks/';
     let params = {
