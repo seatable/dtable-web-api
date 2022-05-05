@@ -1719,6 +1719,17 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  markedlyImportCommonDataset(datasetId, dst_dtable_uuid, dst_table_id, is_sync_periodically) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/markedly-import/';
+    let formData = new FormData();
+    formData.append('dst_dtable_uuid', dst_dtable_uuid);
+    formData.append('dst_table_id', dst_table_id);
+    if (is_sync_periodically) {
+      formData.append('is_sync_periodically', true);
+    }
+    return this._sendPostRequest(url, formData);
+  }
+
   syncCommonDataset(datasetId, dst_dtable_uuid, dst_table_id) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/sync/';
     let formData = new FormData();
