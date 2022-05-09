@@ -1719,8 +1719,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  markedlyImportCommonDataset(datasetId, dst_dtable_uuid, dst_table_id, is_sync_periodically) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/markedly-import/';
+  syncWithExistTable(datasetId, dst_dtable_uuid, dst_table_id, is_sync_periodically) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/sync-with-exist-table/';
     let formData = new FormData();
     formData.append('dst_dtable_uuid', dst_dtable_uuid);
     formData.append('dst_table_id', dst_table_id);
