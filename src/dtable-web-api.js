@@ -1303,11 +1303,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  submitWorkflowTask(token, rowData, tableId) {
+  submitWorkflowTask(token, rowData, tableId, rowId) {
     let url = this.server + `/api/v2.1/workflows/${token}/task-submit/`;
     let form = new FormData();
     form.append('row_data', rowData);
     form.append('table_id', tableId);
+    if (rowId) {
+      form.append('row_id', rowId);
+    }
     return this._sendPostRequest(url, form);
   }
 
