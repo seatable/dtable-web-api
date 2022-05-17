@@ -1435,7 +1435,7 @@ class DTableWebAPI {
       params.page = page;
     }
     if (perPage) {
-      params.per_page = page;
+      params.per_page = perPage;
     }
     return this.req.get(url, {
       params
