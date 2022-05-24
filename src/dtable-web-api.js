@@ -1308,6 +1308,14 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  deleteWorkflowTasksByRowIds(token, rowIds) {
+    const url = this.server + '/api/v2.1/workflows/' + token + '/task-row-ids/';
+    const params = {
+      row_ids: rowIds
+    };
+    return this.req.delete(url, { data: params });
+  }
+
   submitWorkflowTask(token, rowData, tableId, rowId) {
     let url = this.server + `/api/v2.1/workflows/${token}/task-submit/`;
     let form = new FormData();
