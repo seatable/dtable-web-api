@@ -1327,10 +1327,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  transferWorkflowTask(token, taskId, rowData, nextNodeId) {
+  transferWorkflowTask(token, taskId, rowData, nodeId, nextNodeId) {
     let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/transfer/`;
     let form = new FormData();
     form.append('row_data', JSON.stringify(rowData));
+    form.append('node_id', nodeId);
     if (nextNodeId) {
       form.append('next_node_id', nextNodeId);
     }
