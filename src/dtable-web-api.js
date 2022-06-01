@@ -2688,6 +2688,17 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminListOrgBigDataStorageStats(page, per_page) {
+    const url = this.server + '/api/v2.1/admin/organizations/big-data-storage-stats/';
+    let params = {
+      page,
+      per_page
+    };
+    return this.req.get(url, {
+      params
+    });
+  }
+
   sysAdminGetOrg(orgID) {
     const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/';
     return this.req.get(url);
