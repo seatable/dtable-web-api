@@ -998,6 +998,11 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  listAppUsers(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/';
+    return this.req.get(url);
+  }
+
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
     let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
     let form = new FormData();
