@@ -814,12 +814,12 @@ class DTableWebAPI {
     return this.req.post(url, params);
   }
 
-  dTableFormDuplicate(token) {
+  duplicateDTableForm(token) {
     let url = this.server + '/api/v2.1/forms/' + token + '/duplicate/';
     return this.req.post(url);
   }
 
-  dTableCollectionTableDuplicate(token) {
+  duplicateDTableCollectionTable(token) {
     let url = this.server + '/api/v2.1/collection-tables/' + token + '/duplicate/';
     return this.req.post(url);
   }
