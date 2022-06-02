@@ -814,6 +814,16 @@ class DTableWebAPI {
     return this.req.post(url, params);
   }
 
+  duplicateDTableForm(token) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/duplicate/';
+    return this.req.post(url);
+  }
+
+  duplicateDTableCollectionTable(token) {
+    let url = this.server + '/api/v2.1/collection-tables/' + token + '/duplicate/';
+    return this.req.post(url);
+  }
+
   getUploadLinkViaFormToken(token) {
     let url = this.server + '/api/v2.1/forms/' + token + '/upload-link/';
     return this.req.get(url);
