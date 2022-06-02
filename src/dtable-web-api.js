@@ -1008,6 +1008,49 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  listAppUsers(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/';
+    return this.req.get(url);
+  }
+
+  deleteAppUser(token, app_user_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
+    return this.req.delete(url);
+  }
+
+  listAppRoles(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/';
+    return this.req.get(url);
+  }
+
+  listAppInviteLinks(token){
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/invite-links/';
+    return this.req.get(url);
+  }
+
+  addAppInviteLinks(token, role_name, password, expire_days){
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/invite-links/';
+    let form = new FormData();
+    if (role_name) {
+      form.append('role_name', role_name);
+    }
+
+    if (password) {
+      form.append('password', password);
+    }
+
+    if (expire_days) {
+      form.append('expire_days', expire_days);
+    }
+
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteAppInviteLinks(token, link_token){
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/invite-links/' + link_token + '/';
+    return this.req.delete(url);
+  }
+
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
     let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
     let form = new FormData();
