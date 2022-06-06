@@ -1023,6 +1023,41 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  addAppRoles(token, role_name, permission, permission_detail) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/';
+    let data = {
+      'role_name': role_name,
+      'permission': permission,
+    };
+    if (permission_detail){
+      data['permission_detail'] = permission_detail;
+    }
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  getAppRole(token, app_role_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
+    return this.req.get(url)
+  }
+
+  updateAppRole(token, app_role_id, role_name, permission, permission_detail) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
+    let data = {
+      'role_name': role_name,
+      'permission': permission,
+    };
+    if (permission_detail){
+      data['permission_detail'] = permission_detail;
+    }
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  deleteAppRole(token, app_role_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
+    return this.req.delete(url)
+  }
+
+
   listAppInviteLinks(token){
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/invite-links/';
     return this.req.get(url);
