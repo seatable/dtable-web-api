@@ -1042,7 +1042,7 @@ class DTableWebAPI {
 
   getAppRole(token, app_role_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
-    return this.req.get(url)
+    return this.req.get(url);
   }
 
   updateAppRole(token, app_role_id, role_name, permission, permission_detail) {
@@ -1059,7 +1059,7 @@ class DTableWebAPI {
 
   deleteAppRole(token, app_role_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
-    return this.req.delete(url)
+    return this.req.delete(url);
   }
 
 
