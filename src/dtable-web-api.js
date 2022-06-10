@@ -1726,6 +1726,16 @@ class DTableWebAPI {
     });
   }
 
+  moveUserGroupsOrder(group_id, anchor_group_id, to_last) {
+    let url = this.server + '/api/v2.1/groups/move-group/';
+    const params = {
+      group_id,
+      anchor_group_id,
+      to_last
+    };
+    return this.req.put(url, params);
+  }
+
   listShareableGroups() {
     const url = this.server + '/api/v2.1/shareable-groups/';
     return this.req.get(url);
