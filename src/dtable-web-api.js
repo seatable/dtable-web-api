@@ -1008,6 +1008,11 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  listUserApps() {
+    let url = this.server + '/api/v2.1/universal-apps/';
+    return this.req.get(url);
+  }
+
   listAppUsers(token) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/';
     return this.req.get(url);
