@@ -1444,6 +1444,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  cancelWorkflowTask(token, taskId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/cancel/`;
+    return this.req.post(url);
+  }
+
   getWorkflowTaskAdminView(token, taskId) {
     let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/admin-view/`;
     return this.req.get(url);
