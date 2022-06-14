@@ -3477,6 +3477,20 @@ class DTableWebAPI {
     return this.req.get(url, {params: params});
   }
 
+  sysAdminListExternalAppsStatistics(is_user, month, page, perPage, orderBy) {
+    const url = this.server + '/api/v2.1/admin/statistics/external-apps/';
+    let params = {
+      is_user: is_user,
+      month: month,
+      page: page,
+      per_page: perPage
+    };
+    if (orderBy) {
+      params.order_by = orderBy;
+    }
+    return this.req.get(url, {params: params});
+  }
+
   sysAdminGetSysSettingInfo() {
     let url = this.server + '/api/v2.1/admin/web-settings/';
     return this.req.get(url);
