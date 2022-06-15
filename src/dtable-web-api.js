@@ -1422,13 +1422,16 @@ class DTableWebAPI {
     return this.req.delete(url, { data: params });
   }
 
-  submitWorkflowTask(token, rowData, tableId, rowId) {
+  submitWorkflowTask(token, rowData, tableId, rowId, replace) {
     let url = this.server + `/api/v2.1/workflows/${token}/task-submit/`;
     let form = new FormData();
     form.append('row_data', rowData);
     form.append('table_id', tableId);
     if (rowId) {
       form.append('row_id', rowId);
+    }
+    if (replace) {
+      form.append('replace', 'true');
     }
     return this._sendPostRequest(url, form);
   }
