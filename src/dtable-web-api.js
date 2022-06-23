@@ -2659,6 +2659,16 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  orgAdminListWorkWeixinUsers(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/users/';
+    return this.req.get(url);
+  }
+
+  orgAdminWorkWeixinCreateLicenseOrder(orgID, count) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/create-license-order/';
+    return this.req.post(url, {count: count});
+  }
+
   orgAdminGetDingtalkInfo(orgID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dingtalk/info/';
     return this.req.get(url);
