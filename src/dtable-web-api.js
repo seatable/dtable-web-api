@@ -1018,6 +1018,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  updateAppUser(token, app_user_id, is_active) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
+    let data = {
+      'is_active': is_active
+    };
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+  
   deleteAppUser(token, app_user_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
     return this.req.delete(url);
