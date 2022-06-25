@@ -515,8 +515,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  appendExcelUploadExcel(workspaceId, file, dtableUuid, tableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/upload-excel/';
+  appendExcelCSVUploadFile(workspaceId, file, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel-csv/upload-file/';
     let formData = new FormData();
     formData.append('file', file);
     formData.append('dtable_uuid', dtableUuid);
@@ -524,8 +524,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  appendExcelAppendParsedFile(workspaceId, fileName, dtableUuid, tableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel/append-parsed-file/';
+  appendExcelCSVAppendParsedFile(workspaceId, fileName, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/append-excel-csv/append-parsed-file/';
     let formData = new FormData();
     formData.append('file_name', fileName);
     formData.append('dtable_uuid', dtableUuid);
@@ -553,18 +553,18 @@ class DTableWebAPI {
     return this.req.delete(url, {params: params});
   }
 
-  importExcelPreview(workspaceId, dtableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/?dtable_name=' + encodeURIComponent(dtableName);
+  importExcelCSVPreview(workspaceId, dtableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/?dtable_name=' + encodeURIComponent(dtableName);
     return this.req.get(url);
   }
 
-  importExcelCancel(workspaceId, dtableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/?dtable_name=' + encodeURIComponent(dtableName);
+  importExcelCSVCancel(workspaceId, dtableName, fileType) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/?dtable_name=' + encodeURIComponent(dtableName) + '&file_type=' + fileType;
     return this.req.delete(url);
   }
 
-  addImportExcelTask(workspaceId, dtableName, folderID) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/';
+  addImportExcelCSVTask(workspaceId, dtableName, folderID) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/';
     let formData = new FormData();
     formData.append('dtable_name', dtableName);
     if (folderID) {
@@ -573,16 +573,16 @@ class DTableWebAPI {
     return this.req.post(url, formData);
   }
 
-  importExcelUploadExcel(workspaceId, file, dtableUuid) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/upload-excel/';
+  importExcelCSVUploadFile(workspaceId, file, dtableUuid) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/upload-file/';
     let formData = new FormData();
     formData.append('file', file);
     formData.append('dtable_uuid', dtableUuid);
     return this.req.post(url, formData);
   }
 
-  importExcelImportParsedFile(workspaceId, fileName, dtableUuid, tableName) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/import-parsed-file/';
+  importExcelCSVImportParsedFile(workspaceId, fileName, dtableUuid, tableName) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/import-parsed-file/';
     let formData = new FormData();
     formData.append('file_name', fileName);
     formData.append('dtable_uuid', dtableUuid);
@@ -635,8 +635,8 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  addUpdateExcelTask(workspaceId, dtableName, tables) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel/';
+  addUpdateExcelCSVTask(workspaceId, dtableName, tables) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/';
     let formData = new FormData();
     formData.append('dtable_name', dtableName);
     formData.append('tables', tables);
