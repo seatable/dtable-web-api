@@ -1843,6 +1843,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getCommonDatasetOverview(datasetId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/overview/';
+    return this.req.get(url);
+  }
+
   createCommonDataset(datasetName, workspaceID, dtableName, tableName, viewName) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     let formData = new FormData();
