@@ -1843,8 +1843,8 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getCommonDatasetOverview(datasetId) {
-    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/overview/';
+  getCommonDatasetInfo(datasetId) {
+    let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/info/';
     return this.req.get(url);
   }
 
