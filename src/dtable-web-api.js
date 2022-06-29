@@ -1933,12 +1933,17 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  setCommonDatasetSyncPeriodically(datasetId, dst_dtable_uuid, dst_table_id, is_sync_periodically) {
+  setCommonDatasetSyncPeriodically(datasetId, dst_dtable_uuid, dst_table_id, updates) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/sync/';
     let formData = new FormData();
     formData.append('dst_dtable_uuid', dst_dtable_uuid);
     formData.append('dst_table_id', dst_table_id);
-    formData.append('is_sync_periodically', is_sync_periodically);
+    if (updates.is_sync_periodically) {
+      formData.append('is_sync_periodically', updates.is_sync_periodically);
+    }
+    if (updates.sync_interval) {
+      formData.append('sync_interval', updates.sync_interval);
+    }
     return this.req.put(url, formData);
   }
 
