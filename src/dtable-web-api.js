@@ -1031,6 +1031,21 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  getAppUserSyncInfo(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/sync/';
+    return this.req.get(url);
+  }
+
+  syncAppUserInfo(token, table_name) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/sync/';
+    let data = {};
+    if (table_name){
+      data['table_name'] = table_name;
+    }
+
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
   listAppRoles(token) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/';
     return this.req.get(url);
