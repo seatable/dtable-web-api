@@ -1013,9 +1013,15 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  listAppUsers(token) {
+  listAppUsers(token, page, perPage) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/';
-    return this.req.get(url);
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {
+      params: params
+    });
   }
 
   updateAppUser(token, app_user_id, is_active) {
