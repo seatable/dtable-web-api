@@ -1040,6 +1040,25 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  // dtable db api
+  querySql(dtableUuid, token, sql) {
+    let url = this.server + '/api/v2.1/dtable-db/query/' + dtableUuid + '/';
+    let form = new FormData();
+    form.append('token', token);
+    form.append('sql', sql);
+    return this._sendPostRequest(url, form);
+  }
+
+  queryRowLinkRecords(dtableUuid, token, tableId, rowId, linkColumns) {
+    let url = this.server + '/api/v2.1/dtable-db/row-link-records/' + dtableUuid + '/';
+    let form = new FormData();
+    form.append('token', token);
+    form.append('table_id', tableId);
+    form.append('row_id', rowId);
+    form.append('link_columns', linkColumns);
+    return this._sendPostRequest(url, form);
+  }
+
   // external app module
   listExternalAppsInstances(workspaceID, dtableName) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/';
