@@ -2066,8 +2066,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  deleteSession(session_key) {
+    const url = this.server + '/api/v2.1/sessions/' + session_key + '/';
+    return this.req.delete(url);
+  }
+
   logOutSession(session_key) {
-    const url = this.server + '/api/v2.1/session/' + session_key + '/';
+    const url = this.server + '/api/v2.1/online-sessions/' + session_key + '/';
     return this.req.delete(url);
   }
 
