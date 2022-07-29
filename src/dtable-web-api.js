@@ -77,26 +77,6 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  // has been deleted
-  // createWorkspace(name) {
-  //   const url = this.server + '/api/v2.1/workspaces/';
-  //   let form = new FormData();
-  //   form.append('name', name);
-  //   return this._sendPostRequest(url, form);
-  // }
-
-  // renameWorkspace(workspaceID, name) {
-  //   const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/';
-  //   let form = new FormData();
-  //   form.append('name', name);
-  //   return this.req.put(url, form);
-  // }
-
-  // deleteWorkspace(workspaceID) {
-  //   const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/';
-  //   return this.req.delete(url);
-  // }
-
   // share table api
   listSharedTables() {
     let url = this.server + '/api/v2.1/dtables/shared/';
@@ -2676,7 +2656,7 @@ class DTableWebAPI {
 
   orgAdminDisconnectWorkWeixinUser(orgID, user) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/user/';
-    let params = {user: user}
+    let params = {user: user};
     return this.req.delete(url, {data: params});
   }
 
