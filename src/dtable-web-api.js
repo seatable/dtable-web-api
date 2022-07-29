@@ -2669,6 +2669,17 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  orgAdminImportWorkWeixinUser(orgID, user) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/users/';
+    return this.req.post(url, {user: user});
+  }
+
+  orgAdminDisconnectWorkWeixinUser(orgID, user) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/user/';
+    let params = {user: user}
+    return this.req.delete(url, {data: params});
+  }
+
   orgAdminWorkWeixinCreateLicenseOrder(orgID, count) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/create-license-order/';
     return this.req.post(url, {count: count});
