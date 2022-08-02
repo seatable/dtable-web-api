@@ -3603,6 +3603,16 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminListDTableAPITokens(dtableUuid) {
+    let url = this.server + '/api/v2.1/admin/dtables/' + dtableUuid + '/api-tokens/';
+    return this.req.get(url);
+  }
+
+  sysAdminDeleteDTableAPIToken(dtableUuid, apiToken) {
+    let url = this.server + '/api/v2.1/admin/dtables/' + dtableUuid + '/api-tokens/' + apiToken + '/';
+    return this.req.delete(url);
+  }
+
   sysAdminAddRepoSharedItem(repoID, shareType, shareToList, permission) {
     const url = this.server + '/api/v2.1/admin/shares/';
     let form = new FormData();
