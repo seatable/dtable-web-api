@@ -1372,6 +1372,11 @@ class DTableWebAPI {
     });
   }
 
+  listAppUserSyncs(dtableUuid) {
+    let url = this.server + '/api/v2.1/universal-apps/' + dtableUuid + '/app-users/syncs/';
+    return this.req.get(url);
+  }
+
   addWorkflow(workspaceId, baseName, workflowConfig) {
     let url = this.server + '/api/v2.1/workflows/';
     let form = new FormData();
