@@ -1261,15 +1261,6 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  runDataSync(dtableUuid, dataSyncId, sendDate, syncType) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/${dataSyncId}/run/`;
-    let options = {
-      send_date: sendDate,
-      sync_type: syncType
-    };
-    return this.req.post(url, options);
-  }
-
   // workflow apis
   listWorkflows(workspaceId, baseName) {
     let url = this.server + '/api/v2.1/workflows/';
