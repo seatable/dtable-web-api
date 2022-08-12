@@ -1004,6 +1004,12 @@ class DTableWebAPI {
     });
   }
 
+  addAppUsersBatch(token, usersInfo) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/batch/';
+    let data = {'users_info': usersInfo};
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
   updateAppUser(token, app_user_id, is_active) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
     let data = {
