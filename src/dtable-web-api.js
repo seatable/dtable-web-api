@@ -1367,6 +1367,35 @@ class DTableWebAPI {
     return this.req.post(url, options);
   }
 
+  addDataSync(dtableUuid, syncName, detail, syncType) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/`;
+    return this.req.post(url, {
+      name: syncName,
+      detail: detail,
+      sync_type: syncType
+    });
+  }
+
+  listDataSyncs(dtableUuid) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/`;
+    return this.req.get(url);
+  }
+
+  updateDataSync(dtableUuid, dataSyncId, syncName, syncType, detail) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/${dataSyncId}/`;
+    let options = {
+      name: syncName,
+      detail: detail,
+      sync_type: syncType
+    };
+    return this.req.put(url, options);
+  }
+
+  deleteDataSync(dtableUuid, dataSyncId) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/${dataSyncId}/`;
+    return this.req.delete(url);
+  }
+
   // workflow apis
   listWorkflows(workspaceId, baseName) {
     let url = this.server + '/api/v2.1/workflows/';
