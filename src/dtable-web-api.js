@@ -1367,17 +1367,16 @@ class DTableWebAPI {
     return this.req.post(url, options);
   }
 
-  addDataSync(dtableUuid, syncName, detail, syncType) {
+  addDataSync(dtableUuid, detail, syncType) {
     let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/`;
     return this.req.post(url, {
-      name: syncName,
       detail: detail,
       sync_type: syncType
     });
   }
 
-  listDataSyncs(dtableUuid) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/`;
+  listDataSyncs(dtableUuid, syncType) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/?sync_type=` + syncType;
     return this.req.get(url);
   }
 
