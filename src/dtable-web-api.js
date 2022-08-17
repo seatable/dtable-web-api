@@ -993,7 +993,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  exitUserApp(appUserId) {
+  leaveApp(appUserId) {
     let url = this.server + '/api/v2.1/app-users/' + appUserId + '/';
     return this.req.delete(url);
   }
