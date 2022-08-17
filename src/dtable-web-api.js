@@ -993,6 +993,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  leaveApp(appUserId) {
+    let url = this.server + '/api/v2.1/app-users/' + appUserId + '/';
+    return this.req.delete(url);
+  }
+
   listAppUsers(token, page, perPage) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/';
     let params = {
