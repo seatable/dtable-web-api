@@ -1148,11 +1148,12 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  addWechatSendTask(dtableUuid, account_name, message) {
+  addWechatSendTask(dtableUuid, account_name, message, msg_type) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/wechat/';
     let data = {
       'message': message,
       'account_name': account_name,
+      'msg_type': msg_type,
     };
 
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
