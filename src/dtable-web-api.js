@@ -2146,7 +2146,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  updateUserInfo({name, telephone, contact_email, list_in_address_book}) {
+  updateUserInfo({name, telephone, contact_email, list_in_address_book, sms_2fa}) {
     const url = this.server + '/api/v2.1/user/';
     let data = {};
     if (name != undefined) {
@@ -2160,6 +2160,9 @@ class DTableWebAPI {
     }
     if (list_in_address_book != undefined) {
       data.list_in_address_book = list_in_address_book;
+    }
+    if (sms_2fa != undefined) {
+      data.sms_2fa = sms_2fa;
     }
     return this.req.put(url, data);
   }
