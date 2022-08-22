@@ -1389,10 +1389,9 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  updateDataSync(dtableUuid, dataSyncId, syncName, syncType, detail) {
+  updateDataSync(dtableUuid, dataSyncId, syncType, detail) {
     let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-syncs/${dataSyncId}/`;
     let options = {
-      name: syncName,
       detail: detail,
       sync_type: syncType
     };
