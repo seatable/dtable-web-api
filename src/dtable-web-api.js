@@ -1511,6 +1511,19 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  getLinkedTableRowsWithWorkflow(token, link_column_key, task_id) {
+    let url = this.server + `/api/v2.1/workflows/${token}/linked-rows/`;
+    let params = {
+      link_column_key
+    };
+    if (task_id) {
+      params.task_id = task_id;
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   cancelWorkflowTask(token, taskId) {
     let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/cancel/`;
     return this.req.post(url);
