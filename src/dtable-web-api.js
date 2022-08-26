@@ -1482,7 +1482,7 @@ class DTableWebAPI {
     return this.req.delete(url, { data: params });
   }
 
-  submitWorkflowTask(token, rowData, tableId, rowId, replace) {
+  submitWorkflowTask(token, rowData, tableId, rowId, replace, link_rows, new_linked_rows) {
     let url = this.server + `/api/v2.1/workflows/${token}/task-submit/`;
     let form = new FormData();
     form.append('row_data', rowData);
@@ -1493,10 +1493,16 @@ class DTableWebAPI {
     if (replace) {
       form.append('replace', 'true');
     }
+    if (link_rows) {
+      form.append('link_rows', link_rows);
+    }
+    if (new_linked_rows) {
+      form.append('new_linked_rows', new_linked_rows);
+    }
     return this._sendPostRequest(url, form);
   }
 
-  transferWorkflowTask(token, taskId, rowData, nodeId, nextNodeId) {
+  transferWorkflowTask(token, taskId, rowData, nodeId, nextNodeId, link_rows, new_linked_rows) {
     let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/transfer/`;
     let form = new FormData();
     form.append('row_data', JSON.stringify(rowData));
@@ -1504,7 +1510,26 @@ class DTableWebAPI {
     if (nextNodeId) {
       form.append('next_node_id', nextNodeId);
     }
+    if (link_rows) {
+      form.append('link_rows', link_rows);
+    }
+    if (new_linked_rows) {
+      form.append('new_linked_rows', new_linked_rows);
+    }
     return this._sendPostRequest(url, form);
+  }
+
+  getLinkedTableRowsWithWorkflow(token, link_column_key, task_id) {
+    let url = this.server + `/api/v2.1/workflows/${token}/linked-rows/`;
+    let params = {
+      link_column_key
+    };
+    if (task_id) {
+      params.task_id = task_id;
+    };
+    return this.req.get(url, {
+      params: params
+    });
   }
 
   cancelWorkflowTask(token, taskId) {
