@@ -1130,7 +1130,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id) {
+  addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id, in_reply_to) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
       'account_name': account_name,
@@ -1152,6 +1152,9 @@ class DTableWebAPI {
     }
     if (need_message_id) {
       data['need_message_id'] = need_message_id;
+    }
+    if (in_reply_to) {
+      data['in_reply_to'] = in_reply_to;
     }
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
