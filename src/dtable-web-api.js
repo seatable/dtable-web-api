@@ -1417,6 +1417,11 @@ class DTableWebAPI {
     return this.req.post(url, options);
   }
 
+  queryDTableDataSyncStatusByTaskId(taskId) {
+    let url = this.server + '/api/v2.1/dtable-data-sync-status/?task_id=' + taskId;
+    return this.req.get(url);
+  }
+
   // workflow apis
   listWorkflows(workspaceId, baseName) {
     let url = this.server + '/api/v2.1/workflows/';
