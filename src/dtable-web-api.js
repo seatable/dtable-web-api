@@ -1542,7 +1542,7 @@ class DTableWebAPI {
     };
     if (task_id) {
       params.task_id = task_id;
-    };
+    }
     return this.req.get(url, {
       params: params
     });
