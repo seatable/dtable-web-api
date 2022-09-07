@@ -1760,6 +1760,21 @@ class DTableWebAPI {
     return this.req.post(url, {code: code});
   }
 
+  listSmsMessageTemplates() {
+    let url = this.server + '/api/v2.1/dtable-sms-message/templates/';
+    return this.req.get(url);
+  }
+
+  batchSendSmsMessage(template_name , phone_list, msg_list) {
+    let url = this.server + '/api/v2.1/dtable-sms-message/batch-send/';
+    let data = {
+      'template_name': template_name,
+      'phone_list': phone_list,
+      'msg_list': msg_list,
+    };
+    return this.req.post(url, data);
+  }
+
   getGroup(groupID) {
     const url = this.server + '/api/v2.1/groups/' + groupID + '/';
     return this.req.get(url);
@@ -3921,6 +3936,65 @@ class DTableWebAPI {
       params.department_id = departmentID;
     }
     return this.req.get(url, {params: params});
+  }
+
+  sysAdminListOrgSmsMessageQuotas() {
+    let url = this.server + '/api/v2.1/admin/org-sms-message-quotas/';
+    return this.req.get(url);
+  }
+
+  sysAdminAddOrgSmsMessageQuota(org_id, count) {
+    let url = this.server + '/api/v2.1/admin/org-sms-message-quotas/';
+    let data = {
+      'org_id': org_id,
+      'count': count,
+    };
+    return this.req.post(url, data);
+  }
+
+  sysAdminUpdateOrgSmsMessageQuota(org_id, attribute, value) {
+    let url = this.server + '/api/v2.1/admin/org-sms-message-quota/' + org_id + '/';
+    let params = {};
+    switch (attribute) {
+      case 'user_list':
+        params['user_list'] = value;
+        break;
+      case 'count':
+        params['count'] = value;
+        break;
+      case 'is_active':
+        params['is_active'] = value;
+        break;
+    }
+    return this.req.put(url, params);
+  }
+
+  sysAdminListUserSmsMessageQuotas() {
+    let url = this.server + '/api/v2.1/admin/user-sms-message-quotas/';
+    return this.req.get(url);
+  }
+
+  sysAdminAddUserSmsMessageQuota(username, count) {
+    let url = this.server + '/api/v2.1/admin/user-sms-message-quotas/';
+    let data = {
+      'username': username,
+      'count': count,
+    };
+    return this.req.post(url, data);
+  }
+
+  sysAdminUpdateUserSmsMessageQuota(username, attribute, value) {
+    let url = this.server + '/api/v2.1/admin/user-sms-message-quota/' + username + '/';
+    let params = {};
+    switch (attribute) {
+      case 'count':
+        params['count'] = value;
+        break;
+      case 'is_active':
+        params['is_active'] = value;
+        break;
+    }
+    return this.req.put(url, params);
   }
 
   sysAdminListExternalApps(page, per_page) {
