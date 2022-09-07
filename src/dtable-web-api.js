@@ -1130,6 +1130,17 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  fetchEmail(dtableUuid, thirdAccountName, emailTableName, threadTableName, messageId) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/fetch-email/`;
+    let options = {
+      third_account_name: thirdAccountName,
+      email_table_name: emailTableName,
+      thread_table_name: threadTableName,
+      message_id: messageId
+    };
+    return this.req.post(url, options);
+  }
+
   addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id, in_reply_to) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
