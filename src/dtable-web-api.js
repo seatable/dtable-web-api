@@ -1130,7 +1130,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to, attachments, html_message) {
+  addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id, in_reply_to) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
       'account_name': account_name,
@@ -1149,6 +1149,12 @@ class DTableWebAPI {
     }
     if (html_message) {
       data['html_message'] = html_message;
+    }
+    if (need_message_id) {
+      data['need_message_id'] = need_message_id;
+    }
+    if (in_reply_to) {
+      data['in_reply_to'] = in_reply_to;
     }
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
@@ -1379,6 +1385,11 @@ class DTableWebAPI {
   runDataSyncJob(dtableUuid, jobId, options) {
     let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/run/`;
     return this.req.post(url, options);
+  }
+
+  queryDTableDataSyncStatusByTaskId(taskId) {
+    let url = this.server + '/api/v2.1/dtable-data-sync-status/?task_id=' + taskId;
+    return this.req.get(url);
   }
 
   addDataSync(dtableUuid, detail, syncType) {
