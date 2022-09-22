@@ -1477,6 +1477,9 @@ class DTableWebAPI {
     if (updates.workflow_name) {
       form.append('workflow_name', updates.workflow_name);
     }
+    if (updates.can_any_user_submit_via_link) {
+      form.append('can_any_user_submit_via_link', updates.can_any_user_submit_via_link);
+    }
     if (updates.icon) {
       form.append('icon', updates.icon);
     }
