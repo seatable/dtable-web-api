@@ -1909,6 +1909,14 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
+  renameDTableAssetFile(dtableUuid, path, newName) {
+    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/rename/';
+    const form = new FormData();
+    form.append('path', path);
+    form.append('new_name', newName);
+    return this._sendPostRequest(url, form);
+  }
+
   fileTransferSave(dtableUuid, filesMap, path, replace, relativePath) {
     let url = this.server + '/api/v2.1/seafile-connectors/' + dtableUuid + '/file-transfer-task/';
     let data = {
