@@ -809,9 +809,14 @@ class DTableWebAPI {
     return this.req.post(url);
   }
 
-  getUploadLinkViaFormToken(token) {
-    let url = this.server + '/api/v2.1/forms/' + token + '/upload-link/';
+  getPublicUploadLinkViaFormToken(token) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/public-upload-link/';
     return this.req.get(url);
+  }
+
+  getUploadLinkViaFormToken(token, uploadType) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/upload-link/';
+    return this.req.get(url, { params: { upload_type: uploadType } });
   }
 
   getTableFormShareLink(workspaceID, dtableName, formId) {
@@ -1656,9 +1661,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getUploadLinkViaWorkflowToken(token) {
-    let url = this.server + '/api/v2.1/workflows/' + token + '/upload-link/';
+  getPublicUploadLinkViaWorkflowToken(token) {
+    let url = this.server + '/api/v2.1/workflows/' + token + '/public-upload-link/';
     return this.req.get(url);
+  }
+
+  getUploadLinkViaWorkflowToken(token, uploadType) {
+    let url = this.server + '/api/v2.1/workflows/' + token + '/upload-link/';
+    return this.req.get(url, { params: { upload_type: uploadType } });
   }
 
   getWorkflowInitForm(token) {
