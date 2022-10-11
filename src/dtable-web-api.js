@@ -2209,6 +2209,11 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  removePassword() {
+    let url = this.server + '/api/v2.1/user/remove-password/';
+    return this.req.put(url);
+  }
+
   updateEmailNotificationInterval(dtableUpdatesEmailInterval, dtableCollaborateEmailInterval) {
     const url = this.server + '/api2/account/info/';
     const data = {
