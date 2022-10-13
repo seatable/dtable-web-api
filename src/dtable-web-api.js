@@ -3263,9 +3263,6 @@ class DTableWebAPI {
     case 'unit':
       formData.append('unit', value);
       break;
-    case 'sms_message_limit':
-      formData.append('sms_message_limit', value);
-      break;
     }
     return this.req.put(url, formData);
   }
