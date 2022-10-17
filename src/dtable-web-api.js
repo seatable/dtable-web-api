@@ -3087,8 +3087,8 @@ class DTableWebAPI {
     if (orgInfo.bigDataRowLimit) {
       formData.append('big_data_row_limit', orgInfo.bigDataRowLimit);
     }
-    if (orgInfo.sms_message_limit) {
-      formData.append('sms_message_limit', orgInfo.sms_message_limit);
+    if (orgInfo.smsMessageLimitPerMonth) {
+      formData.append('sms_message_limit_per_month', orgInfo.smsMessageLimitPerMonth);
     }
     return this.req.put(url, formData);
   }
