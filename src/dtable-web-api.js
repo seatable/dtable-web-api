@@ -1135,15 +1135,19 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  fetchEmail(dtableUuid, thirdAccountName, emailTableName, threadTableName, messageId) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/fetch-email/`;
-    let options = {
-      third_account_name: thirdAccountName,
-      email_table_name: emailTableName,
-      thread_table_name: threadTableName,
-      message_id: messageId
+  pluginEmailSendEmail(dtableUuid, thirdAccountName, emailInfo, tableInfo) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/plugin-email-send-email/`;
+    let data = {
+      'account_name': thirdAccountName,
+      'email_info': emailInfo,
+      'table_info': tableInfo
     };
-    return this.req.post(url, options);
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  getPluginEmailSendStatus(task_id) {
+    const url = this.server + '/api/v2.1/plugin-email-send-status/?task_id=' + task_id;
+    return this.req.get(url);
   }
 
   addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id, in_reply_to) {
