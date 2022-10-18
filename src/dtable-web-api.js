@@ -645,6 +645,20 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  addBigDataImportTask(dtableUuid, tableName, file, fileType) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/big-data-task/import-file/';
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('table_name', tableName);
+    formData.append('file_type', fileType);
+    return this._sendPostRequest(url, formData);
+  }
+
+  queryBigDataTaskStatus(taskId) {
+    let url = this.server + '/api/v2.1/dtables/big-data-status/?task_id=' + taskId;
+    return this.req.get(url);
+  }
+
   createSeafileConnector(dtableId, seafileURL, repoAPIToken) {
     let url = this.server + '/api/v2.1/seafile-connectors/';
     let formData = new FormData();
