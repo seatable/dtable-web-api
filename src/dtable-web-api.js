@@ -2670,6 +2670,16 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
+  orgAdminSearchUsers(orgID, query, page, perPage) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/search-users/';
+    let params = {
+      query: query,
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   orgAdminSetGroupMemberRole(orgID, groupID, userEmail, isAdmin) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID +  '/members/' + encodeURIComponent(userEmail) + '/';
     let form = new FormData();
