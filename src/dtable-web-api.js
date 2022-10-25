@@ -2237,6 +2237,17 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  resetPasswordByPhone(phone, code, newPassword, confirmPassword) {
+    let url = this.server + '/api/v2.1/user/reset-password-by-phone/';
+    let data = {
+      phone: phone,
+      code: code,
+      new_password: newPassword,
+      confirm_password: confirmPassword,
+    };
+    return this.req.post(url, data);
+  }
+
   updateEmailNotificationInterval(dtableUpdatesEmailInterval, dtableCollaborateEmailInterval) {
     const url = this.server + '/api2/account/info/';
     const data = {
