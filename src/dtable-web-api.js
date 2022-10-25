@@ -2210,7 +2210,7 @@ class DTableWebAPI {
   }
 
   resetPasswordByPhone(phone, code, newPassword, confirmPassword) {
-    let url = this.server + '/api/v2.1/user/reset-password/';
+    let url = this.server + '/api/v2.1/user/reset-password-by-phone/';
     let data = {
       phone: phone,
       code: code,
