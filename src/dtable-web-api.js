@@ -1788,6 +1788,21 @@ class DTableWebAPI {
     return this.req.post(url, {code: code});
   }
 
+  listSmsMessageTemplates() {
+    let url = this.server + '/api/v2.1/dtable-sms-message/templates/';
+    return this.req.get(url);
+  }
+
+  sendSmsMessage(template_name , phone, msg_dict) {
+    let url = this.server + '/api/v2.1/dtable-sms-message/send/';
+    let data = {
+      'template_name': template_name,
+      'phone': phone,
+      'msg_dict': msg_dict,
+    };
+    return this.req.post(url, data);
+  }
+
   getGroup(groupID) {
     const url = this.server + '/api/v2.1/groups/' + groupID + '/';
     return this.req.get(url);
@@ -3082,6 +3097,9 @@ class DTableWebAPI {
     }
     if (orgInfo.bigDataRowLimit) {
       formData.append('big_data_row_limit', orgInfo.bigDataRowLimit);
+    }
+    if (orgInfo.smsMessageLimitPerMonth) {
+      formData.append('sms_message_limit_per_month', orgInfo.smsMessageLimitPerMonth);
     }
     return this.req.put(url, formData);
   }
