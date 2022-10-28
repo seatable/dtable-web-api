@@ -1961,6 +1961,92 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getCustomAssetUploadLink(dtableUuid, parentDir) {
+    const url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/upload-link/?parent_dir=' + encodeURIComponent(parentDir);
+    return this.req.get(url);
+  }
+
+  listCustomAsset(dtableUuid, parentDir) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/dir/';
+    if (parentDir) {
+      url = url + '?parent_dir=' + encodeURIComponent(parentDir);
+    }
+    return this.req.get(url);
+  }
+
+  createCustomAssetDir(dtableUuid, parentDir, dirName) {
+    const url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/dir/';
+    let data = {
+      parent_dir: parentDir,
+      name: dirName,
+    };
+    return this.req.post(url, data);
+  }
+
+  renameCustomAssetDir(dtableUuid, parentDir, dirName, newName) {
+    const url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/dir/';
+    let data = {
+      parent_dir: parentDir,
+      name: dirName,
+      new_name: newName,
+    };
+    return this.req.put(url, data);
+  }
+
+  deleteCustomAssetDir(dtableUuid, parentDir, dirName) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/dir/';
+    url += '?parent_dir=' +  encodeURIComponent(parentDir) + '&name=' + encodeURIComponent(dirName);
+    return this.req.delete(url);
+  }
+
+  getCustomAssetUuid(dtableUuid, parentDir, direntName) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/file/';
+    url = url + '?parent_dir=' + encodeURIComponent(parentDir) + '&name=' + encodeURIComponent(direntName);
+    return this.req.get(url);
+  }
+
+  renameCustomAsset(dtableUuid, parentDir, name, newName, assetUuid) {
+    const url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/file/';
+    let data = {
+      parent_dir: parentDir,
+      name: name,
+      new_name: newName,
+      asset_uuid: assetUuid,
+    };
+    return this.req.put(url, data);
+  }
+
+  deleteCustomAsset(dtableUuid, parentDir, direntName) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/file/';
+    url += '?parent_dir=' + encodeURIComponent(parentDir) + '&name=' + encodeURIComponent(direntName);
+    return this.req.delete(url);
+  }
+
+  batchDeleteCustomAsset(dtableUuid, parentDir, dirents) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/batch-delete/';
+    let operation = {
+      'parent_dir': parentDir,
+      'dirents': dirents
+    };
+    return this.req['delete'](url, {
+      data: operation
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  }
+
+  batchMoveCustomAsset(dtableUuid, srcParentDir, dirents, dstParentDir) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/batch-move/';
+    let data = {
+      'src_parent_dir': srcParentDir,
+      'src_dirents': dirents,
+      'dst_parent_dir': dstParentDir,
+    };
+    return this.req.post(url, data);
+  }
+
   listCommonDatasets(dstDTableUuid, byGroup=false) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     let params = {};
