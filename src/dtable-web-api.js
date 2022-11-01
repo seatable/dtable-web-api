@@ -1381,46 +1381,6 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  // data-sync apis
-  listDataSyncJobs() {
-    let url = this.server + '/api/v2.1/data-sync/user-jobs/';
-    return this.req.get(url);
-  }
-
-  addDataSyncJob(dtableUuid, name, jobType, detail, minute, hour) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/`;
-
-    return this.req.post(url, {
-      name: name,
-      detail: detail,
-      job_type: jobType,
-      trigger_minute: minute,
-      trigger_hour: hour
-    });
-  }
-
-  updateDataSyncJob(dtableUuid, jobId, name, detail, minute, hour) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/`;
-
-    let options = {
-      name: name,
-      detail: detail,
-      trigger_minute: minute,
-      trigger_hour: hour
-    };
-    return this.req.put(url, options);
-  }
-
-  deleteDataSyncJob(dtableUuid, jobId) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/`;
-    return this.req.delete(url);
-  }
-
-  runDataSyncJob(dtableUuid, jobId, options) {
-    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/data-sync/jobs/${jobId}/run/`;
-    return this.req.post(url, options);
-  }
-
   queryDTableDataSyncStatusByTaskId(taskId) {
     let url = this.server + '/api/v2.1/dtable-data-sync-status/?task_id=' + taskId;
     return this.req.get(url);
