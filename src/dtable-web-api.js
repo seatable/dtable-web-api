@@ -654,6 +654,17 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  addBigDataUpdateTask(dtableUuid, tableName, file, fileType, refCols, isInsertNewData) {
+    const url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/big-data-task/update-file/';
+    let formData = new FormData();
+    formData.append('file', file);
+    formData.append('table_name', tableName);
+    formData.append('file_type', fileType);
+    formData.append('ref_columns', refCols);
+    formData.append('is_insert_new_data', isInsertNewData);
+    return this._sendPostRequest(url, formData);
+  }
+
   queryBigDataTaskStatus(taskId) {
     let url = this.server + '/api/v2.1/dtables/big-data-status/?task_id=' + taskId;
     return this.req.get(url);
