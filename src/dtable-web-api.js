@@ -3643,6 +3643,15 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  sysAdminListLoginLogs(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/logs/login-logs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminListAdminLoginLogs(page, perPage) {
     let url = this.server + '/api/v2.1/admin/admin-login-logs/';
     let params = {
