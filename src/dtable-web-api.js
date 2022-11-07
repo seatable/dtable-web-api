@@ -457,6 +457,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  queryCopyDTableStatus(taskId) {
+    let url = this.server + '/api/v2.1/dtable-copy/status/?task_id=' + taskId;
+    return this.req.get(url);
+  }
+
   copyExternalDtable(dstWorkspaceID, link, folderID) {
     let url = this.server + '/api/v2.1/dtable-external-link/dtable-copy/';
     let formData = new FormData();
