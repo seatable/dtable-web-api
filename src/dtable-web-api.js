@@ -587,6 +587,16 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  importTableFromBase(srcDtableUuid, srcTableId, srcTableName, dstDtableUuid) {
+    const url = this.server + '/api/v2.1/dtable/import-table-from-base/';
+    let formData = new FormData();
+    formData.append('src_dtable_uuid', srcDtableUuid);
+    formData.append('src_table_id', srcTableId);
+    formData.append('src_table_name', srcTableName);
+    formData.append('dst_dtable_uuid', dstDtableUuid);
+    return this._sendPostRequest(url, formData);
+  }
+
   excelCommonDeleteExcel(workspaceId, fileName, dtableUuid) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/excel-common/delete-excel/?file_name=' + encodeURIComponent(fileName) + '&dtable_uuid=' + dtableUuid;
     return this.req.delete(url);
