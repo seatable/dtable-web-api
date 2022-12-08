@@ -2901,6 +2901,18 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  orgAdminUpdateOrgLogo(file) {
+    const url = this.server + '/api/v2.1/org/admin/org-logo/';
+    let form = new FormData();
+    form.append('file', file);
+    return this._sendPostRequest(url, form);
+  }
+
+  orgAdminDeleteOrgLogo() {
+    const url = this.server + '/api/v2.1/org/admin/org-logo/';
+    return this.req.delete(url);
+  }
+
   orgAdminBindWorkWeixin(orgID, corpID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/bind/';
     return this.req.post(url, {corp_id: corpID});
