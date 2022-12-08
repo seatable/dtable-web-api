@@ -1158,26 +1158,21 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  listAppCustomLinks(token){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-links/';
-    return this.req.get(url);
-  }
-
-  addAppCustomLinks(token, custom_token){
+  addAppCustomLinks(token, custom_url){
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-links/';
     let form = new FormData();
-    if (custom_token) {
-      form.append('custom_token', custom_token);
+    if (custom_url) {
+      form.append('custom_url', custom_url);
     }
 
     return this._sendPostRequest(url, form);
   }
 
-  deleteAppCustomLinks(token, custom_link_id){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-links/' + custom_link_id + '/';
+  deleteAppCustomLinks(token){
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-links/';
     return this.req.delete(url);
   }
-
+  
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
     let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
     let form = new FormData();
