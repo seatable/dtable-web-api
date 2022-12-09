@@ -1158,8 +1158,8 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  addAppCustomLinks(token, custom_url){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-links/';
+  addAppCustomURL(token, custom_url){
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-url/';
     let form = new FormData();
     if (custom_url) {
       form.append('custom_url', custom_url);
@@ -1168,8 +1168,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  deleteAppCustomLinks(token){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-links/';
+  deleteAppCustomURL(token){
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-url/';
     return this.req.delete(url);
   }
   
