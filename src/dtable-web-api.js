@@ -195,6 +195,74 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  // folder structure api
+  listFolderStructure(workspaceID, path) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/folders/?path=' + path;
+    return this.req.get(url);
+  }
+
+  createFolderStructure(workspaceID, parentFolderPath, newFolderName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/folders/';
+    let form = new FormData();
+    form.append('dst_parent_folder', parentFolderPath);
+    form.append('new_folder_name', newFolderName);
+    return this._sendPostRequest(url, form);
+  }
+
+  renameFolderStructure(workspaceID, folderName, newFolderName, parentFolderPath) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/folders/';
+    let form = new FormData();
+    form.append('folder_name', folderName);
+    form.append('new_folder_name', newFolderName);
+    form.append('src_parent_folder', parentFolderPath);
+    return this.req.put(url, form);
+  }
+
+  moveFolderStructure(workspaceID, folderName, srcParentFolder, dstParentFolder) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/folders/';
+    let form = new FormData();
+    form.append('folder_name', folderName);
+    form.append('src_parent_folder', srcParentFolder);
+    form.append('dst_parent_folder', dstParentFolder);
+    return this.req.put(url, form);
+  }
+
+  deleteFolderStructure(workspaceID, folderName, parentFolderPath) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/folders/';
+    let params = {
+      folder_name: folderName,
+      src_parent_folder: parentFolderPath,
+    };
+    return this.req.delete(url, {data: params});
+  }
+
+  // base structure api
+  createBaseStructure(workspaceID, baseName, parentFolderName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/bases/';
+    let form = new FormData();
+    form.append('base_name', baseName);
+    form.append('dst_parent_folder', parentFolderName);
+    return this._sendPostRequest(url, form);
+  }
+
+  moveBaseStructure(workspaceID, baseName, srcParentFolder, dstParentFolder) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/bases/';
+    let form = new FormData();
+    form.append('base_name', baseName);
+    form.append('src_parent_folder', srcParentFolder);
+    form.append('dst_parent_folder', dstParentFolder);
+    return this.req.put(url, form);
+  }
+
+  deleteBaseStructure(workspaceID, baseName, srcParentFolder) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/bases/';
+    let params = {
+      base_name: baseName,
+      src_parent_folder: srcParentFolder,
+    };
+    return this.req.delete(url, {data: params});
+  }
+
   // ---- dTable api
   createTable(name, owner, dtableIcon, dtableColor, textColor, folderID) {
     const url = this.server + '/api/v2.1/dtables/';
@@ -961,9 +1029,10 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  deleteFolder(workspaceID, folderID) {
+  deleteFolder(workspaceID, folderID, srcParentFolder) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/' + folderID +'/';
-    return this.req.delete(url);
+    let params = {src_parent_folder: srcParentFolder};
+    return this.req.delete(url, {data: params});
   }
 
   moveFolderItem(workspaceID, itemType, itemID, moveFrom, moveTo) {
