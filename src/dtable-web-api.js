@@ -651,6 +651,12 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  convertBigDataViewToExcel(workspaceId, fileName, tableId, viewId) {
+    let params = 'table_id=' + tableId + '&view_id=' + viewId;
+    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-big-data-view-to-excel/?' + params;
+    return this.req.get(url);
+  }
+
   convertTableToExcel(workspaceId, fileName, tableId) {
     let params = 'table_id=' + tableId;
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-table-to-excel/?' + params;
