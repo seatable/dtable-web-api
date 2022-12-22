@@ -2056,6 +2056,29 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  addCustomAssetZipTask(dtableUuid, parentDir, dirents) {
+    let url = this.server + `/api/v2.1/dtable-custom-asset/${dtableUuid}/zip-task/`;
+    let form = new FormData();
+    form.append('parent_dir', parentDir);
+    dirents.forEach(dirent => {
+      form.append('dirents', dirent);
+    });
+    return this._sendPostRequest(url, form);
+  }
+
+  queryCustomAssetZipProgress(token) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/query-zip-progress/';
+    let params = { token };
+    return this.req.get(url, { params });
+  }
+
+  cancelCustomAssetZipTask(token) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/cancel-zip-task/';
+    let form = new FormData();
+    form.append('token', token);
+    return this._sendPostRequest(url, form);
+  }
+
   listCommonDatasets(dstDTableUuid, byGroup=false) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     let params = {};
