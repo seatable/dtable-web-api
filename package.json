@@ -19,7 +19,7 @@
   "author": "seafile",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "1.2.1",
     "form-data": "^2.5.1"
   },
   "devDependencies": {
