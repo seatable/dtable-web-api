@@ -1164,6 +1164,21 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  addAppCustomURL(token, custom_url){
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-url/';
+    let form = new FormData();
+    if (custom_url) {
+      form.append('custom_url', custom_url);
+    }
+
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteAppCustomURL(token){
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-url/';
+    return this.req.delete(url);
+  }
+  
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
     let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
     let form = new FormData();
