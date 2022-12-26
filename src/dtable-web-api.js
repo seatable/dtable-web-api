@@ -3279,6 +3279,17 @@ class DTableWebAPI {
     });
   }
 
+  sysAdminListOrgExternalApps(orgID, page, perPage) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/external-apps/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   sysAdminSearchOrgs(query) {
     let url = this.server + '/api/v2.1/admin/search-organization/';
     let params = {
