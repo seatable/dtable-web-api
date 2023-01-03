@@ -1046,6 +1046,16 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listAppOrganizationMembers(token, org_id, page) {
+    const url = this.server + '/api/v2.1/universal-apps/' + token + '/organizations/'+ org_id +'/members/?page=' + page;
+    return this.req.get(url);
+  }
+
+  listAppDepartmentMembers(token, department_id) {
+    const url = this.server + '/api/v2.1/universal-apps/' + token + '/departments/'+ department_id +'/members/';
+    return this.req.get(url);
+  }
+
   leaveApp(appUserId) {
     let url = this.server + '/api/v2.1/app-users/' + appUserId + '/';
     return this.req.delete(url);
