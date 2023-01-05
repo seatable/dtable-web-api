@@ -2039,6 +2039,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  createCustomAsset(dtableUuid, parentDir, newFileName) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/file/';
+    let form = new FormData();
+    form.append('parent_dir', parentDir);
+    form.append('new_file_name', newFileName);
+    return this._sendPostRequest(url, form);
+  }
+
   renameCustomAsset(dtableUuid, parentDir, name, newName, assetUuid) {
     const url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/file/';
     let data = {
