@@ -2216,10 +2216,13 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  importCommonDataset(datasetId, dst_dtable_uuid) {
+  importCommonDataset(datasetId, dst_dtable_uuid, toArchive) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/' + datasetId + '/import/';
     let formData = new FormData();
     formData.append('dst_dtable_uuid', dst_dtable_uuid);
+    if (toArchive) {
+      formData.append('to_archive', toArchive);
+    }
     return this._sendPostRequest(url, formData);
   }
 
