@@ -3988,6 +3988,27 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminExportDtable(dtableUuid) {
+    const url = this.server + '/api/v2.1/admin/dtables/' + dtableUuid + '/export-dtable/';
+    return this.req.get(url);
+  }
+
+  sysAdminCopyDTable(srcWorkspaceID, dstWorkspaceID, name) {
+    const url = this.server + '/api/v2.1/admin/dtable-copy/';
+    let formData = new FormData();
+    formData.append('src_workspace_id', srcWorkspaceID);
+    formData.append('dst_workspace_id', dstWorkspaceID);
+    formData.append('name', name);
+    return this._sendPostRequest(url, formData);
+  }
+
+  sysAdminDoTaskAfterCopyDTable(dst_dtable_uuid) {
+    const url = this.server + '/api/v2.1/admin/dtable-copy/do-task-after-copy/';
+    let formData = new FormData();
+    formData.append('dst_dtable_uuid', dst_dtable_uuid);
+    return this._sendPostRequest(url, formData);
+  }
+
   sysAdminAddRepoSharedItem(repoID, shareType, shareToList, permission) {
     const url = this.server + '/api/v2.1/admin/shares/';
     let form = new FormData();
