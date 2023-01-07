@@ -1072,6 +1072,18 @@ class DTableWebAPI {
     });
   }
 
+  searchAppUsers(token, query, page, perPage) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/search-user/';
+    let params = {
+      query: query,
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   addAppUsersBatch(token, usersInfo) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/batch/';
     let data = {'users_info': usersInfo};
