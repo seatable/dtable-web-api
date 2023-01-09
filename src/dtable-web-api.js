@@ -1331,9 +1331,19 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getTableRelatedUsers(workspaceID, name) {
+  getTableRelatedUsers(workspaceID, name, queryParams) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/related-users/';
-    return this.req.get(url);
+    const { workflowToken, workflowTaskId } = queryParams || {};
+    const params = {};
+    if (workflowToken || workflowTaskId) {
+      if (workflowToken) {
+        params.workflow_token = workflowToken;
+      }
+      if (workflowTaskId) {
+        params.workflow_task_id = workflowTaskId;
+      }
+    }
+    return this.req.get(url, { params });
   }
 
   getTableAssetUploadLink(workspaceID, name) {
