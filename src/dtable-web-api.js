@@ -833,11 +833,10 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
-  dTableFormShare(token, shareType, groupIDs) {
+  dTableFormShare(token, shareType) {
     let url = this.server + '/api/v2.1/forms/' + token + '/share/';
     let params = {
-      share_type: shareType,
-      group_ids: groupIDs
+      share_type: shareType
     };
     return this.req.post(url, params);
   }
