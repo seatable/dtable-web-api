@@ -1806,6 +1806,20 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  getSlideCaptcha() {
+    const url = this.server + '/api/v2.1/slide-captcha/';
+    return this.req.get(url);
+  }
+
+  verifySlideCaptcha(x, y) {
+    const url = this.server + '/api/v2.1/slide-captcha/';
+    let params = {
+      x: x,
+      y: y,
+    };
+    return this.req.post(url, params);
+  }
+
   listGroups(includingAllDeps=false) {
     const url = this.server + '/api/v2.1/groups/';
     let params = {including_all_deps: includingAllDeps};
