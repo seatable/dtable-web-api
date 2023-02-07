@@ -654,8 +654,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  convertBigDataViewToExcel(workspaceId, fileName, tableId, viewId) {
+  convertBigDataViewToExcel(workspaceId, fileName, tableId, viewId, isSupportImage) {
     let params = 'table_id=' + tableId + '&view_id=' + viewId;
+    if (isSupportImage) {
+      params = params + '&is_support_image=' + isSupportImage;
+    }
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-big-data-view-to-excel/?' + params;
     return this.req.get(url);
   }
