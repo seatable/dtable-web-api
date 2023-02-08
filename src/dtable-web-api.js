@@ -1097,6 +1097,14 @@ class DTableWebAPI {
     };
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
+
+  updateAppUserRole(token, app_user_id, role_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
+    let data = {
+      'app_role_id': role_id
+    };
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
   
   deleteAppUser(token, app_user_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
