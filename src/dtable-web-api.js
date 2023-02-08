@@ -645,20 +645,29 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
-  convertViewToExcel(workspaceId, fileName, tableId, viewId) {
+  convertViewToExcel(workspaceId, fileName, tableId, viewId, isSupportImage) {
     let params = 'table_id=' + tableId + '&view_id=' + viewId;
+    if (isSupportImage) {
+      params = params + '&is_support_image=' + isSupportImage;
+    }
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-view-to-excel/?' + params;
     return this.req.get(url);
   }
 
-  convertBigDataViewToExcel(workspaceId, fileName, tableId, viewId) {
+  convertBigDataViewToExcel(workspaceId, fileName, tableId, viewId, isSupportImage) {
     let params = 'table_id=' + tableId + '&view_id=' + viewId;
+    if (isSupportImage) {
+      params = params + '&is_support_image=' + isSupportImage;
+    }
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-big-data-view-to-excel/?' + params;
     return this.req.get(url);
   }
 
-  convertTableToExcel(workspaceId, fileName, tableId) {
+  convertTableToExcel(workspaceId, fileName, tableId, isSupportImage) {
     let params = 'table_id=' + tableId;
+    if (isSupportImage) {
+      params = params + '&is_support_image=' + isSupportImage;
+    }
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(fileName) + '/convert-table-to-excel/?' + params;
     return this.req.get(url);
   }
@@ -1208,7 +1217,7 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-url/';
     return this.req.delete(url);
   }
-  
+
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
     let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
     let form = new FormData();
