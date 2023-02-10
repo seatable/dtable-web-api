@@ -2853,6 +2853,15 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  orgAdminListAdminLogs(orgID, page, perPage) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/admin-logs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   orgAdminListOrgLinks(page) {
     const url = this.server + '/api/v2.1/org/admin/links/?page=' + page;
     return this.req.get(url);
