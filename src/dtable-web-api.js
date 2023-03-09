@@ -933,6 +933,12 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  createDTableSnapshot(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ encodeURIComponent(dtableName) + '/snapshots/';
+    let form = new FormData();
+    return this._sendPostRequest(url, form)
+  }
+
   getDTableSnapshotDownloadLink(workspaceID, dtableName, commitId) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/';
     return this.req.get(url);
