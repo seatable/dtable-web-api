@@ -2049,8 +2049,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  listRecentUploadedFiles(dtableUuid) {
-    let url = this.server + '/api/v2.1/dtable-recent-asset/' + dtableUuid + '/';
+  listRecentUploadedFiles(dtableUuid, fileType) {
+    let url = this.server + '/api/v2.1/dtable-recent-asset/' + dtableUuid + '/?file_type=' + fileType;
     return this.req.get(url);
   }
 
