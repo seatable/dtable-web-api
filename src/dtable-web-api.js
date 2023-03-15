@@ -707,24 +707,6 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  createSeafileConnector(dtableId, seafileURL, repoAPIToken) {
-    let url = this.server + '/api/v2.1/seafile-connectors/';
-    let formData = new FormData();
-    formData.append('dtable_id', dtableId);
-    formData.append('seafile_url', seafileURL );
-    formData.append('repo_api_token', repoAPIToken);
-    return this.req.post(url, formData);
-  }
-
-  updateSeafileConnector(dtableId, seafileURL, repoAPIToken, connectorId) {
-    let url = this.server + '/api/v2.1/seafile-connectors/' + connectorId + '/';
-    let formData = new FormData();
-    formData.append('dtable_id', dtableId);
-    formData.append('seafile_url', seafileURL );
-    formData.append('repo_api_token', repoAPIToken);
-    return this.req.put(url, formData);
-  }
-
   addStarDTable(dtable_uuid) {
     let url = this.server + '/api/v2.1/starred-dtables/';
     let formData = new FormData();
@@ -1956,16 +1938,6 @@ class DTableWebAPI {
     const name = encodeURIComponent(userName);
     const url = this.server + '/api/v2.1/groups/' + groupID + '/members/' + name + '/';
     return this.req.delete(url);
-  }
-
-  getSeafileConnectors(dtableId) {
-    let url = this.server + '/api/v2.1/seafile-connectors/';
-    let params = {
-      dtable_id: dtableId
-    };
-    return this.req.get(url, {
-      params: params
-    });
   }
 
   moveUserGroupsOrder(group_id, anchor_group_id, to_last) {
