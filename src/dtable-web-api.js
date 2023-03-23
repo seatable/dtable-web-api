@@ -2649,6 +2649,42 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  listEmbeddingCollections(dtableUuid) {
+    const url = this.server + '/api/v2.1/embedding-collections/?dtable_uuid=' + dtableUuid;
+    return this.req.get(url);
+  }
+
+  createEmbeddingCollection(APIToken, dtableUuid, tableId) {
+    let url = this.server + '/api/v2.1/embedding-collections/';
+    let data = {
+      'api_token': APIToken,
+      'dtable_uuid': dtableUuid,
+      'table_id': tableId,
+    };
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  semanticSearch(dtableUuid, tableId, query) {
+    let url = this.server + '/api/v2.1/similarity-search/';
+    let params = {
+      'dtable_uuid': dtableUuid,
+      'table_id': tableId,
+      'query': query
+    };
+    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  deleteEmbeddingCollection(dtableUuid, collectionId) {
+    const url = this.server + '/api/v2.1/embedding-collections/' + collectionId + '/?dtable_uuid=' + dtableUuid;
+    return this.req.delete(url);
+  }
+
+  updateEmbeddingCollection(dtableUuid, collectionId) {
+    const url = this.server + '/api/v2.1/embedding-collections/' + collectionId + '/';
+    let params = { dtable_uuid: dtableUuid };
+    return this.req.put(url, params);
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
