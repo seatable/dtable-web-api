@@ -2654,10 +2654,9 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  createEmbeddingCollection(APIToken, dtableUuid, tableId) {
+  createEmbeddingCollection(dtableUuid, tableId) {
     let url = this.server + '/api/v2.1/embedding-collections/';
     let data = {
-      'api_token': APIToken,
       'dtable_uuid': dtableUuid,
       'table_id': tableId,
     };
