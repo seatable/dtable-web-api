@@ -2097,6 +2097,12 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  searchCustomAsset(dtableUuid, parentDir, query) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/file-search/';
+    url = url + '?query=' + query + '&parent_dir=' + encodeURIComponent(parentDir);
+    return this.req.get(url);
+  }
+
   createCustomAssetDir(dtableUuid, parentDir, dirName) {
     const url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/dir/';
     let data = {
