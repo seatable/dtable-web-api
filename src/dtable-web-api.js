@@ -4315,6 +4315,20 @@ class DTableWebAPI {
     };
     return this.req.get(url, { params: params });
   }
+
+  sysAdminListEmbeddingCollections(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/embedding-collections/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminListIndexTasks() {
+    let url = this.server + '/api/v2.1/admin/index-tasks/';
+    return this.req.get(url);
+  }
 }
 
 export default DTableWebAPI;
