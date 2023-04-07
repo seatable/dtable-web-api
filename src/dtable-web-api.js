@@ -2649,39 +2649,49 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  // embedding collections
   listEmbeddingCollections(dtableUuid) {
     const url = this.server + '/api/v2.1/embedding-collections/?dtable_uuid=' + dtableUuid;
     return this.req.get(url);
   }
 
-  createEmbeddingCollection(dtableUuid, tableId) {
+  createEmbeddingCollection(dtableUuid, tableIds) {
     let url = this.server + '/api/v2.1/embedding-collections/';
     let data = {
       'dtable_uuid': dtableUuid,
-      'table_id': tableId,
+      'table_ids': tableIds,
     };
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: {'Content-Type': 'application/json' }});
   }
 
-  semanticSearch(dtableUuid, tableId, query) {
-    let url = this.server + '/api/v2.1/similarity-search/';
-    let params = {
-      'dtable_uuid': dtableUuid,
-      'table_id': tableId,
-      'query': query
-    };
-    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
-  }
-
-  deleteEmbeddingCollection(dtableUuid, collectionId) {
-    const url = this.server + '/api/v2.1/embedding-collections/' + collectionId + '/?dtable_uuid=' + dtableUuid;
+  deleteEmbeddingCollection(collectionId) {
+    const url = this.server + '/api/v2.1/embedding-collections/' + collectionId + '/';
     return this.req.delete(url);
   }
 
-  updateEmbeddingCollection(dtableUuid, collectionId) {
+  updateEmbeddingCollection(collectionId) {
     const url = this.server + '/api/v2.1/embedding-collections/' + collectionId + '/';
-    let params = { dtable_uuid: dtableUuid };
-    return this.req.put(url, params);
+    return this.req.put(url);
+  }
+
+  queryEmbeddingCollectionStatus(taskId) {
+    const url = this.server + '/api/v2.1/embedding-collections/task-status/?task_id=' + taskId;
+    return this.req.get(url);
+  }
+
+  semanticSearch(dtableUuid, query, { tableIds, count } = {}) {
+    let url = this.server + '/api/v2.1/similarity-search/';
+    let params = {
+      'dtable_uuid': dtableUuid,
+      'query': query,
+    };
+    if (tableIds) {
+      params['table_ids'] = tableIds;
+    }
+    if (count) {
+      params['count'] = count;
+    }
+    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
   // org admin api
