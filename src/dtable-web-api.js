@@ -2171,6 +2171,16 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  getDTableAssetStats(dtableUuid) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/asset-stats/`;
+    return this.req.get(url);
+  }
+
+  calcDTableAssetStats(dtableUuid) {
+    let url = this.server + `/api/v2.1/dtables/${dtableUuid}/calc-asset-stats/`;
+    return this.req.post(url);
+  }
+
   listCommonDatasets(dstDTableUuid, byGroup=false) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     let params = {};
