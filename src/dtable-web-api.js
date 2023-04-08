@@ -3871,7 +3871,7 @@ class DTableWebAPI {
   sysAdminUpdateAddressBookV2DepartmentMember(departmentId, email, options) {
     const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/members/${email}/`;
     const form = new FormData();
-    if (options.is_staff) {
+    if (typeof options.is_staff === 'boolean') {
       form.append('is_staff', options.is_staff);
     }
     return this.req.put(url, form);
