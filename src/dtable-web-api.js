@@ -2120,6 +2120,16 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  batchMoveCustomAsset(dtableUuid, srcParentDir, dirents, dstParentDir) {
+    let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/batch-copy/';
+    let data = {
+      'src_parent_dir': srcParentDir,
+      'src_dirents': dirents,
+      'dst_parent_dir': dstParentDir,
+    };
+    return this.req.post(url, data);
+  }
+
   addCustomAssetZipTask(dtableUuid, parentDir, dirents) {
     let url = this.server + `/api/v2.1/dtable-custom-asset/${dtableUuid}/zip-task/`;
     let form = new FormData();
