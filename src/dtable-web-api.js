@@ -2120,7 +2120,7 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
-  batchMoveCustomAsset(dtableUuid, srcParentDir, dirents, dstParentDir) {
+  batchCopyCustomAsset(dtableUuid, srcParentDir, dirents, dstParentDir) {
     let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/batch-copy/';
     let data = {
       'src_parent_dir': srcParentDir,
