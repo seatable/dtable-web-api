@@ -1030,8 +1030,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  queryRowLinkRecords(dtableUuid, tableId, rowId, linkColumns) {
-    let url = this.server + '/api/v2.1/dtable-db/row-link-records/' + dtableUuid + '/';
+  pageDesginQueryRowLinkRecords(dtableUuid, tableId, rowId, linkColumns) {
+    let url = this.server + '/api/v2.1/page-design/row-link-records/' + dtableUuid + '/';
     let form = new FormData();
     form.append('table_id', tableId);
     form.append('row_id', rowId);
@@ -1039,8 +1039,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  queryRowsLinkRecords(dtableUuid, tableId, rowIds, linkColumns) {
-    let url = this.server + '/api/v2.1/dtable-db/rows-link-records/' + dtableUuid + '/';
+  pageDesignQueryRowsLinkRecords(dtableUuid, tableId, rowIds, linkColumns) {
+    let url = this.server + '/api/v2.1/page-design/rows-link-records/' + dtableUuid + '/';
     let form = new FormData();
     form.append('table_id', tableId);
     form.append('row_ids', rowIds);
