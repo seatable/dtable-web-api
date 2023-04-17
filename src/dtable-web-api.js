@@ -2525,7 +2525,7 @@ class DTableWebAPI {
   }
 
   listAddressBookV2DepartmentMemberDTables(departmentId, email) {
-    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members/${email}/dtable/`;
+    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members/${email}/dtables/`;
     return this.req.get(url);
   }
 
