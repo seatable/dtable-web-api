@@ -1754,9 +1754,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getUploadLinkViaWorkflowToken(token, uploadType) {
+  getUploadLinkViaWorkflowToken(token, uploadType, taskId = null) {
     let url = this.server + '/api/v2.1/workflows/' + token + '/upload-link/';
-    return this.req.get(url, { params: { upload_type: uploadType } });
+    const params = { upload_type: uploadType };
+    if (taskId) {
+      params.task_id = taskId;
+    }
+    return this.req.get(url, { params });
   }
 
   getWorkflowInitForm(token) {
