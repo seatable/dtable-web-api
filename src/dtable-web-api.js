@@ -2706,6 +2706,18 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
+  semanticSearchInView(dtableUuid, query, table_id, view_id, count) {
+    let url = this.server + '/api/v2.1/similarity-search-in-view/';
+    let params = {
+      'dtable_uuid': dtableUuid,
+      'query': query,
+      'table_id': table_id,
+      'view_id': view_id,
+      'count': count,
+    };
+    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
