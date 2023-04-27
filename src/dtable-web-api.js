@@ -2277,6 +2277,22 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  listTrashAssets(dtableUuid, deleteFrom, parentDir = '', page = 1, perPage = 25) {
+    const url = this.server + `/api/v2.1/dtable-asset/${dtableUuid}/trash/`;
+    const params = {
+      delete_from: deleteFrom,
+      parent_dir: parentDir,
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params });
+  }
+
+  revertTrashAsset(dtableUuid, trashItemId) {
+    const url = this.server + `/api/v2.1/dtable-asset/${dtableUuid}/trash/${trashItemId}/revert/`;
+    return this.req.put(url);
+  }
+
   listCommonDatasets(dstDTableUuid, byGroup=false) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     let params = {};
