@@ -2056,6 +2056,25 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  checkSeafileRepo(seafileUrl, repoApiToken) {
+    let url = this.server + '/api/v2.1/seafile-connectors/repo-check/';
+    const form = new FormData();
+    form.append('seafile_url', seafileUrl);
+    form.append('repo_api_token', repoApiToken);
+    return this._sendPostRequest(url, form);
+  }
+
+  listSeafileRepoDir(seafileUrl, repoApiToken, path) {
+    let url = this.server + '/api/v2.1/seafile-connectors/dir/';
+    const form = new FormData();
+    form.append('seafile_url', seafileUrl);
+    form.append('repo_api_token', repoApiToken);
+    if (path) {
+      form.append('path', path);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
   getCustomAssetUploadLink(dtableUuid, parentDir) {
     const url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/upload-link/?parent_dir=' + encodeURIComponent(parentDir);
     return this.req.get(url);
