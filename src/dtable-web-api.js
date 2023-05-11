@@ -2056,15 +2056,15 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  checkSeafileRepo(seafileUrl, repoApiToken) {
-    let url = this.server + '/api/v2.1/seafile-connectors/repo-check/';
+  getSeafileRepoInfo(seafileUrl, repoApiToken) {
+    let url = this.server + '/api/v2.1/seafile-connectors/repo-info/';
     const form = new FormData();
     form.append('seafile_url', seafileUrl);
     form.append('repo_api_token', repoApiToken);
     return this._sendPostRequest(url, form);
   }
 
-  listSeafileRepoDir(seafileUrl, repoApiToken, path) {
+  getSeafileRepoFileList(seafileUrl, repoApiToken, path) {
     let url = this.server + '/api/v2.1/seafile-connectors/dir/';
     const form = new FormData();
     form.append('seafile_url', seafileUrl);
@@ -2072,6 +2072,15 @@ class DTableWebAPI {
     if (path) {
       form.append('path', path);
     }
+    return this._sendPostRequest(url, form);
+  }
+
+  getSeafileDownloadFileLink(seafileUrl, repoApiToken, path) {
+    let url = this.server + '/api/v2.1/seafile-connectors/download-link/';
+    const form = new FormData();
+    form.append('seafile_url', seafileUrl);
+    form.append('repo_api_token', repoApiToken);
+    form.append('path', path);
     return this._sendPostRequest(url, form);
   }
 
