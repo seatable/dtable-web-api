@@ -896,13 +896,13 @@ class DTableWebAPI {
   }
 
   getActivitiesDetail(dtable_uuid, opDate, pageNum, avatarSize=36) {
-    let params = 'dtable_uuid=' + dtable_uuid + '&op_date=' + opDate + '&page=' + pageNum + '&avatar_size=' + avatarSize;
+    let params = 'dtable_uuid=' + dtable_uuid + '&op_date=' + encodeURIComponent(opDate) + '&page=' + pageNum + '&avatar_size=' + avatarSize;
     let url = this.server + '/api/v2.1/dtable-activities/detail/?' + params;
     return this.req.get(url);
   }
 
-  getDTableActivities(pageNum) {
-    let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum;
+  getDTableActivities(pageNum, to_tz) {
+    let url = this.server + '/api/v2.1/dtable-activities/?page=' + pageNum + '&to_tz=' + encodeURIComponent(to_tz);
     return this.req.get(url);
   }
 
