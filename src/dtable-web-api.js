@@ -2746,6 +2746,14 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
+  semanticSearchInAllBases(query) {
+    let url = this.server + '/api/v2.1/similarity-search-in-all/';
+    let params = {
+      'query': query,
+    };
+    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
