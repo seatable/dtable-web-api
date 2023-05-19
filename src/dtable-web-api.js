@@ -1030,7 +1030,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  pageDesginQueryRowLinkRecords(dtableUuid, tableId, rowId, linkColumns) {
+  pageDesignQueryRowLinkRecords(dtableUuid, tableId, rowId, linkColumns) {
     let url = this.server + '/api/v2.1/page-design/row-link-records/' + dtableUuid + '/';
     let form = new FormData();
     form.append('table_id', tableId);
