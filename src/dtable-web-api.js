@@ -4385,6 +4385,28 @@ class DTableWebAPI {
     };
     return this.req.get(url, { params: params });
   }
+
+  // plugin module
+  exportBigDataScreenPageContent(workspaceID, dtableName, pageName, pageId) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/export-big-data-screen/?page_name=' + encodeURIComponent(pageName) + '&page_id=' + pageId;
+    return this.req.get(url);
+  }
+  
+  importBigDataScreenPageContent(workspaceID, dtableName, newPageId, fileUrl, file) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/import-big-data-screen/';
+    const form = new FormData();
+    form.append('page_id', newPageId);
+    if (fileUrl) {
+      form.append('is_file', false);
+      form.append('file_url', fileUrl);
+    } else {
+      form.append('is_file', true);
+      form.append('zip_file', file);
+    }
+
+    return this.req.post(url, form);
+  }
+
 }
 
 export default DTableWebAPI;
