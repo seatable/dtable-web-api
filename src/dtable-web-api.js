@@ -2746,12 +2746,30 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
-  semanticSearchInAllBases(query) {
+  semanticSearchInAllBases(query, { count, search_range } = {}) {
     let url = this.server + '/api/v2.1/similarity-search-in-all/';
     let params = {
       'query': query,
     };
+    if (count) {
+      params['count'] = count;
+    }
+    if (search_range) {
+      params['search_range'] = search_range;
+    }
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  listSemanticSearchBases() {
+    let url = this.server + '/api/v2.1/semantic-related-dtables/';
+    return this.req.get(url);
+  }
+
+  queryBatchIndexes(indexRange) {
+    let url = this.server + '/api/v2.1/batch-indexes/';
+    let form = new FormData();
+    form.append('index_range', JSON.stringify(indexRange));
+    return this._sendPostRequest(url, form);
   }
 
   // org admin api
