@@ -196,9 +196,10 @@ class DTableWebAPI {
   }
 
   // ---- dTable api
-  createTable(name, owner, dtableIcon, dtableColor, textColor, folderID) {
+  createTable(workspaceID, name, owner, dtableIcon, dtableColor, textColor, dst_parent_folder) {
     const url = this.server + '/api/v2.1/dtables/';
     let form = new FormData();
+    form.append('workspace_id', workspaceID);
     form.append('name', name);
     form.append('owner', owner);
     if (dtableColor) {
@@ -210,10 +211,10 @@ class DTableWebAPI {
     if (textColor) {
       form.append('text_color', textColor);
     }
-    if (folderID) {
-      form.append('folder_id', folderID);
+    if (dst_parent_folder) {
+      form.append('dst_parent_folder', dst_parent_folder);
     }
-    return this._sendPostRequest(url, form);
+    return this._sendPostRequest(url, form, {headers: {'Content-Type': 'application/json'}});
   }
 
   renameTable(workspaceID, old_name, new_name) {
@@ -262,9 +263,12 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  deleteTable(workspaceID, name) {
+  deleteTable(workspaceID, name, src_parent_folder) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/';
-    let params = { name: name };
+    let params = {
+      name: name,
+      src_parent_folder: src_parent_folder,
+    };
     return this.req.delete(url, { data: params });
   }
 
@@ -954,32 +958,50 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
-  createFolder(workspaceID, name) {
+  listFolderStructure(workspaceID, path) {
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/folders/?path=' + path;
+    return this.req.get(url);
+  }
+
+  createFolder(workspaceID, name, dst_parent_folder) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/';
     let form = new FormData();
     form.append('name', name);
+    form.append('dst_parent_folder', dst_parent_folder);
     return this._sendPostRequest(url, form);
   }
 
-  updateFolder(workspaceID, folderID, name) {
+  updateFolder(workspaceID, folderID, name, src_parent_folder) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/' + folderID + '/';
     let form = new FormData();
     form.append('name', name);
+    form.append('src_parent_folder', src_parent_folder);
     return this.req.put(url, form);
   }
 
-  deleteFolder(workspaceID, folderID) {
+  deleteFolder(workspaceID, folderID, src_parent_folder) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/' + folderID +'/';
-    return this.req.delete(url);
+    let params = {};
+    params['src_parent_folder'] = src_parent_folder;
+    return this.req.delete(url, {data: params});
   }
 
-  moveFolderItem(workspaceID, itemType, itemID, moveFrom, moveTo) {
+  moveFolder(workspaceID, folder_name, src_parent_folder, dst_parent_folder) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/structure/folders/' + folderID +'/';
+    let form = new FormData();
+    form.append('folder_name', folder_name);
+    form.append('src_parent_folder', src_parent_folder);
+    form.append('dst_parent_folder', dst_parent_folder);
+    return this._sendPostRequest(url, form);
+  }
+
+  moveFolderItem(workspaceID, itemType, itemID, src_parent_folder, dst_parent_folder) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folder-item-moving/';
     let form = new FormData();
     form.append('item_type', itemType);
     form.append('item_id', itemID);
-    form.append('from', moveFrom);
-    form.append('to', moveTo);
+    form.append('src_parent_folder', src_parent_folder);
+    form.append('dst_parent_folder', dst_parent_folder);
     return this._sendPostRequest(url, form);
   }
 
