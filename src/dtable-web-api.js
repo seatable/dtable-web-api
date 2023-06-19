@@ -1324,6 +1324,19 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
+  addNotificationSendTask(dtableUuid, emails, userColKey, message, tableId, rowId) {
+    let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/notification/';
+    let data = {
+      'msg': message,
+      'emails': emails,
+      'table_id': tableId,
+      'row_id': rowId,
+      'user_col_key': userColKey,
+    };
+
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
 
   getMessageSendStatus(task_id) {
     const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
