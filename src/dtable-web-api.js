@@ -1074,6 +1074,11 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
+  duplicateExternalAppInstance(token) {
+    let url = this.server + '/api/v2.1/external-apps/' + token + '/duplicate/';
+    return this.req.post(url);
+  }
+
   listUserApps() {
     let url = this.server + '/api/v2.1/universal-apps/';
     return this.req.get(url);
