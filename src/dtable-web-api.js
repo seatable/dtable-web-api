@@ -983,6 +983,45 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  // dtable share-folders module
+  createShareFolder(name) {
+    let url = this.server + '/api/v2.1/dtables/share-folders/';
+    let form = new FormData();
+    form.append('name', name);
+    return this._sendPostRequest(url, form);
+  }
+
+  renameShareFolder(name, share_folder_id) {
+    let url = this.server + '/api/v2.1/dtables/share-folders/' + share_folder_id + '/';
+    let form = new FormData();
+    form.append('name', name);
+    return this.req.put(url, form);
+  }
+
+  deleteShareFolder(share_folder_id) {
+    let url = this.server + '/api/v2.1/dtables/share-folders/' + share_folder_id + '/';
+    return this.req.delete(url);
+  }
+
+  getShareFolderContent(share_folder_id) {
+    let url = this.server + '/api/v2.1/dtables/share-folders/' + share_folder_id + '/';
+    return this.req.get(url);
+  }
+
+  moveShareTableToFolder(dtable_share_id, move_to) {
+    let url = this.server + '/api/v2.1/dtables/share-table-move-to-folder/' + dtable_share_id + '/';
+    let form = new FormData();
+    form.append('move_to', move_to);
+    return this._sendPostRequest(url, form);
+  }
+
+  moveShareViewToFolder(view_share_id, move_to) {
+    let url = this.server + '/api/v2.1/dtables/share-view-move-to-folder/' + view_share_id + '/';
+    let form = new FormData();
+    form.append('move_to', move_to);
+    return this._sendPostRequest(url, form);
+  }
+
   // dtable plugin module
   listAvailablePlugins() {
     let url = this.server + '/api/v2.1/dtable-system-plugins/';
