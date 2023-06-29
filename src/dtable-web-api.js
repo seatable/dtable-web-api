@@ -2288,6 +2288,14 @@ class DTableWebAPI {
     return this.req.get(url, { params });
   }
 
+  cleanTrashAssets(dtableUuid, deleteFrom) {
+    const url = this.server + `/api/v2.1/dtable-asset/${dtableUuid}/trash/`;
+    const params = {
+      delete_from: deleteFrom
+    };
+    return this.req.delete(url, {params});
+  }
+
   revertTrashAsset(dtableUuid, trashItemId) {
     const url = this.server + `/api/v2.1/dtable-asset/${dtableUuid}/trash/${trashItemId}/revert/`;
     return this.req.put(url);
