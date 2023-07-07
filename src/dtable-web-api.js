@@ -2862,6 +2862,38 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  queryMultiBaseIndexState(associateId) {
+    let url = this.server + '/api/v2.1/multi-base-index-state/?associate_id=' + associateId;
+    return this.req.get(url);
+  }
+
+  createMultiBaseIndex(indexRange, associateId) {
+    let url = this.server + '/api/v2.1/multi-base-embedding-collections/';
+    let form = new FormData();
+    form.append('index_range', JSON.stringify(indexRange));
+    form.append('associate_id', associateId);
+    return this._sendPostRequest(url, form);
+  }
+
+  updateMultiBaseIndex(indexRange, associateId) {
+    let url = this.server + '/api/v2.1/multi-base-embedding-collections/' + associateId + '/';
+    let form = new FormData();
+    form.append('index_range', JSON.stringify(indexRange));
+    return this.req.put(url, form);
+  }
+
+  semanticSearchInMultiBase(query, appToken, count=null) {
+    let url = this.server + '/api/v2.1/similarity-search-in-multi-base/';
+    let params = {
+      'query': query,
+      'associate_id': appToken,
+    };
+    if (count) {
+      params['count'] = count;
+    }
+    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
