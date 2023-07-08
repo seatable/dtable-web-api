@@ -2521,6 +2521,38 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listAddressBookV2UserDepartments() {
+    const url = this.server + '/api/v2.1/address-book-v2/user-departments/';
+    return this.req.get(url);
+  }
+
+  listAddressBookV2SubDepartments(departmentId) {
+    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/sub-departments/`;
+    return this.req.get(url);
+  }
+
+  listAddressBookV2DepartmentMembers(departmentId) {
+    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members/`;
+    return this.req.get(url);
+  }
+
+  bulkAddAddressBookV2DepartmentMembers(departmentId, emails) {
+    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members-bulk/`;
+    const form = new FormData();
+    form.append('emails', emails.join(','));
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteAddressBookV2Member(departmentId, email) {
+    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members/${email}/`;
+    return this.req.delete(url);
+  }
+
+  listAddressBookV2DepartmentMemberDTables(departmentId, email) {
+    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members/${email}/dtables/`;
+    return this.req.get(url);
+  }
+
   getInvitationLink() {
     const url = this.server + '/api/v2.1/invitation-link/';
     return this.req.get(url);
@@ -3087,6 +3119,58 @@ class DTableWebAPI {
   orgAdminListGroupInfo(orgID, groupID, showAncestors) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/' + groupID + '/?return_ancestors=' + showAncestors;
     return this.req.get(url);
+  }
+
+  orgAdminListAddressBookV2Departments(orgId, parentId) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/`;
+    const params = { parent_id: parentId };
+    return this.req.get(url, { params });
+  }
+
+  orgAdminCreateAddressBookV2Department(orgId, parentId, name) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/`;
+    const form = new FormData();
+    form.append('parent_id', parentId);
+    form.append('name', name);
+    return this._sendPostRequest(url, form);
+  }
+
+  orgAdminUpdateAddressBookV2DepartmentName(orgId, departmentId, name) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/`;
+    const form = new FormData();
+    form.append('name', name);
+    return this.req.put(url, form);
+  }
+
+  orgAdminDeleteAddressBookV2Department(orgId, departmentId) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/`;
+    return this.req.delete(url);
+  }
+
+  orgAdminListAddressBookV2DepartmentMembers(orgId, departmentId) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/members/`;
+    return this.req.get(url);
+  }
+
+  orgAdminAddAddressBookV2DepartmentMembers(orgId, departmentId, emails) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/members/`;
+    const form = new FormData();
+    emails.forEach(email => form.append('email', email));
+    return this._sendPostRequest(url, form);
+  }
+
+  orgAdminUpdateAddressBookV2DepartmentMember(orgId, departmentId, email, options) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/members/${email}/`;
+    const form = new FormData();
+    if (typeof options.is_staff === 'boolean') {
+      form.append('is_staff', options.is_staff);
+    }
+    return this.req.put(url, form);
+  }
+
+  orgAdminDeleteAddressBookV2DepartmentMember(orgId, departmentId, email) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/members/${email}/`;
+    return this.req.delete(url);
   }
 
   orgAdminListGroupMembers(orgID, groupID) {
@@ -3854,6 +3938,58 @@ class DTableWebAPI {
 
   sysAdminDeleteDepartGroup(groupID) {
     const url = this.server + '/api/v2.1/admin/address-book/groups/' + groupID + '/';
+    return this.req.delete(url);
+  }
+
+  sysAdminListAddressBookV2Departments(parentId) {
+    const url = this.server + '/api/v2.1/admin/address-book-v2/departments/';
+    const params = { parent_id: parentId };
+    return this.req.get(url, { params });
+  }
+
+  sysAdminCreateAddressBookV2Department(parentId, name) {
+    const url = this.server + '/api/v2.1/admin/address-book-v2/departments/';
+    const form = new FormData();
+    form.append('parent_id', parentId);
+    form.append('name', name);
+    return this._sendPostRequest(url, form);
+  }
+
+  sysAdminUpdateAddressBookV2DepartmentName(departmentId, name) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/`;
+    const form = new FormData();
+    form.append('name', name);
+    return this.req.put(url, form);
+  }
+
+  sysAdminDeleteAddressBookV2Department(departmentId) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/`;
+    return this.req.delete(url);
+  }
+
+  sysAdminListAddressBookV2DepartmentMembers(departmentId) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/members/`;
+    return this.req.get(url);
+  }
+
+  sysAdminAddAddressBookV2DepartmentMembers(departmentId, emails) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/members/`;
+    const form = new FormData();
+    emails.forEach(email => form.append('email', email));
+    return this._sendPostRequest(url, form);
+  }
+
+  sysAdminUpdateAddressBookV2DepartmentMember(departmentId, email, options) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/members/${email}/`;
+    const form = new FormData();
+    if (typeof options.is_staff === 'boolean') {
+      form.append('is_staff', options.is_staff);
+    }
+    return this.req.put(url, form);
+  }
+
+  sysAdminDeleteAddressBookV2DepartmentMember(departmentId, email) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/members/${email}/`;
     return this.req.delete(url);
   }
 
