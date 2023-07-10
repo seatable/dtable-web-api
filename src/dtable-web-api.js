@@ -2526,6 +2526,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listAddressBookV2Departments() {
+    const url = this.server + '/api/v2.1/address-book-v2/departments/';
+    return this.req.get(url);
+  }
+
   listAddressBookV2SubDepartments(departmentId) {
     const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/sub-departments/`;
     return this.req.get(url);
