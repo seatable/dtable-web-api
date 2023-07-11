@@ -1133,6 +1133,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listAppDepartmentV2Members(token, department_id) {
+    const url = this.server + '/api/v2.1/universal-apps/' + token + '/departments-v2/'+ department_id +'/members/';
+    return this.req.get(url);
+  }
+
   leaveApp(appUserId) {
     let url = this.server + '/api/v2.1/app-users/' + appUserId + '/';
     return this.req.delete(url);
@@ -2523,6 +2528,11 @@ class DTableWebAPI {
 
   listAddressBookV2UserDepartments() {
     const url = this.server + '/api/v2.1/address-book-v2/user-departments/';
+    return this.req.get(url);
+  }
+
+  listAddressBookV2Departments() {
+    const url = this.server + '/api/v2.1/address-book-v2/departments/';
     return this.req.get(url);
   }
 
