@@ -2910,7 +2910,7 @@ class DTableWebAPI {
   }
 
   createMultiBaseIndex(indexRange, associateId) {
-    let url = this.server + '/api/v2.1/multi-base-embedding-collections/';
+    let url = this.server + '/api/v2.1/multi-base-collections/';
     let form = new FormData();
     form.append('index_range', JSON.stringify(indexRange));
     form.append('associate_id', associateId);
@@ -2918,7 +2918,7 @@ class DTableWebAPI {
   }
 
   updateMultiBaseIndex(indexRange, associateId) {
-    let url = this.server + '/api/v2.1/multi-base-embedding-collections/' + associateId + '/';
+    let url = this.server + '/api/v2.1/multi-base-collections/' + associateId + '/';
     let form = new FormData();
     form.append('index_range', JSON.stringify(indexRange));
     return this.req.put(url, form);
@@ -2926,6 +2926,18 @@ class DTableWebAPI {
 
   semanticSearchInMultiBase(query, appToken, count=null) {
     let url = this.server + '/api/v2.1/similarity-search-in-multi-base/';
+    let params = {
+      'query': query,
+      'associate_id': appToken,
+    };
+    if (count) {
+      params['count'] = count;
+    }
+    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  keywordsSearchInMultiBase(query, appToken, count=null) {
+    let url = this.server + '/api/v2.1/keywords-search-in-multi-base/';
     let params = {
       'query': query,
       'associate_id': appToken,
