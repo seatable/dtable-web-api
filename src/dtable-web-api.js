@@ -3943,6 +3943,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminAddUserToGroups(email, groupIds) {
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/groups/';
+    const form = new FormData();
+    groupIds.forEach(groupId => form.append('group_id', groupId));
+    return this._sendPostRequest(url, form);
+  }
+
   sysAdminListDepartGroups() {
     const url = this.server + '/api/v2.1/admin/address-book/groups/';
     return this.req.get(url);
