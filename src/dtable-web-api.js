@@ -3201,7 +3201,7 @@ class DTableWebAPI {
   }
 
   orgAdminAddressBookV2DepartmentsMigrate(orgId) {
-    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments-migration/`;
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments-migrate/`;
     return this.req.post(url);
   }
 
@@ -4038,7 +4038,7 @@ class DTableWebAPI {
   }
 
   sysAdminAddressBookV2DepartmentsMigrate() {
-    const url = this.server + '/api/v2.1/admin/address-book-v2/departments-migration/';
+    const url = this.server + '/api/v2.1/admin/address-book-v2/departments-migrate/';
     return this.req.post(url);
   }
 
