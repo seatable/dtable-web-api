@@ -3001,11 +3001,6 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  orgAdminConvertDepartGroups(orgID) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/address-book/groups/convert/';
-    return this.req.post(url);
-  }
-
   orgAdminAddOrgUser(orgID, email, name, password) {
     const url =  this.server + '/api/v2.1/org/' + orgID +'/admin/users/';
     let form = new FormData();
@@ -3978,11 +3973,6 @@ class DTableWebAPI {
   sysAdminDeleteDepartGroup(groupID) {
     const url = this.server + '/api/v2.1/admin/address-book/groups/' + groupID + '/';
     return this.req.delete(url);
-  }
-
-  sysAdminConvertDepartGroups() {
-    const url = this.server + '/api/v2.1/admin/address-book/groups/convert/';
-    return this.req.post(url);
   }
 
   sysAdminListAddressBookV2Departments(parentId) {
