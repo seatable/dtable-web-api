@@ -3195,6 +3195,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  orgAdminAddressBookV2DepartmentsMigrate(orgId) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments-migrate/`;
+    return this.req.post(url);
+  }
+
   orgAdminListGroupMembers(orgID, groupID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/members/';
     return this.req.get(url);
@@ -3933,6 +3938,13 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminAddUserToGroups(email, groupIds) {
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/groups/';
+    const form = new FormData();
+    groupIds.forEach(groupId => form.append('group_id', groupId));
+    return this._sendPostRequest(url, form);
+  }
+
   sysAdminListDepartGroups() {
     const url = this.server + '/api/v2.1/admin/address-book/groups/';
     return this.req.get(url);
@@ -4013,6 +4025,11 @@ class DTableWebAPI {
   sysAdminDeleteAddressBookV2DepartmentMember(departmentId, email) {
     const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/members/${email}/`;
     return this.req.delete(url);
+  }
+
+  sysAdminAddressBookV2DepartmentsMigrate() {
+    const url = this.server + '/api/v2.1/admin/address-book-v2/departments-migrate/';
+    return this.req.post(url);
   }
 
   sysAdminListUserDTables(email, page, per_page) {
