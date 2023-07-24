@@ -1118,6 +1118,14 @@ class DTableWebAPI {
     return this.req.post(url);
   }
 
+  suspendExternalAppInstance(token, isPause) {
+    let url = this.server + '/api/v2.1/external-apps/' + token + '/suspend/';
+    let data = {
+      is_pause: isPause
+    };
+    return this.req.put(url, data);
+  }
+
   listUserApps() {
     let url = this.server + '/api/v2.1/universal-apps/';
     return this.req.get(url);
