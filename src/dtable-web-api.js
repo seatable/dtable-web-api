@@ -2628,8 +2628,8 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
-  userConversionToTeam() {
-    const url = this.server + '/api/v2.1/user/conversion-to-team/';
+  userConvertToTeam() {
+    const url = this.server + '/api/v2.1/user/convert-to-team/';
     return this.req.post(url);
   }
 
