@@ -2628,6 +2628,11 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  userConvertToTeam() {
+    const url = this.server + '/api/v2.1/user/convert-to-team/';
+    return this.req.post(url);
+  }
+
   updateEmailNotificationInterval(dtableUpdatesEmailInterval, dtableCollaborateEmailInterval) {
     const url = this.server + '/api2/account/info/';
     const data = {
