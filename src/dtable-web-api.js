@@ -481,7 +481,6 @@ class DTableWebAPI {
   }
 
   addExportExternalDTable(externalLinkToken, isCustomToken, onDownloadProgress = null) {
-    // let url = this.server + '/dtable/external-links/'+ externalLinkToken +'/download-zip/';
     let url = `${this.server}/dtable/external-links/${isCustomToken ? 'custom/': ''}${externalLinkToken}/download-zip/`;
     const _this = this;
     return this.req.get(url, {onDownloadProgress, responseType: 'blob', cancelToken: new axios.CancelToken(function executor(c) {
