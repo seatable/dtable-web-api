@@ -729,11 +729,14 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  searchDTables(query_str) {
-    let url = this.server + `/api/v2.1/dtables/search/`;
+  searchItems(query_str, query_type) {
+    let url = this.server + `/api/v2.1/dtable/items-search/`;
     let params = {};
     if (query_str) {
       params.query_str = query_str;
+    }
+    if (query_type) {
+      params.query_type = query_type;
     }
     return this.req.get(url, {
       params
@@ -1300,17 +1303,6 @@ class DTableWebAPI {
   deleteAppCustomURL(token){
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-url/';
     return this.req.delete(url);
-  }
-
-  searchApps(query_str) {
-    let url = this.server + `/api/v2.1/universal-apps/search/`;
-    let params = {};
-    if (query_str) {
-      params.query_str = query_str;
-    }
-    return this.req.get(url, {
-      params
-    });
   }
 
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
@@ -1886,17 +1878,6 @@ class DTableWebAPI {
     }
     if (perPage) {
       params.per_page = perPage;
-    }
-    return this.req.get(url, {
-      params
-    });
-  }
-
-  searchWorkflows(query_str) {
-    let url = this.server + `/api/v2.1/workflows/search/`;
-    let params = {};
-    if (query_str) {
-      params.query_str = query_str;
     }
     return this.req.get(url, {
       params
