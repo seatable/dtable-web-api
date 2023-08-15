@@ -1340,6 +1340,12 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  updateAppVersion (token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/version-update/';
+    let form = new FormData();
+    return this._sendPostRequest(url, form);
+  }
+
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
     let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
     let form = new FormData();
