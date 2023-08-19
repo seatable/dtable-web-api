@@ -3209,6 +3209,16 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  orgAdminCreateAddressBookV2DepartmentGroup(orgId, departmentId) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/group/`;
+    return this.req.post(url);
+  }
+
+  orgAdminGetAddressBookV2DepartmentGroup(orgId, departmentId) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/group/`;
+    return this.req.get(url);
+  }
+
   orgAdminAddressBookV2DepartmentsMigrate(orgId) {
     const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments-migrate/`;
     return this.req.post(url);
@@ -4039,6 +4049,16 @@ class DTableWebAPI {
   sysAdminDeleteAddressBookV2DepartmentMember(departmentId, email) {
     const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/members/${email}/`;
     return this.req.delete(url);
+  }
+
+  sysAdminCreateAddressBookV2DepartmentGroup(departmentId) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/group/`;
+    return this.req.post(url);
+  }
+
+  sysAdminGetAddressBookV2DepartmentGroup(departmentId) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/group/`;
+    return this.req.get(url);
   }
 
   sysAdminAddressBookV2DepartmentsMigrate() {
