@@ -1118,8 +1118,8 @@ class DTableWebAPI {
     return this.req.post(url);
   }
 
-  suspendExternalAppInstance(token, isInactive) {
-    let url = this.server + '/api/v2.1/external-apps/' + token + '/suspend/';
+  changeExternalAppStatus(token, isInactive) {
+    let url = this.server + '/api/v2.1/external-apps/' + token + '/status/';
     let data = {
       is_inactive: isInactive
     };
