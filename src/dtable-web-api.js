@@ -1118,6 +1118,14 @@ class DTableWebAPI {
     return this.req.post(url);
   }
 
+  changeExternalAppStatus(token, isInactive) {
+    let url = this.server + '/api/v2.1/external-apps/' + token + '/status/';
+    let data = {
+      is_inactive: isInactive
+    };
+    return this.req.put(url, data);
+  }
+
   listUserApps() {
     let url = this.server + '/api/v2.1/universal-apps/';
     return this.req.get(url);
