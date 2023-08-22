@@ -729,6 +729,20 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  searchItems(query_str, query_type) {
+    let url = this.server + `/api/v2.1/dtable/items-search/`;
+    let params = {};
+    if (query_str) {
+      params.query_str = query_str;
+    }
+    if (query_type) {
+      params.query_type = query_type;
+    }
+    return this.req.get(url, {
+      params
+    });
+  }
+
   getDTableWebhooks(workspaceID, name) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/webhooks/';
     return this.req.get(url);
