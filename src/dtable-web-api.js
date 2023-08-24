@@ -2962,6 +2962,25 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
+  listMultiBaseIndexRecords() {
+    let url = this.server + '/api/v2.1/multi-base-index-records/';
+    return this.req.get(url);
+  }
+
+  createMultiBaseIndexRecord(indexConfig) {
+    let url = this.server + '/api/v2.1/multi-base-index-records/';
+    let form = new FormData();
+    form.append('index_config', indexConfig);
+    return this.req.post(url, form);
+  }
+
+  updateMultiBaseIndexRecord(associateId, indexConfig) {
+    let url = this.server + '/api/v2.1/multi-base-index-record/' + associateId + '/';
+    let form = new FormData();
+    form.append('index_config', indexConfig);
+    return this.req.put(url, form);
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
