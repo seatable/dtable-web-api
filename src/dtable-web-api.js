@@ -944,7 +944,10 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/restore/';
     let form = new FormData();
     form.append('snapshot_name', snapshotName);
-    form.append('password', password);
+    if (password) {
+      form.append('password', password);
+    }
+
     return this._sendPostRequest(url, form);
   }
 
