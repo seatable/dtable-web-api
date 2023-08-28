@@ -940,10 +940,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  restoreDTableSnapshot(workspaceID, dtableName, commitId, snapshotName) {
+  restoreDTableSnapshot(workspaceID, dtableName, commitId, snapshotName, password) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/restore/';
     let form = new FormData();
     form.append('snapshot_name', snapshotName);
+    if (password) {
+      form.append('password', password);
+    }
+
     return this._sendPostRequest(url, form);
   }
 
