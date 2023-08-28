@@ -1334,6 +1334,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  deleteAppSnapshot(token, snapshot_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/';
+    return this.req.delete(url);
+  }
+
   restoreApp (token, snapshot_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/restore/';
     let form = new FormData();
