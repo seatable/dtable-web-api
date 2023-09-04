@@ -1848,7 +1848,7 @@ class DTableWebAPI {
 
   // workflow-folders module
   createWorkflowFolder(name, folder_type) {
-    let url = this.server + '/api/v2.1/workflows/workflow-folders/';
+    let url = this.server + '/api/v2.1/workflows/folders/';
     let form = new FormData();
     form.append('name', name);
     form.append('folder_type', folder_type);
@@ -1856,24 +1856,24 @@ class DTableWebAPI {
   }
 
   deleteWorkflowFolder(workflow_folder_id) {
-    let url = this.server + '/api/v2.1/workflows/workflow-folders/' + workflow_folder_id + '/';
+    let url = this.server + '/api/v2.1/workflows/folders/' + workflow_folder_id + '/';
     return this.req.delete(url);
   }
 
   renameWorkflowFolder(name, workflow_folder_id) {
-    let url = this.server + '/api/v2.1/workflows/workflow-folders/' + workflow_folder_id + '/';
+    let url = this.server + '/api/v2.1/workflows/folders/' + workflow_folder_id + '/';
     let form = new FormData();
     form.append('name', name);
     return this.req.put(url, form);
   }
 
   getCurrentFolderWorkflow(workflow_folder_id) {
-    let url = this.server + '/api/v2.1/workflows/workflow-folders/' + workflow_folder_id + '/';
+    let url = this.server + '/api/v2.1/workflows/folders/' + workflow_folder_id + '/';
     return this.req.get(url);
   }
 
   moveWorkflowToFolder(workflow_id, move_from, move_to) {
-    let url = this.server + '/api/v2.1/workflows/workflow-folders/move-workflow-to-folder/' + workflow_id + '/';
+    let url = this.server + '/api/v2.1/workflows/folders/'+ workflow_id + '/move-workflow-to-folder/' ;
     let form = new FormData();
     form.append('move_from', move_from);
     form.append('move_to', move_to);
