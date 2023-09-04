@@ -1880,13 +1880,6 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  moveSharedWorkflowToFolder(workflow_share_id, move_from, move_to) {
-    let url = this.server + '/api/v2.1/workflows/workflow-folders/move-workflow-share-to-folder/' + workflow_share_id + '/';
-    let form = new FormData();
-    form.append('move_from', move_from);
-    form.append('move_to', move_to);
-    return this._sendPostRequest(url, form);
-  }
 
   getPublicUploadLinkViaWorkflowToken(token) {
     let url = this.server + '/api/v2.1/workflows/' + token + '/public-upload-link/';
