@@ -1872,8 +1872,8 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  moveWorkflowToFolder(workflow_id, move_from, move_to) {
-    let url = this.server + '/api/v2.1/workflows/folders/'+ workflow_id + '/move-workflow-to-folder/' ;
+  moveWorkflowToFolder(token, move_from, move_to) {
+    let url = this.server + `/api/v2.1/workflows/${token}/move-workflow-to-folder/`;
     let form = new FormData();
     form.append('move_from', move_from);
     form.append('move_to', move_to);
