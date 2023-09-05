@@ -1328,10 +1328,21 @@ class DTableWebAPI {
     });
   }
 
-  addAppSnapshot (token) {
+  addAppSnapshot (token, notes) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/';
     let form = new FormData();
+    if (notes) {
+      form.append('notes', notes);
+    }
     return this._sendPostRequest(url, form);
+  }
+
+  editAppSnapshot(token, snapshot_id, notes) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/';
+    let data = {
+       'notes': notes,
+    };
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
   deleteAppSnapshot(token, snapshot_id) {
