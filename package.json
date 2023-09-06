@@ -7,8 +7,8 @@
     "lint": "eslint ./src/dtable-web-api.js --fix",
     "clean": "rm -rf lib && mkdir lib",
     "test": "jest --env=node --colors --coverage",
-    "pub:lib": "./node_modules/.bin/babel src --out-dir lib",
-    "prepublishOnly": "npm run clean && npm run pub:lib"
+    "build": "./node_modules/.bin/babel src --out-dir lib",
+    "prepublishOnly": "npm run clean && npm run build"
   },
   "files": [
     "lib",
