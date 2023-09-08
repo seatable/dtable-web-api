@@ -730,7 +730,7 @@ class DTableWebAPI {
   }
 
   searchItems(query_str, query_type) {
-    let url = this.server + `/api/v2.1/dtable/items-search/`;
+    let url = this.server + '/api/v2.1/dtable/items-search/';
     let params = {};
     if (query_str) {
       params.query_str = query_str;
@@ -2198,7 +2198,7 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/file-search/';
     url = url + '?query=' + query + '&parent_dir=' + encodeURIComponent(parentDir);
     if (isCustom) {
-      url = url + '&from_custom=1'
+      url = url + '&from_custom=1';
     }
     return this.req.get(url);
   }
