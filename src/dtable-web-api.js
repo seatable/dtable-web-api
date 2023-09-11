@@ -2999,6 +2999,15 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
+  optimizeCommonWording(text, tableName) {
+    let url = this.server + 'api/v2.1/optimize-common-wording/';
+    let params = {
+      'text': text,
+      'table_name': tableName,
+    };
+    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
+  }
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
