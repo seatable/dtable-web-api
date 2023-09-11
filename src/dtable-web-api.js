@@ -3000,7 +3000,7 @@ class DTableWebAPI {
   }
 
   optimizeCommonWording(text, tableName) {
-    let url = this.server + 'api/v2.1/optimize-common-wording/';
+    let url = this.server + '/api/v2.1/optimize-common-wording/';
     let params = {
       'text': text,
       'table_name': tableName,
