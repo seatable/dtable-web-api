@@ -1317,7 +1317,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  listAppSnapshots (token, page, perPage) {
+  listAppSnapshots(token, page, perPage) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/';
     let params = {
       page: page,
@@ -1328,7 +1328,7 @@ class DTableWebAPI {
     });
   }
 
-  addAppSnapshot (token, notes) {
+  addAppSnapshot(token, notes) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/';
     let form = new FormData();
     if (notes) {
@@ -1350,13 +1350,13 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  restoreApp (token, snapshot_id) {
+  restoreApp(token, snapshot_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/restore/';
     let form = new FormData();
     return this._sendPostRequest(url, form);
   }
 
-  updateAppVersion (token) {
+  updateAppVersion(token) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/version-update/';
     let form = new FormData();
     return this._sendPostRequest(url, form);
