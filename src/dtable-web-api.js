@@ -1317,6 +1317,51 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  listAppSnapshots(token, page, perPage) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
+  addAppSnapshot(token, notes) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/';
+    let form = new FormData();
+    if (notes) {
+      form.append('notes', notes);
+    }
+    return this._sendPostRequest(url, form);
+  }
+
+  editAppSnapshot(token, snapshot_id, notes) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/';
+    let data = {
+       'notes': notes,
+    };
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  deleteAppSnapshot(token, snapshot_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/';
+    return this.req.delete(url);
+  }
+
+  restoreApp(token, snapshot_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/restore/';
+    let form = new FormData();
+    return this._sendPostRequest(url, form);
+  }
+
+  updateAppVersion(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/version-update/';
+    let form = new FormData();
+    return this._sendPostRequest(url, form);
+  }
+
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
     let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
     let form = new FormData();
