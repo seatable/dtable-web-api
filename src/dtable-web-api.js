@@ -1867,7 +1867,7 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  getCurrentFolderWorkflow(workflow_folder_id) {
+  getWorkflowFolderContent(workflow_folder_id) {
     let url = this.server + '/api/v2.1/workflows/folders/' + workflow_folder_id + '/';
     return this.req.get(url);
   }
