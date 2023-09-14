@@ -2999,11 +2999,11 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
-  optimizeCommonWording(text, tableName) {
-    let url = this.server + '/api/v2.1/optimize-common-wording/';
+  optimizeWording(text, intent) {
+    let url = this.server + '/api/v2.1/optimize-wording/';
     let params = {
       'text': text,
-      'table_name': tableName,
+      'intent': intent,
     };
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
