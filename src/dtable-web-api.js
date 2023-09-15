@@ -3079,14 +3079,6 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
-  optimizeWording(text) {
-    let url = this.server + '/api/v2.1/optimize-wording/';
-    let params = {
-      'text': text,
-    };
-    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
-  }
-
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
