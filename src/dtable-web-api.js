@@ -3068,17 +3068,6 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
-  //ai assistant api
-  smartFillFromText(text, dtableUuid, tableName) {
-    let url = this.server + '/api/v2.1/smart-fill-from-text/';
-    let params = {
-      'text': text,
-      'dtable_uuid': dtableUuid,
-      'table_name': tableName,
-    };
-    return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
-  }
-
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
