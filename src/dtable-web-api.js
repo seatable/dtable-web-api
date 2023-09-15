@@ -2999,11 +2999,10 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
-  optimizeWording(text, intent) {
+  optimizeWording(text) {
     let url = this.server + '/api/v2.1/optimize-wording/';
     let params = {
       'text': text,
-      'intent': intent,
     };
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
