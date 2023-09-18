@@ -3885,6 +3885,9 @@ class DTableWebAPI {
     if (orgInfo.smsMessageLimitPerMonth) {
       formData.append('sms_message_limit_per_month', orgInfo.smsMessageLimitPerMonth);
     }
+    if (orgInfo.bigDataStorageQuotaMb) {
+      formData.append('big_data_storage_quota_mb', orgInfo.bigDataStorageQuotaMb)
+    }
     return this.req.put(url, formData);
   }
 
