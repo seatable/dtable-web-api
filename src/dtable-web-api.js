@@ -1340,7 +1340,7 @@ class DTableWebAPI {
   editAppSnapshot(token, snapshot_id, notes) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/';
     let data = {
-       'notes': notes,
+      'notes': notes,
     };
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
