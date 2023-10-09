@@ -3330,6 +3330,11 @@ class DTableWebAPI {
     return this.req.post(url);
   }
 
+  orgAdminListAddressBookV2NonDepartmentUsers(orgId) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/non-department-users/`;
+    return this.req.get(url);
+  }
+
   orgAdminListGroupMembers(orgID, groupID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/members/';
     return this.req.get(url);
@@ -4170,6 +4175,11 @@ class DTableWebAPI {
   sysAdminAddressBookV2DepartmentsMigrate() {
     const url = this.server + '/api/v2.1/admin/address-book-v2/departments-migrate/';
     return this.req.post(url);
+  }
+
+  sysAdminListAddressBookV2NonDepartmentUsers() {
+    const url = this.server + '/api/v2.1/admin/address-book-v2/non-department-users/';
+    return this.req.get(url);
   }
 
   sysAdminListUserDTables(email, page, per_page) {
