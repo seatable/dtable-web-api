@@ -3335,6 +3335,15 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  orgAdminAddressBookV2AddUserToDepartments(orgId, email, departmentIds) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/add-to-departments/`;
+    const data = {
+      email: email,
+      department_ids: departmentIds
+    };
+    return this.req.post(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
   orgAdminListGroupMembers(orgID, groupID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/members/';
     return this.req.get(url);
@@ -4180,6 +4189,15 @@ class DTableWebAPI {
   sysAdminListAddressBookV2NonDepartmentUsers() {
     const url = this.server + '/api/v2.1/admin/address-book-v2/non-department-users/';
     return this.req.get(url);
+  }
+
+  sysAdminAddressBookV2AddUserToDepartments(email, departmentIds) {
+    const url = this.server + '/api/v2.1/admin/address-book-v2/departments/add-to-departments/';
+    const data = {
+      email: email,
+      department_ids: departmentIds
+    };
+    return this.req.post(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
   sysAdminListUserDTables(email, page, per_page) {
