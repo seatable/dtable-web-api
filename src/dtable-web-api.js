@@ -947,8 +947,14 @@ class DTableWebAPI {
     if (password) {
       form.append('password', password);
     }
-
     return this._sendPostRequest(url, form);
+  }
+
+  updateDTableSnapshotNotes(workspaceID, dtableName, commitId, notes) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/notes/';
+    let form = new FormData();
+    form.append('notes', notes);
+    return this.req.put(url, form);
   }
 
   listTrashDTables(page, perPage){
