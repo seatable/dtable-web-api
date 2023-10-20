@@ -1213,6 +1213,14 @@ class DTableWebAPI {
     };
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
+
+  updateAppUserCandidate(token, app_user_id, is_candidate) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
+    let data = {
+      'is_candidate': is_candidate
+    };
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
   
   deleteAppUser(token, app_user_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
@@ -1256,7 +1264,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  updateAppRole(token, app_role_id, role_name, permission, permission_detail) {
+  updateAppRole(token, app_role_id, role_name, permission, permission_detail, is_candidate) {
     let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
     let data = {
       'role_name': role_name,
@@ -1264,6 +1272,9 @@ class DTableWebAPI {
     };
     if (permission_detail){
       data['permission_detail'] = permission_detail;
+    }
+    if (is_candidate){
+      data['is_candidate'] = is_candidate;
     }
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
