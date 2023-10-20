@@ -3068,6 +3068,40 @@ class DTableWebAPI {
     return this._sendPostRequest(url, params, {headers: {'Content-Type': 'application/json'}});
   }
 
+  listAutoArchiveTasks(dtableUuid) {
+    let url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/auto-archive-tasks/';
+    return this.req.get(url);
+  }
+
+  addAutoArchiveTask(dtableUuid, table_id, view_id, run_condition, details) {
+    let url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/auto-archive-tasks/';
+    let data = {
+      'table_id': table_id,
+      'view_id': view_id,
+      'run_condition': run_condition,
+      'details': details
+    };
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  updateAutoArchiveTask(dtableUuid, task_id, table_id, view_id, run_condition, details) {
+    let url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/auto-archive-tasks/' + task_id + '/';
+    let data = {
+      'table_id': table_id,
+      'view_id': view_id,
+      'run_condition': run_condition,
+      'details': details
+    };
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+
+  deleteAutoArchiveTask(dtableUuid, task_id) {
+    let url = this.server + '/api/v2.1/dtables/' + dtableUuid + '/auto-archive-tasks/' + task_id + '/';
+    return this.req.delete(url);
+  }
+
+
   // org admin api
   orgAdminUpdateOrgInfo(newOrgName) {
     let url = this.server + '/api/v2.1/org/admin/info/';
