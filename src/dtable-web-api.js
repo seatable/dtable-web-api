@@ -1802,6 +1802,11 @@ class DTableWebAPI {
     return this.req.post(url);
   }
 
+  resubmitWorkflowTask(token, taskId) {
+    let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/resubmit/`;
+    return this.req.post(url);
+  }
+
   getWorkflowTaskAdminView(token, taskId) {
     let url = this.server + `/api/v2.1/workflows/${token}/tasks/${taskId}/admin-view/`;
     return this.req.get(url);
