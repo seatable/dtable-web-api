@@ -3325,6 +3325,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  orgAdminDeleteAddressBookV2DepartmentGroup(orgId, departmentId) {
+    const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments/${departmentId}/group/`;
+    return this.req.delete(url);
+  }
+
   orgAdminAddressBookV2DepartmentsMigrate(orgId) {
     const url = this.server + `/api/v2.1/org/${orgId}/admin/address-book-v2/departments-migrate/`;
     return this.req.post(url);
@@ -4179,6 +4184,11 @@ class DTableWebAPI {
   sysAdminGetAddressBookV2DepartmentGroup(departmentId) {
     const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/group/`;
     return this.req.get(url);
+  }
+
+  sysAdminDeleteAddressBookV2DepartmentGroup(departmentId) {
+    const url = this.server + `/api/v2.1/admin/address-book-v2/departments/${departmentId}/group/`;
+    return this.req.delete(url);
   }
 
   sysAdminAddressBookV2DepartmentsMigrate() {
