@@ -3873,6 +3873,8 @@ class DTableWebAPI {
     case 'quota_total':
       formData.append('quota_total', value);
       break;
+    case 'is_admin':
+      formData.append('is_admin', value);
     }
     return this.req.put(url, formData);
   }
