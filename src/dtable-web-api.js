@@ -1362,6 +1362,28 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  listUniversalAppAdminBases(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/admin-bases/';
+    return this.req.get(url);
+  }
+
+  listUniversalAppRelatedBases(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/related-bases/';
+    return this.req.get(url);
+  }
+
+  AddUniversalAppRelatedBase(token, dtable_uuid) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/related-bases/';
+    let form = new FormData();
+    form.append('dtable_uuid', dtable_uuid)
+    return this._sendPostRequest(url, form)
+  }
+
+  DeleteUniversalAppRelatedBase(token, related_base_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/related-bases/' + related_base_id + '/';
+    return this.req.delete(url)
+  }
+
   submitExternalAppFormData(token, app_page_id, row_data, table_name) {
     let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
     let form = new FormData();
