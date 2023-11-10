@@ -4875,6 +4875,11 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  sysAdminListSystemBases() {
+    let url = this.server + '/api/v2.1/admin/system-bases/';
+    return this.req.get(url);
+  }
+
   // plugin module
   exportBigDataScreenPageContent(workspaceID, dtableName, pageName, pageId) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/export-big-data-screen/?page_name=' + encodeURIComponent(pageName) + '&page_id=' + pageId;
