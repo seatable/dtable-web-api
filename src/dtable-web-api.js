@@ -3364,9 +3364,12 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  orgAdminListOrgGroups(orgID, page) {
+  orgAdminListOrgGroups(orgID, page, perPage) {
     const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/groups/?page=' + page;
-    return this.req.get(url);
+    let params = {
+      per_page: perPage
+    };
+    return this.req.get(url, { params });
   }
 
   orgAdminListAdminLogs(orgID, page, perPage) {
@@ -3387,9 +3390,12 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/repos/?page=' + page;
     return this.req.get(url);
   }
-  orgAdminListOrgUsers(orgID, isStaff, page) {
+  orgAdminListOrgUsers(orgID, isStaff, page, perPage) {
     const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/users/?is_staff=' + isStaff + '&page=' + page;
-    return this.req.get(url);
+    const params = {
+      per_page: perPage,
+    };
+    return this.req.get(url, { params });
   }
 
   orgAdminListPermAudit(email, repoID, page) {
