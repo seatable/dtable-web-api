@@ -2666,18 +2666,6 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  bulkAddAddressBookV2DepartmentMembers(departmentId, emails) {
-    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members-bulk/`;
-    const form = new FormData();
-    form.append('emails', emails.join(','));
-    return this._sendPostRequest(url, form);
-  }
-
-  deleteAddressBookV2Member(departmentId, email) {
-    const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members/${email}/`;
-    return this.req.delete(url);
-  }
-
   listAddressBookV2DepartmentMemberDTables(departmentId, email) {
     const url = this.server + `/api/v2.1/address-book-v2/departments/${departmentId}/members/${email}/dtables/`;
     return this.req.get(url);
