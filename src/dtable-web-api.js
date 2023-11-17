@@ -1131,13 +1131,13 @@ class DTableWebAPI {
     return this.req.put(url, form);
   }
 
-  duplicateExternalAppInstance(token) {
-    let url = this.server + '/api/v2.1/external-apps/' + token + '/duplicate/';
+  duplicateExternalAppInstance(appUuid) {
+    let url = this.server + '/api/v2.1/external-apps/' + appUuid + '/duplicate/';
     return this.req.post(url);
   }
 
-  changeExternalAppStatus(token, isInactive) {
-    let url = this.server + '/api/v2.1/external-apps/' + token + '/status/';
+  changeExternalAppStatus(appUuid, isInactive) {
+    let url = this.server + '/api/v2.1/external-apps/' + appUuid + '/status/';
     let data = {
       is_inactive: isInactive
     };
@@ -1149,18 +1149,18 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  listAppOrganizationMembers(token, org_id, page) {
-    const url = this.server + '/api/v2.1/universal-apps/' + token + '/organizations/'+ org_id +'/members/?page=' + page;
+  listAppOrganizationMembers(appUuid, org_id, page) {
+    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/organizations/'+ org_id +'/members/?page=' + page;
     return this.req.get(url);
   }
 
-  listAppDepartmentMembers(token, department_id) {
-    const url = this.server + '/api/v2.1/universal-apps/' + token + '/departments/'+ department_id +'/members/';
+  listAppDepartmentMembers(appUuid, department_id) {
+    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/departments/'+ department_id +'/members/';
     return this.req.get(url);
   }
 
-  listAppDepartmentV2Members(token, department_id) {
-    const url = this.server + '/api/v2.1/universal-apps/' + token + '/departments-v2/'+ department_id +'/members/';
+  listAppDepartmentV2Members(appUuid, department_id) {
+    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/departments-v2/'+ department_id +'/members/';
     return this.req.get(url);
   }
 
@@ -1169,8 +1169,8 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  listAppUsers(token, page, perPage) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/';
+  listAppUsers(appUuid, page, perPage) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/';
     let params = {
       page: page,
       per_page: perPage
@@ -1180,8 +1180,8 @@ class DTableWebAPI {
     });
   }
 
-  searchAppUsers(token, query, page, perPage) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/search-user/';
+  searchAppUsers(appUuid, query, page, perPage) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/search-user/';
     let params = {
       query: query,
       page: page,
@@ -1192,40 +1192,40 @@ class DTableWebAPI {
     });
   }
 
-  addAppUsersBatch(token, usersInfo) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/batch/';
+  addAppUsersBatch(appUuid, usersInfo) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/batch/';
     let data = {'users_info': usersInfo};
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  updateAppUser(token, app_user_id, is_active) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
+  updateAppUser(appUuid, app_user_id, is_active) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/' + app_user_id + '/';
     let data = {
       'is_active': is_active
     };
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  updateAppUserRole(token, app_user_id, role_id) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
+  updateAppUserRole(appUuid, app_user_id, role_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/' + app_user_id + '/';
     let data = {
       'app_role_id': role_id
     };
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
   
-  deleteAppUser(token, app_user_id) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/' + app_user_id + '/';
+  deleteAppUser(appUuid, app_user_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/' + app_user_id + '/';
     return this.req.delete(url);
   }
 
-  getAppUserSyncInfo(token) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/sync/';
+  getAppUserSyncInfo(appUuid) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/sync/';
     return this.req.get(url);
   }
 
-  syncAppUserInfo(token, table_name) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-users/sync/';
+  syncAppUserInfo(appUuid, table_name) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/sync/';
     let data = {};
     if (table_name){
       data['table_name'] = table_name;
@@ -1234,13 +1234,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  listAppRoles(token) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/';
+  listAppRoles(appUuid) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-roles/';
     return this.req.get(url);
   }
 
-  addAppRoles(token, role_name, permission, permission_detail) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/';
+  addAppRoles(appUuid, role_name, permission, permission_detail) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-roles/';
     let data = {
       'role_name': role_name,
       'permission': permission,
@@ -1251,13 +1251,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  getAppRole(token, app_role_id) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
+  getAppRole(appUuid, app_role_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-roles/' + app_role_id + '/';
     return this.req.get(url);
   }
 
-  updateAppRole(token, app_role_id, role_name, permission, permission_detail) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
+  updateAppRole(appUuid, app_role_id, role_name, permission, permission_detail) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-roles/' + app_role_id + '/';
     let data = {
       'role_name': role_name,
       'permission': permission,
@@ -1268,19 +1268,19 @@ class DTableWebAPI {
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  deleteAppRole(token, app_role_id) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-roles/' + app_role_id + '/';
+  deleteAppRole(appUuid, app_role_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-roles/' + app_role_id + '/';
     return this.req.delete(url);
   }
 
 
-  listAppInviteLinks(token){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/invite-links/';
+  listAppInviteLinks(appUuid){
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/invite-links/';
     return this.req.get(url);
   }
 
-  addAppInviteLinks(token, role_name, password, expire_days){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/invite-links/';
+  addAppInviteLinks(appUuid, role_name, password, expire_days){
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/invite-links/';
     let form = new FormData();
     if (role_name) {
       form.append('role_name', role_name);
@@ -1297,13 +1297,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  deleteAppInviteLinks(token, link_token){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/invite-links/' + link_token + '/';
+  deleteAppInviteLinks(appUuid, link_token){
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/invite-links/' + link_token + '/';
     return this.req.delete(url);
   }
 
-  addAppCustomURL(token, custom_url){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-url/';
+  addAppCustomURL(appUuid, custom_url){
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/custom-url/';
     let form = new FormData();
     if (custom_url) {
       form.append('custom_url', custom_url);
@@ -1312,13 +1312,13 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  deleteAppCustomURL(token){
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/custom-url/';
+  deleteAppCustomURL(appUuid){
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/custom-url/';
     return this.req.delete(url);
   }
 
-  listAppSnapshots(token, page, perPage) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/';
+  listAppSnapshots(appUuid, page, perPage) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/snapshots/';
     let params = {
       page: page,
       per_page: perPage
@@ -1328,8 +1328,8 @@ class DTableWebAPI {
     });
   }
 
-  addAppSnapshot(token, notes) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/';
+  addAppSnapshot(appUuid, notes) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/snapshots/';
     let form = new FormData();
     if (notes) {
       form.append('notes', notes);
@@ -1337,33 +1337,33 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  editAppSnapshot(token, snapshot_id, notes) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/';
+  editAppSnapshot(appUuid, snapshot_id, notes) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/snapshots/' + snapshot_id + '/';
     let data = {
       'notes': notes,
     };
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  deleteAppSnapshot(token, snapshot_id) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/';
+  deleteAppSnapshot(appUuid, snapshot_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/snapshots/' + snapshot_id + '/';
     return this.req.delete(url);
   }
 
-  restoreApp(token, snapshot_id) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/snapshots/' + snapshot_id + '/restore/';
+  restoreApp(appUuid, snapshot_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/snapshots/' + snapshot_id + '/restore/';
     let form = new FormData();
     return this._sendPostRequest(url, form);
   }
 
-  updateAppVersion(token) {
-    let url = this.server + '/api/v2.1/universal-apps/' + token + '/version-update/';
+  updateAppVersion(appUuid) {
+    let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/version-update/';
     let form = new FormData();
     return this._sendPostRequest(url, form);
   }
 
-  submitExternalAppFormData(token, app_page_id, row_data, table_name) {
-    let url = this.server + '/api/v2.1/external-app-form-submit/' + token + '/';
+  submitExternalAppFormData(appUuid, app_page_id, row_data, table_name) {
+    let url = this.server + '/api/v2.1/external-app-form-submit/' + appUuid + '/';
     let form = new FormData();
     form.append('app_page_id', app_page_id);
     form.append('row_data', row_data);
@@ -1371,8 +1371,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  getExternalAppUploadLink(token) {
-    let url = this.server + '/api/v2.1/external-apps/' + token + '/upload-link/';
+  getExternalAppUploadLink(appUuid) {
+    let url = this.server + '/api/v2.1/external-apps/' + appUuid + '/upload-link/';
     return this.req.get(url);
   }
 
