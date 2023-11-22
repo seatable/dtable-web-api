@@ -2849,26 +2849,6 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getScriptTask(dtableUuid, scriptName) {
-    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
-    return this.req.get(url);
-  }
-
-  addScriptTask(dtableUuid, scriptName, taskData) {
-    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
-    return this.req.post(url, taskData);
-  }
-
-  updateScriptTask(dtableUuid, scriptName, taskData) {
-    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
-    return this.req.put(url, taskData);
-  }
-
-  deleteScriptTask(dtableUuid, scriptName) {
-    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
-    return this.req.delete(url);
-  }
-
   listScriptTaskLogs(dtableUuid, scriptName, page) {
     const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/logs/?page=${page}&per_page=15`;
     return this.req.get(url);
