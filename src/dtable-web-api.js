@@ -2859,6 +2859,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  deleteScriptFile(dtableUuid, scriptName) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/script/${scriptName}`;
+    return this.req.delete(url);
+  }
+
   listTemplates() {
     const url = '/api/v2.1/templates/';
     return this.req.get(url);
