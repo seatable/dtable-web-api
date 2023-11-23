@@ -826,6 +826,19 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  addFormCustomUrls(token, customUrl) {
+    const url = this.server + '/api/v2.1/forms/' + token + '/custom-urls/';
+    let formData = new FormData();
+    formData.append('custom_url', customUrl);
+    return this.req.post(url, formData);
+  }
+
+  deleteFormCustomUrl(token, customUrl) {
+    let url = this.server + '/api/v2.1/forms/' + token + '/custom-urls/';
+    let params = { custom_url: customUrl };
+    return this.req.delete(url, { data: params });
+  }
+
   createDTableForm(workspaceID, dtableName, formID, formConfig) {
     let url = this.server + '/api/v2.1/forms/';
     let formData = new FormData();
