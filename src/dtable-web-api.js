@@ -2860,7 +2860,7 @@ class DTableWebAPI {
   }
 
   deleteScriptFile(dtableUuid, scriptName) {
-    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/script/${scriptName}`;
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/script/${scriptName}/`;
     return this.req.delete(url);
   }
 
@@ -4896,17 +4896,6 @@ class DTableWebAPI {
 
   sysAdminListExternalApps(page, per_page) {
     const url = this.server + '/api/v2.1/admin/external-apps/';
-    const params = {
-      page: page,
-      per_page: per_page
-    };
-    return this.req.get(url, {
-      params: params
-    });
-  }
-
-  sysAdminListScriptsTasks(page, per_page) {
-    const url = this.server + '/api/v2.1/admin/scripts-tasks/';
     const params = {
       page: page,
       per_page: per_page
