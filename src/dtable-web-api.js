@@ -2849,6 +2849,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  deleteScriptTask(dtableUuid, scriptName) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
+    return this.req.delete(url);
+  }
+
   listScriptTaskLogs(dtableUuid, scriptName, page) {
     const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/logs/?page=${page}&per_page=15`;
     return this.req.get(url);
@@ -2857,11 +2862,6 @@ class DTableWebAPI {
   getScriptTaskLog(dtableUuid, scriptName, logId) {
     const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/logs/${logId}/`;
     return this.req.get(url);
-  }
-
-  deleteScriptFile(dtableUuid, scriptName) {
-    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/script/${scriptName}/`;
-    return this.req.delete(url);
   }
 
   listTemplates() {
