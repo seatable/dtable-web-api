@@ -3635,6 +3635,65 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  orgAdminUploadIdpCertificate(orgID, file) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/saml-idp-certificate/';
+    let formData = new FormData();
+    formData.append('idp_certificate', file);
+    return this._sendPostRequest(url, formData);
+  }
+
+  orgAdminGetSamlConfig(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/saml-config/';
+    return this.req.get(url);
+  }
+
+  orgAdminUpdateSamlMetadataUrl(orgID, metadataUrl) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/saml-config/';
+    let data = {
+      metadata_url: metadataUrl
+    };
+    return this.req.post(url, data);
+  }
+
+  orgAdminUpdateSamlDomain(orgID, domain) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/saml-config/';
+    let data = {
+      domain: domain
+    };
+    return this.req.put(url, data);
+  }
+
+  orgAdminDeleteSamlConfig(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/saml-config/';
+    return this.req.delete(url);
+  }
+
+  orgAdminGetUrlPrefix(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/url-prefix/';
+    return this.req.get(url);
+  }
+
+  orgAdminUpdateUrlPrefix(orgID, orgUrlPrefix) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/url-prefix/';
+    let data = {
+      org_url_prefix: orgUrlPrefix,
+    };
+    return this.req.put(url, data);
+  }
+
+  orgAdminVerifyDomain(orgID, domain) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/verify-domain/';
+    let data = {
+      domain: domain
+    };
+    return this.req.put(url, data);
+  }
+
+  orgAdminCreateDnsTxt(orgID) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/verify-domain/';
+    return this.req.post(url);
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
