@@ -492,14 +492,23 @@ class DTableWebAPI {
     return this.source();
   }
 
-  addExportDTableTask(workspaceId, dtable_name, password) {
+  addExportDTableTask(workspaceId, dtable_name, password, ignore_asset) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
     let formData = new FormData();
     if (password) {
       formData.append('password', password);
     }
+    if (ignore_asset) {
+      formData.append('ignore_asset', ignore_asset)
+    }
 
     return this._sendPostRequest(url, formData);
+  }
+
+  getDTableAssetSize(workspaceId, dtable_name) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/asset-size/';
+    return this.req.get(url);
+
   }
 
   addImportDTableTask (workspaceId, file, folderID) {
@@ -3480,8 +3489,16 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  orgAdminAddExportDTableTask(orgID, dtableUuid) {
+  orgAdminAddExportDTableTask(orgID, dtableUuid, ignore_asset) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/export-dtable/';
+    let formData = new FormData();
+    if (password) {
+      formData.append('password', password);
+    }
+    if (ignore_asset) {
+      formData.append('ignore_asset', ignore_asset);
+    }
+
     return this.req.get(url);
   }
 
@@ -4714,8 +4731,13 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  sysAdminExportDtable(dtableUuid) {
+  sysAdminExportDtable(dtableUuid, ignore_asset) {
     const url = this.server + '/api/v2.1/admin/dtables/' + dtableUuid + '/export-dtable/';
+    let formData = new FormData();
+    if (ignore_asset) {
+      formData.append('ignore_asset', ignore_asset);
+    }
+
     return this.req.get(url);
   }
 
