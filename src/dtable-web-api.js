@@ -3489,16 +3489,8 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  orgAdminAddExportDTableTask(orgID, dtableUuid, ignore_asset) {
+  orgAdminAddExportDTableTask(orgID, dtableUuid) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/export-dtable/';
-    let formData = new FormData();
-    if (password) {
-      formData.append('password', password);
-    }
-    if (ignore_asset) {
-      formData.append('ignore_asset', ignore_asset);
-    }
-
     return this.req.get(url);
   }
 
@@ -4731,13 +4723,8 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  sysAdminExportDtable(dtableUuid, ignore_asset) {
+  sysAdminExportDtable(dtableUuid) {
     const url = this.server + '/api/v2.1/admin/dtables/' + dtableUuid + '/export-dtable/';
-    let formData = new FormData();
-    if (ignore_asset) {
-      formData.append('ignore_asset', ignore_asset);
-    }
-
     return this.req.get(url);
   }
 
