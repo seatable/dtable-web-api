@@ -505,12 +505,6 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  getDTableAssetSize(workspaceId, dtable_name) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/asset-size/';
-    return this.req.get(url);
-
-  }
-
   addImportDTableTask (workspaceId, file, folderID) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-dtable/';
     let formData = new FormData();
@@ -2227,6 +2221,12 @@ class DTableWebAPI {
     form.append('path', path);
     form.append('new_name', newName);
     return this._sendPostRequest(url, form);
+  }
+
+  getDTableAssetSize(dtableUuid) {
+    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/asset-size/';
+    return this.req.get(url);
+
   }
 
   fileTransferSave(dtableUuid, filesMap, path, replace, relativePath) {
