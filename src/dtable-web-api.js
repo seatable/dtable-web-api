@@ -492,11 +492,14 @@ class DTableWebAPI {
     return this.source();
   }
 
-  addExportDTableTask(workspaceId, dtable_name, password) {
+  addExportDTableTask(workspaceId, dtable_name, password, ignore_asset) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtable_name) + '/export-dtable/';
     let formData = new FormData();
     if (password) {
       formData.append('password', password);
+    }
+    if (ignore_asset) {
+      formData.append('ignore_asset', ignore_asset)
     }
 
     return this._sendPostRequest(url, formData);
@@ -2231,6 +2234,12 @@ class DTableWebAPI {
     form.append('path', path);
     form.append('new_name', newName);
     return this._sendPostRequest(url, form);
+  }
+
+  getDTableAssetSize(dtableUuid) {
+    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/asset-size/';
+    return this.req.get(url);
+
   }
 
   fileTransferSave(dtableUuid, filesMap, path, replace, relativePath) {
