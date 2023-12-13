@@ -499,7 +499,7 @@ class DTableWebAPI {
       formData.append('password', password);
     }
     if (ignore_asset) {
-      formData.append('ignore_asset', ignore_asset)
+      formData.append('ignore_asset', ignore_asset);
     }
 
     return this._sendPostRequest(url, formData);
@@ -2142,7 +2142,6 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-
   listGroupTrashDTables(groupID){
     let url = this.server + '/api/v2.1/groups/' + groupID + '/trash-dtables/';
     return this.req.get(url);
@@ -2222,9 +2221,7 @@ class DTableWebAPI {
 
   zipDTableAssetFiles(dtableUuid, filesMap) {
     let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid  + '/zip-task/';
-
     let data = {'files_map': filesMap};
-
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
@@ -2239,7 +2236,6 @@ class DTableWebAPI {
   getDTableAssetSize(dtableUuid) {
     let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/asset-size/';
     return this.req.get(url);
-
   }
 
   fileTransferSave(dtableUuid, filesMap, path, replace, relativePath) {
@@ -3768,7 +3764,7 @@ class DTableWebAPI {
       formData.append('sms_message_limit_per_month', orgInfo.smsMessageLimitPerMonth);
     }
     if (orgInfo.bigDataStorageQuotaMb) {
-      formData.append('big_data_storage_quota_mb', orgInfo.bigDataStorageQuotaMb)
+      formData.append('big_data_storage_quota_mb', orgInfo.bigDataStorageQuotaMb);
     }
     return this.req.put(url, formData);
   }
