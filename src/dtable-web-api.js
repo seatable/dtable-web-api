@@ -2689,6 +2689,11 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  listAddressBookV2DepartmentGroupMembers(groupId) {
+    const url = this.server + `/api/v2.1/address-book-v2/departments/groups/${groupId}/members/`;
+    return this.req.get(url);
+  }
+
   getInvitationLink() {
     const url = this.server + '/api/v2.1/invitation-link/';
     return this.req.get(url);
