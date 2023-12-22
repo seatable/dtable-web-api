@@ -2591,7 +2591,12 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
-  listSysUserUnseenNotifications() {
+  listNotificationsCenter() {
+    const url = this.server + '/api/v2.1/notifications-center/';
+    return this.req.get(url);
+  }
+
+  listSysUserUnseenNotifications(){
     const url = this.server + '/api/v2.1/sys-user-notifications/unseen/';
     return this.req.get(url);
   }
