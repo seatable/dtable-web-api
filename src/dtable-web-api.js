@@ -1198,6 +1198,11 @@ class DTableWebAPI {
     });
   }
 
+  listAppRelatedUsers(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-related-users/';
+    return this.req.get(url);
+  }
+
   searchAppUsers(appUuid, query, page, perPage) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/search-user/';
     let params = {
@@ -1236,6 +1241,38 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/' + app_user_id + '/';
     return this.req.delete(url);
   }
+
+  listAppGroups(token, page, perPage) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-groups/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
+  addAppGroup(token, group_id, app_role_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-groups/';
+    let data = {'group_id': group_id, 'app_role_id': app_role_id};
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+
+  updateAppGroupRole(token, app_group_id, role_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-groups/' + app_group_id + '/';
+    let data = {
+      'app_role_id': role_id
+    };
+    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
+  deleteAppGroup(token, app_group_id) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-groups/' + app_group_id + '/';
+    return this.req.delete(url);
+  }
+
 
   getAppUserSyncInfo(appUuid) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/sync/';
