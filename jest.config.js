@@ -10,4 +10,7 @@ module.exports = {
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$',
   ],
+  moduleNameMapper: {
+    '^axios$': require.resolve('axios'),
+  },
 }
