@@ -445,7 +445,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  copyDTable(srcWorkspaceID, dstWorkspaceID, name, password) {
+  copyDTable(srcWorkspaceID, dstWorkspaceID, name, password, isCopyDatasetSyncs) {
     let url = this.server + '/api/v2.1/dtable-copy/';
     let formData = new FormData();
     formData.append('src_workspace_id', srcWorkspaceID);
@@ -453,6 +453,9 @@ class DTableWebAPI {
     formData.append('name', name);
     if (password) {
       formData.append('password', password);
+    }
+    if (isCopyDatasetSyncs !== null && typeof isCopyDatasetSyncs !== 'undefined') {
+      formData.append('is_copy_dataset_syncs', isCopyDatasetSyncs);
     }
     return this._sendPostRequest(url, formData);
   }
