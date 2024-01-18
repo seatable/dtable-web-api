@@ -2391,7 +2391,7 @@ class DTableWebAPI {
     };
     return this.req.post(url, data);
   }
-
+sss
   addCustomAssetZipTask(dtableUuid, parentDir, dirents) {
     let url = this.server + `/api/v2.1/dtable-custom-asset/${dtableUuid}/zip-task/`;
     let form = new FormData();
