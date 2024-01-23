@@ -1464,10 +1464,10 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id, in_reply_to, images_info) {
+  addEmailSendTask(dtableUuid, account_id, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id, in_reply_to, images_info) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
-      'account_name': account_name,
+      'account_id': account_id,
       'send_to': send_to,
       'message': message,
       'subject': subject,
@@ -1496,22 +1496,22 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
-  addWechatSendTask(dtableUuid, account_name, message, msg_type) {
+  addWechatSendTask(dtableUuid, account_id, message, msg_type) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/wechat/';
     let data = {
       'message': message,
-      'account_name': account_name,
+      'account_id': account_id,
       'msg_type': msg_type,
     };
 
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
-  addDingtalkSendTask(dtableUuid, account_name, message) {
+  addDingtalkSendTask(dtableUuid, account_id, message) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/dingtalk/';
     let data = {
       'message': message,
-      'account_name': account_name,
+      'account_id': account_id,
     };
 
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
