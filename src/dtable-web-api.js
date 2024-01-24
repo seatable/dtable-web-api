@@ -1123,6 +1123,30 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  exportPageDesignPage(workspaceId, name, pageId) {
+    let url = this.server + `/api/v2.1/workspace/${workspaceId}/dtable/${name}/page-design-export/`;
+    let form = new FormData();
+    form.append('page_id', pageId);
+    return this._sendPostRequest(url, form);
+  }
+
+  downloadExportedPageDesignPage(workspaceId, name, pageId, taskId) {
+    let url = this.server + `/api/v2.1/workspace/${workspaceId}/dtable/${name}/page-design-export-content/`;
+    return this.req.get(url, {
+      params: {
+        page_id: pageId,
+        task_id: taskId
+      }
+    });
+  }
+
+  importPageDesignPage(workspaceId, name, pageDesignFile) {
+    let url = this.server + `/api/v2.1/workspace/${workspaceId}/dtable/${name}/page-design-export/`;
+    let form = new FormData();
+    form.append('page_design_filr', pageDesignFile);
+    return this._sendPostRequest(url, form);
+  }
+
   // external app module
   listExternalAppsInstances(workspaceID, dtableName) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/';
