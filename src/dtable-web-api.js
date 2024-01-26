@@ -1407,10 +1407,10 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addEmailSendTask(dtableUuid, account_name, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id, in_reply_to, images_info) {
+  addEmailSendTask(dtableUuid, account_id, send_to, message, subject, copy_to, reply_to, attachments, html_message, need_message_id, in_reply_to, images_info) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/email/';
     let data = {
-      'account_name': account_name,
+      'account_id': account_id,
       'send_to': send_to,
       'message': message,
       'subject': subject,
@@ -1439,22 +1439,22 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  addWechatSendTask(dtableUuid, account_name, message, msg_type) {
+  addWechatSendTask(dtableUuid, account_id, message, msg_type) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/wechat/';
     let data = {
       'message': message,
-      'account_name': account_name,
+      'account_id': account_id,
       'msg_type': msg_type,
     };
 
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  addDingtalkSendTask(dtableUuid, account_name, message) {
+  addDingtalkSendTask(dtableUuid, account_id, message) {
     let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/dingtalk/';
     let data = {
       'message': message,
-      'account_name': account_name,
+      'account_id': account_id,
     };
 
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
@@ -1602,22 +1602,24 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addThirdPartyAccount(dtableUuid, account_name, accout_type, detail) {
+  addThirdPartyAccount(dtableUuid, account_name, accout_type, detail, ownerID) {
     let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/';
     let data = {
       'account_name': account_name,
       'account_type': accout_type,
-      'detail': detail
+      'detail': detail,
+      'owner': ownerID
     };
     return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
   }
 
-  updateThirdPartyAccount(dtableUuid, account_id, account_name, account_type, detail) {
+  updateThirdPartyAccount(dtableUuid, account_id, account_name, account_type, detail, ownerID) {
     let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/' + account_id + '/';
     let data = {
       'account_name': account_name,
       'account_type': account_type,
-      'detail': detail
+      'detail': detail,
+      'owner': ownerID
     };
     return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
   }
@@ -2063,9 +2065,9 @@ class DTableWebAPI {
     return this.req.post(url, params);
   }
 
-  listGroups(includingAllDeps=false) {
+  listGroups(includingAllDeps=false, canAdmin=false) {
     const url = this.server + '/api/v2.1/groups/';
-    let params = {including_all_deps: includingAllDeps};
+    let params = {including_all_deps: includingAllDeps, can_admin: canAdmin};
     return this.req.get(url, {params: params});
   }
 
