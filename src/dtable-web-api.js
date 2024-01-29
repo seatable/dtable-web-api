@@ -1872,6 +1872,11 @@ class DTableWebAPI {
     });
   }
 
+  getWorkflowOngoingTasksCount() {
+    let url = this.server + '/api/v2.1/workflows/ongoing-tasks/count/';
+    return this.req.get(url);
+  }
+
   listWorkflowOngoingTasks(page = null, perPage = null) {
     let url = this.server + '/api/v2.1/workflows/ongoing-tasks/';
     let params = {
