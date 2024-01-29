@@ -1390,14 +1390,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  AddUniversalAppRelatedBase(appUuid, dtable_uuid) {
+  addUniversalAppRelatedBase(appUuid, related_base_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/related-bases/';
     let form = new FormData();
-    form.append('dtable_uuid', dtable_uuid)
+    form.append('dtable_uuid', related_base_id)
     return this._sendPostRequest(url, form)
   }
 
-  DeleteUniversalAppRelatedBase(appUuid, related_base_id) {
+  deleteUniversalAppRelatedBase(appUuid, related_base_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/related-bases/' + related_base_id + '/';
     return this.req.delete(url)
   }
