@@ -3,7 +3,7 @@ import DTableWebAPI from '../src/dtable-web-api';
 
 let { server, username, password } = ACCESS_CONFIG;
 let dtableWebAPI = new DTableWebAPI();
-dtableWebAPI.init({server, username, password});
+dtableWebAPI.init({ server, username, password });
 
 beforeEach(() => {
   return dtableWebAPI.login();

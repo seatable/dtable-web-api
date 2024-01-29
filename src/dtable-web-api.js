@@ -2,8 +2,8 @@ import axios from 'axios';
 import FormData from 'form-data';
 
 class DTableWebAPI {
-  
-  init({server, username, password, token}) {
+
+  init({ server, username, password, token }) {
     this.server = server;
     this.username = username;
     this.password = password;
@@ -18,12 +18,12 @@ class DTableWebAPI {
   }
 
   initForDTableUsage({ siteRoot, xcsrfHeaders }) {
-    if (siteRoot && siteRoot.charAt(siteRoot.length-1) === '/') {
-      var server = siteRoot.substring(0, siteRoot.length-1);
+    if (siteRoot && siteRoot.charAt(siteRoot.length - 1) === '/') {
+      var server = siteRoot.substring(0, siteRoot.length - 1);
       this.server = server;
     } else {
       this.server = siteRoot;
-    } 
+    }
 
     this.req = axios.create({
       headers: {
@@ -50,14 +50,14 @@ class DTableWebAPI {
   _sendPostRequest(url, form) {
     if (form.getHeaders) {
       return this.req.post(url, form, {
-        headers:form.getHeaders()
+        headers: form.getHeaders()
       });
     } else {
       return this.req.post(url, form);
     }
   }
 
-  uploadImage (uploadLink, formData, onUploadProgress = null) {
+  uploadImage(uploadLink, formData, onUploadProgress = null) {
     return (
       axios.create()({
         method: 'post',
@@ -87,7 +87,7 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/dtables/group-shared/';
     return this.req.get(url);
   }
-  
+
   // share view api
   listDTableUserViewShares(workspaceId, dtableName, tableId, viewId) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/user-view-shares/';
@@ -356,12 +356,12 @@ class DTableWebAPI {
   }
 
   getDTableExternalLink(workspaceID, name) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/external-links/';
     return this.req.get(url);
   }
 
   createDTableExternalLink(workspaceID, name, token, password, expireDays) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/external-links/';
     let form = new FormData();
     if (token) {
       form.append('token', token);
@@ -374,20 +374,20 @@ class DTableWebAPI {
     }
     return this._sendPostRequest(url, form);
   }
-  
+
   deleteDTableExternalLink(workspaceID, name, token) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/external-links/' + token + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/external-links/' + token + '/';
     return this.req.delete(url);
   }
 
   listDTableViewExternalLinks(workspaceID, name, tableId, viewId) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/view-external-links/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/view-external-links/';
     url += '?table_id=' + tableId + '&view_id=' + viewId;
     return this.req.get(url);
   }
 
   createDTableViewExternalLink(workspaceID, name, tableId, viewId, token, password, expireDays) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/view-external-links/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/view-external-links/';
     let form = new FormData();
     form.append('table_id', tableId);
     form.append('view_id', viewId);
@@ -402,9 +402,9 @@ class DTableWebAPI {
     }
     return this._sendPostRequest(url, form);
   }
-  
+
   deleteDTableViewExternalLink(workspaceID, name, token) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) +'/view-external-links/' + token + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/view-external-links/' + token + '/';
     return this.req.delete(url);
   }
 
@@ -412,7 +412,7 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/view-external-link-tokens/' + token + '/access-token/';
     return this.req.get(url);
   }
-  
+
   listTableAPITokens(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/api-tokens/';
     return this.req.get(url);
@@ -481,11 +481,13 @@ class DTableWebAPI {
   }
 
   addExportExternalDTable(externalLinkToken, isCustomToken, onDownloadProgress = null) {
-    let url = `${this.server}/dtable/external-links/${isCustomToken ? 'custom/': ''}${externalLinkToken}/download-zip/`;
+    let url = `${this.server}/dtable/external-links/${isCustomToken ? 'custom/' : ''}${externalLinkToken}/download-zip/`;
     const _this = this;
-    return this.req.get(url, {onDownloadProgress, responseType: 'blob', cancelToken: new axios.CancelToken(function executor(c) {
-      _this.source = c;
-    })});
+    return this.req.get(url, {
+      onDownloadProgress, responseType: 'blob', cancelToken: new axios.CancelToken(function executor(c) {
+        _this.source = c;
+      })
+    });
   }
 
   cancelRequest() {
@@ -505,7 +507,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  addImportDTableTask (workspaceId, file, folderID) {
+  addImportDTableTask(workspaceId, file, folderID) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-dtable/';
     let formData = new FormData();
     formData.append('dtable', file);
@@ -550,7 +552,7 @@ class DTableWebAPI {
       dtable_uuid: dtable_uuid,
       task_type: task_type
     };
-    return this.req.delete(url, {params: params});
+    return this.req.delete(url, { params: params });
   }
 
   importExcelCSVPreview(workspaceId, dtableName) {
@@ -626,7 +628,7 @@ class DTableWebAPI {
 
   updateExcelCSVGetCheckedResult(workspaceId, fileName, dtableUuid, tableName, selectedColumns) {
     let params = 'file_name=' + encodeURIComponent(fileName) + '&dtable_uuid=' + dtableUuid + '&table_name='
-          + encodeURIComponent(tableName) + '&selected_columns=' + encodeURIComponent(selectedColumns);
+      + encodeURIComponent(tableName) + '&selected_columns=' + encodeURIComponent(selectedColumns);
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/update-excel-csv/get-checked-result/?' + params;
     return this.req.get(url);
   }
@@ -784,7 +786,7 @@ class DTableWebAPI {
   }
 
   listDTableCollectionTables(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/collection-tables/?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
+    let url = this.server + '/api/v2.1/collection-tables/?workspace_id=' + workspaceID + '&name=' + encodeURIComponent(dtableName);
     return this.req.get(url);
   }
 
@@ -825,7 +827,7 @@ class DTableWebAPI {
   }
 
   listDTableForms(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/forms/?workspace_id=' + workspaceID + '&name='+ encodeURIComponent(dtableName);
+    let url = this.server + '/api/v2.1/forms/?workspace_id=' + workspaceID + '&name=' + encodeURIComponent(dtableName);
     return this.req.get(url);
   }
 
@@ -925,7 +927,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  getActivitiesDetail(dtable_uuid, opDate, pageNum, avatarSize=36) {
+  getActivitiesDetail(dtable_uuid, opDate, pageNum, avatarSize = 36) {
     let params = 'dtable_uuid=' + dtable_uuid + '&op_date=' + encodeURIComponent(opDate) + '&page=' + pageNum + '&avatar_size=' + avatarSize;
     let url = this.server + '/api/v2.1/dtable-activities/detail/?' + params;
     return this.req.get(url);
@@ -937,7 +939,7 @@ class DTableWebAPI {
   }
 
   listDTableSnapshots(workspaceID, dtableName, page, perPage) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ encodeURIComponent(dtableName) + '/snapshots/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/';
     let params = {
       page: page,
       per_page: perPage
@@ -946,7 +948,7 @@ class DTableWebAPI {
   }
 
   createDTableSnapshot(workspaceID, dtableName) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/'+ encodeURIComponent(dtableName) + '/snapshots/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/';
     let form = new FormData();
     return this._sendPostRequest(url, form);
   }
@@ -967,7 +969,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  listTrashDTables(page, perPage){
+  listTrashDTables(page, perPage) {
     let url = this.server + '/api/v2.1/trash-dtables/';
     let params = {
       page: page,
@@ -983,7 +985,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  restoreTrashDTable(dtableID){
+  restoreTrashDTable(dtableID) {
     let url = this.server + '/api/v2.1/trash-dtables/' + dtableID + '/';
     return this.req.put(url);
   }
@@ -1003,7 +1005,7 @@ class DTableWebAPI {
   }
 
   deleteFolder(workspaceID, folderID) {
-    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/' + folderID +'/';
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/folders/' + folderID + '/';
     return this.req.delete(url);
   }
 
@@ -1072,14 +1074,14 @@ class DTableWebAPI {
         let pluginName = pluginNames.shift();
         params = params + 'plugin_name=' + pluginName;
 
-        for(let i = 0; i < pluginNames.length; i++) {
+        for (let i = 0; i < pluginNames.length; i++) {
           params = params + '&plugin_name=' + pluginNames[i];
         }
       }
     }
     return this.req.get(url + params);
   }
-  
+
   updatePluginState(pluginId, dtableUuid, enable) {
     let url = this.server + '/api/v2.1/dtable-plugins/' + pluginId + '/';
     let form = new FormData();
@@ -1126,7 +1128,7 @@ class DTableWebAPI {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/';
     return this.req.get(url);
   }
-  
+
   createExternalAppInstance(workspaceID, dtableName, appType, appConfig) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/';
     let form = new FormData();
@@ -1134,7 +1136,7 @@ class DTableWebAPI {
     form.append('app_config', appConfig);
     return this.req.post(url, form);
   }
-  
+
   deleteExternalAppInstance(workspaceID, dtableName, externalAppId) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/external-apps/' + externalAppId + '/';
     return this.req.delete(url);
@@ -1166,17 +1168,17 @@ class DTableWebAPI {
   }
 
   listAppOrganizationMembers(appUuid, org_id, page) {
-    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/organizations/'+ org_id +'/members/?page=' + page;
+    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/organizations/' + org_id + '/members/?page=' + page;
     return this.req.get(url);
   }
 
   listAppDepartmentMembers(appUuid, department_id) {
-    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/departments/'+ department_id +'/members/';
+    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/departments/' + department_id + '/members/';
     return this.req.get(url);
   }
 
   listAppDepartmentV2Members(appUuid, department_id) {
-    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/departments-v2/'+ department_id +'/members/';
+    const url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/departments-v2/' + department_id + '/members/';
     return this.req.get(url);
   }
 
@@ -1210,8 +1212,8 @@ class DTableWebAPI {
 
   addAppUsersBatch(appUuid, usersInfo) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/batch/';
-    let data = {'users_info': usersInfo};
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    let data = { 'users_info': usersInfo };
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   updateAppUser(appUuid, app_user_id, is_active) {
@@ -1219,7 +1221,7 @@ class DTableWebAPI {
     let data = {
       'is_active': is_active
     };
-    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this.req.put(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   updateAppUserRole(appUuid, app_user_id, role_id) {
@@ -1227,9 +1229,9 @@ class DTableWebAPI {
     let data = {
       'app_role_id': role_id
     };
-    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this.req.put(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
-  
+
   deleteAppUser(appUuid, app_user_id) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/' + app_user_id + '/';
     return this.req.delete(url);
@@ -1243,11 +1245,11 @@ class DTableWebAPI {
   syncAppUserInfo(appUuid, table_name) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/app-users/sync/';
     let data = {};
-    if (table_name){
+    if (table_name) {
       data['table_name'] = table_name;
     }
 
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   listAppRoles(appUuid) {
@@ -1261,10 +1263,10 @@ class DTableWebAPI {
       'role_name': role_name,
       'permission': permission,
     };
-    if (permission_detail){
+    if (permission_detail) {
       data['permission_detail'] = permission_detail;
     }
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   getAppRole(appUuid, app_role_id) {
@@ -1278,10 +1280,10 @@ class DTableWebAPI {
       'role_name': role_name,
       'permission': permission,
     };
-    if (permission_detail){
+    if (permission_detail) {
       data['permission_detail'] = permission_detail;
     }
-    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this.req.put(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   deleteAppRole(appUuid, app_role_id) {
@@ -1290,12 +1292,12 @@ class DTableWebAPI {
   }
 
 
-  listAppInviteLinks(appUuid){
+  listAppInviteLinks(appUuid) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/invite-links/';
     return this.req.get(url);
   }
 
-  addAppInviteLinks(appUuid, role_name, password, expire_days){
+  addAppInviteLinks(appUuid, role_name, password, expire_days) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/invite-links/';
     let form = new FormData();
     if (role_name) {
@@ -1313,12 +1315,12 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  deleteAppInviteLinks(appUuid, link_token){
+  deleteAppInviteLinks(appUuid, link_token) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/invite-links/' + link_token + '/';
     return this.req.delete(url);
   }
 
-  addAppCustomURL(appUuid, custom_url){
+  addAppCustomURL(appUuid, custom_url) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/custom-url/';
     let form = new FormData();
     if (custom_url) {
@@ -1328,7 +1330,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  deleteAppCustomURL(appUuid){
+  deleteAppCustomURL(appUuid) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/custom-url/';
     return this.req.delete(url);
   }
@@ -1358,7 +1360,7 @@ class DTableWebAPI {
     let data = {
       'notes': notes,
     };
-    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this.req.put(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   deleteAppSnapshot(appUuid, snapshot_id) {
@@ -1399,7 +1401,7 @@ class DTableWebAPI {
       'email_info': emailInfo,
       'table_info': tableInfo
     };
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   getPluginEmailSendStatus(task_id) {
@@ -1436,7 +1438,7 @@ class DTableWebAPI {
     if (images_info) {
       data['images_info'] = images_info;
     }
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   addWechatSendTask(dtableUuid, account_name, message, msg_type) {
@@ -1447,7 +1449,7 @@ class DTableWebAPI {
       'msg_type': msg_type,
     };
 
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   addDingtalkSendTask(dtableUuid, account_name, message) {
@@ -1457,7 +1459,7 @@ class DTableWebAPI {
       'account_name': account_name,
     };
 
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   addNotificationSendTask(dtableUuid, emails, userColKey, message, tableId, rowId) {
@@ -1470,7 +1472,7 @@ class DTableWebAPI {
       'user_col_key': userColKey,
     };
 
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
 
@@ -1484,7 +1486,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  
+
   // ---- dtable data api
   getTableDownloadLink(workspaceID, name) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/?name=' + encodeURIComponent(name) + '&reuse=1';
@@ -1540,15 +1542,15 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  isDTableAssetExist (workspaceID, tableName, path) {
+  isDTableAssetExist(workspaceID, tableName, path) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + tableName + '/asset-exists/?path=' + path;
     return this.req.get(url);
   }
 
   getTableRowShareLink(workspaceID, tableName, table_id, rowId) {
-    let params = '?workspace_id=' + workspaceID + '&name=' + encodeURIComponent(tableName) + '&table_id=' + table_id + '&row_id=' + rowId; 
+    let params = '?workspace_id=' + workspaceID + '&name=' + encodeURIComponent(tableName) + '&table_id=' + table_id + '&row_id=' + rowId;
     const url = this.server + '/api/v2.1/dtable-row-shares/' + params;
-    return this.req.get(url); 
+    return this.req.get(url);
   }
 
   createTableRowShareLink(workspaceID, tableName, table_id, rowId) {
@@ -1560,14 +1562,14 @@ class DTableWebAPI {
     form.append('row_id', rowId);
     return this._sendPostRequest(url, form);
   }
-  
+
   deleteTableRowShareLink(token) {
     const url = this.server + '/api/v2.1/dtable-row-shares/' + token + '/';
     this.req.delete(url);
   }
 
   listRecentAddedFiles(days) {
-    let url =  this.server + '/api/v2.1/recent-added-files/';
+    let url = this.server + '/api/v2.1/recent-added-files/';
     if (days) {
       url = url + '?days=' + days;
     }
@@ -1589,7 +1591,7 @@ class DTableWebAPI {
       'image_path': image_path,
       'top_num': top_num,
     };
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   getThirdPartyAccountsDetail(dtableUuid, account_name) {
@@ -1609,7 +1611,7 @@ class DTableWebAPI {
       'account_type': accout_type,
       'detail': detail
     };
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   updateThirdPartyAccount(dtableUuid, account_id, account_name, account_type, detail) {
@@ -1619,7 +1621,7 @@ class DTableWebAPI {
       'account_type': account_type,
       'detail': detail
     };
-    return this.req.put(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this.req.put(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   deleteThirdPartyAccount(dtableUuid, account_id) {
@@ -1628,7 +1630,7 @@ class DTableWebAPI {
   }
 
   savePageDesignPDFToFileColumn(workspaceID, dtableName, { page_id, row_id, target_table, target_row_id, target_column, file_name }) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceID +'/dtable/' + dtableName + '/page-design-file/';
+    const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + dtableName + '/page-design-file/';
     let formData = new FormData();
     formData.append('page_id', page_id);
     formData.append('row_id', row_id);
@@ -2013,9 +2015,9 @@ class DTableWebAPI {
     let params = {
       avatar_size: avatarSize
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
-  
+
   getOrganization(org_id) {
     const url = this.server + '/api/v2.1/organizations/' + org_id + '/';
     return this.req.get(url);
@@ -2046,7 +2048,7 @@ class DTableWebAPI {
     let params = {
       payment_type: paymentType,
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   getSubscriptionLogs() {
@@ -2068,15 +2070,15 @@ class DTableWebAPI {
     return this.req.post(url, params);
   }
 
-  listGroups(includingAllDeps=false) {
+  listGroups(includingAllDeps = false) {
     const url = this.server + '/api/v2.1/groups/';
-    let params = {including_all_deps: includingAllDeps};
-    return this.req.get(url, {params: params});
+    let params = { including_all_deps: includingAllDeps };
+    return this.req.get(url, { params: params });
   }
 
   exchangeCoinByCode(code) {
     const url = this.server + '/api/v2.1/subscription/coin-exchange/';
-    return this.req.post(url, {code: code});
+    return this.req.post(url, { code: code });
   }
 
   listSmsMessageTemplates() {
@@ -2084,7 +2086,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  sendSmsMessage(template_name , phone, msg_dict) {
+  sendSmsMessage(template_name, phone, msg_dict) {
     let url = this.server + '/api/v2.1/dtable-sms-message/send/';
     let data = {
       'template_name': template_name,
@@ -2139,21 +2141,21 @@ class DTableWebAPI {
     const params = {
       q: q
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
-  listGroupMembers(groupID, isAdmin=false, avatarSize=64) {
+  listGroupMembers(groupID, isAdmin = false, avatarSize = 64) {
     let url = this.server + '/api/v2.1/groups/' + groupID + '/members/?avatar_size=' + avatarSize + '&is_admin=' + isAdmin;
     return this.req.get(url);
   }
 
-  listGroupTrashDTables(groupID){
+  listGroupTrashDTables(groupID) {
     let url = this.server + '/api/v2.1/groups/' + groupID + '/trash-dtables/';
     return this.req.get(url);
   }
 
-  restoreGroupTrashDTable(dtableUuid, groupID){
-    let url = this.server + '/api/v2.1/groups/' + groupID + '/trash-dtables/'  + dtableUuid + '/';
+  restoreGroupTrashDTable(dtableUuid, groupID) {
+    let url = this.server + '/api/v2.1/groups/' + groupID + '/trash-dtables/' + dtableUuid + '/';
     return this.req.put(url);
   }
 
@@ -2192,7 +2194,7 @@ class DTableWebAPI {
     let operation = {
       user_id_list: userIdList
     };
-    return this._sendPostRequest(url, operation, { headers: { 'Content-type': 'application/json' }});
+    return this._sendPostRequest(url, operation, { headers: { 'Content-type': 'application/json' } });
   }
 
   listDTableAsset(dtableUuid, parent_dir) {
@@ -2225,9 +2227,9 @@ class DTableWebAPI {
   }
 
   zipDTableAssetFiles(dtableUuid, filesMap) {
-    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid  + '/zip-task/';
-    let data = {'files_map': filesMap};
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    let url = this.server + '/api/v2.1/dtable-asset/' + dtableUuid + '/zip-task/';
+    let data = { 'files_map': filesMap };
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   renameDTableAssetFile(dtableUuid, path, newName) {
@@ -2253,7 +2255,7 @@ class DTableWebAPI {
     if (relativePath) {
       data['relative_path'] = relativePath;
     }
-    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   listRecentUploadedFiles(dtableUuid, fileType) {
@@ -2332,7 +2334,7 @@ class DTableWebAPI {
 
   deleteCustomAssetDir(dtableUuid, parentDir, dirName) {
     let url = this.server + '/api/v2.1/dtable-custom-asset/' + dtableUuid + '/dir/';
-    url += '?parent_dir=' +  encodeURIComponent(parentDir) + '&name=' + encodeURIComponent(dirName);
+    url += '?parent_dir=' + encodeURIComponent(parentDir) + '&name=' + encodeURIComponent(dirName);
     return this.req.delete(url);
   }
 
@@ -2441,7 +2443,7 @@ class DTableWebAPI {
     const params = {
       delete_from: deleteFrom
     };
-    return this.req.delete(url, {params});
+    return this.req.delete(url, { params });
   }
 
   revertTrashAsset(dtableUuid, trashItemId) {
@@ -2449,7 +2451,7 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
-  listCommonDatasets(dstDTableUuid, byGroup=false) {
+  listCommonDatasets(dstDTableUuid, byGroup = false) {
     let url = this.server + '/api/v2.1/dtable/common-datasets/';
     let params = {};
     if (dstDTableUuid) {
@@ -2576,15 +2578,15 @@ class DTableWebAPI {
       page: page,
       per_page: perPage
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
-  listSysUserUnseenNotifications(){
+  listSysUserUnseenNotifications() {
     const url = this.server + '/api/v2.1/sys-user-notifications/unseen/';
     return this.req.get(url);
   }
 
-  setSysUserNotificationToSeen(nid){
+  setSysUserNotificationToSeen(nid) {
     let url = this.server + '/api/v2.1/sys-user-notifications/' + nid + '/seen/';
     return this.req.put(url);
   }
@@ -2617,7 +2619,7 @@ class DTableWebAPI {
       params['token'] = shareToken;
     }
     return this.req.get(url, {
-      headers: {'X-Requested-With': 'XMLHttpRequest'},
+      headers: { 'X-Requested-With': 'XMLHttpRequest' },
       params: params
     });
   }
@@ -2722,7 +2724,7 @@ class DTableWebAPI {
   //account api
 
   getAccountInfo() {
-    const url =  this.server + '/api2/account/info/';
+    const url = this.server + '/api2/account/info/';
     return this.req.get(url);
   }
 
@@ -2786,7 +2788,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
-  updateUserInfo({name, telephone, contact_email, list_in_address_book, sms_2fa}) {
+  updateUserInfo({ name, telephone, contact_email, list_in_address_book, sms_2fa }) {
     const url = this.server + '/api/v2.1/user/';
     let data = {};
     if (name != undefined) {
@@ -2821,17 +2823,17 @@ class DTableWebAPI {
 
   addNotificationRule(workspace_id, dtable_name, ruleJson) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/';
-    return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' }});
+    return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' } });
   }
 
   deleteNotificationRule(workspace_id, dtable_name, notificationRuleId) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/' + notificationRuleId + '/';
     return this.req.delete(url);
   }
-  
+
   updateNotificationRule(workspace_id, dtable_name, notificationRuleId, ruleJson) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/notification-rules/' + notificationRuleId + '/';
-    return this.req.put(url, ruleJson,  { headers: { 'Content-type': 'application/json' }});
+    return this.req.put(url, ruleJson, { headers: { 'Content-type': 'application/json' } });
   }
 
   listAutomationRules(workspace_id, dtable_name) {
@@ -2841,17 +2843,17 @@ class DTableWebAPI {
 
   addAutomationRule(workspace_id, dtable_name, ruleJson) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/';
-    return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' }});
+    return this._sendPostRequest(url, ruleJson, { headers: { 'Content-type': 'application/json' } });
   }
 
   deleteAutomationRule(workspace_id, dtable_name, automationRuleId) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + automationRuleId + '/';
     return this.req.delete(url);
   }
-  
+
   updateAutomationRule(workspace_id, dtable_name, automationRuleId, ruleJson) {
     const url = this.server + '/api/v2.1/workspace/' + workspace_id + '/dtable/' + encodeURIComponent(dtable_name) + '/automation-rules/' + automationRuleId + '/';
-    return this.req.put(url, ruleJson,  { headers: { 'Content-type': 'application/json' }});
+    return this.req.put(url, ruleJson, { headers: { 'Content-type': 'application/json' } });
   }
 
   testAutomationRule(workspace_id, dtable_name, automationRuleId) {
@@ -2984,7 +2986,7 @@ class DTableWebAPI {
   }
 
   orgAdminAddGroupMember(orgID, groupID, userEmail) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID +  '/members/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/members/';
     let form = new FormData();
     form.append('email', userEmail);
     return this._sendPostRequest(url, form);
@@ -3001,7 +3003,7 @@ class DTableWebAPI {
   }
 
   orgAdminAddOrgUser(orgID, email, name, password) {
-    const url =  this.server + '/api/v2.1/org/' + orgID +'/admin/users/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/';
     let form = new FormData();
     form.append('email', email);
     form.append('name', name);
@@ -3010,7 +3012,7 @@ class DTableWebAPI {
   }
 
   orgAdminInviteOrgUser(orgID, emails) {
-    const url =  this.server + '/api/v2.1/org/' + orgID +'/admin/invite-user-email/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/invite-user-email/';
     let form = new FormData();
     emails.forEach(email => {
       form.append('email', email);
@@ -3019,7 +3021,7 @@ class DTableWebAPI {
   }
 
   orgAdminChangeOrgUserStatus(orgID, email, statusCode) {
-    const url = this.server +'/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/';
     let form = new FormData();
     form.append('is_active', statusCode);
     return this.req.put(url, form);
@@ -3041,7 +3043,7 @@ class DTableWebAPI {
   }
 
   orgAdminDeleteOrgGroup(orgID, groupID) {
-    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/groups/' + groupID + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/';
     return this.req.delete(url);
   }
 
@@ -3058,22 +3060,22 @@ class DTableWebAPI {
   }
 
   orgAdminDeleteOrgRepo(orgID, repoID) {
-    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/repos/' + repoID + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/repos/' + repoID + '/';
     return this.req.delete(url);
   }
 
   orgAdminDeleteOrgUser(orgID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/';
     return this.req.delete(url);
   }
 
   orgAdminGetFileUpdateDetail(repoID, commitID) {
     let url = this.server + '/ajax/repo/' + repoID + '/history/changes/?commit_id=' + commitID;
-    return this.req.get(url, { headers: {'X-Requested-With': 'XMLHttpRequest'}});
+    return this.req.get(url, { headers: { 'X-Requested-With': 'XMLHttpRequest' } });
   }
 
   orgAdminGetGroup(orgID, groupID) {
-    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/groups/' + groupID + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/';
     return this.req.get(url);
   }
 
@@ -3083,17 +3085,17 @@ class DTableWebAPI {
   }
 
   orgAdminGetOrgUserBesharedRepos(orgID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/beshared-repos/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/beshared-repos/';
     return this.req.get(url);
   }
 
   orgAdminGetOrgUserInfo(orgID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/';
     return this.req.get(url);
   }
 
   orgAdminGetOrgUserOwnedRepos(orgID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/repos/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/repos/';
     return this.req.get(url);
   }
 
@@ -3111,7 +3113,7 @@ class DTableWebAPI {
   }
 
   orgAdminDeleteTwoFactorAuth(orgID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/two-factor-auth/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/two-factor-auth/';
     return this.req.delete(url);
   }
 
@@ -3225,7 +3227,7 @@ class DTableWebAPI {
       email: email,
       department_ids: departmentIds
     };
-    return this.req.post(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this.req.post(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   orgAdminListGroupMembers(orgID, groupID) {
@@ -3239,7 +3241,7 @@ class DTableWebAPI {
   }
 
   orgAdminListOrgGroups(orgID, page, perPage) {
-    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/groups/?page=' + page;
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/?page=' + page;
     let params = {
       per_page: perPage
     };
@@ -3270,11 +3272,11 @@ class DTableWebAPI {
   }
 
   orgAdminListOrgRepos(orgID, page) {
-    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/repos/?page=' + page;
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/repos/?page=' + page;
     return this.req.get(url);
   }
   orgAdminListOrgUsers(orgID, isStaff, page, perPage) {
-    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/users/?is_staff=' + isStaff + '&page=' + page;
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/?is_staff=' + isStaff + '&page=' + page;
     const params = {
       per_page: perPage,
     };
@@ -3293,7 +3295,7 @@ class DTableWebAPI {
   }
 
   orgAdminResetOrgUserPassword(orgID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/set-password/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/set-password/';
     return this.req.put(url);
   }
 
@@ -3308,7 +3310,7 @@ class DTableWebAPI {
   }
 
   orgAdminSetGroupMemberRole(orgID, groupID, userEmail, isAdmin) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID +  '/members/' + encodeURIComponent(userEmail) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/groups/' + groupID + '/members/' + encodeURIComponent(userEmail) + '/';
     let form = new FormData();
     form.append('is_admin', isAdmin);
     return this.req.put(url, form);
@@ -3322,14 +3324,14 @@ class DTableWebAPI {
   }
 
   orgAdminSetOrgAdmin(orgID, email, isStaff) {
-    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/users/' + encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/';
     let form = new FormData();
     form.append('is_staff', isStaff);
     return this.req.put(url, form);
   }
 
   orgAdminSetOrgUserContactEmail(orgID, email, contactEmail) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/';
     const data = {
       contact_email: contactEmail
     };
@@ -3337,7 +3339,7 @@ class DTableWebAPI {
   }
 
   orgAdminSetOrgUserName(orgID, email, name) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/';
     const data = {
       name: name
     };
@@ -3345,7 +3347,7 @@ class DTableWebAPI {
   }
 
   orgAdminSetOrgUserQuota(orgID, email, quota) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/';
     const data = {
       quota_total: quota
     };
@@ -3353,7 +3355,7 @@ class DTableWebAPI {
   }
 
   orgAdminSetOrgUserIdInOrg(orgID, email, IdInOrg) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/'+ encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/users/' + encodeURIComponent(email) + '/';
     const data = {
       id_in_org: IdInOrg
     };
@@ -3361,7 +3363,7 @@ class DTableWebAPI {
   }
 
   orgAdminTransferOrgRepo(orgID, repoID, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID +  '/admin/repos/' + repoID + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/repos/' + repoID + '/';
     let form = new FormData();
     form.append('email', email);
     return this.req.put(url, form);
@@ -3373,7 +3375,7 @@ class DTableWebAPI {
       page: page,
       per_page: perPage
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   orgAdminDeleteDTable(orgID, dtableID) {
@@ -3392,7 +3394,7 @@ class DTableWebAPI {
       page: page,
       per_page: perPage
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   orgAdminCleanTrashDTables(orgID) {
@@ -3444,7 +3446,7 @@ class DTableWebAPI {
 
   orgAdminBindWorkWeixin(orgID, corpID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/bind/';
-    return this.req.post(url, {corp_id: corpID});
+    return this.req.post(url, { corp_id: corpID });
   }
 
   orgAdminGetWorkWeixinInfo(orgID) {
@@ -3459,18 +3461,18 @@ class DTableWebAPI {
 
   orgAdminImportWorkWeixinUser(orgID, user) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/users/';
-    return this.req.post(url, {user: user});
+    return this.req.post(url, { user: user });
   }
 
   orgAdminDisconnectWorkWeixinUser(orgID, user) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/user/';
-    let params = {user: user};
-    return this.req.delete(url, {data: params});
+    let params = { user: user };
+    return this.req.delete(url, { data: params });
   }
 
   orgAdminWorkWeixinCreateLicenseOrder(orgID, count) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/create-license-order/';
-    return this.req.post(url, {count: count});
+    return this.req.post(url, { count: count });
   }
 
   orgAdminGetDingtalkInfo(orgID) {
@@ -3480,17 +3482,17 @@ class DTableWebAPI {
 
   orgAdminAddWorkWeixinUsersBatch(orgID, userList) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/users/batch/';
-    return this.req.post(url, {userlist: userList});
+    return this.req.post(url, { userlist: userList });
   }
 
   orgAdminImportWorkWeixinDepartment(orgID, departmentID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/departments/import/';
-    return this.req.post(url, {work_weixin_department_id: departmentID});
+    return this.req.post(url, { work_weixin_department_id: departmentID });
   }
 
   orgAdminListWorkWeixinDepartmentMembers(orgID, departmentID, params) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/work-weixin/departments/' + departmentID + '/members/';
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   orgAdminListWorkWeixinDepartments(orgID, departmentID) {
@@ -3499,7 +3501,7 @@ class DTableWebAPI {
     if (departmentID) {
       params.department_id = departmentID;
     }
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   orgAdminListDTableExternalLinks(orgID, page, perPage) {
@@ -3508,7 +3510,7 @@ class DTableWebAPI {
       page: page,
       per_page: perPage
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   orgAdminDeleteDTableExternalLink(orgID, token) {
@@ -3522,7 +3524,7 @@ class DTableWebAPI {
       page: page,
       per_page: perPage
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   orgAdminDeleteViewExternalLink(orgID, token) {
@@ -3565,7 +3567,7 @@ class DTableWebAPI {
       page: page,
       per_page: perPage
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListTrashDTables(page, perPage) {
@@ -3633,7 +3635,7 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/admin/dtable/' + dtable_uuid + '/unset-password/';
     return this.req.put(url);
   }
-  
+
   sysAdminListForms(page, perPage) {
     let url = this.server + '/api/v2.1/admin/forms/';
     let params = {
@@ -3781,18 +3783,18 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/users/' + encodeURIComponent(email) + '/';
     let formData = new FormData();
     switch (attribute) {
-    case 'active':
-      formData.append('active', value);
-      break;
-    case 'name':
-      formData.append('name', value);
-      break;
-    case 'contact_email':
-      formData.append('contact_email', value);
-      break;
-    case 'quota_total':
-      formData.append('quota_total', value);
-      break;
+      case 'active':
+        formData.append('active', value);
+        break;
+      case 'name':
+        formData.append('name', value);
+        break;
+      case 'contact_email':
+        formData.append('contact_email', value);
+        break;
+      case 'quota_total':
+        formData.append('quota_total', value);
+        break;
     }
     return this.req.put(url, formData);
   }
@@ -3846,10 +3848,10 @@ class DTableWebAPI {
     if (isLDAPImport) {
       url += '?source=ldapimport';
     }
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
-  sysAdminFilterUsers(page, perPage, {userStatus, userRole, orderBy, direction}) {
+  sysAdminFilterUsers(page, perPage, { userStatus, userRole, orderBy, direction }) {
     let url = this.server + '/api/v2.1/admin/filter-users/';
     let params = {
       page: page,
@@ -3867,7 +3869,7 @@ class DTableWebAPI {
     if (direction) {
       params.direction = direction;
     }
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminAddUser(email, name, role, password) {
@@ -3884,54 +3886,54 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/';
     let formData = new FormData();
     switch (attribute) {
-    case 'password':
-      formData.append('password', value);
-      break;
-    case 'is_active':
-      formData.append('is_active', value);
-      break;
-    case 'is_staff':
-      formData.append('is_staff', value);
-      break;
-    case 'role':
-      formData.append('role', value);
-      break;
-    case 'name':
-      formData.append('name', value);
-      break;
-    case 'login_id':
-      formData.append('login_id', value);
-      break;
-    case 'contact_email':
-      formData.append('contact_email', value);
-      break;
-    case 'phone':
-      formData.append('phone', value);
-      break;
-    case 'reference_id':
-      formData.append('reference_id', value);
-      break;
-    case 'department':
-      formData.append('department', value);
-      break;
-    case 'quota_total':
-      formData.append('quota_total', value);
-      break;
-    case 'institution':
-      formData.append('institution', value);
-      break;
-    case 'row_limit':
-      formData.append('row_limit', value);
-      break;
-    case 'asset_quota_mb':
-      formData.append('asset_quota_mb', value);
-      break;
-    case 'id_in_org':
-      formData.append('id_in_org', value);
-      break;
-    case 'unit':
-      formData.append('unit', value);
-      break;
+      case 'password':
+        formData.append('password', value);
+        break;
+      case 'is_active':
+        formData.append('is_active', value);
+        break;
+      case 'is_staff':
+        formData.append('is_staff', value);
+        break;
+      case 'role':
+        formData.append('role', value);
+        break;
+      case 'name':
+        formData.append('name', value);
+        break;
+      case 'login_id':
+        formData.append('login_id', value);
+        break;
+      case 'contact_email':
+        formData.append('contact_email', value);
+        break;
+      case 'phone':
+        formData.append('phone', value);
+        break;
+      case 'reference_id':
+        formData.append('reference_id', value);
+        break;
+      case 'department':
+        formData.append('department', value);
+        break;
+      case 'quota_total':
+        formData.append('quota_total', value);
+        break;
+      case 'institution':
+        formData.append('institution', value);
+        break;
+      case 'row_limit':
+        formData.append('row_limit', value);
+        break;
+      case 'asset_quota_mb':
+        formData.append('asset_quota_mb', value);
+        break;
+      case 'id_in_org':
+        formData.append('id_in_org', value);
+        break;
+      case 'unit':
+        formData.append('unit', value);
+        break;
     }
     return this.req.put(url, formData);
   }
@@ -3947,7 +3949,7 @@ class DTableWebAPI {
     if (avatarSize) {
       params.avatar_size = avatarSize;
     }
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminResetUserPassword(email) {
@@ -3974,7 +3976,7 @@ class DTableWebAPI {
   }
 
   sysAdminDeleteTwoFactorAuth(email) {
-    const url = this.server + '/api/v2.1/admin/users/'+ encodeURIComponent(email) + '/two-factor-auth/';
+    const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/two-factor-auth/';
     return this.req.delete(url);
   }
 
@@ -4132,7 +4134,7 @@ class DTableWebAPI {
       email: email,
       department_ids: departmentIds
     };
-    return this.req.post(url, data, {headers: {'Content-Type': 'application/json'}});
+    return this.req.post(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
   sysAdminListUserDTables(email, page, per_page) {
@@ -4292,7 +4294,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  sysAdminUpdateSysNotification(nid, msg, primary){
+  sysAdminUpdateSysNotification(nid, msg, primary) {
     let url = this.server + '/api/v2.1/admin/sys-notifications/' + nid + '/';
     let formData = new FormData();
     if (msg) {
@@ -4304,7 +4306,7 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
-  sysAdminListAllSysUserNotifications(page, perPage){
+  sysAdminListAllSysUserNotifications(page, perPage) {
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
     let params = {
       page: page,
@@ -4313,7 +4315,7 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
-  sysAdminAddSysUserNotification(msg, username){
+  sysAdminAddSysUserNotification(msg, username) {
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/';
     let formData = new FormData();
     formData.append('msg', msg);
@@ -4321,12 +4323,12 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  sysAdminDeleteSysUserNotification(nid){
+  sysAdminDeleteSysUserNotification(nid) {
     let url = this.server + '/api/v2.1/admin/sys-user-notifications/' + nid + '/';
     return this.req.delete(url);
   }
 
-  sysAdminListAllNotificationRules(page,perPage) {
+  sysAdminListAllNotificationRules(page, perPage) {
     let url = this.server + '/api/v2.1/admin/notification-rules/';
     let params = {
       page: page,
@@ -4335,7 +4337,7 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
-  sysAdminListInvalidNotificationRules(page,perPage) {
+  sysAdminListInvalidNotificationRules(page, perPage) {
     let url = this.server + '/api/v2.1/admin/invalid-notification-rules/';
     let params = {
       page: page,
@@ -4350,7 +4352,7 @@ class DTableWebAPI {
   }
 
   sysAdminDeleteInvalidNotificationRules() {
-    let url = this.server + '/api/v2.1/admin/invalid-notification-rules/' ;
+    let url = this.server + '/api/v2.1/admin/invalid-notification-rules/';
     return this.req.delete(url);
   }
 
@@ -4378,7 +4380,7 @@ class DTableWebAPI {
   }
 
   sysAdminDeleteInvalidAutomationRules() {
-    let url = this.server + '/api/v2.1/admin/invalid-automation-rules/' ;
+    let url = this.server + '/api/v2.1/admin/invalid-automation-rules/';
     return this.req.delete(url);
   }
 
@@ -4415,7 +4417,7 @@ class DTableWebAPI {
   }
 
   sysAdminDeleteCommonDatasetInvalidSyncs() {
-    let url = this.server + '/api/v2.1/admin/common-dataset/invalid-syncs/' ;
+    let url = this.server + '/api/v2.1/admin/common-dataset/invalid-syncs/';
     return this.req.delete(url);
   }
 
@@ -4452,7 +4454,7 @@ class DTableWebAPI {
       start: startTime,
       end: endTime,
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListScriptsRunningStatistics(is_user, month, page, perPage, orderBy) {
@@ -4466,7 +4468,7 @@ class DTableWebAPI {
     if (orderBy) {
       params.order_by = orderBy;
     }
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListAutoRulesStatistics(is_user, month, page, perPage, orderBy) {
@@ -4480,7 +4482,7 @@ class DTableWebAPI {
     if (orderBy) {
       params.order_by = orderBy;
     }
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListAutoRuleStatisticDetails(is_user, month, username, org_id) {
@@ -4491,7 +4493,7 @@ class DTableWebAPI {
       owner: username,
       org_id: org_id
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListExternalAppsStatistics(is_user, month, page, perPage, orderBy) {
@@ -4505,7 +4507,7 @@ class DTableWebAPI {
     if (orderBy) {
       params.order_by = orderBy;
     }
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminGetSysSettingInfo() {
@@ -4527,7 +4529,7 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
-  sysAdminUpdateFavicon(file, withNotify=null) {
+  sysAdminUpdateFavicon(file, withNotify = null) {
     let url = this.server + '/api/v2.1/admin/favicon/';
     let formData = new FormData();
     formData.append('favicon', file);
@@ -4632,7 +4634,7 @@ class DTableWebAPI {
       share_type: shareType,
       share_to: shareTo
     };
-    return this.req.delete(url, {data: params});
+    return this.req.delete(url, { data: params });
   }
 
   sysAdminGetRepoHistorySetting(repoID) {
@@ -4657,7 +4659,7 @@ class DTableWebAPI {
       page: page,
       per_page: per_page
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListRepoSharedItems(repoID, shareType) {
@@ -4666,7 +4668,7 @@ class DTableWebAPI {
       repo_id: repoID,
       share_type: shareType
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminUnlinkDevice(platform, deviceID, user, wipeDevice) {
@@ -4679,7 +4681,7 @@ class DTableWebAPI {
     if (wipeDevice) {
       params.wipe_device = wipeDevice;
     }
-    return this.req.delete(url, {data: params});
+    return this.req.delete(url, { data: params });
   }
 
   sysAdminUpdateRepoHistorySetting(repoID, keepDays) {
@@ -4733,7 +4735,7 @@ class DTableWebAPI {
       page: page,
       per_page: per_page
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListAbuseReports(page, per_page) {
@@ -4742,7 +4744,7 @@ class DTableWebAPI {
       page: page,
       per_page: per_page
     };
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminUpdateAbuseReport(reportId, handled) {
@@ -4754,17 +4756,17 @@ class DTableWebAPI {
 
   adminAddWorkWeixinUsersBatch(userList) {
     const url = this.server + '/api/v2.1/admin/work-weixin/users/batch/';
-    return this.req.post(url, {userlist: userList});
+    return this.req.post(url, { userlist: userList });
   }
 
   adminImportWorkWeixinDepartment(departmentID) {
     const url = this.server + '/api/v2.1/admin/work-weixin/departments/import/';
-    return this.req.post(url, {work_weixin_department_id: departmentID});
+    return this.req.post(url, { work_weixin_department_id: departmentID });
   }
 
   adminListWorkWeixinDepartmentMembers(departmentID, params) {
     const url = this.server + '/api/v2.1/admin/work-weixin/departments/' + departmentID + '/members/';
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   adminListWorkWeixinDepartments(departmentID) {
@@ -4773,7 +4775,7 @@ class DTableWebAPI {
     if (departmentID) {
       params.department_id = departmentID;
     }
-    return this.req.get(url, {params: params});
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListExternalApps(page, per_page) {
@@ -4801,7 +4803,7 @@ class DTableWebAPI {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/export-big-data-screen/?page_name=' + encodeURIComponent(pageName) + '&page_id=' + pageId;
     return this.req.get(url);
   }
-  
+
   importBigDataScreenPageContent(workspaceID, dtableName, newPageId, fileUrl, file) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/import-big-data-screen/';
     const form = new FormData();
