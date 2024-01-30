@@ -1143,7 +1143,7 @@ class DTableWebAPI {
   importPageDesignPage(workspaceId, name, pageDesignFile) {
     let url = this.server + `/api/v2.1/workspace/${workspaceId}/dtable/${name}/page-design-export/`;
     let form = new FormData();
-    form.append('page_design_filr', pageDesignFile);
+    form.append('page_design_file', pageDesignFile);
     return this._sendPostRequest(url, form);
   }
 
