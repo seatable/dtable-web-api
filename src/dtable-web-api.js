@@ -1390,10 +1390,10 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addUniversalAppRelatedBase(appUuid, related_base_id) {
+  addUniversalAppRelatedBase(appUuid, related_base_uuid) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/related-bases/';
     let form = new FormData();
-    form.append('dtable_uuid', related_base_id)
+    form.append('dtable_uuid', related_base_uuid)
     return this._sendPostRequest(url, form)
   }
 
