@@ -1664,7 +1664,7 @@ class DTableWebAPI {
     let data = {
       'account_name': account_name,
       'account_type': accout_type,
-      'detail': detail,
+      'detail': detail
     };
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
@@ -1674,7 +1674,7 @@ class DTableWebAPI {
     let data = {
       'account_name': account_name,
       'account_type': account_type,
-      'detail': detail,
+      'detail': detail
     };
     return this.req.put(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
