@@ -1649,8 +1649,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
-  getThirdPartyAccountsDetail(dtableUuid, account_name) {
-    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/detail/?account_name=' + encodeURIComponent(account_name);
+  getThirdPartyAccountsDetail(dtableUuid, account_id) {
+    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/' + account_id + '/';
     return this.req.get(url);
   }
 
@@ -1659,24 +1659,22 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addThirdPartyAccount(dtableUuid, account_name, accout_type, detail, ownerID) {
+  addThirdPartyAccount(dtableUuid, account_name, accout_type, detail) {
     let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/';
     let data = {
       'account_name': account_name,
       'account_type': accout_type,
       'detail': detail,
-      'owner': ownerID
     };
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
-  updateThirdPartyAccount(dtableUuid, account_id, account_name, account_type, detail, ownerID) {
+  updateThirdPartyAccount(dtableUuid, account_id, account_name, account_type, detail) {
     let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/' + account_id + '/';
     let data = {
       'account_name': account_name,
       'account_type': account_type,
       'detail': detail,
-      'owner': ownerID
     };
     return this.req.put(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
