@@ -2414,6 +2414,16 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  addSystemAssetZipTask(dtableUuid, parentDir, dirents) {
+    const url = `${this.server}/api/v2.1/dtable-system-asset/${dtableUuid}/zip-task/`;
+    let form = new FormData();
+    form.append('parent_dir', parentDir);
+    dirents.forEach(dirent => {
+      form.append('dirents', dirent);
+    });
+    return this._sendPostRequest(url, form);
+  }
+
   queryCustomAssetZipProgress(token) {
     let url = this.server + '/api/v2.1/dtable-custom-asset/query-zip-progress/';
     let params = { token };
