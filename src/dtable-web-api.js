@@ -472,6 +472,15 @@ class DTableWebAPI {
     return this._sendPostRequest(url, formData);
   }
 
+  copyDTablePerCDSsCheck(srcWorkspaceID, name, dstWorkspaceID) {
+    let url = this.server + '/api/v2.1/dtable-copy/pre-common-dataset-syncs-check/';
+    let form = new FormData();
+    form.append('src_workspace_id', srcWorkspaceID);
+    form.append('name', name);
+    form.append('dst_workspace_id', dstWorkspaceID);
+    return this._sendPostRequest(url, form);
+  }
+
   copyExternalDtable(dstWorkspaceID, link, folderID) {
     let url = this.server + '/api/v2.1/dtable-external-link/dtable-copy/';
     let formData = new FormData();
