@@ -2765,6 +2765,11 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  removePassword() {
+    const url = this.server + '/api/v2.1/user/remove-password/';
+    return this.req.put(url);
+  }
+
   resetPasswordByPhone(phone, code, newPassword, confirmPassword) {
     let url = this.server + '/api/v2.1/user/reset-password-by-phone/';
     let data = {
