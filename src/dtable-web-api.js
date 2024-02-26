@@ -647,13 +647,6 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  addUpdateExcelCSVTask(workspaceId, dtableName, tables) {
-    const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/';
-    let formData = new FormData();
-    formData.append('dtable_name', dtableName);
-    formData.append('tables', tables);
-    return this.req.put(url, formData);
-  }
 
   addConvertPageTask(workspaceId, dtableName, params) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/convert-page/';
