@@ -445,7 +445,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  copyDTable(srcWorkspaceID, dstWorkspaceID, name, password) {
+  copyDTable(srcWorkspaceID, dstWorkspaceID, name, password, isCopyDatasetSyncs) {
     let url = this.server + '/api/v2.1/dtable-copy/';
     let formData = new FormData();
     formData.append('src_workspace_id', srcWorkspaceID);
@@ -453,6 +453,9 @@ class DTableWebAPI {
     formData.append('name', name);
     if (password) {
       formData.append('password', password);
+    }
+    if (isCopyDatasetSyncs !== null && typeof isCopyDatasetSyncs !== 'undefined') {
+      formData.append('is_copy_dataset_syncs', isCopyDatasetSyncs);
     }
     return this._sendPostRequest(url, formData);
   }
@@ -467,6 +470,15 @@ class DTableWebAPI {
     let formData = new FormData();
     formData.append('dst_dtable_uuid', dst_dtable_uuid);
     return this._sendPostRequest(url, formData);
+  }
+
+  copyDTablePerCDSsCheck(srcWorkspaceID, name, dstWorkspaceID) {
+    let url = this.server + '/api/v2.1/dtable-copy/pre-common-dataset-syncs-check/';
+    let form = new FormData();
+    form.append('src_workspace_id', srcWorkspaceID);
+    form.append('name', name);
+    form.append('dst_workspace_id', dstWorkspaceID);
+    return this._sendPostRequest(url, form);
   }
 
   copyExternalDtable(dstWorkspaceID, link, folderID) {
@@ -2550,6 +2562,11 @@ class DTableWebAPI {
       formData.append('sync_interval', updates.sync_interval);
     }
     return this.req.put(url, formData);
+  }
+
+  forceSyncCommonDataset(datasetId) {
+    const url = this.server + `/api/v2.1/dtable/common-datasets/${datasetId}/force-sync/`;
+    return this.req.post(url);
   }
 
   listCommonDatasetSyncs(dst_dtable_uuid) {
