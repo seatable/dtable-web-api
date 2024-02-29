@@ -2746,7 +2746,7 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  //account api
+  // account api
 
   getAccountInfo() {
     const url = this.server + '/api2/account/info/';
