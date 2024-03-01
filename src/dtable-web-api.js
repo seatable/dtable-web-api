@@ -2606,6 +2606,14 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  notificationCenterMarkSeen(noticeType) {
+    const url = this.server + '/api/v2.1/notifications-center/';
+    let data = {
+      notice_type: noticeType,
+    };
+    return this.req.put(url, data);
+  }
+
   listSysUserUnseenNotifications(){
     const url = this.server + '/api/v2.1/sys-user-notifications/unseen/';
     return this.req.get(url);
