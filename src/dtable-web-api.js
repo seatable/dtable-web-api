@@ -577,10 +577,11 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  addImportExcelCSVTask(workspaceId, dtableName, folderID) {
+  addImportExcelCSVTask(workspaceId, dtableName, folderID, includedTables) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/';
     let formData = new FormData();
     formData.append('dtable_name', dtableName);
+    formData.append('included_tables', includedTables);
     if (folderID) {
       formData.append('folder_id', folderID);
     }
