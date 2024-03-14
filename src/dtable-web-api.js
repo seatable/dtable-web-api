@@ -579,13 +579,14 @@ class DTableWebAPI {
 
   addImportExcelCSVTask(workspaceId, dtableName, folderID, includedTables) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceId + '/import-excel-csv/';
-    let formData = new FormData();
-    formData.append('dtable_name', dtableName);
-    formData.append('included_tables', includedTables);
+    let params = {
+      dtable_name: dtableName,
+      included_tables: includedTables
+    };
     if (folderID) {
-      formData.append('folder_id', folderID);
+      params['folder_id'] = folderID;
     }
-    return this.req.post(url, formData);
+    return this.req.post(url, params);
   }
 
   importExcelCSVUploadFile(workspaceId, file, dtableUuid) {
