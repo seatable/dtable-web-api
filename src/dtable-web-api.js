@@ -2559,9 +2559,12 @@ class DTableWebAPI {
     return this.req.put(url, formData);
   }
 
-  forceSyncCommonDataset(datasetId) {
+  forceSyncCommonDataset(datasetId, dst_dtable_uuids = []) {
     const url = this.server + `/api/v2.1/dtable/common-datasets/${datasetId}/force-sync/`;
-    return this.req.post(url);
+    const data = {
+      dst_dtable_uuids: dst_dtable_uuids,
+    };
+    return this.req.post(url, data);
   }
 
   listCommonDatasetSyncs(dst_dtable_uuid) {
