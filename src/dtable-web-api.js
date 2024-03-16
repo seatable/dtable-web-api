@@ -2606,6 +2606,11 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  listNotificationsCenter() {
+    const url = this.server + '/api/v2.1/notifications-center/';
+    return this.req.get(url);
+  }
+
   listSysUserUnseenNotifications() {
     const url = this.server + '/api/v2.1/sys-user-notifications/unseen/';
     return this.req.get(url);
@@ -2616,9 +2621,12 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
-  updateNotifications() {
+  updateNotifications(noticeType) {
     const url = this.server + '/api/v2.1/notifications/';
-    return this.req.put(url);
+    const data = {
+      notice_type: noticeType
+    };
+    return this.req.put(url, data);
   }
 
   deleteNotifications() {
