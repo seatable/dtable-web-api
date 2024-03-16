@@ -934,6 +934,20 @@ class DTableWebAPI {
     return this._sendPostRequest(url, form);
   }
 
+  getFormLinkedRows(customUrl, formToken, linkColumnKey) {
+    const url = `${this.server}/api/v2.1/forms/linked-rows/`;
+    const params = {
+      link_column_key: linkColumnKey
+    };
+    if (customUrl) {
+      params['custom_url'] = customUrl;
+    }
+    if (formToken) {
+      params['form_token'] = formToken;
+    }
+    return this.req.get(url, { params });
+  }
+
   getActivitiesDetail(dtable_uuid, opDate, pageNum, avatarSize = 36) {
     let params = 'dtable_uuid=' + dtable_uuid + '&op_date=' + encodeURIComponent(opDate) + '&page=' + pageNum + '&avatar_size=' + avatarSize;
     let url = this.server + '/api/v2.1/dtable-activities/detail/?' + params;
