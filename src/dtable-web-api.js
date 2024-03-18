@@ -2818,6 +2818,15 @@ class DTableWebAPI {
     return this.req.post(url, data);
   }
 
+  resetPassword(oldPassword, newPassword) {
+    let url = this.server + '/api/v2.1/user/reset-password/';
+    let data = {
+      old_password: oldPassword,
+      new_password: newPassword
+    };
+    return this.req.post(url, data);
+  }
+
   userConvertToTeam() {
     const url = this.server + '/api/v2.1/user/convert-to-team/';
     return this.req.post(url);
