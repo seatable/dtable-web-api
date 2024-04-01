@@ -4655,6 +4655,40 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  sysAdminGetSharePermissions(dtableUuid) {
+    const url = this.server + "/api/v2.1/admin/dtables/share-permissions/"+dtableUuid+"/";
+    return this.req.get(url);
+  }
+
+  sysAdminListTableShares(dtableUuid) {
+    const url = this.server + "/api/v2.1/admin/dtables/share/"+dtableUuid+"/";
+    return this.req.get(url);
+  }
+
+  sysAdminAddTableShare(dtableUuid, email, permission) {
+    const url = this.server + "/api/v2.1/admin/dtables/share/"+dtableUuid+"/";
+    let params = {
+      email: email,
+      permission: permission
+    };
+    return this.req.post(url, params);
+  }
+
+  sysAdminDeleteTableShare(dtableUuid, email) {
+    const url = this.server + "/api/v2.1/admin/dtables/share/"+dtableUuid+"/";
+    let params = { email: email };
+    return this.req.delete(url, { data: params });
+  }
+
+  sysAdminUpdateTableShare(dtableUuid, email, permission) {
+    const url = this.server + "/api/v2.1/admin/dtables/share/"+dtableUuid+"/";
+    let params = {
+      email: email,
+      permission: permission
+    };
+    return this.req.put(url, params);
+  }
+
   sysAdminCopyDTable(srcWorkspaceID, dstWorkspaceID, name) {
     const url = this.server + '/api/v2.1/admin/dtable-copy/';
     let formData = new FormData();
@@ -4670,6 +4704,7 @@ class DTableWebAPI {
     formData.append('dst_dtable_uuid', dst_dtable_uuid);
     return this._sendPostRequest(url, formData);
   }
+
 
   sysAdminAddRepoSharedItem(repoID, shareType, shareToList, permission) {
     const url = this.server + '/api/v2.1/admin/shares/';
