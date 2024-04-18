@@ -4708,7 +4708,9 @@ class DTableWebAPI {
     let params = {
       group_id: groupID,
     };
-    return this.req.delete(url, params);
+    return this.req.delete(url, {
+      data: params
+    });
   }
 
   sysAdminUpdateTableGroupShare(dtableUuid, groupID, permission) {
