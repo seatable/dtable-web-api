@@ -979,15 +979,28 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  restoreDTableSnapshot(workspaceID, dtableName, commitId, snapshotName, password) {
+  restoreDTableSnapshot(workspaceID, dtableName, commitId, snapshotName, password, backupVersion) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/snapshots/' + commitId + '/restore/';
     let form = new FormData();
     form.append('snapshot_name', snapshotName);
     if (password) {
       form.append('password', password);
     }
+    if (backupVersion) {
+      form.append('backup_version', backupVersion);
+    }
 
     return this._sendPostRequest(url, form);
+  }
+
+  listArchiveBackups(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/archive-backups/';
+    return this.req.get(url);
+  }
+
+  getBigDataState(workspaceID, dtableName) {
+    let url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(dtableName) + '/big-data-state/';
+    return this.req.get(url);
   }
 
   listTrashDTables(page, perPage) {
