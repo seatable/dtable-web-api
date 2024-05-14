@@ -1415,6 +1415,40 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
+  // universal-app-folders module
+  createAppFolder(name, folder_type) {
+    let url = this.server + '/api/v2.1/universal-apps/folders/';
+    let form = new FormData();
+    form.append('name', name);
+    form.append('folder_type', folder_type);
+    return this._sendPostRequest(url, form);
+  }
+
+  deleteAppFolder(app_folder_id) {
+    let url = this.server + '/api/v2.1/universal-apps/folders/' + app_folder_id + '/';
+    return this.req.delete(url);
+  }
+
+  renameAppFolder(name, app_folder_id) {
+    let url = this.server + '/api/v2.1/universal-apps/folders/' + app_folder_id + '/';
+    let form = new FormData();
+    form.append('name', name);
+    return this.req.put(url, form);
+  }
+
+  getAppFolderContent(app_folder_id) {
+    let url = this.server + '/api/v2.1/universal-apps/folders/' + app_folder_id + '/';
+    return this.req.get(url);
+  }
+
+  moveAppToFolder(appUuid, move_from, move_to) {
+    let url = this.server + `/api/v2.1/universal-apps/${appUuid}/move-app-to-folder/`;
+    let form = new FormData();
+    form.append('move_from', move_from);
+    form.append('move_to', move_to);
+    return this._sendPostRequest(url, form);
+  } 
+
   pluginEmailSendEmail(dtableUuid, thirdAccountName, emailInfo, tableInfo) {
     let url = this.server + `/api/v2.1/dtables/${dtableUuid}/plugin-email-send-email/`;
     let data = {
@@ -1972,7 +2006,7 @@ class DTableWebAPI {
     form.append('move_from', move_from);
     form.append('move_to', move_to);
     return this._sendPostRequest(url, form);
-  }
+  } 
 
 
   getPublicUploadLinkViaWorkflowToken(token) {
