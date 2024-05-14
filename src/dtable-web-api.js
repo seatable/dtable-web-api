@@ -1447,7 +1447,7 @@ class DTableWebAPI {
     form.append('move_from', move_from);
     form.append('move_to', move_to);
     return this._sendPostRequest(url, form);
-  } 
+  }
 
   pluginEmailSendEmail(dtableUuid, thirdAccountName, emailInfo, tableInfo) {
     let url = this.server + `/api/v2.1/dtables/${dtableUuid}/plugin-email-send-email/`;
@@ -2006,7 +2006,7 @@ class DTableWebAPI {
     form.append('move_from', move_from);
     form.append('move_to', move_to);
     return this._sendPostRequest(url, form);
-  } 
+  }
 
 
   getPublicUploadLinkViaWorkflowToken(token) {
