@@ -4723,6 +4723,39 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
+  sysAdminListTableGroupShares(dtableUuid) {
+    const url = this.server + '/api/v2.1/admin/dtables/group-shares/' + dtableUuid + '/';
+    return this.req.get(url);
+  }
+
+  sysAdminAddTableGroupShare(dtableUuid, groupID, permission) {
+    const url = this.server + '/api/v2.1/admin/dtables/group-shares/' + dtableUuid + '/';
+    let params = {
+      group_id: groupID,
+      permission: permission
+    };
+    return this.req.post(url, params);
+  }
+
+  sysAdminDeleteTableGroupShare(dtableUuid, groupID) {
+    const url = this.server + '/api/v2.1/admin/dtables/group-shares/' + dtableUuid + '/';
+    let params = {
+      group_id: groupID,
+    };
+    return this.req.delete(url, {
+      data: params
+    });
+  }
+
+  sysAdminUpdateTableGroupShare(dtableUuid, groupID, permission) {
+    const url = this.server + '/api/v2.1/admin/dtables/group-shares/' + dtableUuid + '/';
+    let params = {
+      group_id: groupID,
+      permission: permission
+    };
+    return this.req.put(url, params);
+  }
+
   sysAdminCopyDTable(srcWorkspaceID, dstWorkspaceID, name) {
     const url = this.server + '/api/v2.1/admin/dtable-copy/';
     let formData = new FormData();
