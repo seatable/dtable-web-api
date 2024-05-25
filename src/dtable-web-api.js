@@ -3655,6 +3655,35 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
+  orgAdminListTableShares(orgID, dtableUuid) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/share/' + dtableUuid + '/';
+    return this.req.get(url);
+  }
+
+ orgAdminAddTableShare(orgID, dtableUuid, email, permission) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/dtables/share/' + dtableUuid + '/';
+    let data = {
+      email: email,
+      permission: permission
+    };
+    return this.req.post(url, data);
+  }
+
+  orgAdminDeleteTableShare(orgID, dtableUuid, email) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/dtables/share/' + dtableUuid + '/';
+    let params = { email: email };
+    return this.req.delete(url, { data: params });
+  }
+
+  orgAdminUpdateTableShare(orgID, dtableUuid, email, permission) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/dtables/share/' + dtableUuid + '/';
+    let data = {
+      email: email,
+      permission: permission
+    };
+    return this.req.put(url, data);
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
