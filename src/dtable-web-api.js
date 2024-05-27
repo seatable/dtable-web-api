@@ -3655,6 +3655,11 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
+  orgAdminGetSharePermissions(orgID, dtableUuid) {
+    const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/dtables/' + dtableUuid + '/share-permissions/';
+    return this.req.get(url);
+  }
+
   orgAdminListTableShares(orgID, dtableUuid) {
     const url = this.server + '/api/v2.1/admin/organizations/' + orgID + '/share/' + dtableUuid + '/';
     return this.req.get(url);
