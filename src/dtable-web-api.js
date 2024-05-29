@@ -3675,12 +3675,12 @@ class DTableWebAPI {
   }
 
   orgAdminDeleteTableUserShare(orgID, dtableUuid, email) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/users/' + encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/user/' + encodeURIComponent(email) + '/';
     return this.req.delete(url);
   }
 
   orgAdminUpdateTableShare(orgID, dtableUuid, email, permission) {
-    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/users/' + encodeURIComponent(email) + '/';
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/user/' + encodeURIComponent(email) + '/';
     let data = {
       permission: permission
     };
