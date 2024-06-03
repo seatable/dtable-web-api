@@ -1649,18 +1649,18 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
-  getThirdPartyAccountsDetail(dtableUuid, account_id) {
-    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/' + account_id + '/';
+  getThirdPartyAccountsDetail(workspace_id, account_id) {
+    let url = this.server + '/api/v2.1/workspace/ ' + workspace_id + '/third-party-accounts/' + account_id + '/';
     return this.req.get(url);
   }
 
-  listThirdPartyAccounts(dtableUuid) {
-    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/';
+  listThirdPartyAccounts(workspace_id) {
+    let url = this.server + '/api/v2.1/workspace/' + workspace_id + '/third-party-accounts/';
     return this.req.get(url);
   }
 
-  addThirdPartyAccount(dtableUuid, account_name, accout_type, detail) {
-    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/';
+  addThirdPartyAccount(workspace_id, account_name, accout_type, detail) {
+    let url = this.server + '/api/v2.1/workspace/' + workspace_id + '/third-party-accounts/';
     let data = {
       'account_name': account_name,
       'account_type': accout_type,
@@ -1669,8 +1669,8 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
-  updateThirdPartyAccount(dtableUuid, account_id, account_name, account_type, detail) {
-    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/' + account_id + '/';
+  updateThirdPartyAccount(workspace_id, account_id, account_name, account_type, detail) {
+    let url = this.server + '/api/v2.1/workspace/ ' + workspace_id + '/third-party-accounts/' + account_id + '/';
     let data = {
       'account_name': account_name,
       'account_type': account_type,
@@ -1679,8 +1679,8 @@ class DTableWebAPI {
     return this.req.put(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
-  deleteThirdPartyAccount(dtableUuid, account_id) {
-    let url = this.server + '/api/v2.1/third-party-accounts/' + dtableUuid + '/' + account_id + '/';
+  deleteThirdPartyAccount(workspace_id, account_id) {
+    let url = this.server + '/api/v2.1/workspace/ ' + workspace_id + '/third-party-accounts/' + account_id + '/';
     return this.req.delete(url);
   }
 
