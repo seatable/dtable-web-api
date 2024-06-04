@@ -1650,7 +1650,7 @@ class DTableWebAPI {
   }
 
   getThirdPartyAccountsDetail(workspace_id, account_id) {
-    let url = this.server + '/api/v2.1/workspace/ ' + workspace_id + '/third-party-accounts/' + account_id + '/';
+    let url = this.server + '/api/v2.1/workspace/' + workspace_id + '/third-party-accounts/' + account_id + '/';
     return this.req.get(url);
   }
 
