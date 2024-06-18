@@ -3709,6 +3709,16 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
+  orgAdminSearchGroups(query) {
+    let url = this.server + '/api/v2.1/admin/search-group/';
+    let params = {
+      query: query
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
