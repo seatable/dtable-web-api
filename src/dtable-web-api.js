@@ -3665,7 +3665,7 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
- orgAdminAddTableUserShare(orgID, dtableUuid, email, permission) {
+  orgAdminAddTableUserShare(orgID, dtableUuid, email, permission) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/users/';
     let data = {
       email: email,
@@ -3679,8 +3679,30 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  orgAdminUpdateTableShare(orgID, dtableUuid, email, permission) {
+  orgAdminUpdateTableUserShare(orgID, dtableUuid, email, permission) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/users/' + encodeURIComponent(email) + '/';
+    let data = {
+      permission: permission
+    };
+    return this.req.put(url, data);
+  }
+
+  orgAdminAddTableGroupShare(orgID, dtableUuid, groupId, permission) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/groups/';
+    let data = {
+      group_id: groupId,
+      permission: permission
+    };
+    return this.req.post(url, data);
+  }
+
+  orgAdminDeleteTableGroupShare(orgID, dtableUuid, groupId) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/groups/' + groupId + '/';
+    return this.req.delete(url);
+  }
+
+  orgAdminUpdateTableGroupShare(orgID, dtableUuid, groupId, permission) {
+    const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableUuid + '/shares/groups/' + groupId + '/';
     let data = {
       permission: permission
     };
