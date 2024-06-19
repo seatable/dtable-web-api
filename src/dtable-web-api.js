@@ -3710,9 +3710,9 @@ class DTableWebAPI {
   }
 
   orgAdminSearchGroups(query) {
-    let url = this.server + '/api/v2.1/search-group/';
+    let url = this.server + '/api/v2.1/org-admin/search-group/';
     let params = {
-      q: query
+      query: query
     };
     return this.req.get(url, {
       params: params
