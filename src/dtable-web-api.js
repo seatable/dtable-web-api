@@ -3808,6 +3808,11 @@ class DTableWebAPI {
     return this.req.put(url);
   }
 
+  sysAdminRepairDtable(dtable_uuid) {
+    const url = this.server + '/api/v2.1/admin/dtable/' + dtable_uuid + '/repair/';
+    return this.req.put(url);
+  }
+
   sysAdminListForms(page, perPage) {
     let url = this.server + '/api/v2.1/admin/forms/';
     let params = {
