@@ -4601,6 +4601,15 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
+  sysAdminListAuditGroupLogs(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/audit-logs/group/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   sysAdminListAdminLogs(page, perPage) {
     let url = this.server + '/api/v2.1/admin/admin-logs/';
     let params = {
