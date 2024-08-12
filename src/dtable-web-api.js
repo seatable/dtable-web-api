@@ -3732,6 +3732,15 @@ class DTableWebAPI {
     });
   }
 
+  orgAdminListAuditGroupLogs(orgID, page, perPage) {
+    let url = this.server + '/api/v2.1/org/' + orgID + '/admin/audit-logs/group/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
