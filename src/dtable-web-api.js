@@ -3732,6 +3732,15 @@ class DTableWebAPI {
     });
   }
 
+  orgAdminListAuditLogs(orgID, page, perPage) {
+    let url = this.server + '/api/v2.1/org/' + orgID + '/admin/audit-logs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
@@ -4599,6 +4608,15 @@ class DTableWebAPI {
   sysAdminDeleteCommonDatasetInvalidSyncs() {
     let url = this.server + '/api/v2.1/admin/common-dataset/invalid-syncs/';
     return this.req.delete(url);
+  }
+
+  sysAdminListAuditLogs(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/audit-logs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
   }
 
   sysAdminListAdminLogs(page, perPage) {
