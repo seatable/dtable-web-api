@@ -5085,6 +5085,11 @@ class DTableWebAPI {
     return this.req.post(url, form);
   }
 
+  getSdocAccessToken(file_uuid) {
+    const url = this.server + '/api/v2.1/seadoc/access-token/' + file_uuid + '/';
+    return this.req.get(url);
+  }
+
 }
 
 export default DTableWebAPI;
