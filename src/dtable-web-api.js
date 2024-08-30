@@ -2982,6 +2982,40 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  listVirusFiles(page, perPage, hasHandled) {
+    const url = this.server + '/api/v2.1/admin/virus-files/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    if (hasHandled != undefined) {
+      params.has_handled = hasHandled;
+    }
+    return this.req.get(url, {params: params});
+  }
+
+  deleteVirusFile(virusID) {
+    const url = this.server + '/api/v2.1/admin/virus-files/' + virusID + '/';
+    return this.req.delete(url);
+  }
+
+  toggleIgnoreVirusFile(virusID, ignore) {
+    const url = this.server + '/api/v2.1/admin/virus-files/' + virusID + '/';
+    let formData = new FormData();
+    formData.append('ignore', ignore);
+    return this.req.put(url, formData);
+  }
+
+  batchProcessVirusFiles(virusIDs, operation) {
+    const url = this.server + '/api/v2.1/admin/virus-files/batch/';
+    let formData = new FormData();
+    for (let i = 0; i < virusIDs.length; i++) {
+      formData.append('virus_ids', virusIDs[i]);
+    }
+    formData.append('operation', operation);
+    return this.req.post(url, formData);
+  }
+
   // sysadmin org api
   sysAdminListOrgs(page, per_page, role) {
     const url = this.server + '/api/v2.1/admin/organizations/';
