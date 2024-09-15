@@ -3612,6 +3612,30 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  adminListDingtalkDepartments(departmentID) {
+    const url = this.server + '/api/v2.1/admin/dingtalk/departments/';
+    const params = {};
+    if (departmentID) {
+      params.department_id = departmentID;
+    }
+    return this.req.get(url, {params: params});
+  }
+
+  adminListDingtalkDepartmentMembers(departmentID) {
+    const url = this.server + '/api/v2.1/admin/dingtalk/departments/' + departmentID + '/members/';
+    return this.req.get(url);
+  }
+
+  adminAddDingtalkUsersBatch(userList) {
+    const url = this.server + '/api/v2.1/admin/dingtalk/users/batch/';
+    return this.req.post(url, {userlist: userList});
+  }
+
+  adminImportDingtalkDepartment(departmentID) {
+    const url = this.server + '/api/v2.1/admin/dingtalk/departments/import/';
+    return this.req.post(url, {department_id: departmentID});
+  }
+
   orgAdminListDTableExternalLinks(orgID, page, perPage) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/external-links/';
     let params = {
