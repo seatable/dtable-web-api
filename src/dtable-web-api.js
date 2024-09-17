@@ -1232,6 +1232,11 @@ class DTableWebAPI {
     });
   }
 
+  listAppRelatedUsers(token) {
+    let url = this.server + '/api/v2.1/universal-apps/' + token + '/app-related-users/';
+    return this.req.get(url);
+  }
+
   searchAppUsers(appUuid, query, page, perPage) {
     let url = this.server + '/api/v2.1/universal-apps/' + appUuid + '/search-user/';
     let params = {
