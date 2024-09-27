@@ -3486,6 +3486,16 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  orgAdminSearchDTables(query, orgID, page, perPage) {
+    let url = this.server + '/api/v2.1/org/' + orgID + '/admin/search-dtables/';
+    let params = {
+      query: query,
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
   orgAdminDeleteDTable(orgID, dtableID) {
     const url = this.server + '/api/v2.1/org/' + orgID + '/admin/dtables/' + dtableID + '/';
     return this.req.delete(url);
