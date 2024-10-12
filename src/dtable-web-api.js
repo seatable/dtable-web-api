@@ -3741,6 +3741,17 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
+  orgAdminListFileAccessLogs(orgID, page, perPage) {
+    let url = this.server + '/api/v2.1/org/' + orgID + '/admin/file-access-logs/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, {
+      params: params
+    });
+  }
+
   // sys-admin
   sysAdminListAllDTables(page, perPage) {
     const url = this.server + '/api/v2.1/admin/dtables/';
@@ -5057,6 +5068,15 @@ class DTableWebAPI {
 
   sysAdminListWorkflows(page, perPage) {
     let url = this.server + '/api/v2.1/admin/workflows/';
+    let params = {
+      page: page,
+      per_page: perPage
+    };
+    return this.req.get(url, { params: params });
+  }
+
+  sysAdminListFileAccessLogs(page, perPage) {
+    let url = this.server + '/api/v2.1/admin/file-access-logs/';
     let params = {
       page: page,
       per_page: perPage
