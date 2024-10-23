@@ -948,8 +948,8 @@ class DTableWebAPI {
     return this.req.get(url, { params });
   }
 
-  getActivitiesDetail(dtable_uuid, opDate, pageNum, avatarSize = 36) {
-    let params = 'dtable_uuid=' + dtable_uuid + '&op_date=' + encodeURIComponent(opDate) + '&page=' + pageNum + '&avatar_size=' + avatarSize;
+  getActivitiesDetail(dtable_uuid, opDate, pageNum) {
+    let params = 'dtable_uuid=' + dtable_uuid + '&op_date=' + encodeURIComponent(opDate) + '&page=' + pageNum;
     let url = this.server + '/api/v2.1/dtable-activities/detail/?' + params;
     return this.req.get(url);
   }
@@ -2078,12 +2078,9 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  getUserCommonInfo(email, avatarSize) {
+  getUserCommonInfo(email) {
     const url = this.server + '/api/v2.1/user-common-info/' + email + '/';
-    let params = {
-      avatar_size: avatarSize
-    };
-    return this.req.get(url, { params: params });
+    return this.req.get(url);
   }
 
   getOrganization(org_id) {
@@ -2212,8 +2209,8 @@ class DTableWebAPI {
     return this.req.get(url, { params: params });
   }
 
-  listGroupMembers(groupID, isAdmin = false, avatarSize = 64) {
-    let url = this.server + '/api/v2.1/groups/' + groupID + '/members/?avatar_size=' + avatarSize + '&is_admin=' + isAdmin;
+  listGroupMembers(groupID, isAdmin = false) {
+    let url = this.server + '/api/v2.1/groups/' + groupID + '/members/?is_admin=' + isAdmin;
     return this.req.get(url);
   }
 
@@ -2888,11 +2885,10 @@ class DTableWebAPI {
     return this.req.put(url, data);
   }
 
-  updateUserAvatar(avatarFile, avatarSize) {
+  updateUserAvatar(avatarFile) {
     const url = this.server + '/api/v2.1/user-avatar/';
     let form = new FormData();
     form.append('avatar', avatarFile);
-    form.append('avatar_size', avatarSize);
     return this._sendPostRequest(url, form);
   }
 
@@ -4143,12 +4139,9 @@ class DTableWebAPI {
     return this.req.delete(url);
   }
 
-  sysAdminGetUser(email, avatarSize) {
+  sysAdminGetUser(email) {
     const url = this.server + '/api/v2.1/admin/users/' + encodeURIComponent(email) + '/';
     let params = {};
-    if (avatarSize) {
-      params.avatar_size = avatarSize;
-    }
     return this.req.get(url, { params: params });
   }
 
