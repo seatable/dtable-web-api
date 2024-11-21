@@ -3052,6 +3052,9 @@ class DTableWebAPI {
     if (orgInfo.bigDataStorageQuotaMb) {
       formData.append('big_data_storage_quota_mb', orgInfo.bigDataStorageQuotaMb);
     }
+    if (orgInfo.autoRulesLimitPerMonth) {
+      formData.append('auto_rules_limit_per_month', orgInfo.autoRulesLimitPerMonth);
+    }
     return this.req.put(url, formData);
   }
 
@@ -3241,6 +3244,9 @@ class DTableWebAPI {
         break;
       case 'unit':
         formData.append('unit', value);
+        break;
+      case 'auto_rules_limit_per_month':
+        formData.append('auto_rules_limit_per_month', value);
         break;
     }
     return this.req.put(url, formData);
