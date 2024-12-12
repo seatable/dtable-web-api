@@ -3017,12 +3017,14 @@ class DTableWebAPI {
   }
 
   // sysadmin org api
-  sysAdminListOrgs(page, per_page, role) {
+  sysAdminListOrgs(page, per_page, role, sort, order) {
     const url = this.server + '/api/v2.1/admin/organizations/';
     let params = {
       page,
       per_page,
-      role
+      role,
+      sort,
+      order
     };
     return this.req.get(url, {
       params
