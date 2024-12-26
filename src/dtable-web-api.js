@@ -141,13 +141,13 @@ class DTableWebAPI {
     return this.req.get(url + params);
   }
 
-  createDTableGroupViewShare(workspaceId, dtableName, tableId, viewId, permission, toGroupId, sharedName) {
+  createDTableGroupViewShare(workspaceId, dtableName, tableId, viewId, permission, toGroupIds, sharedName) {
     let url = this.server + '/api/v2.1/workspace/' + workspaceId + '/dtable/' + encodeURIComponent(dtableName) + '/group-view-shares/';
     let params = {
       table_id: tableId,
       view_id: viewId,
       permission: permission,
-      to_group_id: toGroupId,
+      to_group_ids: toGroupIds,
       shared_name: sharedName
     };
     return this.req.post(url, params);
@@ -302,10 +302,10 @@ class DTableWebAPI {
     return this.req.get(url);
   }
 
-  addTableGroupShare(workspaceID, name, groupID, permission) {
+  addTableGroupShare(workspaceID, name, groupIDs, permission) {
     const url = this.server + '/api/v2.1/workspace/' + workspaceID + '/dtable/' + encodeURIComponent(name) + '/group-shares/';
     let params = {
-      group_id: groupID,
+      group_ids: groupIDs,
       permission: permission
     };
     return this.req.post(url, params);
