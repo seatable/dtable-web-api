@@ -3086,6 +3086,9 @@ class DTableWebAPI {
     if (orgInfo.bigDataStorageQuotaMb) {
       formData.append('big_data_storage_quota_mb', orgInfo.bigDataStorageQuotaMb);
     }
+    if (orgInfo.apiGatewayCallsLimitPerUser) {
+      formData.append('api_gateway_calls_limit_per_user', orgInfo.apiGatewayCallsLimitPerUser);
+    }
     return this.req.put(url, formData);
   }
 
