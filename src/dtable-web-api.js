@@ -2789,6 +2789,19 @@ class DTableWebAPI {
     const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/result/${scriptID}/`;
     return this.req.get(url);
   }
+  
+  getScriptLogs(dtableUuid, scriptName, page, operateFrom, operator=null) {
+    const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/script/logs/`;
+    let params = {
+      page: page,
+      per_page: 15,
+      operate_from: operateFrom
+    };
+    if (operator) params.operator = operator;
+    return this.req.get(url, {
+      params: params
+    });
+  }
 
   deleteScriptTask(dtableUuid, scriptName) {
     const url = this.server + `/api/v2.1/dtable/${dtableUuid}/run-script/${scriptName}/task/`;
