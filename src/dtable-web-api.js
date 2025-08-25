@@ -1350,6 +1350,17 @@ class DTableWebAPI {
     return this._sendPostRequest(url, data, { headers: { 'Content-Type': 'application/json' } });
   }
 
+  addRobotMessageSendTask(dtableUuid, account_name, message, message_type) {
+    let url = this.server + '/api/v2.1/dtable-message/' + dtableUuid + '/robot/';
+    let data = {
+      'message': message,
+      'account_name': account_name,
+      'message_type': message_type,
+    };
+
+    return this._sendPostRequest(url, data, {headers: {'Content-Type': 'application/json'}});
+  }
+
 
   getMessageSendStatus(task_id) {
     const url = this.server + '/api/v2.1/dtable-message-status/?task_id=' + task_id;
